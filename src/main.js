@@ -1,62 +1,62 @@
-const songList = document.getElementById("song-list");
 const audio = document.getElementById("audio");
 const nowPlaying = document.getElementById("now-playing");
-const searchInput = document.getElementById("search");
+const seek = document.getElementById("seek");
+const volume = document.getElementById("volume");
+const songList = document.getElementById("song-list");
 
 const btnPlay = document.getElementById("play");
 const btnNext = document.getElementById("next");
 const btnPrev = document.getElementById("prev");
 const btnShuffle = document.getElementById("shuffle");
+const iconPlay = document.getElementById("icon-play");
+const iconPause = document.getElementById("icon-pause");
 
-let songs = [];
 let currentIndex = 0;
 let isPlaying = false;
 let isShuffled = false;
+let songs = [];
 
-// Ambil songs.json
 fetch("songs.json")
-  .then((res) => res.json())
-  .then((data) => {
+  .then(res => res.json())
+  .then(data => {
     songs = data;
-    renderSongs(songs);
+    renderPlaylist();
+    loadSong(currentIndex);
   });
 
-function renderSongs(list) {
+function renderPlaylist() {
   songList.innerHTML = "";
-  list.forEach((song, index) => {
+  songs.forEach((song, idx) => {
     const li = document.createElement("li");
     li.textContent = song.title;
     li.addEventListener("click", () => {
-      currentIndex = index;
-      playSong(songs[currentIndex]);
+      currentIndex = idx;
+      playSong();
     });
     songList.appendChild(li);
   });
 }
 
-function playSong(song) {
-    nowPlaying.textContent = "🎧 Sedang diputar: " + song.title;
-    audio.src = song.url;
-    audio.play();
-    isPlaying = true;
-    iconPlay.style.display = "none";
-    iconPause.style.display = "inline";
-  }
+function highlightActive() {
+  [...songList.children].forEach((li, idx) => {
+    li.classList.toggle("active", idx === currentIndex);
+  });
+}
 
-function togglePlayPause() {
-    if (!songs.length) return;
-    if (isPlaying) {
-      audio.pause();
-      isPlaying = false;
-      iconPlay.style.display = "inline";
-      iconPause.style.display = "none";
-    } else {
-      audio.play();
-      isPlaying = true;
-      iconPlay.style.display = "none";
-      iconPause.style.display = "inline";
-    }
-  }
+function loadSong(index) {
+  const song = songs[index];
+  if (!song) return;
+  audio.src = song.url;
+  nowPlaying.textContent = "🎧 Sedang diputar: " + song.title;
+  highlightActive();
+}
+
+function playSong() {
+  loadSong(currentIndex);
+  audio.play();
+  isPlaying = true;
+  toggleIcons();
+}
 
 function playNext() {
   if (isShuffled) {
@@ -64,35 +64,48 @@ function playNext() {
   } else {
     currentIndex = (currentIndex + 1) % songs.length;
   }
-  playSong(songs[currentIndex]);
+  playSong();
 }
 
 function playPrev() {
-  if (isShuffled) {
-    currentIndex = Math.floor(Math.random() * songs.length);
-  } else {
-    currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-  }
-  playSong(songs[currentIndex]);
+  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+  playSong();
 }
 
-function toggleShuffle() {
-    isShuffled = !isShuffled;
-    btnShuffle.classList.toggle("active", isShuffled);
-  }
+function toggleIcons() {
+  iconPlay.style.display = isPlaying ? "none" : "inline";
+  iconPause.style.display = isPlaying ? "inline" : "none";
+}
 
-// Event listeners
-btnPlay.addEventListener("click", togglePlayPause);
+btnPlay.addEventListener("click", () => {
+  if (!songs.length) return;
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+  } else {
+    audio.play();
+    isPlaying = true;
+  }
+  toggleIcons();
+});
+
 btnNext.addEventListener("click", playNext);
 btnPrev.addEventListener("click", playPrev);
-btnShuffle.addEventListener("click", toggleShuffle);
+btnShuffle.addEventListener("click", () => {
+  isShuffled = !isShuffled;
+  btnShuffle.classList.toggle("active", isShuffled);
+});
 
-// Auto next when song ends
 audio.addEventListener("ended", playNext);
 
-// Fitur pencarian
-searchInput.addEventListener("input", () => {
-  const keyword = searchInput.value.toLowerCase();
-  const filtered = songs.filter(s => s.title.toLowerCase().includes(keyword));
-  renderSongs(filtered);
+audio.addEventListener("timeupdate", () => {
+  seek.value = (audio.currentTime / audio.duration) * 100 || 0;
+});
+
+seek.addEventListener("input", () => {
+  audio.currentTime = (seek.value / 100) * audio.duration;
+});
+
+volume.addEventListener("input", () => {
+  audio.volume = volume.value;
 });
