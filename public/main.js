@@ -3,9 +3,6 @@ const nowPlaying = document.getElementById("now-playing");
 const seek = document.getElementById("seek");
 const volume = document.getElementById("volume");
 const songList = document.getElementById("song-list");
-const cover = document.getElementById('cover');
-const titleDiv = document.getElementById('songTitle');
-const timeDiv = document.getElementById('time');
 
 const btnPlay = document.getElementById("play");
 const btnNext = document.getElementById("next");
@@ -54,18 +51,12 @@ function loadSong(index) {
   highlightActive();
 }
 
-function playSong(index) {
-  currentIndex = index;
-  const song = songs[currentIndex];
-  audio.src = song.url;
-  titleDiv.textContent = song.title;
-  cover.src = song.cover || 'default.jpg'; // default cover
+function playSong() {
+  loadSong(currentIndex);
   audio.play();
-  updatePlaylistUI();
-  playPauseBtn.textContent = '⏸';
-  saveLastPlayed();
+  isPlaying = true;
+  toggleIcons();
 }
-
 
 function playNext() {
   if (isShuffled) {
@@ -97,21 +88,6 @@ btnPlay.addEventListener("click", () => {
   }
   toggleIcons();
 });
-
-audio.ontimeupdate = () => {
-  seekBar.value = (audio.currentTime / audio.duration) * 100 || 0;
-  saveLastPlayed();
-
-  const format = sec => {
-    const m = Math.floor(sec / 60);
-    const s = Math.floor(sec % 60).toString().padStart(2, '0');
-    return `${m}:${s}`;
-  };
-
-  if (!isNaN(audio.duration)) {
-    timeDiv.textContent = `${format(audio.currentTime)} / ${format(audio.duration)}`;
-  }
-};
 
 btnNext.addEventListener("click", playNext);
 btnPrev.addEventListener("click", playPrev);
