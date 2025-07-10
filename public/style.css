@@ -81,3 +81,46 @@ button:hover {
   background: #3b82f6;
   color: white;
 }
+
+body {
+  font-family: sans-serif;
+  background: #fff;
+  color: #000;
+  margin: 0;
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark {
+  background: #121212;
+  color: #fff;
+}
+.player-container {
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+#playlist {
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+}
+#playlist div {
+  padding: 5px;
+  cursor: pointer;
+}
+#playlist div.active {
+  background: #007bff;
+  color: white;
+}
+.controls button {
+  margin: 5px;
+  font-size: 18px;
+}
+input[type="range"] {
+  width: 100%;
+}
+.mini {
+  font-size: 12px;
+  padding: 10px;
+}

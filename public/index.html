@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🎵 Pemutar Musik Pribadi</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <title>Music Player</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="player">
-    <div id="now-playing">Pilih lagu untuk diputar</div>
+  <div class="player-container">
+    <div class="header">
+      <h1>🎵 Music Player</h1>
+      <button id="darkModeToggle">🌓</button>
+    </div>
 
-    <input id="seek" type="range" value="0" min="0" max="100" step="0.1" />
+    <input type="text" id="search" placeholder="Cari lagu..." />
+
+    <div id="playlist"></div>
 
     <div class="controls">
-      <button id="prev">⏮️</button>
-      <button id="play">
-        <span id="icon-play">▶️</span>
-        <span id="icon-pause" style="display:none;">⏸️</span>
-      </button>
-      <button id="next">⏭️</button>
-      <button id="shuffle">🔀</button>
-      <input id="volume" type="range" min="0" max="1" step="0.01" value="1" title="Volume" />
+      <button id="prevBtn">⏮</button>
+      <button id="playPauseBtn">▶️</button>
+      <button id="nextBtn">⏭</button>
+      <button id="shuffleBtn">🔀</button>
     </div>
 
-    <div class="playlist">
-      <h3>🎶 Daftar Lagu</h3>
-      <ul id="song-list"></ul>
-    </div>
+    <input type="range" id="seekBar" value="0" />
+    <input type="range" id="volume" min="0" max="1" step="0.01" value="1" />
 
-    <audio id="audio"></audio>
+    <div class="mini-player-toggle">
+      <button id="toggleMini">🗕 Mini Player</button>
+    </div>
   </div>
 
-  <script src="main.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
