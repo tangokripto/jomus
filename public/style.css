@@ -22,46 +22,6 @@ body {
   margin-bottom: 1rem;
 }
 
-#cover {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-#songTitle {
-  font-weight: bold;
-}
-
-#time {
-  font-size: 0.9em;
-  color: gray;
-}
-
-/* Touch-friendly UI */
-button, input[type=range] {
-  touch-action: manipulation;
-  font-size: 1.5rem;
-  padding: 0.5rem;
-}
-
-@media (max-width: 600px) {
-  .controls {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  #cover {
-    width: 50px;
-    height: 50px;
-  }
-
-  .player {
-    padding: 1rem;
-    font-size: 1rem;
-  }
-}
-
 .controls {
   display: flex;
   gap: 0.5rem;
