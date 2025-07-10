@@ -1,104 +1,111 @@
-let songs = [];
-let current = 0;
-const audio = document.getElementById('audio');
-const playBtn = document.getElementById('play');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-const shuffleBtn = document.getElementById('shuffle');
-const seekBar = document.getElementById('seek');
-const volume = document.getElementById('volume');
-const playlist = document.getElementById('playlist');
-const miniToggle = document.getElementById('mini-toggle');
-const miniTitle = document.getElementById('mini-title');
+const audio = document.getElementById("audio");
+const nowPlaying = document.getElementById("now-playing");
+const seek = document.getElementById("seek");
+const volume = document.getElementById("volume");
+const songList = document.getElementById("song-list");
 
-async function loadSongs() {
-  const res = await fetch('songs.json');
-  songs = await res.json();
-  renderPlaylist();
-  const savedIndex = +localStorage.getItem('lastPlayed') || 0;
-  playSong(savedIndex);
-}
+const btnPlay = document.getElementById("play");
+const btnNext = document.getElementById("next");
+const btnPrev = document.getElementById("prev");
+const btnShuffle = document.getElementById("shuffle");
+const iconPlay = document.getElementById("icon-play");
+const iconPause = document.getElementById("icon-pause");
+
+let currentIndex = 0;
+let isPlaying = false;
+let isShuffled = false;
+let songs = [];
+
+fetch("songs.json")
+  .then(res => res.json())
+  .then(data => {
+    songs = data;
+    renderPlaylist();
+    loadSong(currentIndex);
+  });
 
 function renderPlaylist() {
-  playlist.innerHTML = '';
-  songs.forEach((s, i) => {
-    const li = document.createElement('li');
-    li.textContent = s.title;
-    li.classList.add('song-item');
-    li.onclick = () => playSong(i);
-    playlist.appendChild(li);
+  songList.innerHTML = "";
+  songs.forEach((song, idx) => {
+    const li = document.createElement("li");
+    li.textContent = song.title;
+    li.addEventListener("click", () => {
+      currentIndex = idx;
+      playSong();
+    });
+    songList.appendChild(li);
   });
 }
 
-function playSong(i) {
-  current = i;
-  const song = songs[i];
+function highlightActive() {
+  [...songList.children].forEach((li, idx) => {
+    li.classList.toggle("active", idx === currentIndex);
+  });
+}
+
+function loadSong(index) {
+  const song = songs[index];
+  if (!song) return;
   audio.src = song.url;
+  nowPlaying.textContent = "🎧 Sedang diputar: " + song.title;
+  highlightActive();
+}
+
+function playSong() {
+  loadSong(currentIndex);
   audio.play();
-  highlightCurrent();
-  localStorage.setItem('lastPlayed', current);
-  miniTitle.textContent = '🎵 ' + song.title;
+  isPlaying = true;
+  toggleIcons();
 }
 
-function highlightCurrent() {
-  [...document.querySelectorAll('.song-item')].forEach((el, i) => {
-    el.classList.toggle('playing', i === current);
-  });
-}
-
-playBtn.onclick = () => {
-  if (audio.paused) audio.play();
-  else audio.pause();
-};
-prevBtn.onclick = () => playSong((current - 1 + songs.length) % songs.length);
-nextBtn.onclick = () => playSong((current + 1) % songs.length);
-shuffleBtn.onclick = () => {
-  const r = Math.floor(Math.random() * songs.length);
-  playSong(r);
-};
-audio.onended = () => nextBtn.onclick();
-
-seekBar.addEventListener('input', () => {
-  audio.currentTime = (audio.duration * seekBar.value) / 100;
-});
-audio.ontimeupdate = () => {
-  seekBar.value = (audio.currentTime / audio.duration) * 100 || 0;
-};
-volume.oninput = () => {
-  audio.volume = volume.value;
-};
-
-// Mini Player Toggle
-miniToggle.onclick = () => {
-  if (audio.paused) audio.play();
-  else audio.pause();
-};
-
-// Dark Mode
-document.getElementById('toggle-dark').addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
-});
-if (localStorage.getItem('theme') === 'dark') {
-  document.body.classList.add('dark');
-}
-
-// Search
-document.getElementById('search').addEventListener('input', e => {
-  const keyword = e.target.value.toLowerCase();
-  document.querySelectorAll('.song-item').forEach(li => {
-    li.style.display = li.textContent.toLowerCase().includes(keyword) ? '' : 'none';
-  });
-});
-
-// Mini mode toggle (optional, based on window size)
-window.addEventListener('resize', () => {
-  if (window.innerWidth < 500) {
-    document.body.classList.add('mini-mode');
+function playNext() {
+  if (isShuffled) {
+    currentIndex = Math.floor(Math.random() * songs.length);
   } else {
-    document.body.classList.remove('mini-mode');
+    currentIndex = (currentIndex + 1) % songs.length;
   }
-});
-window.dispatchEvent(new Event('resize')); // trigger on load
+  playSong();
+}
 
-loadSongs();
+function playPrev() {
+  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
+  playSong();
+}
+
+function toggleIcons() {
+  iconPlay.style.display = isPlaying ? "none" : "inline";
+  iconPause.style.display = isPlaying ? "inline" : "none";
+}
+
+btnPlay.addEventListener("click", () => {
+  if (!songs.length) return;
+  if (isPlaying) {
+    audio.pause();
+    isPlaying = false;
+  } else {
+    audio.play();
+    isPlaying = true;
+  }
+  toggleIcons();
+});
+
+btnNext.addEventListener("click", playNext);
+btnPrev.addEventListener("click", playPrev);
+btnShuffle.addEventListener("click", () => {
+  isShuffled = !isShuffled;
+  btnShuffle.classList.toggle("active", isShuffled);
+});
+
+audio.addEventListener("ended", playNext);
+
+audio.addEventListener("timeupdate", () => {
+  seek.value = (audio.currentTime / audio.duration) * 100 || 0;
+});
+
+seek.addEventListener("input", () => {
+  audio.currentTime = (seek.value / 100) * audio.duration;
+});
+
+volume.addEventListener("input", () => {
+  audio.volume = volume.value;
+});

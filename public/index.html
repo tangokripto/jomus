@@ -3,32 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Pemutar Musik</title>
+  <title>🎵 Pemutar Musik Pribadi</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="app">
-    <div class="player-header">
-      <button id="toggle-dark" class="toggle-dark">🌙</button>
-      <input type="text" id="search" placeholder="Cari lagu..." />
+  <div class="player">
+    <div id="now-playing">Pilih lagu untuk diputar</div>
+
+    <input id="seek" type="range" value="0" min="0" max="100" step="0.1" />
+
+    <div class="controls">
+      <button id="prev">⏮️</button>
+      <button id="play">
+        <span id="icon-play">▶️</span>
+        <span id="icon-pause" style="display:none;">⏸️</span>
+      </button>
+      <button id="next">⏭️</button>
+      <button id="shuffle">🔀</button>
+      <input id="volume" type="range" min="0" max="1" step="0.01" value="1" title="Volume" />
     </div>
-    <div id="player">
-      <div id="mini-info">
-        <span id="song-title">Memuat...</span>
-        <button id="toggle-mini">🗕</button>
-      </div>
-      <audio id="audio" preload="auto"></audio>
-      <div id="controls">
-        <button id="prev">⏮️</button>
-        <button id="play">▶️</button>
-        <button id="next">⏭️</button>
-        <button id="shuffle">🔀</button>
-      </div>
-      <input type="range" id="seek" value="0" />
-      <input type="range" id="volume" min="0" max="1" step="0.01" value="1" />
+
+    <div class="playlist">
+      <h3>🎶 Daftar Lagu</h3>
+      <ul id="song-list"></ul>
     </div>
-    <div id="playlist"></div>
+
+    <audio id="audio"></audio>
   </div>
+
   <script src="main.js"></script>
 </body>
 </html>
