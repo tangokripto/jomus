@@ -14,16 +14,25 @@
     <ul id="song-list"></ul>
 
     <div class="player">
-      <div class="player">
-        <div id="now-playing">Pilih lagu untuk diputar</div>
-        <div class="controls">
-          <button id="prev">⏮️</button>
-          <button id="play">▶️</button>
-          <button id="next">⏭️</button>
-          <button id="shuffle">🔀</button>
-        </div>
-        <audio id="audio"></audio>
+      <div id="now-playing">Pilih lagu untuk diputar</div>
+      <div class="controls">
+        <button id="prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" width="24"><path d="M6 19V5M20 5L9 12L20 19V5Z" fill="currentColor"/></svg>
+        </button>
+        <button id="play" aria-label="Play/Pause">
+          <svg id="icon-play" viewBox="0 0 24 24" width="28"><path d="M8 5v14l11-7L8 5Z" fill="currentColor"/></svg>
+          <svg id="icon-pause" viewBox="0 0 24 24" width="28" style="display:none;"><path d="M6 5h4v14H6zM14 5h4v14h-4z" fill="currentColor"/></svg>
+        </button>
+        <button id="next" aria-label="Next">
+          <svg viewBox="0 0 24 24" width="24"><path d="M18 5v14M4 5v14l11-7L4 5Z" fill="currentColor"/></svg>
+        </button>
+        <button id="shuffle" aria-label="Shuffle">
+          <svg viewBox="0 0 24 24" width="24"><path d="M16 3h5v5M8 16l10-10M4 4l6 6M21 16v5h-5M15 15l6 6M4 20l6-6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </button>
       </div>
+      <audio id="audio"></audio>
+    </div>
+    
     </div>
   </div>
 
