@@ -1,24 +1,67 @@
-body {
-  font-family: sans-serif;
-  background: #111;
-  color: #fff;
-  text-align: center;
-  padding: 2rem;
-}
-ul {
-  list-style: none;
-  padding: 0;
-}
-li {
-  margin: 0.5rem 0;
-  cursor: pointer;
-}
-li.active {
-  font-weight: bold;
-  color: #0ff;
-}
-.controls button {
-  margin: 1rem;
-  font-size: 1.5rem;
-  cursor: pointer;
-}
+:root {
+    --bg: #1e1e2f;
+    --fg: #ffffff;
+    --accent: #61dafb;
+    --card: #2b2b3d;
+    --hover: #3b3b50;
+  }
+  
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  #search {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+  
+  #song-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #song-list li {
+    background: var(--card);
+    padding: 1rem;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  #song-list li:hover {
+    background: var(--hover);
+  }
+  
+  .player {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  audio {
+    width: 100%;
+    margin-top: 0.5rem;
+    border-radius: 10px;
+  }
+  

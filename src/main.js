@@ -1,53 +1,37 @@
-const playlistEl = document.getElementById('playlist');
-const audio = document.getElementById('audio');
-let current = 0;
+const songList = document.getElementById("song-list");
+const audio = document.getElementById("audio");
+const nowPlaying = document.getElementById("now-playing");
+const searchInput = document.getElementById("search");
+
 let songs = [];
 
-async function loadSongs() {
-  const res = await fetch('/public/songs.json');
-  songs = await res.json();
+// Ambil songs.json
+fetch("songs.json")
+  .then((res) => res.json())
+  .then((data) => {
+    songs = data;
+    renderSongs(songs);
+  });
 
-  songs.forEach((song, i) => {
-    const li = document.createElement('li');
+function renderSongs(list) {
+  songList.innerHTML = "";
+  list.forEach((song, index) => {
+    const li = document.createElement("li");
     li.textContent = song.title;
-    li.addEventListener('click', () => playSong(i));
-    playlistEl.appendChild(li);
+    li.addEventListener("click", () => playSong(song));
+    songList.appendChild(li);
   });
-
-  playSong(0);
 }
 
-function playSong(index) {
-  current = index;
-  audio.src = songs[current].url;
+function playSong(song) {
+  nowPlaying.textContent = "🎧 Sedang diputar: " + song.title;
+  audio.src = song.url;
   audio.play();
-  highlightCurrent();
 }
 
-function highlightCurrent() {
-  Array.from(playlistEl.children).forEach((li, i) => {
-    li.classList.toggle('active', i === current);
-  });
-}
-
-document.getElementById('play').addEventListener('click', () => {
-  if (audio.paused) audio.play();
-  else audio.pause();
+// Fitur pencarian
+searchInput.addEventListener("input", () => {
+  const keyword = searchInput.value.toLowerCase();
+  const filtered = songs.filter(s => s.title.toLowerCase().includes(keyword));
+  renderSongs(filtered);
 });
-
-document.getElementById('next').addEventListener('click', () => {
-  current = (current + 1) % songs.length;
-  playSong(current);
-});
-
-document.getElementById('prev').addEventListener('click', () => {
-  current = (current - 1 + songs.length) % songs.length;
-  playSong(current);
-});
-
-document.getElementById('shuffle').addEventListener('click', () => {
-  current = Math.floor(Math.random() * songs.length);
-  playSong(current);
-});
-
-loadSongs();
