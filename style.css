@@ -68,21 +68,27 @@
     margin-top: 1rem;
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 1.5rem;
   }
   
   .controls button {
     background: var(--card);
     color: var(--fg);
     border: none;
-    padding: 0.8rem 1rem;
+    padding: 1rem;
     border-radius: 50%;
-    font-size: 1.2rem;
     cursor: pointer;
-    transition: background 0.2s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background 0.3s, transform 0.2s;
   }
   
   .controls button:hover {
     background: var(--hover);
+    transform: scale(1.1);
+  }
+  
+  #shuffle.active svg {
+    stroke: var(--accent);
+    color: var(--accent);
   }
   

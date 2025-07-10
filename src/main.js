@@ -35,25 +35,28 @@ function renderSongs(list) {
 }
 
 function playSong(song) {
-  nowPlaying.textContent = "🎧 Sedang diputar: " + song.title;
-  audio.src = song.url;
-  audio.play();
-  isPlaying = true;
-  btnPlay.textContent = "⏸️";
-}
-
-function togglePlayPause() {
-  if (!songs.length) return;
-  if (isPlaying) {
-    audio.pause();
-    isPlaying = false;
-    btnPlay.textContent = "▶️";
-  } else {
+    nowPlaying.textContent = "🎧 Sedang diputar: " + song.title;
+    audio.src = song.url;
     audio.play();
     isPlaying = true;
-    btnPlay.textContent = "⏸️";
+    iconPlay.style.display = "none";
+    iconPause.style.display = "inline";
   }
-}
+
+function togglePlayPause() {
+    if (!songs.length) return;
+    if (isPlaying) {
+      audio.pause();
+      isPlaying = false;
+      iconPlay.style.display = "inline";
+      iconPause.style.display = "none";
+    } else {
+      audio.play();
+      isPlaying = true;
+      iconPlay.style.display = "none";
+      iconPause.style.display = "inline";
+    }
+  }
 
 function playNext() {
   if (isShuffled) {
@@ -74,9 +77,9 @@ function playPrev() {
 }
 
 function toggleShuffle() {
-  isShuffled = !isShuffled;
-  btnShuffle.style.color = isShuffled ? "var(--accent)" : "var(--fg)";
-}
+    isShuffled = !isShuffled;
+    btnShuffle.classList.toggle("active", isShuffled);
+  }
 
 // Event listeners
 btnPlay.addEventListener("click", togglePlayPause);
