@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background: #f3f4f6;
+  background: #000000;
   color: #333;
   padding: 2rem;
 }
@@ -88,7 +88,7 @@ button:hover {
 body {
   font-family: sans-serif;
   background: #fff;
-  color: #000;
+  color: #ffffff;
   margin: 0;
   padding: 20px;
   transition: background 0.3s, color 0.3s;
