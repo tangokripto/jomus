@@ -1,128 +1,109 @@
-const audio = new Audio();
+const audio = document.getElementById("audio");
+const playBtn = document.getElementById("play");
+const nextBtn = document.getElementById("next");
+const prevBtn = document.getElementById("prev");
+const shuffleBtn = document.getElementById("shuffle");
+const seek = document.getElementById("seek");
+const volume = document.getElementById("volume");
+const playlistEl = document.getElementById("playlist");
+const titleEl = document.getElementById("song-title");
+const search = document.getElementById("search");
+
 let songs = [];
-let currentIndex = 0;
-let isShuffling = false;
+let queue = [];
+let index = 0;
+let isShuffle = false;
 
-// DOM Elements
-const playPauseBtn = document.getElementById('playPauseBtn');
-const prevBtn = document.getElementById('prevBtn');
-const nextBtn = document.getElementById('nextBtn');
-const shuffleBtn = document.getElementById('shuffleBtn');
-const playlistDiv = document.getElementById('playlist');
-const seekBar = document.getElementById('seekBar');
-const volume = document.getElementById('volume');
-const search = document.getElementById('search');
-const darkToggle = document.getElementById('darkModeToggle');
-const miniToggle = document.getElementById('toggleMini');
+function loadSongs() {
+  fetch("songs.json")
+    .then(res => res.json())
+    .then(data => {
+      songs = data;
+      const last = localStorage.getItem("lastPlayed");
+      index = last ? songs.findIndex(s => s.title === last) : 0;
+      queue = [...songs];
+      renderPlaylist();
+      playSong();
+    });
+}
 
-// Load dark mode
-if (localStorage.getItem('dark') === 'true') document.body.classList.add('dark');
-
-// Load songs
-fetch('public/songs.json')
-  .then(res => res.json())
-  .then(data => {
-    songs = data;
-    renderPlaylist();
-    loadLastPlayed();
-  });
-
-function renderPlaylist(filter = '') {
-  playlistDiv.innerHTML = '';
-  songs.forEach((song, i) => {
-    if (song.title.toLowerCase().includes(filter.toLowerCase())) {
-      const div = document.createElement('div');
-      div.textContent = song.title;
-      if (i === currentIndex) div.classList.add('active');
-      div.onclick = () => playSong(i);
-      playlistDiv.appendChild(div);
+function renderPlaylist() {
+  playlistEl.innerHTML = "";
+  queue.forEach((s, i) => {
+    if (s.title.toLowerCase().includes(search.value.toLowerCase())) {
+      const div = document.createElement("div");
+      div.textContent = s.title;
+      if (i === index) div.classList.add("active");
+      div.onclick = () => {
+        index = i;
+        playSong();
+      };
+      playlistEl.appendChild(div);
     }
   });
 }
 
-function playSong(index) {
-  currentIndex = index;
-  const song = songs[currentIndex];
+function playSong() {
+  const song = queue[index];
   audio.src = song.url;
+  titleEl.textContent = song.title;
+  localStorage.setItem("lastPlayed", song.title);
   audio.play();
-  updatePlaylistUI();
-  playPauseBtn.textContent = '⏸';
-  saveLastPlayed();
+  renderPlaylist();
 }
 
-function updatePlaylistUI() {
-  [...playlistDiv.children].forEach((el, i) => {
-    el.classList.toggle('active', i === currentIndex);
-  });
+function nextSong() {
+  index = (index + 1) % queue.length;
+  playSong();
 }
 
-function saveLastPlayed() {
-  localStorage.setItem('lastPlayed', JSON.stringify({
-    index: currentIndex,
-    time: audio.currentTime
-  }));
+function prevSong() {
+  index = (index - 1 + queue.length) % queue.length;
+  playSong();
 }
 
-function loadLastPlayed() {
-  const last = JSON.parse(localStorage.getItem('lastPlayed') || '{}');
-  if (last.index !== undefined && songs[last.index]) {
-    currentIndex = last.index;
-    playSong(currentIndex);
-    audio.currentTime = last.time || 0;
-  }
-}
-
-playPauseBtn.onclick = () => {
-  if (audio.paused) {
-    audio.play();
-    playPauseBtn.textContent = '⏸';
-  } else {
-    audio.pause();
-    playPauseBtn.textContent = '▶️';
-  }
+playBtn.onclick = () => {
+  if (audio.paused) audio.play();
+  else audio.pause();
 };
 
-nextBtn.onclick = () => {
-  if (isShuffling) {
-    currentIndex = Math.floor(Math.random() * songs.length);
-  } else {
-    currentIndex = (currentIndex + 1) % songs.length;
-  }
-  playSong(currentIndex);
+audio.onplay = () => (playBtn.textContent = "⏸️");
+audio.onpause = () => (playBtn.textContent = "▶️");
+
+audio.ontimeupdate = () => {
+  seek.value = audio.currentTime;
+  seek.max = audio.duration || 0;
 };
 
-prevBtn.onclick = () => {
-  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-  playSong(currentIndex);
-};
-
-shuffleBtn.onclick = () => {
-  isShuffling = !isShuffling;
-  shuffleBtn.style.color = isShuffling ? 'red' : 'black';
+seek.oninput = () => {
+  audio.currentTime = seek.value;
 };
 
 volume.oninput = () => {
   audio.volume = volume.value;
 };
 
-audio.ontimeupdate = () => {
-  seekBar.value = (audio.currentTime / audio.duration) * 100 || 0;
-  saveLastPlayed();
+nextBtn.onclick = nextSong;
+prevBtn.onclick = prevSong;
+
+shuffleBtn.onclick = () => {
+  isShuffle = !isShuffle;
+  shuffleBtn.style.color = isShuffle ? "red" : "inherit";
+  queue = isShuffle ? [...songs].sort(() => Math.random() - 0.5) : [...songs];
+  index = 0;
+  playSong();
 };
 
-seekBar.oninput = () => {
-  audio.currentTime = (seekBar.value / 100) * audio.duration;
+search.oninput = renderPlaylist;
+
+document.getElementById("toggle-theme").onclick = () => {
+  document.body.classList.toggle("dark");
 };
 
-search.oninput = (e) => {
-  renderPlaylist(e.target.value);
+document.getElementById("toggle-mini").onclick = () => {
+  document.body.classList.toggle("mini");
 };
 
-darkToggle.onclick = () => {
-  document.body.classList.toggle('dark');
-  localStorage.setItem('dark', document.body.classList.contains('dark'));
-};
+audio.onended = nextSong;
 
-miniToggle.onclick = () => {
-  document.body.classList.toggle('mini');
-};
+loadSongs();

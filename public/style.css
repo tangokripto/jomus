@@ -1,52 +1,56 @@
 body {
   font-family: sans-serif;
-  background: #fff;
-  color: #000;
   margin: 0;
-  padding: 20px;
-  transition: background 0.3s, color 0.3s;
+  background: #f0f0f0;
+  color: #333;
+  transition: 0.3s;
 }
 body.dark {
   background: #121212;
-  color: #fff;
+  color: #eee;
 }
-.player-container {
-  max-width: 400px;
+#app {
+  max-width: 600px;
   margin: auto;
-  text-align: center;
+  padding: 1rem;
 }
-.header {
+.player-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+#search {
+  width: 100%;
+  margin-left: 1rem;
+}
+#player {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
 #playlist {
-  margin-top: 10px;
-  max-height: 200px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
+  margin-top: 1rem;
 }
 #playlist div {
-  padding: 5px;
   cursor: pointer;
+  padding: 0.5rem;
 }
 #playlist div.active {
-  background: #007bff;
-  color: white;
+  font-weight: bold;
+  color: #0077ff;
 }
-.controls button {
-  margin: 5px;
-  font-size: 18px;
+#mini-info {
+  display: flex;
+  justify-content: space-between;
 }
-input[type="range"] {
-  width: 100%;
-  margin: 10px 0;
-}
-.mini .player-container {
-  max-width: 200px;
-  font-size: 12px;
-}
-.mini #playlist,
-.mini #search {
+body.mini #playlist,
+body.mini #seek,
+body.mini #volume {
   display: none;
 }
