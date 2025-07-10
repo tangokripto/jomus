@@ -16,10 +16,12 @@ const darkToggle = document.getElementById('darkModeToggle');
 const miniToggle = document.getElementById('toggleMini');
 
 // Load dark mode
-if (localStorage.getItem('dark') === 'true') document.body.classList.add('dark');
+if (localStorage.getItem('dark') === 'true') {
+  document.documentElement.classList.add('dark');
+}
 
 // Fetch and render songs
-fetch('public/songs.json')
+fetch('songs.json')
   .then(res => res.json())
   .then(data => {
     songs = data;
@@ -27,18 +29,19 @@ fetch('public/songs.json')
     loadLastPlayed();
   });
 
-function renderPlaylist(filter = '') {
-  playlistDiv.innerHTML = '';
-  songs.forEach((song, i) => {
-    if (song.title.toLowerCase().includes(filter.toLowerCase())) {
-      const div = document.createElement('div');
-      div.textContent = song.title;
-      if (i === currentIndex) div.classList.add('active');
-      div.onclick = () => playSong(i);
-      playlistDiv.appendChild(div);
-    }
-  });
-}
+  function renderPlaylist(filter = '') {
+    playlistDiv.innerHTML = '';
+    songs.forEach((song, i) => {
+      if (song.title.toLowerCase().includes(filter.toLowerCase())) {
+        const li = document.createElement('li');
+        li.textContent = song.title;
+        if (i === currentIndex) li.classList.add('active');
+        li.onclick = () => playSong(i);
+        playlistDiv.appendChild(li);
+      }
+    });
+  }
+  
 
 function playSong(index) {
   currentIndex = index;
@@ -119,9 +122,10 @@ search.oninput = (e) => {
 };
 
 darkToggle.onclick = () => {
-  document.body.classList.toggle('dark');
-  localStorage.setItem('dark', document.body.classList.contains('dark'));
+  document.documentElement.classList.toggle('dark');
+  localStorage.setItem('dark', document.documentElement.classList.contains('dark'));
 };
+
 
 miniToggle.onclick = () => {
   document.body.classList.toggle('mini');
