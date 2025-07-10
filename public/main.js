@@ -14,6 +14,21 @@ let queue = [];
 let index = 0;
 let isShuffle = false;
 
+const darkToggle = document.getElementById('toggle-dark');
+const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+const savedTheme = localStorage.getItem('theme');
+
+if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+  document.body.classList.add('dark');
+}
+
+darkToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark');
+  const isDark = document.body.classList.contains('dark');
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+});
+
+
 function loadSongs() {
   fetch("songs.json")
     .then(res => res.json())
