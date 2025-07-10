@@ -47,7 +47,7 @@ function loadSong(index) {
   const song = songs[index];
   if (!song) return;
   audio.src = song.url;
-  nowPlaying.textContent = "🎧 Sedang diputar: " + song.title;
+  nowPlaying.textContent = "🎧 Played : " + song.title;
   highlightActive();
 }
 
