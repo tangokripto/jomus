@@ -64,4 +64,25 @@
     margin-top: 0.5rem;
     border-radius: 10px;
   }
+  .controls {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .controls button {
+    background: var(--card);
+    color: var(--fg);
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  
+  .controls button:hover {
+    background: var(--hover);
+  }
   
