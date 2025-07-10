@@ -1,67 +1,83 @@
 body {
-  background-color: #f5f5f5;
-  color: #111;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 2rem;
+  transition: background 0.3s, color 0.3s;
 }
 
 body.dark {
-  background-color: #111;
-  color: #f5f5f5;
+  background: #111;
+  color: #eee;
+}
+
+.player {
+  max-width: 600px;
+  margin: auto;
+}
+
+.controls button {
+  font-size: 1.5rem;
+  margin: 0.5rem;
+}
+
+#seek, #volume {
+  width: 80%;
+  margin: 1rem 0;
+}
+
+#playlist {
+  list-style: none;
+  padding: 0;
+}
+
+#playlist li {
+  cursor: pointer;
+  margin: 0.3rem 0;
+}
+
+.song-item.playing {
+  font-weight: bold;
+  color: #4caf50;
 }
 
 .toggle-dark {
   position: fixed;
   top: 1rem;
   right: 1rem;
+  font-size: 1.5rem;
   background: none;
   border: none;
-  font-size: 1.5rem;
   cursor: pointer;
   color: inherit;
 }
 
-#app {
-  max-width: 600px;
-  margin: auto;
-  padding: 1rem;
-}
-.player-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-#search {
-  width: 100%;
-  margin-left: 1rem;
-}
-#player {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-#controls {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-}
-#playlist {
-  margin-top: 1rem;
-}
-#playlist div {
-  cursor: pointer;
+.search-container input {
   padding: 0.5rem;
+  font-size: 1rem;
+  width: 60%;
+  max-width: 400px;
+  margin-bottom: 1rem;
 }
-#playlist div.active {
-  font-weight: bold;
-  color: #0077ff;
-}
-#mini-info {
+
+.mini-player {
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  background: #222;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
   display: flex;
-  justify-content: space-between;
-}
-body.mini #playlist,
-body.mini #seek,
-body.mini #volume {
+  align-items: center;
+  gap: 1rem;
   display: none;
+}
+
+body.mini-mode .player {
+  display: none;
+}
+
+body.mini-mode .mini-player {
+  display: flex;
 }
