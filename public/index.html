@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Music Player</title>
+  <title>Music Library</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -15,19 +15,16 @@
       <input type="text" id="search" placeholder="Cari lagu..." />
     </div>
 
-    <!-- Audio -->
-    <audio id="audio" preload="metadata"></audio>
-
     <!-- Controls -->
     <div class="controls">
-      <button id="prev">⏮️</button>
-      <button id="play">▶️</button>
-      <button id="next">⏭️</button>
-      <button id="shuffle">🔀</button>
+      <button id="prevBtn">⏮️</button>
+      <button id="playPauseBtn">▶️</button>
+      <button id="nextBtn">⏭️</button>
+      <button id="shuffleBtn">🔀</button>
     </div>
 
     <!-- Seek + Volume -->
-    <input type="range" id="seek" value="0" />
+    <input type="range" id="seekBar" value="0" />
     <input type="range" id="volume" min="0" max="1" step="0.01" value="1" />
 
     <!-- Playlist -->
@@ -37,11 +34,11 @@
   <!-- Mini Player -->
   <div class="mini-player" id="mini-player">
     <span id="mini-title">🎵</span>
-    <button id="mini-toggle">⏯️</button>
+    <button id="toggleMini">⏯️</button>
   </div>
 
   <!-- Toggle Dark Mode -->
-  <button id="toggle-dark" class="toggle-dark" title="Toggle Dark Mode">🌓</button>
+  <button id="darkModeToggle" class="toggle-dark" title="Toggle Dark Mode">🌓</button>
 
   <script src="main.js"></script>
 </body>

@@ -14,14 +14,15 @@ const volume = document.getElementById('volume');
 const search = document.getElementById('search');
 const darkToggle = document.getElementById('darkModeToggle');
 const miniToggle = document.getElementById('toggleMini');
+const miniTitle = document.getElementById('mini-title');
 
-// Load dark mode
+// Dark mode saat load
 if (localStorage.getItem('dark') === 'true') {
   document.documentElement.classList.add('dark');
 }
 
-// Fetch and render songs
-fetch('songs.json')
+// Fetch lagu
+fetch('/public/songs.json')
   .then(res => res.json())
   .then(data => {
     songs = data;
@@ -29,19 +30,18 @@ fetch('songs.json')
     loadLastPlayed();
   });
 
-  function renderPlaylist(filter = '') {
-    playlistDiv.innerHTML = '';
-    songs.forEach((song, i) => {
-      if (song.title.toLowerCase().includes(filter.toLowerCase())) {
-        const li = document.createElement('li');
-        li.textContent = song.title;
-        if (i === currentIndex) li.classList.add('active');
-        li.onclick = () => playSong(i);
-        playlistDiv.appendChild(li);
-      }
-    });
-  }
-  
+function renderPlaylist(filter = '') {
+  playlistDiv.innerHTML = '';
+  songs.forEach((song, i) => {
+    if (song.title.toLowerCase().includes(filter.toLowerCase())) {
+      const li = document.createElement('li');
+      li.textContent = song.title;
+      if (i === currentIndex) li.classList.add('active');
+      li.onclick = () => playSong(i);
+      playlistDiv.appendChild(li);
+    }
+  });
+}
 
 function playSong(index) {
   currentIndex = index;
@@ -50,6 +50,7 @@ function playSong(index) {
   audio.play();
   updatePlaylistUI();
   playPauseBtn.textContent = '⏸';
+  miniTitle.textContent = song.title;
   saveLastPlayed();
 }
 
@@ -75,6 +76,7 @@ function loadLastPlayed() {
   }
 }
 
+// Tombol play/pause
 playPauseBtn.onclick = () => {
   if (audio.paused) {
     audio.play();
@@ -85,6 +87,7 @@ playPauseBtn.onclick = () => {
   }
 };
 
+// Tombol next
 nextBtn.onclick = () => {
   if (isShuffling) {
     currentIndex = Math.floor(Math.random() * songs.length);
@@ -94,20 +97,24 @@ nextBtn.onclick = () => {
   playSong(currentIndex);
 };
 
+// Tombol prev
 prevBtn.onclick = () => {
   currentIndex = (currentIndex - 1 + songs.length) % songs.length;
   playSong(currentIndex);
 };
 
+// Shuffle
 shuffleBtn.onclick = () => {
   isShuffling = !isShuffling;
   shuffleBtn.style.color = isShuffling ? 'red' : 'black';
 };
 
+// Volume
 volume.oninput = () => {
   audio.volume = volume.value;
 };
 
+// Seek bar update
 audio.ontimeupdate = () => {
   seekBar.value = (audio.currentTime / audio.duration) * 100 || 0;
   saveLastPlayed();
@@ -117,16 +124,18 @@ seekBar.oninput = () => {
   audio.currentTime = (seekBar.value / 100) * audio.duration;
 };
 
+// Search filter
 search.oninput = (e) => {
   renderPlaylist(e.target.value);
 };
 
+// Toggle dark mode
 darkToggle.onclick = () => {
   document.documentElement.classList.toggle('dark');
   localStorage.setItem('dark', document.documentElement.classList.contains('dark'));
 };
 
-
+// Mini player toggle (bisa dikembangkan)
 miniToggle.onclick = () => {
   document.body.classList.toggle('mini');
 };
