@@ -1,89 +1,5 @@
 body {
   font-family: sans-serif;
-  background: #f3f4f6;
-  color: #333;
-  padding: 2rem;
-}
-
-.player {
-  max-width: 600px;
-  margin: auto;
-  background: white;
-  padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
-}
-
-#now-playing {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
-}
-
-.controls {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-  margin-top: 0.5rem;
-  flex-wrap: wrap;
-}
-
-button {
-  font-size: 1.5rem;
-  padding: 0.4rem 0.6rem;
-  border: none;
-  background: #e5e7eb;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-button:hover {
-  background: #d1d5db;
-}
-
-#seek, #volume {
-  width: 100%;
-  margin: 0.5rem 0;
-  accent-color: #3b82f6;
-}
-
-.playlist {
-  margin-top: 1rem;
-  background: #f9fafb;
-  border-radius: 8px;
-  padding: 1rem;
-}
-
-.playlist h3 {
-  margin-bottom: 0.5rem;
-}
-
-#song-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-#song-list li {
-  padding: 0.5rem;
-  cursor: pointer;
-  border-bottom: 1px solid #e5e7eb;
-  transition: background 0.2s;
-}
-
-#song-list li:hover {
-  background: #e0f2fe;
-}
-
-#song-list li.active {
-  background: #3b82f6;
-  color: white;
-}
-
-body {
-  font-family: sans-serif;
   background: #fff;
   color: #000;
   margin: 0;
@@ -98,6 +14,11 @@ body.dark {
   max-width: 400px;
   margin: auto;
   text-align: center;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 #playlist {
   margin-top: 10px;
@@ -119,8 +40,13 @@ body.dark {
 }
 input[type="range"] {
   width: 100%;
+  margin: 10px 0;
 }
-.mini {
+.mini .player-container {
+  max-width: 200px;
   font-size: 12px;
-  padding: 10px;
+}
+.mini #playlist,
+.mini #search {
+  display: none;
 }
