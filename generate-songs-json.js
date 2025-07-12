@@ -39,6 +39,9 @@ const b2 = new B2({
       let startFileName = null;
       let done = false;
 
+      // Ambil semua file di bucket (sekalian cari file cover juga)
+      let allFiles = [];
+
       while (!done) {
         const list = await b2.listFileNames({
           bucketId,
@@ -46,22 +49,35 @@ const b2 = new B2({
           maxFileCount: 1000,
         });
 
-        const files = list.data.files;
-
-        const songs = files
-          .filter(f => f.fileName.endsWith('.mp3'))
-          .map(f => ({
-            title: path.basename(f.fileName, '.mp3'),
-            url: `${b2.downloadUrl}/file/${bucket.bucketName}/${encodeURIComponent(f.fileName)}`,
-          }));
-
-        allSongs.push(...songs);
+        allFiles.push(...list.data.files);
 
         if (list.data.nextFileName) {
           startFileName = list.data.nextFileName;
         } else {
           done = true;
         }
+      }
+
+      const songFiles = allFiles.filter(f => f.fileName.endsWith('.mp3'));
+
+      for (const song of songFiles) {
+        const base = path.basename(song.fileName, '.mp3');
+
+        // Cari file cover dengan nama mirip: base.jpg / base.png
+        const coverFile = allFiles.find(f =>
+          f.fileName === `${base}.jpg` || f.fileName === `${base}.png` || f.fileName === `${base}.jpeg`
+        );
+
+        const songUrl = `${b2.downloadUrl}/file/${bucket.bucketName}/${encodeURIComponent(song.fileName)}`;
+        const coverUrl = coverFile
+          ? `${b2.downloadUrl}/file/${bucket.bucketName}/${encodeURIComponent(coverFile.fileName)}`
+          : null;
+
+        allSongs.push({
+          title: base,
+          url: songUrl,
+          cover: coverUrl
+        });
       }
     }
 
