@@ -35,7 +35,7 @@ button {
   font-size: 1.5rem;
   padding: 0.4rem 0.6rem;
   border: none;
-  background: #3b82f6;
+  background: #f3f4f6;
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s;
@@ -157,4 +157,13 @@ input[type="range"] {
   outline: none;
   border-color: #3b82f6;
   background: white;
+}
+
+#repeat.active {
+  color: #007bff !important;
+  background: #e6f4ea !important; /* opsional: latar hijau muda */
+}
+
+button {
+  transition: background 0.2s, color 0.2s;
 }

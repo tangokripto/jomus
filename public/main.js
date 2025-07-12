@@ -4,8 +4,7 @@ const seek = document.getElementById("seek");
 const volume = document.getElementById("volume");
 const songList = document.getElementById("song-list");
 const searchInput = document.getElementById("search");
-
-
+const btnRepeat = document.getElementById("repeat");
 const btnPlay = document.getElementById("play");
 const btnNext = document.getElementById("next");
 const btnPrev = document.getElementById("prev");
@@ -14,6 +13,7 @@ const iconPlay = document.getElementById("icon-play");
 const iconPause = document.getElementById("icon-pause");
 
 let currentIndex = 0;
+let isRepeating = false;
 let isPlaying = false;
 let isShuffled = false;
 let songs = [];
@@ -25,7 +25,8 @@ fetch("songs.json")
     const saved = localStorage.getItem("lastIndex");
     currentIndex = saved ? parseInt(saved) : 0;
     renderPlaylist();
-    loadSong(currentIndex);
+    loadSong(currentIndex, true);
+    scrollToCurrentSong();
   });
 
   function renderPlaylist(filter = "") {
@@ -37,12 +38,21 @@ fetch("songs.json")
         li.addEventListener("click", () => {
           currentIndex = idx;
           playSong();
+          renderPlaylist();
         });
         songList.appendChild(li);
       }
     });
     highlightActive();
+    scrollToCurrentSong();
   }
+  function scrollToCurrentSong() {
+    const active = songList.querySelector("li.active");
+    if (active) {
+      active.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+  
   
   searchInput.addEventListener("input", () => {
     renderPlaylist(searchInput.value);
@@ -55,17 +65,22 @@ function highlightActive() {
   });
 }
 
-function loadSong(index) {
+function loadSong(index, resume = false) {
   const song = songs[index];
   if (!song) return;
+  const savedIndex = parseInt(localStorage.getItem("lastIndex"));
+  const savedTime = parseFloat(localStorage.getItem("lastTime"));
   audio.src = song.url;
+  if (resume && index === savedIndex && !isNaN(savedTime)) {
+    audio.currentTime = savedTime;
+  }
   nowPlaying.textContent = "🎧 Now playing : " + song.title;
   updateNowPlayingUI(song);
   highlightActive();
 }
 
-function playSong() {
-  loadSong(currentIndex);
+function playSong(resume = false) {
+  loadSong(currentIndex, resume);
   audio.play();
   isPlaying = true;
   toggleIcons();
@@ -96,6 +111,7 @@ btnPlay.addEventListener("click", () => {
   if (isPlaying) {
     audio.pause();
     isPlaying = false;
+    localStorage.setItem("lastTime", audio.currentTime.toString());
   } else {
     audio.play();
     isPlaying = true;
@@ -103,14 +119,27 @@ btnPlay.addEventListener("click", () => {
   toggleIcons();
 });
 
+
 btnNext.addEventListener("click", playNext);
 btnPrev.addEventListener("click", playPrev);
 btnShuffle.addEventListener("click", () => {
   isShuffled = !isShuffled;
   btnShuffle.classList.toggle("active", isShuffled);
 });
+btnRepeat.addEventListener("click", () => {
+  isRepeating = !isRepeating;
+  btnRepeat.classList.toggle("active", isRepeating);
+});
 
-audio.addEventListener("ended", playNext);
+audio.addEventListener("ended", () => {
+  if (isRepeating) {
+    audio.currentTime = 0;
+    audio.play();
+    // playSong(true); // ulangi lagu yg sama
+  } else {
+    playNext();
+  }
+});
 
 audio.addEventListener("timeupdate", () => {
   seek.value = (audio.currentTime / audio.duration) * 100 || 0;
@@ -143,7 +172,13 @@ durationText.textContent = "0:00";
 audio.addEventListener("timeupdate", () => {
   seek.value = (audio.currentTime / audio.duration) * 100 || 0;
   durationText.textContent = formatTime(audio.currentTime);
+
+  // Simpan waktu terakhir tiap update
+  if (!audio.seeking && !audio.paused) {
+    localStorage.setItem("lastTime", audio.currentTime.toString());
+  }
 });
+
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
