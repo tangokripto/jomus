@@ -133,13 +133,13 @@ button:hover {
 }
 
 #search {
-  width: 100%;
+  width: 60%;
   padding: 0.6rem 2.5rem 0.6rem 1rem;
   color: #888;
   font-size: 1rem;
   background: #f9fafb;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 4px;
   transition: border 0.2s, background 0.2s;
 }
 
