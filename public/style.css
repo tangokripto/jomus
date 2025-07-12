@@ -160,8 +160,8 @@ input[type="range"] {
 }
 
 #repeat.active {
-  color: #007bff !important;
-  background: #e6f4ea !important; /* opsional: latar hijau muda */
+    background: #3b82f6;
+    color: white; /* opsional: latar hijau muda */
 }
 
 button {
