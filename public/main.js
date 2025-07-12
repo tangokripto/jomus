@@ -11,12 +11,14 @@ const btnPrev = document.getElementById("prev");
 const btnShuffle = document.getElementById("shuffle");
 const iconPlay = document.getElementById("icon-play");
 const iconPause = document.getElementById("icon-pause");
+const btnClearSearch = document.getElementById("clear-search");
 
 let currentIndex = 0;
 let isRepeating = false;
 let isPlaying = false;
 let isShuffled = false;
 let songs = [];
+let filterSongs = [];
 
 fetch("songs.json")
   .then(res => res.json())
@@ -29,63 +31,102 @@ fetch("songs.json")
     scrollToCurrentSong();
   });
 
-  function renderPlaylist(filter = "") {
-    songList.innerHTML = "";
-    songs.forEach((song, idx) => {
-      if (song.title.toLowerCase().includes(filter.toLowerCase())) {
-        const li = document.createElement("li");
-        li.textContent = song.title;
-        li.addEventListener("click", () => {
-          currentIndex = idx;
-          playSong();
-          renderPlaylist();
-        });
-        songList.appendChild(li);
-      }
+function toggleClearButton() {
+  btnClearSearch.style.display = searchInput.value ? "block" : "none";
+}
+
+searchInput.addEventListener("input", () => {
+  renderPlaylist(searchInput.value);
+  toggleClearButton();
+});
+
+btnClearSearch.addEventListener("click", () => {
+  searchInput.value = "";
+  renderPlaylist();
+  toggleClearButton();
+});
+
+toggleClearButton();
+
+function renderPlaylist(filter = "") {
+  songList.innerHTML = "";
+  filteredSongs = songs
+    .map((song, idx) => ({ ...song, originalIndex: idx }))
+    .filter(song => song.title.toLowerCase().includes(filter.toLowerCase()));
+
+  filteredSongs.forEach((song, i) => {
+    const li = document.createElement("li");
+    li.textContent = song.title;
+    li.addEventListener("click", () => {
+      currentIndex = song.originalIndex;
+      playSong();
+      renderPlaylist(searchInput.value);
     });
-    highlightActive();
-    scrollToCurrentSong();
-  }
-  function scrollToCurrentSong() {
-    const active = songList.querySelector("li.active");
-    if (active) {
-      active.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
-  }
-  
-  
-  searchInput.addEventListener("input", () => {
-    renderPlaylist(searchInput.value);
+    songList.appendChild(li);
   });
-  
+
+  highlightActive();
+  scrollToCurrentSong();
+}
+
+function scrollToCurrentSong() {
+  const active = songList.querySelector("li.active");
+  if (active) {
+    active.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+}
 
 function highlightActive() {
   [...songList.children].forEach((li, idx) => {
-    li.classList.toggle("active", idx === currentIndex);
+    const realIndex = filteredSongs[idx]?.originalIndex;
+    li.classList.toggle("active", realIndex === currentIndex);
   });
 }
 
 function loadSong(index, resume = false) {
   const song = songs[index];
   if (!song) return;
-  const savedIndex = parseInt(localStorage.getItem("lastIndex"));
-  const savedTime = parseFloat(localStorage.getItem("lastTime"));
+
+  nowPlaying.textContent = "⏳ Loading ...";
+  document.title = "Loading ...";
+
   audio.src = song.url;
-  if (resume && index === savedIndex && !isNaN(savedTime)) {
-    audio.currentTime = savedTime;
-  }
-  nowPlaying.textContent = "🎧 Now playing : " + song.title;
-  document.title = song.title + " - Spotify KW";
-  updateNowPlayingUI(song);
-  highlightActive();
+  audio.load();
+
+  audio.addEventListener("canplay", function onReady() {
+    audio.removeEventListener("canplay", onReady);
+    const savedIndex = parseInt(localStorage.getItem("lastIndex"));
+    const savedTime = parseFloat(localStorage.getItem("lastTime"));
+
+    if (resume && index === savedIndex && !isNaN(savedTime)) {
+      audio.currentTime = savedTime;
+    }
+
+    nowPlaying.textContent = "🎧 Now playing : " + song.title;
+    document.title = song.title + " - Spotify KW";
+    updateNowPlayingUI(song);
+    highlightActive();
+  });
 }
 
 function playSong(resume = false) {
   loadSong(currentIndex, resume);
+  audio.volume = 0;
   audio.play();
   isPlaying = true;
   toggleIcons();
   localStorage.setItem("lastIndex", currentIndex);
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    vol += 0.05;
+    if (vol >= volume.value) {
+      audio.volume = volume.value;
+      clearInterval(fade);
+    } else {
+      audio.volume = vol;
+    }
+  }, 50);
 }
 
 function playNext() {
@@ -120,7 +161,6 @@ btnPlay.addEventListener("click", () => {
   toggleIcons();
 });
 
-
 btnNext.addEventListener("click", playNext);
 btnPrev.addEventListener("click", playPrev);
 btnShuffle.addEventListener("click", () => {
@@ -136,7 +176,6 @@ audio.addEventListener("ended", () => {
   if (isRepeating) {
     audio.currentTime = 0;
     audio.play();
-    // playSong(true); // ulangi lagu yg sama
   } else {
     playNext();
   }
@@ -144,6 +183,11 @@ audio.addEventListener("ended", () => {
 
 audio.addEventListener("timeupdate", () => {
   seek.value = (audio.currentTime / audio.duration) * 100 || 0;
+  durationText.textContent = formatTime(audio.currentTime);
+
+  if (!audio.seeking && !audio.paused) {
+    localStorage.setItem("lastTime", audio.currentTime.toString());
+  }
 });
 
 seek.addEventListener("input", () => {
@@ -154,32 +198,17 @@ volume.addEventListener("input", () => {
   audio.volume = volume.value;
 });
 
-// Tambahan elemen UI
 const durationText = document.getElementById("duration");
 
-// Format durasi mm:ss
 function formatTime(seconds) {
   const min = Math.floor(seconds / 60) || 0;
   const sec = Math.floor(seconds % 60) || 0;
   return `${min}:${sec.toString().padStart(2, "0")}`;
 }
 
-// Update info cover & judul
 function updateNowPlayingUI(song) {
-durationText.textContent = "0:00";
+  durationText.textContent = "0:00";
 }
-
-// Update setiap detik
-audio.addEventListener("timeupdate", () => {
-  seek.value = (audio.currentTime / audio.duration) * 100 || 0;
-  durationText.textContent = formatTime(audio.currentTime);
-
-  // Simpan waktu terakhir tiap update
-  if (!audio.seeking && !audio.paused) {
-    localStorage.setItem("lastTime", audio.currentTime.toString());
-  }
-});
-
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

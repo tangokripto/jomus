@@ -167,3 +167,48 @@ input[type="range"] {
 button {
   transition: background 0.2s, color 0.2s;
 }
+.search-container {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.search-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+#search {
+  color: #888;
+  width: 100%;
+  padding: 0.6rem 2.5rem 0.6rem 1rem; /* extra kanan untuk tombol */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: #f9fafb;
+  transition: border 0.2s, background 0.2s;
+}
+
+#search:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: white;
+}
+
+#clear-search {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+}
+
+#clear-search:hover {
+  color: #333;
+}
