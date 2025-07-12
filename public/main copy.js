@@ -48,7 +48,6 @@ function loadSong(index) {
   if (!song) return;
   audio.src = song.url;
   nowPlaying.textContent = "🎧 Played : " + song.title;
-  updateNowPlayingUI(song); // <-- tambahan
   highlightActive();
 }
 
@@ -109,34 +108,4 @@ seek.addEventListener("input", () => {
 
 volume.addEventListener("input", () => {
   audio.volume = volume.value;
-});
-
-// Tambahan elemen UI
-const cover = document.getElementById("cover");
-const nowTitle = document.getElementById("now-title");
-const durationText = document.getElementById("duration");
-
-// Format durasi mm:ss
-function formatTime(seconds) {
-  const min = Math.floor(seconds / 60) || 0;
-  const sec = Math.floor(seconds % 60) || 0;
-  return `${min}:${sec.toString().padStart(2, "0")}`;
-}
-
-// Update info cover & judul
-function updateNowPlayingUI(song) {
-  cover.src = song.cover || "https://via.placeholder.com/64?text=🎵";
-  nowTitle.textContent = song.title || "Unknown";
-  durationText.textContent = "0:00";
-}
-
-// Saat lagu dimuat, update UI
-audio.addEventListener("loadedmetadata", () => {
-  durationText.textContent = formatTime(audio.duration);
-});
-
-// Update setiap detik
-audio.addEventListener("timeupdate", () => {
-  seek.value = (audio.currentTime / audio.duration) * 100 || 0;
-  durationText.textContent = formatTime(audio.currentTime);
 });
