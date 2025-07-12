@@ -1,8 +1,15 @@
 body {
   font-family: sans-serif;
-  background: #f3f4f6;
-  color: #333;
-  padding: 2rem;
+  background: #fff;
+  color: #000;
+  margin: 0;
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+body.dark {
+  background: #121212;
+  color: #888;
 }
 
 .player {
@@ -18,17 +25,22 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  color:#888;
+  color: #888;
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
 
 .controls {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   align-items: center;
   margin-top: 0.5rem;
-  flex-wrap: wrap;
+}
+
+.controls button {
+  margin: 7px;
+  font-size: 20px;
 }
 
 button {
@@ -38,14 +50,20 @@ button {
   background: #f3f4f6;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
 
 button:hover {
   background: #d1d5db;
 }
 
-#seek, #volume {
+#repeat.active {
+  background: #3b82f6;
+  color: white;
+}
+
+#seek,
+#volume {
   width: 100%;
   margin: 0.5rem 0;
   accent-color: #3b82f6;
@@ -58,7 +76,7 @@ button:hover {
   padding: 1rem;
 }
 
-.playlist h3 {
+.playlist h5 {
   margin-bottom: 0.5rem;
 }
 
@@ -66,7 +84,7 @@ button:hover {
   list-style: none;
   padding: 0;
   margin: 0;
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
@@ -86,48 +104,6 @@ button:hover {
   color: white;
 }
 
-body {
-  font-family: sans-serif;
-  background: #fff;
-  color: #000;
-  margin: 0;
-  padding: 20px;
-  transition: background 0.3s, color 0.3s;
-}
-body.dark {
-  background: #121212;
-  color: #888;
-}
-.player-container {
-  max-width: 400px;
-  margin: auto;
-  text-align: center;
-}
-#playlist {
-  margin-top: 10px;
-  max-height: 200px;
-  overflow-y: auto;
-  border: 1px solid #ccc;
-}
-#playlist div {
-  padding: 5px;
-  cursor: pointer;
-}
-#playlist div.active {
-  background: #007bff;
-  color: white;
-}
-.controls button {
-  margin: 7px;
-  font-size: 20px;
-}
-input[type="range"] {
-  width: 100%;
-}
-.mini {
-  font-size: 12px;
-  padding: 10px;
-}
 /* Durasi Lagu */
 #duration {
   font-size: 0.9rem;
@@ -135,42 +111,19 @@ input[type="range"] {
   margin-top: 0.25rem;
   text-align: right;
 }
+
+/* Mini */
+.mini {
+  font-size: 12px;
+  padding: 10px;
+}
+
+/* Search */
 .search-container {
   margin: 1rem 0;
   display: flex;
-  justify-content: center;
-}
-
-#search {
-  color: #888;
-  width: 100%;
-  max-width: 400px;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  background: #f9fafb;
-  transition: border 0.2s, background 0.2s;
-}
-
-#search:focus {
-  outline: none;
-  border-color: #3b82f6;
-  background: white;
-}
-
-#repeat.active {
-    background: #3b82f6;
-    color: white; /* opsional: latar hijau muda */
-}
-
-button {
-  transition: background 0.2s, color 0.2s;
-}
-.search-container {
-  margin: 1rem 0;
-  display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 1rem;
 }
 
 .search-wrapper {
@@ -180,13 +133,13 @@ button {
 }
 
 #search {
-  color: #888;
   width: 100%;
-  padding: 0.6rem 2.5rem 0.6rem 1rem; /* extra kanan untuk tombol */
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  padding: 0.6rem 2.5rem 0.6rem 1rem;
+  color: #888;
   font-size: 1rem;
   background: #f9fafb;
+  border: 1px solid #ccc;
+  border-radius: 8px;
   transition: border 0.2s, background 0.2s;
 }
 
