@@ -88,7 +88,7 @@ function loadSong(index, resume = false) {
   if (!song) return;
 
   nowPlaying.textContent = "⏳ Loading ...";
-  document.title = "Loading ...";
+  document.title = "Loading...";
 
   audio.src = song.url;
   audio.load();
