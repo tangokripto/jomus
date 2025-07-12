@@ -3,6 +3,8 @@ const nowPlaying = document.getElementById("now-playing");
 const seek = document.getElementById("seek");
 const volume = document.getElementById("volume");
 const songList = document.getElementById("song-list");
+const searchInput = document.getElementById("search");
+
 
 const btnPlay = document.getElementById("play");
 const btnNext = document.getElementById("next");
@@ -20,22 +22,32 @@ fetch("songs.json")
   .then(res => res.json())
   .then(data => {
     songs = data;
+    const saved = localStorage.getItem("lastIndex");
+    currentIndex = saved ? parseInt(saved) : 0;
     renderPlaylist();
     loadSong(currentIndex);
   });
 
-function renderPlaylist() {
-  songList.innerHTML = "";
-  songs.forEach((song, idx) => {
-    const li = document.createElement("li");
-    li.textContent = song.title;
-    li.addEventListener("click", () => {
-      currentIndex = idx;
-      playSong();
+  function renderPlaylist(filter = "") {
+    songList.innerHTML = "";
+    songs.forEach((song, idx) => {
+      if (song.title.toLowerCase().includes(filter.toLowerCase())) {
+        const li = document.createElement("li");
+        li.textContent = song.title;
+        li.addEventListener("click", () => {
+          currentIndex = idx;
+          playSong();
+        });
+        songList.appendChild(li);
+      }
     });
-    songList.appendChild(li);
+    highlightActive();
+  }
+  
+  searchInput.addEventListener("input", () => {
+    renderPlaylist(searchInput.value);
   });
-}
+  
 
 function highlightActive() {
   [...songList.children].forEach((li, idx) => {
@@ -47,8 +59,8 @@ function loadSong(index) {
   const song = songs[index];
   if (!song) return;
   audio.src = song.url;
-  nowPlaying.textContent = "🎧 Playing : " + song.title;
-  updateNowPlayingUI(song); // <-- tambahan
+  nowPlaying.textContent = "🎧 Now playing : " + song.title;
+  updateNowPlayingUI(song);
   highlightActive();
 }
 
@@ -57,6 +69,7 @@ function playSong() {
   audio.play();
   isPlaying = true;
   toggleIcons();
+  localStorage.setItem("lastIndex", currentIndex);
 }
 
 function playNext() {
@@ -112,9 +125,7 @@ volume.addEventListener("input", () => {
 });
 
 // Tambahan elemen UI
-// const cover = document.getElementById("cover");
-// const nowTitle = document.getElementById("now-title");
-// const durationText = document.getElementById("duration");
+const durationText = document.getElementById("duration");
 
 // Format durasi mm:ss
 function formatTime(seconds) {
@@ -124,19 +135,20 @@ function formatTime(seconds) {
 }
 
 // Update info cover & judul
-// function updateNowPlayingUI(song) {
-//  cover.src = song.cover || "https://via.placeholder.com/64?text=🎵";
-//  nowTitle.textContent = song.title || "Unknown";
-//  durationText.textContent = "0:00";
-//}
-
-// Saat lagu dimuat, update UI
-audio.addEventListener("loadedmetadata", () => {
-  durationText.textContent = formatTime(audio.duration);
-});
+function updateNowPlayingUI(song) {
+durationText.textContent = "0:00";
+}
 
 // Update setiap detik
 audio.addEventListener("timeupdate", () => {
   seek.value = (audio.currentTime / audio.duration) * 100 || 0;
   durationText.textContent = formatTime(audio.currentTime);
 });
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('✅ Service Worker registered'))
+      .catch(err => console.error('❌ SW failed:', err));
+  });
+}
