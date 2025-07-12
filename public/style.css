@@ -1,59 +1,137 @@
-/* UI Cover dan Durasi */
-.now-playing-ui {
+body {
+  font-family: sans-serif;
+  background: #f3f4f6;
+  color: #333;
+  padding: 2rem;
+}
+
+.player {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+}
+
+#now-playing {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 10px;
+  color:#888;
+  font-size: 1.2rem;
   margin-bottom: 1rem;
-  padding: 0.5rem 0;
 }
 
-.now-playing-ui img {
-  width: 64px;
-  height: 64px;
-  border-radius: 8px;
-  object-fit: cover;
-  background: #ccc;
-}
-
-.now-meta {
+.controls {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
 }
 
-#now-title {
-  font-weight: bold;
-  font-size: 1rem;
+button {
+  font-size: 1.5rem;
+  padding: 0.4rem 0.6rem;
+  border: none;
+  background: #3b82f6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
 }
 
-#duration {
-  font-size: 0.85rem;
-  color: #666;
+button:hover {
+  background: #d1d5db;
 }
 
-/* Dark mode tambahan biar konsisten */
-body.dark .player {
-  background: #1e1e1e;
-  color: #fff;
+#seek, #volume {
+  width: 100%;
+  margin: 0.5rem 0;
+  accent-color: #3b82f6;
 }
 
-body.dark .playlist {
-  background: #2a2a2a;
+.playlist {
+  margin-top: 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 1rem;
 }
 
-body.dark #song-list li {
-  border-color: #444;
+.playlist h3 {
+  margin-bottom: 0.5rem;
 }
 
-body.dark #song-list li:hover {
-  background: #333;
+#song-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
 }
 
-body.dark #song-list li.active {
+#song-list li {
+  padding: 0.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid #e5e7eb;
+  transition: background 0.2s;
+}
+
+#song-list li:hover {
+  background: #e0f2fe;
+}
+
+#song-list li.active {
   background: #3b82f6;
   color: white;
 }
 
-body.dark .now-meta #duration {
-  color: #aaa;
+body {
+  font-family: sans-serif;
+  background: #fff;
+  color: #000;
+  margin: 0;
+  padding: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+body.dark {
+  background: #121212;
+  color: #888;
+}
+.player-container {
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+#playlist {
+  margin-top: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+}
+#playlist div {
+  padding: 5px;
+  cursor: pointer;
+}
+#playlist div.active {
+  background: #007bff;
+  color: white;
+}
+.controls button {
+  margin: 7px;
+  font-size: 20px;
+}
+input[type="range"] {
+  width: 100%;
+}
+.mini {
+  font-size: 12px;
+  padding: 10px;
+}
+/* Durasi Lagu */
+#duration {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0.25rem;
+  text-align: right;
 }

@@ -47,7 +47,7 @@ function loadSong(index) {
   const song = songs[index];
   if (!song) return;
   audio.src = song.url;
-  nowPlaying.textContent = "🎧 Played : " + song.title;
+  nowPlaying.textContent = "🎧 Playing : " + song.title;
   updateNowPlayingUI(song); // <-- tambahan
   highlightActive();
 }
@@ -112,9 +112,9 @@ volume.addEventListener("input", () => {
 });
 
 // Tambahan elemen UI
-const cover = document.getElementById("cover");
-const nowTitle = document.getElementById("now-title");
-const durationText = document.getElementById("duration");
+// const cover = document.getElementById("cover");
+// const nowTitle = document.getElementById("now-title");
+// const durationText = document.getElementById("duration");
 
 // Format durasi mm:ss
 function formatTime(seconds) {
@@ -124,11 +124,11 @@ function formatTime(seconds) {
 }
 
 // Update info cover & judul
-function updateNowPlayingUI(song) {
-  cover.src = song.cover || "https://via.placeholder.com/64?text=🎵";
-  nowTitle.textContent = song.title || "Unknown";
-  durationText.textContent = "0:00";
-}
+// function updateNowPlayingUI(song) {
+//  cover.src = song.cover || "https://via.placeholder.com/64?text=🎵";
+//  nowTitle.textContent = song.title || "Unknown";
+//  durationText.textContent = "0:00";
+//}
 
 // Saat lagu dimuat, update UI
 audio.addEventListener("loadedmetadata", () => {
