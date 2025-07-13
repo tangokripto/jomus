@@ -214,6 +214,16 @@ button {
   background: rgba(255, 255, 255, 0.05);
   color: #ddd;
 }
+
+.song-info {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 200px; /* sesuaikan */
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /* artis album genre */
 #song-meta p {
   padding: 0;
