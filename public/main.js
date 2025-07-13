@@ -28,7 +28,6 @@ fetch("songs.json")
     currentIndex = saved ? parseInt(saved) : 0;
     renderPlaylist();
     loadSong(currentIndex, true);
-    document.getElementById("song-title").textContent = song.title;
     scrollToCurrentSong();
   });
 
@@ -53,11 +52,26 @@ function renderPlaylist(filter = "") {
   songList.innerHTML = "";
   filteredSongs = songs
     .map((song, idx) => ({ ...song, originalIndex: idx }))
-    .filter(song => song.title.toLowerCase().includes(filter.toLowerCase()));
+    .filter(song => {
+      const query = filter.toLowerCase();
+      return (
+        song.title?.toLowerCase().includes(query) ||
+        song.artist?.toLowerCase().includes(query) ||
+        song.album?.toLowerCase().includes(query) ||
+        song.genre?.toLowerCase().includes(query) ||
+        song.file?.toLowerCase().includes(query)
+      );
+    });
+    
 
   filteredSongs.forEach((song, i) => {
     const li = document.createElement("li");
-    li.textContent = song.title;
+    li.innerHTML = `
+  <div class="flex flex-col">
+  <span class="text-xs text-zinc-400">${song.file.split('/').pop().replace(/\.[^/.]+$/, "")}</span>
+  </div>
+`;
+{}
     li.addEventListener("click", () => {
       currentIndex = song.originalIndex;
       playSong();
@@ -221,7 +235,6 @@ function updateNowPlayingUI(song) {
   }
   ;
 }
-
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
