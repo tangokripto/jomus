@@ -199,7 +199,7 @@ button:hover {
   box-sizing: border-box;
   position: relative;
   color: #888;
-  font-size: 12px;
+  font-size: 16px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid;
   border-radius: 4px;
@@ -236,5 +236,13 @@ button:hover {
 
 /* no zoom pas search */
 html {
-  -webkit-text-size-adjust: 100%; /* cegah zoom font di iOS */
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation; /* menghindari gesture yang nggak perlu */
+}
+
+input,
+textarea,
+select,
+button {
+  font-size: 16px; /* penting: ini biar nggak ke-zoom di iOS Safari */
 }
