@@ -233,3 +233,8 @@ button:hover {
     font-size: 0.9rem;
   }
 }
+
+/* no zoom pas search */
+html {
+  -webkit-text-size-adjust: 100%; /* cegah zoom font di iOS */
+}
