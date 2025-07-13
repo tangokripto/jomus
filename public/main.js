@@ -66,7 +66,7 @@ function renderPlaylist(filter = "") {
   });
 
   highlightActive();
-  scrollToCurrentSong();
+  //scrollToCurrentSong();
 }
 
 function scrollToCurrentSong() {
