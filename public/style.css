@@ -1,47 +1,91 @@
 body {
   font-family: sans-serif;
-  background: #fff;
-  color: #000;
+  background: linear-gradient(135deg, #ff6ec4, #7873f5, #4adede, #ffcb57, #4adede, #10b981);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: #fff;
   margin: 0;
   padding: 20px;
   transition: background 0.3s, color 0.3s;
+  position: relative;
+  overflow-x: hidden;
+  z-index: 0;
 }
 
-body.dark {
-  background: #121212;
-  color: #888;
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(59,130,246,0.5), rgba(17,24,39,0.9)); /* Biru ke abu gelap */
+  backdrop-filter: blur(10px);
+  z-index: -1;
+}
+
+body.dark .player {
+  background: rgba(18, 18, 18, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 
 .player {
   max-width: 600px;
   margin: auto;
-  background: white;
+  background: rgba(255, 255, 255, 0.1); /* transparan */
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 0 16px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 
 #now-playing {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #888;
+  color: #f3f4f6;
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
 
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-  margin-top: 0.5rem;
+.controls button {
+  background: linear-gradient(135deg, #3b82f6, #6366f1); /* biru ke ungu */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
-.controls button {
-  margin: 7px;
-  font-size: 20px;
+.controls button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 16px rgba(99, 102, 241, 0.4);
 }
+
+/* Tombol aktif (shuffle & repeat saat aktif) */
+#shuffle.active,
+#repeat.active {
+  background: linear-gradient(135deg, #10b981, #3b82f6); /* hijau ke biru */
+  color: white;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
 
 button {
   font-size: 1.5rem;
@@ -62,6 +106,7 @@ button:hover {
   color: white;
 }
 
+/* volume */
 #seek,
 #volume {
   width: 100%;
@@ -69,9 +114,10 @@ button:hover {
   accent-color: #3b82f6;
 }
 
+/* box lagu */
 .playlist {
-  margin-top: 1rem;
-  background: #f9fafb;
+  margin-top: 2rem;
+  background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   padding: 1rem;
 }
@@ -91,17 +137,17 @@ button:hover {
 #song-list li {
   padding: 0.5rem;
   cursor: pointer;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid;
   transition: background 0.2s;
 }
 
 #song-list li:hover {
-  background: #e0f2fe;
+  background: #3b82f6;
 }
 
 #song-list li.active {
   background: #3b82f6;
-  color: white;
+
 }
 
 /* Durasi Lagu */
@@ -133,20 +179,22 @@ button:hover {
 }
 
 #search {
-  width: 60%;
+  width: 90%;
   padding: 0.6rem 2.5rem 0.6rem 1rem;
   color: #888;
   font-size: 1rem;
-  background: #f9fafb;
-  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid;
   border-radius: 4px;
   transition: border 0.2s, background 0.2s;
 }
 
 #search:focus {
   outline: none;
+  color: #fff;
   border-color: #3b82f6;
-  background: white;
+  transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.3);
 }
 
 #clear-search {
@@ -160,8 +208,4 @@ button:hover {
   color: #999;
   cursor: pointer;
   padding: 0;
-}
-
-#clear-search:hover {
-  color: #333;
 }

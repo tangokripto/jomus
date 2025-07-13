@@ -102,7 +102,7 @@ function loadSong(index, resume = false) {
       audio.currentTime = savedTime;
     }
 
-    nowPlaying.textContent = "🎧 Now playing : " + song.title;
+    nowPlaying.textContent = "🎧 Now :: " + song.title;
     document.title = song.title + " - Spotify KW";
     updateNowPlayingUI(song);
     highlightActive();
