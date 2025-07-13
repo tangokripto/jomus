@@ -29,9 +29,6 @@ fetch("songs.json")
     renderPlaylist();
     loadSong(currentIndex, true);
     document.getElementById("song-title").textContent = song.title;
-    document.getElementById("song-artist").textContent = song.artist || "Unknown Artist";
-    document.getElementById("song-album").textContent = song.album || "Unknown Album";
-    document.getElementById("song-genre").textContent = song.genre || "Genre?";
     scrollToCurrentSong();
   });
 
@@ -106,8 +103,11 @@ function loadSong(index, resume = false) {
     }
 
     nowPlaying.textContent = " 🎵 " + song.title;
-    document.title = song.title + " - Spotify KW";
+    document.title = song.title + " - Apple Music KW";
     updateNowPlayingUI(song);
+    document.getElementById("song-artist").textContent = song.artist || "Unknown";
+    document.getElementById("song-album").textContent = song.album || "Unknown";
+    document.getElementById("song-genre").textContent = song.genre || "Genre?";
     highlightActive();
   });
 }
@@ -219,15 +219,7 @@ function updateNowPlayingUI(song) {
   } else {
     cover.style.display = "none";
   }
-
-  nowPlaying.innerHTML = `
-    <div style="font-weight: bold; font-size: 1.1rem;">${song.title}</div>
-    <div style="font-size: 0.9rem; color: #ccc;">
-      ${song.artist || 'Unknown Artist'} &middot;
-      ${song.album || 'Unknown Album'} &middot;
-      ${song.genre || 'Genre?'}
-    </div>
-  `;
+  ;
 }
 
 
