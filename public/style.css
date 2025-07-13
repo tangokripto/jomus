@@ -182,19 +182,21 @@ button:hover {
 .search-container {
   margin: 1rem 0;
   display: flex;
-  justify-content: flex-start;
-  padding-left: 1rem;
+  justify-content: center;
+  padding-left: 0 1rem;
+  box-sizing: border-box;
 }
 
 .search-wrapper {
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
 }
 
 #search {
   width: 90%;
   padding: 0.6rem 2.5rem 0.6rem 1rem;
+  box-sizing: border-box;
   color: #888;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.05);
@@ -222,4 +224,9 @@ button:hover {
   color: #999;
   cursor: pointer;
   padding: 0;
+}
+@media (max-width: 480px) {
+  #search {
+    font-size: 0.9rem;
+  }
 }
