@@ -53,6 +53,7 @@ const b2 = new B2({
           .map(f => ({
             title: path.basename(f.fileName, '.mp3'),
             url: `${b2.downloadUrl}/file/${bucket.bucketName}/${encodeURIComponent(f.fileName)}`,
+            cover: `https://townsquare.media/site/295/files/2024/01/attachment-Saviors_Cover.jpg?w=980&q=75`,
           }));
 
         allSongs.push(...songs);

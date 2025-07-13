@@ -208,6 +208,13 @@ function formatTime(seconds) {
 
 function updateNowPlayingUI(song) {
   durationText.textContent = "0:00";
+  const cover = document.getElementById("cover-art");
+  if (song.cover) {
+    cover.src = song.cover;
+    cover.style.display = "block";
+  } else {
+    cover.style.display = "none";
+  }
 }
 
 if ('serviceWorker' in navigator) {

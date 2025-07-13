@@ -1,8 +1,8 @@
 body {
   font-family: sans-serif;
-  background: linear-gradient(135deg, #ff6ec4, #7873f5, #4adede, #ffcb57, #4adede, #10b981);
+  background: linear-gradient(135deg, #ff6ec4, #7873f5, #4adede, #ffcb57, #4adede, #10b981, #243be9, #eb0e28, #ed751a);
   background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+  animation: gradientShift 20s ease infinite;
   color: #fff;
   margin: 0;
   padding: 20px;
@@ -36,6 +36,20 @@ body::before {
 body.dark .player {
   background: rgba(18, 18, 18, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+/* cover */
+#cover-art {
+  width: 100%;
+  max-width: 20%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  margin-bottom: 1rem;
+  transition: transform 0.3s;
+  display: block;
+  margin: 0 left;
+}
+#cover-art:hover {
+  transform: scale(1.05);
 }
 
 
