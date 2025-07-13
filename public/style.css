@@ -3,7 +3,7 @@ body {
   background: linear-gradient(135deg, #ff6ec4, #7873f5, #4adede, #ffcb57, #4adede, #10b981, #243be9, #eb0e28, #ed751a);
   background-size: 400% 400%;
   animation: gradientShift 20s ease infinite;
-  color: #fff;
+  color: #ddd;
   margin: 0;
   padding: 20px;
   transition: background 0.3s, color 0.3s;
@@ -52,7 +52,6 @@ body.dark .player {
   transform: scale(1.05);
 }
 
-
 .player {
   max-width: 600px;
   margin: auto;
@@ -65,12 +64,11 @@ body.dark .player {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-
 #now-playing {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #f3f4f6;
+  color: #ddd;
   font-size: 1.2rem;
   margin-bottom: 1rem;
 }
@@ -79,7 +77,7 @@ body.dark .player {
 .controls button {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #fff;
+  color: #ddd;
   border-radius: 50%;
   padding: 0.8rem;
   width: 48px;
@@ -107,7 +105,6 @@ body.dark .player {
   height: 60px;
   font-size: 1.5rem;
 }
-
 
 /* Tombol aktif (shuffle & repeat saat aktif) */
 #shuffle.active,
@@ -153,7 +150,7 @@ button {
   width: 14px;
   border-radius: 50%;
   background: #3b82f6;
-  border: 2px solid white;
+  border: 2px solid #ddd;
   cursor: pointer;
   box-shadow: 0 0 4px rgba(59, 130, 246, 0.6);
   transition: background 0.2s, transform 0.2s;
@@ -170,7 +167,7 @@ button {
   width: 14px;
   border-radius: 50%;
   background: #3b82f6;
-  border: 2px solid white;
+  border: 2px solid #ddd;
   cursor: pointer;
   box-shadow: 0 0 4px rgba(59, 130, 246, 0.6);
 }
@@ -215,13 +212,28 @@ button {
 
 #song-list li.active {
   background: rgba(255, 255, 255, 0.05);
-  color: white;
+  color: #ddd;
+}
+/* artis album genre */
+#song-meta {
+  text-align: left;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  color: #ddd;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.meta-line {
+  font-weight: 300;
+  letter-spacing: 0.3;
 }
 
 /* Durasi Lagu */
 #duration {
   font-size: 0.9rem;
-  color: #fff;
+  color: #ddd;
   margin-top: 0.25rem;
   text-align: right;
 }
@@ -262,7 +274,7 @@ button {
 
 #search:focus {
   outline: none;
-  color: #fff;
+  color: #ddd;
   border-color: #3b82f6;
   transition: transform 0.2s, box-shadow 0.3s, background 0.3s;
   box-shadow: 0 2px 12px rgba(99, 102, 241, 0.3);

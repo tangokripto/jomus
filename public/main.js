@@ -28,6 +28,10 @@ fetch("songs.json")
     currentIndex = saved ? parseInt(saved) : 0;
     renderPlaylist();
     loadSong(currentIndex, true);
+    document.getElementById("song-title").textContent = song.title;
+    document.getElementById("song-artist").textContent = song.artist || "Unknown Artist";
+    document.getElementById("song-album").textContent = song.album || "Unknown Album";
+    document.getElementById("song-genre").textContent = song.genre || "Genre?";
     scrollToCurrentSong();
   });
 
@@ -207,6 +211,7 @@ function formatTime(seconds) {
 
 function updateNowPlayingUI(song) {
   durationText.textContent = "0:00";
+
   const cover = document.getElementById("cover-art");
   if (song.cover) {
     cover.src = song.cover;
@@ -214,7 +219,17 @@ function updateNowPlayingUI(song) {
   } else {
     cover.style.display = "none";
   }
+
+  nowPlaying.innerHTML = `
+    <div style="font-weight: bold; font-size: 1.1rem;">${song.title}</div>
+    <div style="font-size: 0.9rem; color: #ccc;">
+      ${song.artist || 'Unknown Artist'} &middot;
+      ${song.album || 'Unknown Album'} &middot;
+      ${song.genre || 'Genre?'}
+    </div>
+  `;
 }
+
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
