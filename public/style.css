@@ -215,13 +215,15 @@ button {
   color: #ddd;
 }
 /* artis album genre */
-#song-meta {
+#song-meta p {
+  padding: 0;
+  margin: 0;
   text-align: left;
   margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: #ddd;
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1;
   opacity: 0.9;
 }
 
