@@ -230,10 +230,21 @@ function updateNowPlayingUI(song) {
   if (song.cover) {
     cover.src = song.cover;
     cover.style.display = "block";
+    updateFavicon(song.cover);
   } else {
     cover.style.display = "none";
   }
   ;
+}
+
+function updateFavicon(url) {
+  let link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "icon";
+    document.head.appendChild(link);
+  }
+  link.href = url + "?v=" + Date.now(); // auto refresh favicon tiap lagu ganti
 }
 
 if ('serviceWorker' in navigator) {
