@@ -270,26 +270,6 @@ function updateFavicon(url) {
   link.href = url + "?v=" + Date.now(); // force refresh favicon
 }
 
-function startScrollingTitle(text) {
-  clearInterval(scrollTitleInterval);
-  scrollTitleOffset = 0;
-
-  scrollTitleInterval = setInterval(() => {
-    const scrollText = text.substring(scrollTitleOffset) + " • " + text.substring(0, scrollTitleOffset);
-    document.title = scrollText;
-    scrollTitleOffset = (scrollTitleOffset + 1) % text.length;
-  }, 250);
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('✅ Service Worker registered'))
-      .catch(err => console.error('❌ SW failed:', err));
-  });
-}
-/* cover dynamic */
-
 function generateFaviconFromImage(url) {
   const img = new Image();
   img.crossOrigin = "anonymous";
@@ -310,4 +290,23 @@ function generateFaviconFromImage(url) {
     link.href = favicon;
   };
   img.src = url;
+}
+
+function startScrollingTitle(text) {
+  clearInterval(scrollTitleInterval);
+  scrollTitleOffset = 0;
+
+  scrollTitleInterval = setInterval(() => {
+    const scrollText = text.substring(scrollTitleOffset) + " • " + text.substring(0, scrollTitleOffset);
+    document.title = scrollText;
+    scrollTitleOffset = (scrollTitleOffset + 1) % text.length;
+  }, 250);
+}
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('✅ Service Worker registered'))
+      .catch(err => console.error('❌ SW failed:', err));
+  });
 }
