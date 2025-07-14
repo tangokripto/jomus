@@ -242,22 +242,24 @@ function updateNowPlayingUI(song) {
   } else {
     cover.style.display = "none";
   }
-}
 
-if ('mediaSession' in navigator) {
-  navigator.mediaSession.metadata = new MediaMetadata({
-    title: song.title || 'Unknown',
-    artist: song.artist || 'Unknown',
-    album: song.album || '',
-    artwork: [
-      { src: song.cover, sizes: '512x512', type: 'image/png' },
-    ]
-  });
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: song.title || 'Unknown',
+      artist: song.artist || 'Unknown',
+      album: song.album || '',
+      artwork: [
+        { src: song.cover, sizes: '512x512', type: 'image/png' },
+      ]
+    });
 
-  navigator.mediaSession.setActionHandler('play', () => audio.play());
-  navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-  navigator.mediaSession.setActionHandler('previoustrack', playPrev);
-  navigator.mediaSession.setActionHandler('nexttrack', playNext);
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+    navigator.mediaSession.setActionHandler('nexttrack', playNext);
+
+    console.log("✅ MediaSession updated:", navigator.mediaSession.metadata);
+  }
 }
 
 function updateFavicon(url) {
