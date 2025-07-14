@@ -74,6 +74,13 @@ body.dark .player {
 }
 
 /*controls */
+.control-btn svg {
+  transition: transform 0.2s ease, fill 0.2s ease;
+}
+.control-btn:hover svg {
+  transform: scale(1.1);
+  fill: #00f0ff; /* warna saat hover */
+}
 .controls button {
   margin-top: 16px;
   background: rgba(255, 255, 255, 0.05);
@@ -144,8 +151,7 @@ button {
 }
 
 /* thumb-nya (titiknya) */
-#seek::-webkit-slider-thumb,
-#volume::-webkit-slider-thumb {
+#seek::-webkit-slider-thumb, {
   -webkit-appearance: none;
   height: 14px;
   width: 14px;
