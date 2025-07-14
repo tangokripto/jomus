@@ -1,7 +1,6 @@
 const audio = document.getElementById("audio");
 const nowPlaying = document.getElementById("now-playing");
 const seek = document.getElementById("seek");
-const volume = document.getElementById("volume");
 const songList = document.getElementById("song-list");
 const searchInput = document.getElementById("search");
 const btnRepeat = document.getElementById("repeat");
@@ -12,6 +11,8 @@ const btnShuffle = document.getElementById("shuffle");
 const iconPlay = document.getElementById("icon-play");
 const iconPause = document.getElementById("icon-pause");
 const btnClearSearch = document.getElementById("clear-search");
+const current = formatTime(audio.currentTime);
+const total = formatTime(audio.duration);
 
 let currentIndex = 0;
 let isRepeating = false;
@@ -140,8 +141,8 @@ function playSong(resume = false) {
   let vol = 0;
   const fade = setInterval(() => {
     vol += 0.05;
-    if (vol >= volume.value) {
-      audio.volume = volume.value;
+    if (vol >= 1) {
+      audio.volume = 1;
       clearInterval(fade);
     } else {
       audio.volume = vol;
@@ -208,7 +209,9 @@ audio.addEventListener("ended", () => {
 audio.addEventListener("timeupdate", () => {
   seek.value = (audio.currentTime / audio.duration) * 100 || 0;
   durationText.textContent = formatTime(audio.currentTime);
-
+  const current = formatTime(audio.currentTime);
+  const total = formatTime(audio.duration);
+  durationText.textContent = `${current} / ${total}`;
   if (!audio.seeking && !audio.paused) {
     localStorage.setItem("lastTime", audio.currentTime.toString());
   }
@@ -216,10 +219,6 @@ audio.addEventListener("timeupdate", () => {
 
 seek.addEventListener("input", () => {
   audio.currentTime = (seek.value / 100) * audio.duration;
-});
-
-volume.addEventListener("input", () => {
-  audio.volume = volume.value;
 });
 
 const durationText = document.getElementById("duration");

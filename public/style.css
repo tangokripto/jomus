@@ -75,6 +75,7 @@ body.dark .player {
 
 /*controls */
 .controls button {
+  margin-top: 16px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: #ddd;
@@ -243,6 +244,12 @@ button {
 }
 
 /* Durasi Lagu */
+.seek-container {
+  margin-top: 12px;
+}
+input[type=range] {
+  width: 100%;
+}
 #duration {
   font-size: 0.9rem;
   color: #ddd;
@@ -272,6 +279,7 @@ button {
 }
 
 #search {
+  margin-top: 8px;
   width: 90%;
   padding: 0.6rem 2.5rem 0.6rem 1rem;
   box-sizing: border-box;
