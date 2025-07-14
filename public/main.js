@@ -68,7 +68,7 @@ function renderPlaylist(filter = "") {
     const li = document.createElement("li");
     li.innerHTML = `
   <div class="flex flex-col">
-  <span class="text-xs text-zinc-400">${song.file.split('/').pop().replace(/\.[^/.]+$/, "")}</span>
+  <span class="text-xs text-zinc-400">${song.file.split('/')}</span>
   </div>
 `;
 {}
