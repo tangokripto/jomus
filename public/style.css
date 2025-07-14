@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background: linear-gradient(135deg, #ff6ec4, #7873f5, #4adede, #ffcb57, #4adede, #10b981, #243be9, #eb0e28, #ed751a);
+  background: linear-gradient(135deg, #f16f13, #ffffff, #f63b3b, #24e6f4, #ff6ec4, #7873f5, #4adede, #ffcb57, #4adede, #10b981, #243be9, #eb0e28, #ed751a);
   background-size: 400% 400%;
   animation: gradientShift 20s ease infinite;
   color: #ddd;
@@ -74,6 +74,29 @@ body.dark .player {
 }
 
 /*controls */
+.svg-wrapper {
+  position: relative;
+  width: 100%;
+  height: 120px;
+}
+
+.svg-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.controls {
+  display: flex;
+  justify-content: center; /* Pusatkan tombol player */
+  align-items: center;
+  gap: 24px; /* Jarak antar tombol */
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
 .control-btn svg {
   width: 8vw;
   height: 8vw;
@@ -83,21 +106,22 @@ body.dark .player {
   transition: transform 0.2s ease, fill 0.2s ease;
 }
 .control-btn:hover svg {
-  fill: #00f0ff; /* warna saat hover */
+  fill: #24e6f4; /* warna saat hover */
 }
 .controls button {
   background: none;
   border: none;
   padding: 0;
+  align-items: center;
+  margin-top: 1.2rem;
+  justify-content: center;
   width: auto;
   height: auto;
   box-shadow: none;
   backdrop-filter: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, filter 0.3s;
   transform: scale(1.4);
 }
 
@@ -105,39 +129,35 @@ body.dark .player {
   background: none;
   transform: scale(1.1);
   box-shadow: none;
+  filter: drop-shadow(0 0 10px #24e6f4);
 }
 
 .controls button:active {
   transform: scale(0.95);
 }
 
-#play {
-  width: 80px;
-  height: 80px;
-  font-size: 1.5rem;
+#play svg{
+  width: 40px;
+  height: 40px;
+  max-width: 80px;
+  max-height: 80px;
+}
+
+#shuffle {
+  margin-right: 24px; /* kasih jarak extra ke kanan */
+}
+#repeat {
+  margin-left: 24px; /* kasih jarak extra ke kiri */
 }
 
 /* Tombol aktif (shuffle & repeat saat aktif) */
-#shuffle.active,
-#repeat.active {
-  background: linear-gradient(135deg, #10b981, #3b82f6); /* hijau ke biru */
-  color: white;
-  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+#shuffle.active svg {
+  fill: #24e6f4;
+  filter: drop-shadow(0 0 8px #24e6f4);
 }
-
-button {
-  font-size: 1.5rem;
-  padding: 0.4rem 0.6rem;
-  border: none;
-  background: #f3f4f6;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s, color 0.2s;
-}
-
-#repeat.active {
-  background: #3b82f6;
-  color: white;
+#repeat.active svg {
+  fill: #24e6f4;
+  filter: drop-shadow(0 0 8px #24e6f4);
 }
 
 /* volume */
@@ -289,7 +309,7 @@ input[type=range] {
 
 #search {
   margin-top: 8px;
-  width: 90%;
+  width: 100%;
   padding: 0.6rem 2.5rem 0.6rem 1rem;
   box-sizing: border-box;
   position: relative;
