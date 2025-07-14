@@ -238,9 +238,26 @@ function updateNowPlayingUI(song) {
     cover.src = song.cover;
     cover.style.display = "block";
     updateFavicon(song.cover);
+    generateFaviconFromImage(song.cover);
   } else {
     cover.style.display = "none";
   }
+}
+
+if ('mediaSession' in navigator) {
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: song.title || 'Unknown',
+    artist: song.artist || 'Unknown',
+    album: song.album || '',
+    artwork: [
+      { src: song.cover, sizes: '512x512', type: 'image/png' },
+    ]
+  });
+
+  navigator.mediaSession.setActionHandler('play', () => audio.play());
+  navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+  navigator.mediaSession.setActionHandler('nexttrack', playNext);
 }
 
 function updateFavicon(url) {
@@ -273,18 +290,24 @@ if ('serviceWorker' in navigator) {
 }
 /* cover dynamic */
 
-if ('mediaSession' in navigator) {
-  navigator.mediaSession.metadata = new MediaMetadata({
-    title: song.title || 'Unknown',
-    artist: song.artist || 'Unknown',
-    album: song.album || '',
-    artwork: [
-      { src: song.cover, sizes: '512x512', type: 'image/png' },
-    ]
-  });
+function generateFaviconFromImage(url) {
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.onload = function () {
+    const canvas = document.createElement("canvas");
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, 64, 64);
+    const favicon = canvas.toDataURL("image/png");
 
-  navigator.mediaSession.setActionHandler('play', () => audio.play());
-  navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-  navigator.mediaSession.setActionHandler('previoustrack', playPrev);
-  navigator.mediaSession.setActionHandler('nexttrack', playNext);
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.href = favicon;
+  };
+  img.src = url;
 }
