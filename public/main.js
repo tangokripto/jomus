@@ -19,6 +19,8 @@ let isPlaying = false;
 let isShuffled = false;
 let songs = [];
 let filterSongs = [];
+let scrollTitleInterval;
+let scrollTitleOffset = 0;
 
 fetch("songs.json")
   .then(res => res.json())
@@ -28,7 +30,6 @@ fetch("songs.json")
     currentIndex = saved ? parseInt(saved) : 0;
     renderPlaylist();
     loadSong(currentIndex, true);
-    scrollToCurrentSong();
   });
 
 function toggleClearButton() {
@@ -62,20 +63,19 @@ function renderPlaylist(filter = "") {
         song.file?.toLowerCase().includes(query)
       );
     });
-    
 
   filteredSongs.forEach((song, i) => {
     const li = document.createElement("li");
     li.innerHTML = `
-  <div class="flex flex-col">
-  <span class="text-xs text-zinc-400">${song.file.split('/')}</span>
-  </div>
-`;
-{}
+      <div class="flex flex-col">
+        <span class="text-xs text-zinc-400">${song.file.split('/')}</span>
+      </div>
+    `;
     li.addEventListener("click", () => {
       currentIndex = song.originalIndex;
       playSong();
       renderPlaylist(searchInput.value);
+      scrollToCurrentSong();
     });
     songList.appendChild(li);
   });
@@ -83,9 +83,9 @@ function renderPlaylist(filter = "") {
   highlightActive();
 }
 
-function scrollToCurrentSong() {
+function scrollToCurrentSong(autoScroll = true) {
   const active = songList.querySelector("li.active");
-  if (active) {
+  if (active & autoScroll) {
     active.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 }
@@ -117,7 +117,10 @@ function loadSong(index, resume = false) {
     }
 
     nowPlaying.textContent = " 🎵 " + song.title;
-    document.title = song.title + " - Apple Music KW";
+
+    const fullTitle = `🎵 ${song.title} - ${song.artist || "Unknown"}`;
+    startScrollingTitle(fullTitle);
+
     updateNowPlayingUI(song);
     document.getElementById("song-artist").textContent = song.artist || "Unknown";
     document.getElementById("song-album").textContent = song.album || "Unknown";
@@ -170,10 +173,14 @@ btnPlay.addEventListener("click", () => {
   if (isPlaying) {
     audio.pause();
     isPlaying = false;
+    clearInterval(scrollTitleInterval); // stop scroll saat pause
     localStorage.setItem("lastTime", audio.currentTime.toString());
   } else {
     audio.play();
     isPlaying = true;
+    const song = songs[currentIndex];
+    const fullTitle = `🎵 ${song.title} - ${song.artist || "Unknown"} 🎶`;
+    startScrollingTitle(fullTitle);
   }
   toggleIcons();
 });
@@ -234,7 +241,6 @@ function updateNowPlayingUI(song) {
   } else {
     cover.style.display = "none";
   }
-  ;
 }
 
 function updateFavicon(url) {
@@ -244,7 +250,18 @@ function updateFavicon(url) {
     link.rel = "icon";
     document.head.appendChild(link);
   }
-  link.href = url + "?v=" + Date.now(); // auto refresh favicon tiap lagu ganti
+  link.href = url + "?v=" + Date.now(); // force refresh favicon
+}
+
+function startScrollingTitle(text) {
+  clearInterval(scrollTitleInterval);
+  scrollTitleOffset = 0;
+
+  scrollTitleInterval = setInterval(() => {
+    const scrollText = text.substring(scrollTitleOffset) + " • " + text.substring(0, scrollTitleOffset);
+    document.title = scrollText;
+    scrollTitleOffset = (scrollTitleOffset + 1) % text.length;
+  }, 250);
 }
 
 if ('serviceWorker' in navigator) {
@@ -253,4 +270,21 @@ if ('serviceWorker' in navigator) {
       .then(reg => console.log('✅ Service Worker registered'))
       .catch(err => console.error('❌ SW failed:', err));
   });
+}
+/* cover dynamic */
+
+if ('mediaSession' in navigator) {
+  navigator.mediaSession.metadata = new MediaMetadata({
+    title: song.title || 'Unknown',
+    artist: song.artist || 'Unknown',
+    album: song.album || '',
+    artwork: [
+      { src: song.cover, sizes: '512x512', type: 'image/png' },
+    ]
+  });
+
+  navigator.mediaSession.setActionHandler('play', () => audio.play());
+  navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+  navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+  navigator.mediaSession.setActionHandler('nexttrack', playNext);
 }
