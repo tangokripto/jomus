@@ -102,6 +102,7 @@ body.dark .player {
   height: 8vw;
   max-width: 64px;
   max-height: 64px;
+  filter: none;
   fill: #ddd;
   transition: transform 0.2s ease, fill 0.2s ease;
 }
