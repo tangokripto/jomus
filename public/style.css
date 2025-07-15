@@ -146,11 +146,15 @@ body.dark .player {
 #shuffle {
   filter: none;
   transition: filter 0.2s, fill 0.2s;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   margin-right: 24px; /* kasih jarak extra ke kanan */
 }
 #repeat {
   filter: none;
   transition: filter 0.2s, fill 0.2s;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   margin-left: 24px; /* kasih jarak extra ke kiri */
 }
 
