@@ -104,8 +104,9 @@ function loadSong(index, resume = false) {
   nowPlaying.textContent = "⏳ Loading ...";
   document.title = "Loading...";
 
-  audio.src = song.url;
-  audio.load();
+  if (!audio.src || audio.src !== song.url) {
+    audio.src = song.url;
+  }
 
   audio.addEventListener("canplay", function onReady() {
     audio.removeEventListener("canplay", onReady);
