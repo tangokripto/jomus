@@ -85,18 +85,6 @@ function renderPlaylist(filter = "") {
 }
 
 
-songList.addEventListener("scroll", () => {
-  if (
-    songList.scrollTop + songList.clientHeight >=
-    songList.scrollHeight - 10
-  ) {
-    if (visibleCount < filteredSongs.length) {
-      visibleCount += LOAD_STEP;
-      renderVisibleSongs();
-    }
-  }
-});
-
 function scrollToCurrentSong(autoScroll = true) {
   const active = songList.querySelector("li.active");
   if (active && autoScroll) {
@@ -119,7 +107,7 @@ function loadSong(index, resume = false) {
   document.title = "Loading...";
 
   audio.src = song.url;
-  audio.play();
+  audio.load();
 
   audio.addEventListener("canplay", function onReady() {
     audio.removeEventListener("canplay", onReady);
