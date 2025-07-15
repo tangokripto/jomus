@@ -13,7 +13,6 @@ const iconPause = document.getElementById("icon-pause");
 const btnClearSearch = document.getElementById("clear-search");
 const durationText = document.getElementById("duration");
 
-
 let currentIndex = 0;
 let isRepeating = false;
 let isPlaying = false;
@@ -83,7 +82,6 @@ function renderPlaylist(filter = "") {
 
   highlightActive();
 }
-
 
 function scrollToCurrentSong(autoScroll = true) {
   const active = songList.querySelector("li.active");
