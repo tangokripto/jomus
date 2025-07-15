@@ -1,4 +1,4 @@
-const audio = new Audio();
+const audio = document.getElementById("audio");
 const nowPlaying = document.getElementById("now-playing");
 const seek = document.getElementById("seek");
 const songList = document.getElementById("song-list");
@@ -13,7 +13,6 @@ const iconPause = document.getElementById("icon-pause");
 const btnClearSearch = document.getElementById("clear-search");
 const durationText = document.getElementById("duration");
 
-
 let currentIndex = 0;
 let isRepeating = false;
 let isPlaying = false;
@@ -23,7 +22,7 @@ let filteredSongs = [];
 let scrollTitleInterval;
 let scrollTitleOffset = 0;
 
-fetch("https://gist.githubusercontent.com/tangokripto/9a9509c2df203d727b060494a4a002dc/raw/songs.json")
+fetch("songs.json")
   .then(res => res.json())
   .then(data => {
     songs = data;
@@ -119,7 +118,7 @@ function loadSong(index, resume = false) {
   document.title = "Loading...";
 
   audio.src = song.url;
-  audio.play();
+  audio.load();
 
   audio.addEventListener("canplay", function onReady() {
     audio.removeEventListener("canplay", onReady);
