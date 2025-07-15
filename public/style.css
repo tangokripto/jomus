@@ -348,6 +348,11 @@ input[type=range] {
     font-size: 0.9rem;
   }
 }
+@media (prefers-reduced-motion: reduce){
+  body{
+    animation: none;
+  }
+}
 
 /* no zoom pas search */
 html {
