@@ -118,7 +118,6 @@ body.dark .player {
   width: auto;
   height: auto;
   box-shadow: none;
-  backdrop-filter: none;
   filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
   cursor: pointer;
   transition: transform 0.2s, filter 0.3s;
@@ -144,17 +143,9 @@ body.dark .player {
 }
 
 #shuffle {
-  filter: none;
-  transition: filter 0.2s, fill 0.2s;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   margin-right: 24px; /* kasih jarak extra ke kanan */
 }
 #repeat {
-  filter: none;
-  transition: filter 0.2s, fill 0.2s;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   margin-left: 24px; /* kasih jarak extra ke kiri */
 }
 
