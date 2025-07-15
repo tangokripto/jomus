@@ -11,17 +11,18 @@ const btnShuffle = document.getElementById("shuffle");
 const iconPlay = document.getElementById("icon-play");
 const iconPause = document.getElementById("icon-pause");
 const btnClearSearch = document.getElementById("clear-search");
-const current = formatTime(audio.currentTime);
-const total = formatTime(audio.duration);
+const durationText = document.getElementById("duration");
 
 let currentIndex = 0;
 let isRepeating = false;
 let isPlaying = false;
 let isShuffled = false;
 let songs = [];
-let filterSongs = [];
+let filteredSongs = [];
 let scrollTitleInterval;
 let scrollTitleOffset = 0;
+let visibleCount = 10;
+const LOAD_STEP = 10;
 
 fetch("songs.json")
   .then(res => res.json())
@@ -52,6 +53,8 @@ toggleClearButton();
 
 function renderPlaylist(filter = "") {
   songList.innerHTML = "";
+  visibleCount = LOAD_STEP;
+
   filteredSongs = songs
     .map((song, idx) => ({ ...song, originalIndex: idx }))
     .filter(song => {
@@ -65,7 +68,14 @@ function renderPlaylist(filter = "") {
       );
     });
 
-  filteredSongs.forEach((song, i) => {
+  renderVisibleSongs();
+}
+
+function renderVisibleSongs() {
+  const visibleSongs = filteredSongs.slice(0, visibleCount);
+  songList.innerHTML = "";
+
+  visibleSongs.forEach(song => {
     const li = document.createElement("li");
     li.innerHTML = `
       <div class="flex flex-col">
@@ -84,9 +94,21 @@ function renderPlaylist(filter = "") {
   highlightActive();
 }
 
+songList.addEventListener("scroll", () => {
+  if (
+    songList.scrollTop + songList.clientHeight >=
+    songList.scrollHeight - 10
+  ) {
+    if (visibleCount < filteredSongs.length) {
+      visibleCount += LOAD_STEP;
+      renderVisibleSongs();
+    }
+  }
+});
+
 function scrollToCurrentSong(autoScroll = true) {
   const active = songList.querySelector("li.active");
-  if (active & autoScroll) {
+  if (active && autoScroll) {
     active.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 }
@@ -118,7 +140,6 @@ function loadSong(index, resume = false) {
     }
 
     nowPlaying.textContent = " 🎵 " + song.title;
-
     const fullTitle = `🎵 ${song.title} - ${song.artist || "Unknown"}`;
     startScrollingTitle(fullTitle);
 
@@ -174,7 +195,7 @@ btnPlay.addEventListener("click", () => {
   if (isPlaying) {
     audio.pause();
     isPlaying = false;
-    clearInterval(scrollTitleInterval); // stop scroll saat pause
+    clearInterval(scrollTitleInterval);
     localStorage.setItem("lastTime", audio.currentTime.toString());
   } else {
     audio.play();
@@ -208,7 +229,6 @@ audio.addEventListener("ended", () => {
 
 audio.addEventListener("timeupdate", () => {
   seek.value = (audio.currentTime / audio.duration) * 100 || 0;
-  durationText.textContent = formatTime(audio.currentTime);
   const current = formatTime(audio.currentTime);
   const total = formatTime(audio.duration);
   durationText.textContent = `${current} / ${total}`;
@@ -221,8 +241,6 @@ seek.addEventListener("input", () => {
   audio.currentTime = (seek.value / 100) * audio.duration;
 });
 
-const durationText = document.getElementById("duration");
-
 function formatTime(seconds) {
   const min = Math.floor(seconds / 60) || 0;
   const sec = Math.floor(seconds % 60) || 0;
@@ -231,7 +249,6 @@ function formatTime(seconds) {
 
 function updateNowPlayingUI(song) {
   durationText.textContent = "0:00";
-
   const cover = document.getElementById("cover-art");
   if (song.cover) {
     cover.src = song.cover;
@@ -247,17 +264,13 @@ function updateNowPlayingUI(song) {
       title: song.title || 'Unknown',
       artist: song.artist || 'Unknown',
       album: song.album || '',
-      artwork: [
-        { src: song.cover, sizes: '512x512', type: 'image/png' },
-      ]
+      artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
     });
 
     navigator.mediaSession.setActionHandler('play', () => audio.play());
     navigator.mediaSession.setActionHandler('pause', () => audio.pause());
     navigator.mediaSession.setActionHandler('previoustrack', playPrev);
     navigator.mediaSession.setActionHandler('nexttrack', playNext);
-
-    console.log("✅ MediaSession updated:", navigator.mediaSession.metadata);
   }
 }
 
@@ -268,7 +281,7 @@ function updateFavicon(url) {
     link.rel = "icon";
     document.head.appendChild(link);
   }
-  link.href = url + "?v=" + Date.now(); // force refresh favicon
+  link.href = url + "?v=" + Date.now();
 }
 
 function generateFaviconFromImage(url) {
@@ -296,7 +309,6 @@ function generateFaviconFromImage(url) {
 function startScrollingTitle(text) {
   clearInterval(scrollTitleInterval);
   scrollTitleOffset = 0;
-
   scrollTitleInterval = setInterval(() => {
     const scrollText = text.substring(scrollTitleOffset) + " • " + text.substring(0, scrollTitleOffset);
     document.title = scrollText;
