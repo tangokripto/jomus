@@ -104,6 +104,11 @@ function loadSong(index, resume = false) {
   nowPlaying.textContent = "⏳ Loading ...";
   document.title = "Loading...";
 
+  //* stop buffering semua lagu
+  audio.pause();
+  audio.removeAttribute("src");
+  audio.load();
+
   if (!audio.src || audio.src !== song.url) {
     audio.src = song.url;
   }
