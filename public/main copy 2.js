@@ -21,6 +21,8 @@ let songs = [];
 let filteredSongs = [];
 let scrollTitleInterval;
 let scrollTitleOffset = 0;
+let visibleCount = 10;
+const LOAD_STEP = 10;
 
 fetch("songs.json")
   .then(res => res.json())
@@ -51,7 +53,9 @@ toggleClearButton();
 
 function renderPlaylist(filter = "") {
   songList.innerHTML = "";
-  filterSongs = songs
+  visibleCount = LOAD_STEP;
+
+  filteredSongs = songs
     .map((song, idx) => ({ ...song, originalIndex: idx }))
     .filter(song => {
       const query = filter.toLowerCase();
@@ -64,7 +68,14 @@ function renderPlaylist(filter = "") {
       );
     });
 
-  filterSongs.forEach((song, i) => {
+  renderVisibleSongs();
+}
+
+function renderVisibleSongs() {
+  const visibleSongs = filteredSongs.slice(0, visibleCount);
+  songList.innerHTML = "";
+
+  visibleSongs.forEach(song => {
     const li = document.createElement("li");
     li.innerHTML = `
       <div class="flex flex-col">
@@ -75,14 +86,13 @@ function renderPlaylist(filter = "") {
       currentIndex = song.originalIndex;
       playSong();
       renderPlaylist(searchInput.value);
-      scrollToCurrentSong(false);
+      scrollToCurrentSong();
     });
     songList.appendChild(li);
   });
 
   highlightActive();
 }
-
 
 songList.addEventListener("scroll", () => {
   if (
@@ -105,7 +115,7 @@ function scrollToCurrentSong(autoScroll = true) {
 
 function highlightActive() {
   [...songList.children].forEach((li, idx) => {
-    const realIndex = filterSongs[idx]?.originalIndex;
+    const realIndex = filteredSongs[idx]?.originalIndex;
     li.classList.toggle("active", realIndex === currentIndex);
   });
 }
