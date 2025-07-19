@@ -26,6 +26,12 @@ fetch("songs.json")
   .then(res => res.json())
   .then(data => {
     songs = data;
+    // ✅ Urutkan berdasarkan nama artist sebelum playlist dirender
+    songs.sort((a, b) => {
+      const artistA = a.artist.toLowerCase();
+      const artistB = b.artist.toLowerCase();
+      return artistA.localeCompare(artistB);
+    });
     const saved = localStorage.getItem("lastIndex");
     currentIndex = saved ? parseInt(saved) : 0;
     renderPlaylist();
@@ -68,9 +74,13 @@ function renderPlaylist(filter = "") {
     const li = document.createElement("li");
     li.innerHTML = `
       <div class="flex flex-col">
-        <span class="text-xs text-zinc-400">${song.file.split('/')}</span>
+      <span class="text-xs text-zinc-400">${getFileName(song.file)}</span>
       </div>
     `;
+    function getFileName(path) {
+      const name = path.split('/').pop(); // ambil bagian akhir path
+      return name.replace(/\.[^/.]+$/, ''); // hapus ekstensi .mp3 atau lainnya
+    }    
     li.addEventListener("click", () => {
       currentIndex = song.originalIndex;
       playSong();
