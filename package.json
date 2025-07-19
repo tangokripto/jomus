@@ -15,7 +15,8 @@
     "backblaze-b2": "^1.7.1",
     "dotenv": "^17.2.0",
     "fs": "^0.0.1-security",
-    "music-metadata": "^11.6.0",
-    "path": "^0.12.7"
+    "music-metadata": "^11.7.0",
+    "path": "^0.12.7",
+    "sharp": "^0.34.3"
   }
 }

@@ -1,127 +1,145 @@
-// 1. Import
+// update-songs.js — FINAL GABUNGAN
+
 const B2 = require('backblaze-b2');
 const fs = require('fs');
 const path = require('path');
 const mm = require('music-metadata');
 const axios = require('axios');
-require('dotenv').config(); // Load .env
+const sharp = require('sharp');
+require('dotenv').config();
 
-// 2. Inisialisasi B2
 const b2 = new B2({
   applicationKeyId: process.env.B2_KEY_ID,
   applicationKey: process.env.B2_APP_KEY,
 });
 
-// 3. Fungsi ambil metadata dari file URL
-async function getMetadataFromUrl(url) {
+const outputPath = 'public/songs.json';
+const coverDir = 'public/covers';
+if (!fs.existsSync(coverDir)) fs.mkdirSync(coverDir, { recursive: true });
+
+function slugify(text) {
+  return text.toLowerCase()
+    .replace(/[^a-z0-9]/g, '-')
+    .replace(/-+/g, '-')
+    .replace(/^-|-$/g, '');
+}
+
+async function extractAndSaveCover(pictureBuffer, filenameBase) {
+  const coverPath = path.join(coverDir, `${filenameBase}.jpg`);
+  if (fs.existsSync(coverPath)) return `covers/${filenameBase}.jpg`;
+
+  try {
+    const outputBuffer = await sharp(pictureBuffer)
+      .resize({ width: 300, height: 300, fit: 'inside' })
+      .jpeg({ quality: 70 })
+      .toBuffer();
+
+    fs.writeFileSync(coverPath, outputBuffer);
+    return `covers/${filenameBase}.jpg`;
+  } catch (err) {
+    console.warn(`⚠️ Gagal kompres cover untuk ${filenameBase}:`, err.message);
+    return null;
+  }
+}
+
+async function getMetadataWithCover(url, filenameBase) {
   try {
     const { data } = await axios.get(url, { responseType: 'stream' });
     const metadata = await mm.parseStream(data, {}, { duration: true });
 
+    let coverPath = null;
+    if (metadata.common.picture?.length) {
+      const picture = metadata.common.picture[0];
+      coverPath = await extractAndSaveCover(picture.data, filenameBase);
+    }
+
     return {
-      title: metadata.common.title || 'Unknown Title',
+      title: metadata.common.title || path.basename(url, '.mp3'),
       artist: metadata.common.artist || 'Unknown Artist',
       album: metadata.common.album || 'Unknown Album',
       genre: metadata.common.genre?.[0] || 'Unknown Genre',
       duration: Math.round(metadata.format.duration || 0),
+      cover: coverPath,
     };
   } catch (err) {
-    console.warn(`⚠️  Gagal ambil metadata dari: ${url} — ${err.message}`);
-    return {
-      title: 'Unknown Title',
-      artist: 'Unknown Artist',
-      album: 'Unknown Album',
-      genre: 'Unknown Genre',
-      duration: 0,
-    };
+    console.warn(`⚠️ Gagal ambil metadata dari: ${url} — ${err.message}`);
+    return null;
   }
 }
 
-// 4. Fungsi async utama
 (async () => {
   try {
-    console.log('🌀 Menghubungkan ke Backblaze...');
+    console.log('🔐 Authorizing...');
     await b2.authorize();
 
-    console.log('✅ Authorized OK');
-    console.log('🔗 API URL:', b2.authorizationApiUrl);
-    console.log('🆔 Account ID:', b2.accountId);
-
-    // Baca existing songs.json (jika ada)
     let existingSongs = [];
-    const outputPath = 'public/songs.json';
-
     if (fs.existsSync(outputPath)) {
       existingSongs = JSON.parse(fs.readFileSync(outputPath, 'utf-8'));
     }
 
     const existingMap = new Map();
-    existingSongs.forEach(song => {
-      existingMap.set(song.file, song); // pakai fileName sebagai key
-    });
+    existingSongs.forEach(song => existingMap.set(song.file, song));
 
     const bucketsResponse = await b2.listBuckets();
-    const buckets = bucketsResponse.data.buckets;
+    const bucket = bucketsResponse.data.buckets[0];
+    if (!bucket) return console.error('❌ Tidak ada bucket ditemukan.');
 
-    if (!buckets.length) {
-      console.error('❌ Tidak ada bucket ditemukan.');
-      return;
-    }
+    let allSongs = [...existingSongs];
+    let startFileName = null;
+    let done = false;
 
-    let allSongs = [];
+    while (!done) {
+      const list = await b2.listFileNames({
+        bucketId: bucket.bucketId,
+        startFileName,
+        maxFileCount: 1000,
+      });
 
-    for (const bucket of buckets) {
-      console.log(`🎵 Memindai bucket: ${bucket.bucketName}`);
-      const bucketId = bucket.bucketId;
+      const files = list.data.files.filter(f => f.fileName.endsWith('.mp3'));
 
-      let startFileName = null;
-      let done = false;
+      for (const file of files) {
+        const fileName = file.fileName;
+        const fileUrl = `${b2.downloadUrl}/file/${bucket.bucketName}/${encodeURIComponent(fileName)}`;
 
-      while (!done) {
-        const list = await b2.listFileNames({
-          bucketId,
-          startFileName,
-          maxFileCount: 1000,
-        });
-
-        const files = list.data.files.filter(f => f.fileName.endsWith('.mp3'));
-
-        for (const file of files) {
-          const fileUrl = `${b2.downloadUrl}/file/${bucket.bucketName}/${encodeURIComponent(file.fileName)}`;
-          const existing = existingMap.get(file.fileName);
-
-          if (existing && existing.cover) {
-            console.log(`🟡 Skip (sudah ada cover): ${file.fileName}`);
-            allSongs.push(existing); // tambahkan dari data lama
-            continue;
-          }
-
-          console.log(`🎧 Memproses: ${file.fileName}`);
-          const meta = await getMetadataFromUrl(fileUrl);
-
-          allSongs.push({
-            file: file.fileName,
-            url: fileUrl,
-            title: meta.title || path.basename(file.fileName, '.mp3'),
-            artist: meta.artist,
-            album: meta.album,
-            genre: meta.genre,
-            duration: meta.duration,
-            cover: `https://townsquare.media/site/295/files/2024/01/attachment-Saviors_Cover.jpg?w=980&q=75`, // fallback default
-          });
+        // Jika sudah ada, skip
+        if (existingMap.has(fileName)) {
+          console.log(`⏩ Skip (sudah ada): ${fileName}`);
+          continue;
         }
 
-        if (list.data.nextFileName) {
-          startFileName = list.data.nextFileName;
-        } else {
-          done = true;
-        }
+        const filenameBase = slugify(path.basename(fileName, '.mp3'));
+        console.log(`🎧 Memproses baru: ${fileName}`);
+
+        const meta = await getMetadataWithCover(fileUrl, filenameBase);
+        if (!meta) continue;
+
+        const newSong = {
+          file: fileName,
+          url: fileUrl,
+          title: meta.title,
+          artist: meta.artist,
+          album: meta.album,
+          genre: meta.genre,
+          duration: meta.duration,
+          cover: meta.cover || 'covers/default.jpg',
+        };
+
+        allSongs.push(newSong);
+        existingMap.set(fileName, newSong);
+      }
+
+      if (list.data.nextFileName) {
+        startFileName = list.data.nextFileName;
+      } else {
+        done = true;
       }
     }
 
+    // Optional: sort alfabetis
+    allSongs.sort((a, b) => a.file.localeCompare(b.file));
+
     fs.writeFileSync(outputPath, JSON.stringify(allSongs, null, 2));
     console.log(`✅ ${allSongs.length} lagu ditulis ke ${outputPath}`);
-
   } catch (err) {
     console.error('❌ ERROR:', err.message || err);
   }

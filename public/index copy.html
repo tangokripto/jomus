@@ -17,8 +17,6 @@
 </head>
 <body class="dark">
   <div class="player">
-    <!-- Cover + Durasi (DITAMBAHKAN) -->
-
     <img id="cover-art" src="" alt="Cover Art"" />
     <!-- ELEMEN ASLI -->
     <div id="now-playing">Choose song</div>
@@ -68,7 +66,8 @@
       <h3>🎶 Songs</h3>
       <ul id="song-list"></ul>
     </div>
-    <audio id="audio"></audio>
+<!-- Hanya satu audio di HTML -->
+<audio id="audio" preload="none"></audio>
   <script src="main.js"></script>
 </body>
 </html>
