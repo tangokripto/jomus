@@ -580,6 +580,16 @@
     "cover": "covers/avenged-sevenfold-gunslinger.jpg"
   },
   {
+    "file": "Avenged Sevenfold - Hail to the King.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avenged%20Sevenfold%20-%20Hail%20to%20the%20King.mp3",
+    "title": "Hail to the King",
+    "artist": "Avenged Sevenfold",
+    "album": "Hail to the King",
+    "genre": "Metal",
+    "duration": 306,
+    "cover": "covers/avenged-sevenfold-hail-to-the-king.jpg"
+  },
+  {
     "file": "Avenged Sevenfold - M.I.A..mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Avenged%20Sevenfold%20-%20M.I.A..mp3",
     "title": "M.I.A.",
@@ -618,6 +628,106 @@
     "genre": "Metal",
     "duration": 327,
     "cover": "covers/avenged-sevenfold-so-far-away.jpg"
+  },
+  {
+    "file": "Avril Lavigne - Complicated.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20Complicated.mp3",
+    "title": "Complicated",
+    "artist": "Avril Lavigne",
+    "album": "Let Go",
+    "genre": "Unknown Genre",
+    "duration": 245,
+    "cover": "covers/avril-lavigne-complicated.jpg"
+  },
+  {
+    "file": "Avril Lavigne - Girlfriend.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20Girlfriend.mp3",
+    "title": "Girlfriend",
+    "artist": "Avril Lavigne",
+    "album": "The Best Damn Thing (Expanded Edition)",
+    "genre": "Unknown Genre",
+    "duration": 217,
+    "cover": "covers/avril-lavigne-girlfriend.jpg"
+  },
+  {
+    "file": "Avril Lavigne - Here's to Never Growing Up.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20Here's%20to%20Never%20Growing%20Up.mp3",
+    "title": "Here's to Never Growing Up",
+    "artist": "Avril Lavigne",
+    "album": "Avril Lavigne (Expanded Edition)",
+    "genre": "Unknown Genre",
+    "duration": 214,
+    "cover": "covers/avril-lavigne-here-s-to-never-growing-up.jpg"
+  },
+  {
+    "file": "Avril Lavigne - I'm with You.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20I'm%20with%20You.mp3",
+    "title": "I'm with You",
+    "artist": "Avril Lavigne",
+    "album": "Let Go",
+    "genre": "Unknown Genre",
+    "duration": 223,
+    "cover": "covers/avril-lavigne-i-m-with-you.jpg"
+  },
+  {
+    "file": "Avril Lavigne - Knockin' on Heaven's Door - Studio Version.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20Knockin'%20on%20Heaven's%20Door%20-%20Studio%20Version.mp3",
+    "title": "Knockin' on Heaven's Door - Studio Version",
+    "artist": "Avril Lavigne",
+    "album": "Nobody's Home",
+    "genre": "Unknown Genre",
+    "duration": 171,
+    "cover": "covers/avril-lavigne-knockin-on-heaven-s-door-studio-version.jpg"
+  },
+  {
+    "file": "Avril Lavigne - My Happy Ending.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20My%20Happy%20Ending.mp3",
+    "title": "My Happy Ending",
+    "artist": "Avril Lavigne",
+    "album": "Under My Skin",
+    "genre": "Unknown Genre",
+    "duration": 242,
+    "cover": "covers/avril-lavigne-my-happy-ending.jpg"
+  },
+  {
+    "file": "Avril Lavigne - Sk8er Boi.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20Sk8er%20Boi.mp3",
+    "title": "Sk8er Boi",
+    "artist": "Avril Lavigne",
+    "album": "Let Go",
+    "genre": "Unknown Genre",
+    "duration": 204,
+    "cover": "covers/avril-lavigne-sk8er-boi.jpg"
+  },
+  {
+    "file": "Avril Lavigne - What the Hell.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20What%20the%20Hell.mp3",
+    "title": "What the Hell",
+    "artist": "Avril Lavigne",
+    "album": "Goodbye Lullaby (Expanded Edition)",
+    "genre": "Unknown Genre",
+    "duration": 221,
+    "cover": "covers/avril-lavigne-what-the-hell.jpg"
+  },
+  {
+    "file": "Avril Lavigne - When You're Gone.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20When%20You're%20Gone.mp3",
+    "title": "When You're Gone",
+    "artist": "Avril Lavigne",
+    "album": "The Best Damn Thing (Expanded Edition)",
+    "genre": "Unknown Genre",
+    "duration": 241,
+    "cover": "covers/avril-lavigne-when-you-re-gone.jpg"
+  },
+  {
+    "file": "Avril Lavigne - Wish You Were Here.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avril%20Lavigne%20-%20Wish%20You%20Were%20Here.mp3",
+    "title": "Wish You Were Here",
+    "artist": "Avril Lavigne",
+    "album": "Goodbye Lullaby (Expanded Edition)",
+    "genre": "Unknown Genre",
+    "duration": 226,
+    "cover": "covers/avril-lavigne-wish-you-were-here.jpg"
   },
   {
     "file": "Avril Lavigne, Simple Plan - Young & Dumb (feat. Simple Plan).mp3",
@@ -1420,6 +1530,16 @@
     "cover": "covers/d-angelo-unshaken.jpg"
   },
   {
+    "file": "Danes Rabani - Sore Tugu Pancoran ft. Jeje GuitarAddict ( Iwan Fals Rock Cover ).mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Danes%20Rabani%20-%20Sore%20Tugu%20Pancoran%20ft.%20Jeje%20GuitarAddict%20(%20Iwan%20Fals%20Rock%20Cover%20).mp3",
+    "title": "Sore Tugu Pancoran ft. Jeje GuitarAddict ( Iwan Fals Rock Cover )",
+    "artist": "Danes Rabani",
+    "album": "Unknown Album",
+    "genre": "Rock",
+    "duration": 158,
+    "cover": "covers/default.jpg"
+  },
+  {
     "file": "Daniel Lanois - Mountain Finale.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Daniel%20Lanois%20-%20Mountain%20Finale.mp3",
     "title": "Mountain Finale",
@@ -1678,6 +1798,16 @@
     "genre": "Anime",
     "duration": 236,
     "cover": "covers/flow-sign.jpg"
+  },
+  {
+    "file": "Fourtwnty, Charita Utami - Mangu.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Fourtwnty%2C%20Charita%20Utami%20-%20Mangu.mp3",
+    "title": "Mangu",
+    "artist": "Fourtwnty",
+    "album": "Nalar",
+    "genre": "Indonesian Indie",
+    "duration": 263,
+    "cover": "covers/fourtwnty-charita-utami-mangu.jpg"
   },
   {
     "file": "Green Day - ¡Viva La Gloria!.mp3",
@@ -2050,6 +2180,16 @@
     "cover": "covers/ipang-lazuardi-sahabat-kecil-acoustic-version.jpg"
   },
   {
+    "file": "Ipang Lazuardi - Sahabat Kecil.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Ipang%20Lazuardi%20-%20Sahabat%20Kecil.mp3",
+    "title": "Sahabat Kecil",
+    "artist": "Ipang Lazuardi",
+    "album": "Hits Ipang Lazuardi",
+    "genre": "Indonesian Pop",
+    "duration": 243,
+    "cover": "covers/ipang-lazuardi-sahabat-kecil.jpg"
+  },
+  {
     "file": "Ipang Lazuardi - Sekali Lagi (Acoustic Version).mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Ipang%20Lazuardi%20-%20Sekali%20Lagi%20(Acoustic%20Version).mp3",
     "title": "Sekali Lagi (Acoustic Version)",
@@ -2158,6 +2298,126 @@
     "genre": "Heavy Metal",
     "duration": 351,
     "cover": "covers/iron-maiden-wasting-love-2015-remaster.jpg"
+  },
+  {
+    "file": "Iwan Fals - Aku Sayang Kamu.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Aku%20Sayang%20Kamu.mp3",
+    "title": "Aku Sayang Kamu",
+    "artist": "Iwan Fals",
+    "album": "Album Emas Periode 78 - 88",
+    "genre": "Indonesian Pop",
+    "duration": 260,
+    "cover": "covers/iwan-fals-aku-sayang-kamu.jpg"
+  },
+  {
+    "file": "Iwan Fals - Galang Rambu Anarki.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Galang%20Rambu%20Anarki.mp3",
+    "title": "Galang Rambu Anarki",
+    "artist": "Iwan Fals",
+    "album": "Opini",
+    "genre": "Indonesian Pop",
+    "duration": 233,
+    "cover": "covers/iwan-fals-galang-rambu-anarki.jpg"
+  },
+  {
+    "file": "Iwan Fals - Jendela Kelas 1.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Jendela%20Kelas%201.mp3",
+    "title": "Jendela Kelas 1",
+    "artist": "Iwan Fals",
+    "album": "Sumbang",
+    "genre": "Indonesian Pop",
+    "duration": 214,
+    "cover": "covers/iwan-fals-jendela-kelas-1.jpg"
+  },
+  {
+    "file": "Iwan Fals - Mata Indah Bola Pingpong.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Mata%20Indah%20Bola%20Pingpong.mp3",
+    "title": "Mata Indah Bola Pingpong",
+    "artist": "Iwan Fals",
+    "album": "Wakil Rakyat",
+    "genre": "Indonesian Pop",
+    "duration": 265,
+    "cover": "covers/iwan-fals-mata-indah-bola-pingpong.jpg"
+  },
+  {
+    "file": "Iwan Fals - Pesawat Tempurku.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Pesawat%20Tempurku.mp3",
+    "title": "Pesawat Tempurku",
+    "artist": "Iwan Fals",
+    "album": "Celoteh - Celoteh",
+    "genre": "Indonesian Pop",
+    "duration": 287,
+    "cover": "covers/iwan-fals-pesawat-tempurku.jpg"
+  },
+  {
+    "file": "Iwan Fals - Sore Tugu Pancoran.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Sore%20Tugu%20Pancoran.mp3",
+    "title": "Sore Tugu Pancoran",
+    "artist": "Iwan Fals",
+    "album": "Sore Tugu Pancoran",
+    "genre": "Indonesian Pop",
+    "duration": 248,
+    "cover": "covers/iwan-fals-sore-tugu-pancoran.jpg"
+  },
+  {
+    "file": "Iwan Fals - Surat Buat Wakil Rakyat.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Surat%20Buat%20Wakil%20Rakyat.mp3",
+    "title": "Surat Buat Wakil Rakyat",
+    "artist": "Iwan Fals",
+    "album": "Wakil Rakyat",
+    "genre": "Indonesian Pop",
+    "duration": 391,
+    "cover": "covers/iwan-fals-surat-buat-wakil-rakyat.jpg"
+  },
+  {
+    "file": "Iwan Fals - Tikus - Tikus Kantor.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Tikus%20-%20Tikus%20Kantor.mp3",
+    "title": "Tikus - Tikus Kantor",
+    "artist": "Iwan Fals",
+    "album": "Ethiopia",
+    "genre": "Indonesian Pop",
+    "duration": 153,
+    "cover": "covers/iwan-fals-tikus-tikus-kantor.jpg"
+  },
+  {
+    "file": "Iwan Fals - Ujung Aspal Pondok Gede.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Ujung%20Aspal%20Pondok%20Gede.mp3",
+    "title": "Ujung Aspal Pondok Gede",
+    "artist": "Iwan Fals",
+    "album": "Sore Tugu Pancoran",
+    "genre": "Indonesian Pop",
+    "duration": 308,
+    "cover": "covers/iwan-fals-ujung-aspal-pondok-gede.jpg"
+  },
+  {
+    "file": "Iwan Fals - Yang Terlupakan.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iwan%20Fals%20-%20Yang%20Terlupakan.mp3",
+    "title": "Yang Terlupakan",
+    "artist": "Iwan Fals",
+    "album": "Mata Dewa",
+    "genre": "Indonesian Pop",
+    "duration": 296,
+    "cover": "covers/iwan-fals-yang-terlupakan.jpg"
+  },
+  {
+    "file": "J-Rocks - Ceria.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/J-Rocks%20-%20Ceria.mp3",
+    "title": "J-Rocks%20-%20Ceria",
+    "artist": "Unknown Artist",
+    "album": "Unknown Album",
+    "genre": "Unknown Genre",
+    "duration": 234,
+    "cover": "covers/default.jpg"
+  },
+  {
+    "file": "J-Rocks - Meraih Mimpi.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/J-Rocks%20-%20Meraih%20Mimpi.mp3",
+    "title": "Meraih Mimpi",
+    "artist": "J-Rocks",
+    "album": "Road to Abbey",
+    "genre": "Indonesian Pop",
+    "duration": 196,
+    "cover": "covers/j-rocks-meraih-mimpi.jpg"
   },
   {
     "file": "Jamrud - Maaf.mp3",
@@ -2758,6 +3018,16 @@
     "genre": "Reggae",
     "duration": 225,
     "cover": "covers/magic-rude.jpg"
+  },
+  {
+    "file": "Marcello Tahitoe, Andi, Maia, Rif, Achi Harahap, Rio F, The Changcuters, Pinkan Mambo, Pasto, Terry, Yovie & Nuno, Nindy - Ayah.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Marcello%20Tahitoe%2C%20Andi%2C%20Maia%2C%20Rif%2C%20Achi%20Harahap%2C%20Rio%20F%2C%20The%20Changcuters%2C%20Pinkan%20Mambo%2C%20Pasto%2C%20Terry%2C%20Yovie%20%26%20Nuno%2C%20Nindy%20-%20Ayah.mp3",
+    "title": "Ayah",
+    "artist": "Marcello Tahitoe",
+    "album": "The Masterpiece Of Rinto Harahap",
+    "genre": "Indonesian Pop",
+    "duration": 317,
+    "cover": "covers/marcello-tahitoe-andi-maia-rif-achi-harahap-rio-f-the-changcuters-pinkan-mambo-pasto-terry-yovie-nuno-nindy-ayah.jpg"
   },
   {
     "file": "Megadeth - Holy Wars...The Punishment Due - 2004 Remix.mp3",
@@ -3948,6 +4218,96 @@
     "genre": "Nu Metal",
     "duration": 219,
     "cover": "covers/system-of-a-down-toxicity.jpg"
+  },
+  {
+    "file": "The Changcuters - Gila - Gilaan.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Changcuters%20-%20Gila%20-%20Gilaan.mp3",
+    "title": "Gila - Gilaan",
+    "artist": "The Changcuters",
+    "album": "Mencoba Sukses Kembali",
+    "genre": "Indonesian Pop",
+    "duration": 241,
+    "cover": "covers/the-changcuters-gila-gilaan.jpg"
+  },
+  {
+    "file": "The Changcuters - Hijrah Ke London.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Changcuters%20-%20Hijrah%20Ke%20London.mp3",
+    "title": "Hijrah Ke London",
+    "artist": "The Changcuters",
+    "album": "Mencoba Sukses Kembali",
+    "genre": "Indonesian Pop",
+    "duration": 206,
+    "cover": "covers/the-changcuters-hijrah-ke-london.jpg"
+  },
+  {
+    "file": "The Changcuters - I Love U Bibeh.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Changcuters%20-%20I%20Love%20U%20Bibeh.mp3",
+    "title": "I Love U Bibeh",
+    "artist": "The Changcuters",
+    "album": "Mencoba Sukses Kembali",
+    "genre": "Indonesian Pop",
+    "duration": 252,
+    "cover": "covers/the-changcuters-i-love-u-bibeh.jpg"
+  },
+  {
+    "file": "The Changcuters - Main Serong.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Changcuters%20-%20Main%20Serong.mp3",
+    "title": "Main Serong",
+    "artist": "The Changcuters",
+    "album": "The Changcuters Dan Misteri Kalajengking Hitam",
+    "genre": "Indonesian Pop",
+    "duration": 252,
+    "cover": "covers/the-changcuters-main-serong.jpg"
+  },
+  {
+    "file": "The Changcuters - Parampampam.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Changcuters%20-%20Parampampam.mp3",
+    "title": "Parampampam",
+    "artist": "The Changcuters",
+    "album": "Tugas Akhir",
+    "genre": "Indonesian Pop",
+    "duration": 221,
+    "cover": "covers/the-changcuters-parampampam.jpg"
+  },
+  {
+    "file": "The Changcuters - Pria Idaman Wanita.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Changcuters%20-%20Pria%20Idaman%20Wanita.mp3",
+    "title": "Pria Idaman Wanita",
+    "artist": "The Changcuters",
+    "album": "Mencoba Sukses Kembali",
+    "genre": "Indonesian Pop",
+    "duration": 220,
+    "cover": "covers/the-changcuters-pria-idaman-wanita.jpg"
+  },
+  {
+    "file": "The Changcuters - Racun Dunia.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Changcuters%20-%20Racun%20Dunia.mp3",
+    "title": "Racun Dunia",
+    "artist": "The Changcuters",
+    "album": "Mencoba Sukses Kembali",
+    "genre": "Indonesian Pop",
+    "duration": 275,
+    "cover": "covers/the-changcuters-racun-dunia.jpg"
+  },
+  {
+    "file": "The Changcuters - Senandung Pertemanan.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Changcuters%20-%20Senandung%20Pertemanan.mp3",
+    "title": "Senandung Pertemanan",
+    "artist": "The Changcuters",
+    "album": "The Changcuters Dan Misteri Kalajengking Hitam",
+    "genre": "Indonesian Pop",
+    "duration": 287,
+    "cover": "covers/the-changcuters-senandung-pertemanan.jpg"
+  },
+  {
+    "file": "The Changcuters - Suka Suka.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Changcuters%20-%20Suka%20Suka.mp3",
+    "title": "Suka Suka",
+    "artist": "The Changcuters",
+    "album": "The Changcuters Dan Misteri Kalajengking Hitam",
+    "genre": "Indonesian Pop",
+    "duration": 197,
+    "cover": "covers/the-changcuters-suka-suka.jpg"
   },
   {
     "file": "The Red Jumpsuit Apparatus - Cat And Mouse.mp3",
