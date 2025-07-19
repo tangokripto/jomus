@@ -22,7 +22,7 @@ let filteredSongs = [];
 let scrollTitleInterval;
 let scrollTitleOffset = 0;
 
-fetch("https://gist.githubusercontent.com/tangokripto/9a9509c2df203d727b060494a4a002dc/raw/songs.json")
+fetch("songs.json")
   .then(res => res.json())
   .then(data => {
     songs = data;
