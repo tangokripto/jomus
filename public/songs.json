@@ -1584,7 +1584,7 @@
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Danes%20Rabani%20-%20Sore%20Tugu%20Pancoran%20ft.%20Jeje%20GuitarAddict%20(%20Iwan%20Fals%20Rock%20Cover%20).mp3",
     "title": "Sore Tugu Pancoran ft. Jeje GuitarAddict ( Iwan Fals Rock Cover )",
     "artist": "Danes Rabani",
-    "album": "Unknown Album",
+    "album": "Y",
     "genre": "Rock",
     "duration": 158,
     "cover": "covers/default.jpg"
@@ -2462,10 +2462,10 @@
   {
     "file": "J-Rocks - Ceria.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/J-Rocks%20-%20Ceria.mp3",
-    "title": "J-Rocks%20-%20Ceria",
-    "artist": "Unknown Artist",
-    "album": "Unknown Album",
-    "genre": "Unknown Genre",
+    "title": "Ceria",
+    "artist": "J-Rocks",
+    "album": "Road to Abbey",
+    "genre": "Pop",
     "duration": 234,
     "cover": "covers/default.jpg"
   },
