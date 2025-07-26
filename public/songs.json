@@ -3550,6 +3550,56 @@
     "cover": "covers/nofx-thank-god-it-s-monday.jpg"
   },
   {
+    "file": "Oasis - Champagne Supernova - Remastered.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Oasis%20-%20Champagne%20Supernova%20-%20Remastered.mp3",
+    "title": "Champagne Supernova - Remastered",
+    "artist": "Oasis",
+    "album": "(What's The Story) Morning Glory? [Remastered]",
+    "genre": "Britpop",
+    "duration": 451,
+    "cover": "covers/oasis-champagne-supernova-remastered.jpg"
+  },
+  {
+    "file": "Oasis - Don't Look Back in Anger - Remastered.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Oasis%20-%20Don't%20Look%20Back%20in%20Anger%20-%20Remastered.mp3",
+    "title": "Don't Look Back in Anger - Remastered",
+    "artist": "Oasis",
+    "album": "(What's The Story) Morning Glory? [Remastered]",
+    "genre": "Britpop",
+    "duration": 290,
+    "cover": "covers/oasis-don-t-look-back-in-anger-remastered.jpg"
+  },
+  {
+    "file": "Oasis - Live Forever.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Oasis%20-%20Live%20Forever.mp3",
+    "title": "Live Forever",
+    "artist": "Oasis",
+    "album": "Definitely Maybe",
+    "genre": "Britpop",
+    "duration": 277,
+    "cover": "covers/oasis-live-forever.jpg"
+  },
+  {
+    "file": "Oasis - She's Electric - Remastered.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Oasis%20-%20She's%20Electric%20-%20Remastered.mp3",
+    "title": "She's Electric - Remastered",
+    "artist": "Oasis",
+    "album": "(What's The Story) Morning Glory? [Remastered]",
+    "genre": "Britpop",
+    "duration": 221,
+    "cover": "covers/oasis-she-s-electric-remastered.jpg"
+  },
+  {
+    "file": "Oasis - Slide Away - Remastered.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Oasis%20-%20Slide%20Away%20-%20Remastered.mp3",
+    "title": "Slide Away - Remastered",
+    "artist": "Oasis",
+    "album": "Definitely Maybe (Remastered)",
+    "genre": "Britpop",
+    "duration": 392,
+    "cover": "covers/oasis-slide-away-remastered.jpg"
+  },
+  {
     "file": "Oasis - Stand by Me.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Oasis%20-%20Stand%20by%20Me.mp3",
     "title": "Stand by Me",
@@ -3558,6 +3608,26 @@
     "genre": "Britpop",
     "duration": 357,
     "cover": "covers/oasis-stand-by-me.jpg"
+  },
+  {
+    "file": "Oasis - Supersonic - Remastered.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Oasis%20-%20Supersonic%20-%20Remastered.mp3",
+    "title": "Supersonic - Remastered",
+    "artist": "Oasis",
+    "album": "Definitely Maybe (Remastered)",
+    "genre": "Britpop",
+    "duration": 284,
+    "cover": "covers/oasis-supersonic-remastered.jpg"
+  },
+  {
+    "file": "Oasis - Wonderwall - Remastered.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Oasis%20-%20Wonderwall%20-%20Remastered.mp3",
+    "title": "Wonderwall - Remastered",
+    "artist": "Oasis",
+    "album": "(What's The Story) Morning Glory? [Remastered]",
+    "genre": "Britpop",
+    "duration": 259,
+    "cover": "covers/oasis-wonderwall-remastered.jpg"
   },
   {
     "file": "Ohio Players - Love Rollercoaster.mp3",
@@ -4018,6 +4088,16 @@
     "genre": "Art Rock",
     "duration": 229,
     "cover": "covers/radiohead-no-surprises.jpg"
+  },
+  {
+    "file": "Rage Against The Machine - Killing In the Name.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Rage%20Against%20The%20Machine%20-%20Killing%20In%20the%20Name.mp3",
+    "title": "Killing In the Name",
+    "artist": "Rage Against The Machine",
+    "album": "Rage Against The Machine",
+    "genre": "Rap Metal",
+    "duration": 314,
+    "cover": "covers/rage-against-the-machine-killing-in-the-name.jpg"
   },
   {
     "file": "Rhiannon Giddens - Mountain Banjo.mp3",
