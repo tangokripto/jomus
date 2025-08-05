@@ -366,3 +366,26 @@ select,
 button {
   font-size: 16px; /* penting: ini biar nggak ke-zoom di iOS Safari */
 }
+
+/* tab */
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.tabs button {
+  background: rgba(18, 18, 18, 0.4);
+  color: #ddd;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.tabs button.active {
+  background: rgba(18, 18, 18, 0.4);
+  font-weight: bold;
+}
