@@ -376,7 +376,7 @@ button {
 }
 
 .tabs button {
-  background: rgba(18, 18, 18, 0.4);
+  background: rgba(255, 255, 255, 0.1);
   color: #ddd;
   border: none;
   padding: 6px 12px;
@@ -390,11 +390,11 @@ button {
   font-weight: bold;
 }
 .tab-content .box {
-  background: rgba(0,0,0,0.3);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   padding: 12px;
   margin-top: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
 .tab-content h3 {

@@ -15,6 +15,9 @@ const durationText = document.getElementById("duration");
 const tabAll = document.getElementById("tab-all");
 const tabArtist = document.getElementById("tab-artist");
 const artistList = document.getElementById("artist-list");
+const viewArtists = document.getElementById("view-artists");
+const viewSongs = document.getElementById("view-songs");
+
 
 let currentIndex = 0;
 let isRepeating = false;
