@@ -66,8 +66,14 @@ function loadMoreSongs() {
     li.addEventListener("click", () => {
       currentIndex = song.originalIndex;
       playSong();
-      renderPlaylist(searchInput.value);
-      scrollToCurrentSong(false);
+    
+      // Hanya reset playlist jika filter berubah
+      if (searchInput.value !== lazyFilter) {
+        renderPlaylist(searchInput.value);
+      } else {
+        highlightActive();
+        scrollToCurrentSong(false);
+      }
     });
     songList.appendChild(li);
   });
@@ -319,9 +325,9 @@ function renderArtistList() {
     div.addEventListener("click", () => {
       searchInput.value = artist;
       toggleClearButton();
-      renderPlaylist(artist);
-      tabAll.click(); // Kembali ke tab lagu
-    });
+      tabAll.click();
+      setTimeout(() => renderPlaylist(artist), 10);
+    });    
     artistList.appendChild(div);
   });
 }

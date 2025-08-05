@@ -390,7 +390,7 @@ button {
   font-weight: bold;
 }
 .tab-content .box {
-  background: #1e1e1e;
+  background: rgba(0,0,0,0.3);
   border-radius: 10px;
   padding: 12px;
   margin-top: 10px;
@@ -399,5 +399,5 @@ button {
 
 .tab-content h3 {
   margin-bottom: 8px;
-  color: #fff;
+  color: #ddd;
 }
