@@ -90,7 +90,6 @@ function loadMoreSongs() {
     li.addEventListener("click", () => {
       currentIndex = song.originalIndex;
       playSong();
-      renderPlaylist(searchInput.value);
       scrollToCurrentSong(false);
     });
     songList.appendChild(li);
