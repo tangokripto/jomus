@@ -366,3 +366,32 @@ select,
 button {
   font-size: 16px; /* penting: ini biar nggak ke-zoom di iOS Safari */
 }
+/* Pastikan body dan html full tinggi layar */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* cegah scroll global */
+}
+
+/* Player container biar full layar */
+.player {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Bagian playlist auto menyesuaikan sisa ruang */
+#song-list {
+  flex: 1;
+  overflow-y: auto; /* biar playlist bisa di-scroll sendiri */
+  min-height: 0; /* penting untuk flexbox biar scroll jalan */
+}
+
+/* Responsif di HP & PC */
+@media (max-width: 768px) {
+  #song-list {
+    font-size: 14px;
+  }
+}

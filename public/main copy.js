@@ -18,26 +18,27 @@ let isRepeating = false;
 let isPlaying = false;
 let isShuffled = false;
 let songs = [];
-let filteredSongs = [];
+let filterSongs = [];
 let scrollTitleInterval;
 let scrollTitleOffset = 0;
 
+// Lazy load config
+const SONGS_PER_LOAD = 20;
+let loadedCount = 0;
+
+// Fetch & Init Songs
 fetch("songs.json")
   .then(res => res.json())
   .then(data => {
     songs = data;
-    // ✅ Urutkan berdasarkan nama artist sebelum playlist dirender
-    songs.sort((a, b) => {
-      const artistA = a.artist.toLowerCase();
-      const artistB = b.artist.toLowerCase();
-      return artistA.localeCompare(artistB);
-    });
+    songs.sort((a, b) => a.artist?.toLowerCase().localeCompare(b.artist?.toLowerCase()));
     const saved = localStorage.getItem("lastIndex");
     currentIndex = saved ? parseInt(saved) : 0;
     renderPlaylist();
     loadSong(currentIndex, true);
   });
 
+// Toggle Clear Search Button
 function toggleClearButton() {
   btnClearSearch.style.display = searchInput.value ? "block" : "none";
 }
@@ -55,8 +56,11 @@ btnClearSearch.addEventListener("click", () => {
 
 toggleClearButton();
 
+// Render Playlist
 function renderPlaylist(filter = "") {
   songList.innerHTML = "";
+  loadedCount = 0;
+
   filterSongs = songs
     .map((song, idx) => ({ ...song, originalIndex: idx }))
     .filter(song => {
@@ -70,29 +74,44 @@ function renderPlaylist(filter = "") {
       );
     });
 
-  filterSongs.forEach((song, i) => {
+  loadMoreSongs();
+}
+
+// Load More Songs (Lazy Load)
+function loadMoreSongs() {
+  const nextSongs = filterSongs.slice(loadedCount, loadedCount + SONGS_PER_LOAD);
+  nextSongs.forEach(song => {
     const li = document.createElement("li");
     li.innerHTML = `
       <div class="flex flex-col">
-      <span class="text-xs text-zinc-400">${getFileName(song.file)}</span>
+        <span class="text-xs text-zinc-400">${getFileName(song.file)}</span>
       </div>
     `;
-    function getFileName(path) {
-      const name = path.split('/').pop(); // ambil bagian akhir path
-      return name.replace(/\.[^/.]+$/, ''); // hapus ekstensi .mp3 atau lainnya
-    }    
     li.addEventListener("click", () => {
       currentIndex = song.originalIndex;
       playSong();
-      renderPlaylist(searchInput.value);
       scrollToCurrentSong(false);
     });
     songList.appendChild(li);
   });
 
+  loadedCount += nextSongs.length;
   highlightActive();
 }
 
+// Get File Name
+function getFileName(path) {
+  const name = path.split('/').pop();
+  return name.replace(/\.[^/.]+$/, '');
+}
+
+songList.addEventListener("scroll", () => {
+  if (songList.scrollTop + songList.clientHeight >= songList.scrollHeight - 10) {
+    loadMoreSongs();
+  }
+});
+
+// Scroll To Current Song
 function scrollToCurrentSong(autoScroll = true) {
   const active = songList.querySelector("li.active");
   if (active && autoScroll) {
@@ -100,6 +119,7 @@ function scrollToCurrentSong(autoScroll = true) {
   }
 }
 
+// Highlight Active Song
 function highlightActive() {
   [...songList.children].forEach((li, idx) => {
     const realIndex = filterSongs[idx]?.originalIndex;
@@ -107,6 +127,7 @@ function highlightActive() {
   });
 }
 
+// Load Song
 function loadSong(index, resume = false) {
   const song = songs[index];
   if (!song) return;
@@ -114,7 +135,6 @@ function loadSong(index, resume = false) {
   nowPlaying.textContent = "⏳ Loading ...";
   document.title = "Loading...";
 
-  //* stop buffering semua lagu
   audio.pause();
   audio.removeAttribute("src");
   audio.load();
@@ -141,9 +161,11 @@ function loadSong(index, resume = false) {
     document.getElementById("song-album").textContent = song.album || "Unknown";
     document.getElementById("song-genre").textContent = song.genre || "Genre?";
     highlightActive();
+    scrollToCurrentSong(); // ✅ Auto-scroll tiap ganti lagu
   });
 }
 
+// Play Song
 function playSong(resume = false) {
   loadSong(currentIndex, resume);
   audio.volume = 0;
@@ -164,6 +186,7 @@ function playSong(resume = false) {
   }, 50);
 }
 
+// Play Next Song
 function playNext() {
   if (isShuffled) {
     currentIndex = Math.floor(Math.random() * songs.length);
@@ -173,16 +196,108 @@ function playNext() {
   playSong();
 }
 
+// Play Previous Song
 function playPrev() {
   currentIndex = (currentIndex - 1 + songs.length) % songs.length;
   playSong();
 }
 
+// Toggle Play/Pause Icons
 function toggleIcons() {
   iconPlay.style.display = isPlaying ? "none" : "inline";
   iconPause.style.display = isPlaying ? "inline" : "none";
 }
 
+// Format Time
+function formatTime(seconds) {
+  const min = Math.floor(seconds / 60) || 0;
+  const sec = Math.floor(seconds % 60) || 0;
+  return `${min}:${sec.toString().padStart(2, "0")}`;
+}
+
+// Update Now Playing UI
+function updateNowPlayingUI(song) {
+  durationText.textContent = "0:00";
+  const cover = document.getElementById("cover-art");
+  if (song.cover) {
+    cover.src = song.cover;
+    cover.style.display = "block";
+    updateFavicon(song.cover);
+    generateFaviconFromImage(song.cover);
+  } else {
+    cover.style.display = "none";
+  }
+
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: song.title || 'Unknown',
+      artist: song.artist || 'Unknown',
+      album: song.album || '',
+      artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
+    });
+
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+    navigator.mediaSession.setActionHandler('nexttrack', playNext);
+  }
+}
+
+// Update Favicon
+function updateFavicon(url) {
+  let link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "icon";
+    document.head.appendChild(link);
+  }
+  link.href = url + "?v=" + Date.now();
+}
+
+// Generate Favicon From Image
+function generateFaviconFromImage(url) {
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.onload = function () {
+    const canvas = document.createElement("canvas");
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, 64, 64);
+    const favicon = canvas.toDataURL("image/png");
+
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.href = favicon;
+  };
+  img.src = url;
+}
+
+// Start Scrolling Title
+function startScrollingTitle(text) {
+  clearInterval(scrollTitleInterval);
+  scrollTitleOffset = 0;
+  scrollTitleInterval = setInterval(() => {
+    const scrollText = text.substring(scrollTitleOffset) + " • " + text.substring(0, scrollTitleOffset);
+    document.title = scrollText;
+    scrollTitleOffset = (scrollTitleOffset + 1) % text.length;
+  }, 250);
+}
+
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('✅ Service Worker registered'))
+      .catch(err => console.error('❌ SW failed:', err));
+  });
+}
+
+// Event Listeners
 btnPlay.addEventListener("click", () => {
   if (!songs.length) return;
   if (isPlaying) {
@@ -233,86 +348,3 @@ audio.addEventListener("timeupdate", () => {
 seek.addEventListener("input", () => {
   audio.currentTime = (seek.value / 100) * audio.duration;
 });
-
-function formatTime(seconds) {
-  const min = Math.floor(seconds / 60) || 0;
-  const sec = Math.floor(seconds % 60) || 0;
-  return `${min}:${sec.toString().padStart(2, "0")}`;
-}
-
-function updateNowPlayingUI(song) {
-  durationText.textContent = "0:00";
-  const cover = document.getElementById("cover-art");
-  if (song.cover) {
-    cover.src = song.cover;
-    cover.style.display = "block";
-    updateFavicon(song.cover);
-    generateFaviconFromImage(song.cover);
-  } else {
-    cover.style.display = "none";
-  }
-
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: song.title || 'Unknown',
-      artist: song.artist || 'Unknown',
-      album: song.album || '',
-      artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
-    });
-
-    navigator.mediaSession.setActionHandler('play', () => audio.play());
-    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-    navigator.mediaSession.setActionHandler('previoustrack', playPrev);
-    navigator.mediaSession.setActionHandler('nexttrack', playNext);
-  }
-}
-
-function updateFavicon(url) {
-  let link = document.querySelector("link[rel~='icon']");
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "icon";
-    document.head.appendChild(link);
-  }
-  link.href = url + "?v=" + Date.now();
-}
-
-function generateFaviconFromImage(url) {
-  const img = new Image();
-  img.crossOrigin = "anonymous";
-  img.onload = function () {
-    const canvas = document.createElement("canvas");
-    canvas.width = 64;
-    canvas.height = 64;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, 64, 64);
-    const favicon = canvas.toDataURL("image/png");
-
-    let link = document.querySelector("link[rel~='icon']");
-    if (!link) {
-      link = document.createElement("link");
-      link.rel = "icon";
-      document.head.appendChild(link);
-    }
-    link.href = favicon;
-  };
-  img.src = url;
-}
-
-function startScrollingTitle(text) {
-  clearInterval(scrollTitleInterval);
-  scrollTitleOffset = 0;
-  scrollTitleInterval = setInterval(() => {
-    const scrollText = text.substring(scrollTitleOffset) + " • " + text.substring(0, scrollTitleOffset);
-    document.title = scrollText;
-    scrollTitleOffset = (scrollTitleOffset + 1) % text.length;
-  }, 250);
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('✅ Service Worker registered'))
-      .catch(err => console.error('❌ SW failed:', err));
-  });
-}
