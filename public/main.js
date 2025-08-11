@@ -26,7 +26,7 @@ let scrollTitleOffset = 0;
 const SONGS_PER_LOAD = 20;
 let loadedCount = 0;
 
-// [FUNC] Fetch & Init Songs
+// Fetch & Init Songs
 fetch("songs.json")
   .then(res => res.json())
   .then(data => {
@@ -38,7 +38,7 @@ fetch("songs.json")
     loadSong(currentIndex, true);
   });
 
-// [FUNC] Toggle Clear Search Button Visibility
+// Toggle Clear Search Button
 function toggleClearButton() {
   btnClearSearch.style.display = searchInput.value ? "block" : "none";
 }
@@ -56,7 +56,7 @@ btnClearSearch.addEventListener("click", () => {
 
 toggleClearButton();
 
-// [FUNC] Render Playlist
+// Render Playlist
 function renderPlaylist(filter = "") {
   songList.innerHTML = "";
   loadedCount = 0;
@@ -77,7 +77,7 @@ function renderPlaylist(filter = "") {
   loadMoreSongs();
 }
 
-// [FUNC] Load More Songs (Lazy Load)
+// Load More Songs (Lazy Load)
 function loadMoreSongs() {
   const nextSongs = filterSongs.slice(loadedCount, loadedCount + SONGS_PER_LOAD);
   nextSongs.forEach(song => {
@@ -99,7 +99,7 @@ function loadMoreSongs() {
   highlightActive();
 }
 
-// [FUNC] Get File Name (Without Extension)
+// Get File Name
 function getFileName(path) {
   const name = path.split('/').pop();
   return name.replace(/\.[^/.]+$/, '');
@@ -111,7 +111,7 @@ songList.addEventListener("scroll", () => {
   }
 });
 
-// [FUNC] Scroll To Current Song
+// Scroll To Current Song
 function scrollToCurrentSong(autoScroll = true) {
   const active = songList.querySelector("li.active");
   if (active && autoScroll) {
@@ -119,7 +119,7 @@ function scrollToCurrentSong(autoScroll = true) {
   }
 }
 
-// [FUNC] Highlight Active Song
+// Highlight Active Song
 function highlightActive() {
   [...songList.children].forEach((li, idx) => {
     const realIndex = filterSongs[idx]?.originalIndex;
@@ -127,7 +127,7 @@ function highlightActive() {
   });
 }
 
-// [FUNC] Load Song
+// Load Song
 function loadSong(index, resume = false) {
   const song = songs[index];
   if (!song) return;
@@ -161,10 +161,11 @@ function loadSong(index, resume = false) {
     document.getElementById("song-album").textContent = song.album || "Unknown";
     document.getElementById("song-genre").textContent = song.genre || "Genre?";
     highlightActive();
+    scrollToCurrentSong(); // ✅ Auto-scroll tiap ganti lagu
   });
 }
 
-// [FUNC] Play Song
+// Play Song
 function playSong(resume = false) {
   loadSong(currentIndex, resume);
   audio.volume = 0;
@@ -185,7 +186,7 @@ function playSong(resume = false) {
   }, 50);
 }
 
-// [FUNC] Play Next Song
+// Play Next Song
 function playNext() {
   if (isShuffled) {
     currentIndex = Math.floor(Math.random() * songs.length);
@@ -195,26 +196,26 @@ function playNext() {
   playSong();
 }
 
-// [FUNC] Play Previous Song
+// Play Previous Song
 function playPrev() {
   currentIndex = (currentIndex - 1 + songs.length) % songs.length;
   playSong();
 }
 
-// [FUNC] Toggle Play/Pause Icons
+// Toggle Play/Pause Icons
 function toggleIcons() {
   iconPlay.style.display = isPlaying ? "none" : "inline";
   iconPause.style.display = isPlaying ? "inline" : "none";
 }
 
-// [FUNC] Format Time
+// Format Time
 function formatTime(seconds) {
   const min = Math.floor(seconds / 60) || 0;
   const sec = Math.floor(seconds % 60) || 0;
   return `${min}:${sec.toString().padStart(2, "0")}`;
 }
 
-// [FUNC] Update Now Playing UI
+// Update Now Playing UI
 function updateNowPlayingUI(song) {
   durationText.textContent = "0:00";
   const cover = document.getElementById("cover-art");
@@ -242,7 +243,7 @@ function updateNowPlayingUI(song) {
   }
 }
 
-// [FUNC] Update Favicon
+// Update Favicon
 function updateFavicon(url) {
   let link = document.querySelector("link[rel~='icon']");
   if (!link) {
@@ -253,7 +254,7 @@ function updateFavicon(url) {
   link.href = url + "?v=" + Date.now();
 }
 
-// [FUNC] Generate Favicon From Image
+// Generate Favicon From Image
 function generateFaviconFromImage(url) {
   const img = new Image();
   img.crossOrigin = "anonymous";
@@ -276,7 +277,7 @@ function generateFaviconFromImage(url) {
   img.src = url;
 }
 
-// [FUNC] Start Scrolling Title
+// Start Scrolling Title
 function startScrollingTitle(text) {
   clearInterval(scrollTitleInterval);
   scrollTitleOffset = 0;
@@ -287,7 +288,7 @@ function startScrollingTitle(text) {
   }, 250);
 }
 
-// [FUNC] Register Service Worker
+// Register Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
