@@ -113,10 +113,10 @@ songList.addEventListener("scroll", () => {
 
 // Scroll To Current Song
 function scrollToCurrentSong(autoScroll = true) {
-  const active = songList.querySelector("li.active");
-  if (active && autoScroll) {
-    active.scrollIntoView({ behavior: "smooth", block: "center" });
-  }
+ // const active = songList.querySelector("li.active");
+ // if (active && autoScroll) {
+ //   active.scrollIntoView({ behavior: "smooth", block: "center" });
+ // }
 }
 
 // Highlight Active Song
