@@ -4,16 +4,12 @@
   <link rel="icon" href="plybtn2.png" type="image/png">
   <link rel="manifest" href="manifest.json" />
   <link rel="apple-touch-icon" href="plybtn2.png">
-  <link rel="preload" as="script" href="main.js">
-  <link rel="preload" as="style" href="style.css">
   <meta name="theme-color" content="#121212" />
-  <meta name="description" content="huh?">
   <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
   }
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta charset="UTF-8" />
   <title>Apple Music KW</title>
@@ -21,10 +17,7 @@
 </head>
 <body class="dark">
   <div class="player">
-    <img id="cover-art" src="" alt="Cover Art (No image)" />
-    <div id="loading-spinner" style="display:none; text-align:center; padding:1rem; color:#aaa;">
-      Loading more songs...
-    </div>    
+    <img id="cover-art" src="" alt="Cover Art"" />
     <!-- ELEMEN ASLI -->
     <div id="now-playing">Choose song</div>
     <div id="song-meta" class="text-[11px] text-gray-400 mt-0.5 leading-snug space-y-0">
@@ -69,29 +62,10 @@
        <button id="clear-search" title="Clear Search">x</button>
       </div>
     </div>    
-<!-- Tabs -->
-<div class="tabs flex gap-2 mb-2">
-  <button id="tab-all" class="tab active text-sm px-2 py-1 rounded bg-zinc-700">All Songs</button>
-  <button id="tab-artist" class="tab text-sm px-2 py-1 rounded bg-zinc-700">Artists</button>
-</div>
-
-<!-- Tampilan tab "All Songs" -->
-<div class="tab-content" id="view-songs">
-  <div class="box">
-    <h3>All Songs</h3>
-    <ul id="song-list"></ul>
-  </div>
-</div>
-
-<!-- Tampilan tab "Artists" -->
-<div class="tab-content hidden" id="view-artists">
-  <div class="box">
-    <h3>Artists</h3>
-    <ul id="artist-list"></ul>
-  </div>
-</div>
-
-
+    <div class="playlist">
+      <h3>🎶 Songs</h3>
+      <ul id="song-list"></ul>
+    </div>
 <!-- Hanya satu audio di HTML -->
 <audio id="audio" preload="none"></audio>
   <script src="main.js"></script>
