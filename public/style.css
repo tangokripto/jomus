@@ -1,8 +1,9 @@
 body {
   font-family: sans-serif;
-  background: linear-gradient(135deg, #ffffff, #ed751a, #eb0e28, #f16f13, #ff6ec4, #f63b3b, #f63b3b, #24e6f4, #4adede, #10eb2d, #2aed1c, #ffcb57, #4adede, #10b981, #243be9, #7873f5, #dff11c);
-  background-size: 150% 150%;
-  animation: gradientShift 20s ease infinite;
+  background: linear-gradient(135deg, #ffffff, #ed751a, #eb0e28, #f16f13, #ff6ec4, #f63b3b, #f63b3b, #24e6f4, #4adede, #10eb2d, #2aed1c, #ffcb57, #4adede, #10b981, #243be9, #7873f5, #dff11c, 
+                                        #ffffff, #ed751a, #eb0e28, #f16f13, #ff6ec4, #f63b3b, #f63b3b, #24e6f4, #4adede, #10eb2d, #2aed1c, #ffcb57, #4adede, #10b981, #243be9, #7873f5, #dff11c);
+  background-size: 400% 400%;
+  animation: gradientShift 45s ease infinite;
   color: #ddd;
   margin: 0;
   padding: 20px;
@@ -118,7 +119,6 @@ body.dark .player {
   width: auto;
   height: auto;
   box-shadow: none;
-  backdrop-filter: none;
   filter: drop-shadow(0 0 8px rgba(255,255,255,0.3));
   cursor: pointer;
   transition: transform 0.2s, filter 0.3s;
@@ -174,7 +174,7 @@ body.dark .player {
 }
 
 /* thumb-nya (titiknya) */
-#seek::-webkit-slider-thumb, {
+#seek::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 14px;
   width: 14px;
@@ -366,32 +366,38 @@ select,
 button {
   font-size: 16px; /* penting: ini biar nggak ke-zoom di iOS Safari */
 }
-/* Pastikan body dan html full tinggi layar */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow: hidden; /* cegah scroll global */
-}
 
-/* Player container biar full layar */
-.player {
+/* tab */
+.tabs {
   display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
+  gap: 8px;
+  margin-bottom: 10px;
+  justify-content: center;
 }
 
-/* Bagian playlist auto menyesuaikan sisa ruang */
-#song-list {
-  flex: 1;
-  overflow-y: auto; /* biar playlist bisa di-scroll sendiri */
-  min-height: 0; /* penting untuk flexbox biar scroll jalan */
+.tabs button {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ddd;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-/* Responsif di HP & PC */
-@media (max-width: 768px) {
-  #song-list {
-    font-size: 14px;
-  }
+.tabs button.active {
+  background: rgba(18, 18, 18, 0.4);
+  font-weight: bold;
+}
+.tab-content .box {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 10px;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+}
+
+.tab-content h3 {
+  margin-bottom: 8px;
+  color: #ddd;
 }
