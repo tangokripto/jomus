@@ -111,11 +111,21 @@ songList.addEventListener("scroll", () => {
   }
 });
 
-// Scroll To Current Song
+// Scroll To Current Song (hanya di dalam container)
 function scrollToCurrentSong(autoScroll = true) {
   const active = songList.querySelector("li.active");
   if (active && autoScroll) {
-    active.scrollIntoView({ behavior: "smooth", block: "center" });
+    const containerTop = songList.scrollTop;
+    const containerHeight = songList.clientHeight;
+    const itemTop = active.offsetTop;
+    const itemBottom = itemTop + active.offsetHeight;
+
+    if (itemTop < containerTop || itemBottom > containerTop + containerHeight) {
+      songList.scrollTo({
+        top: itemTop - containerHeight / 2 + active.offsetHeight / 2,
+        behavior: "smooth"
+      });
+    }
   }
 }
 
@@ -161,7 +171,7 @@ function loadSong(index, resume = false) {
     document.getElementById("song-album").textContent = song.album || "Unknown";
     document.getElementById("song-genre").textContent = song.genre || "Genre?";
     highlightActive();
-    scrollToCurrentSong(); // ✅ Auto-scroll tiap ganti lagu
+    scrollToCurrentSong(); // Auto-scroll tiap ganti lagu
   });
 }
 
