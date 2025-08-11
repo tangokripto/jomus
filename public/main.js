@@ -26,11 +26,11 @@ let scrollTitleOffset = 0;
 const SONGS_PER_LOAD = 20;
 let loadedCount = 0;
 
+// [FUNC] Fetch & Init Songs
 fetch("songs.json")
   .then(res => res.json())
   .then(data => {
     songs = data;
-    // Urutkan berdasarkan nama artist
     songs.sort((a, b) => a.artist?.toLowerCase().localeCompare(b.artist?.toLowerCase()));
     const saved = localStorage.getItem("lastIndex");
     currentIndex = saved ? parseInt(saved) : 0;
@@ -38,6 +38,7 @@ fetch("songs.json")
     loadSong(currentIndex, true);
   });
 
+// [FUNC] Toggle Clear Search Button Visibility
 function toggleClearButton() {
   btnClearSearch.style.display = searchInput.value ? "block" : "none";
 }
@@ -55,6 +56,7 @@ btnClearSearch.addEventListener("click", () => {
 
 toggleClearButton();
 
+// [FUNC] Render Playlist
 function renderPlaylist(filter = "") {
   songList.innerHTML = "";
   loadedCount = 0;
@@ -75,6 +77,7 @@ function renderPlaylist(filter = "") {
   loadMoreSongs();
 }
 
+// [FUNC] Load More Songs (Lazy Load)
 function loadMoreSongs() {
   const nextSongs = filterSongs.slice(loadedCount, loadedCount + SONGS_PER_LOAD);
   nextSongs.forEach(song => {
@@ -97,6 +100,7 @@ function loadMoreSongs() {
   highlightActive();
 }
 
+// [FUNC] Get File Name (Without Extension)
 function getFileName(path) {
   const name = path.split('/').pop();
   return name.replace(/\.[^/.]+$/, '');
@@ -108,6 +112,7 @@ songList.addEventListener("scroll", () => {
   }
 });
 
+// [FUNC] Scroll To Current Song
 function scrollToCurrentSong(autoScroll = true) {
   const active = songList.querySelector("li.active");
   if (active && autoScroll) {
@@ -115,6 +120,7 @@ function scrollToCurrentSong(autoScroll = true) {
   }
 }
 
+// [FUNC] Highlight Active Song
 function highlightActive() {
   [...songList.children].forEach((li, idx) => {
     const realIndex = filterSongs[idx]?.originalIndex;
@@ -122,6 +128,7 @@ function highlightActive() {
   });
 }
 
+// [FUNC] Load Song
 function loadSong(index, resume = false) {
   const song = songs[index];
   if (!song) return;
@@ -158,6 +165,7 @@ function loadSong(index, resume = false) {
   });
 }
 
+// [FUNC] Play Song
 function playSong(resume = false) {
   loadSong(currentIndex, resume);
   audio.volume = 0;
@@ -178,6 +186,7 @@ function playSong(resume = false) {
   }, 50);
 }
 
+// [FUNC] Play Next Song
 function playNext() {
   if (isShuffled) {
     currentIndex = Math.floor(Math.random() * songs.length);
@@ -187,16 +196,108 @@ function playNext() {
   playSong();
 }
 
+// [FUNC] Play Previous Song
 function playPrev() {
   currentIndex = (currentIndex - 1 + songs.length) % songs.length;
   playSong();
 }
 
+// [FUNC] Toggle Play/Pause Icons
 function toggleIcons() {
   iconPlay.style.display = isPlaying ? "none" : "inline";
   iconPause.style.display = isPlaying ? "inline" : "none";
 }
 
+// [FUNC] Format Time
+function formatTime(seconds) {
+  const min = Math.floor(seconds / 60) || 0;
+  const sec = Math.floor(seconds % 60) || 0;
+  return `${min}:${sec.toString().padStart(2, "0")}`;
+}
+
+// [FUNC] Update Now Playing UI
+function updateNowPlayingUI(song) {
+  durationText.textContent = "0:00";
+  const cover = document.getElementById("cover-art");
+  if (song.cover) {
+    cover.src = song.cover;
+    cover.style.display = "block";
+    updateFavicon(song.cover);
+    generateFaviconFromImage(song.cover);
+  } else {
+    cover.style.display = "none";
+  }
+
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: song.title || 'Unknown',
+      artist: song.artist || 'Unknown',
+      album: song.album || '',
+      artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
+    });
+
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+    navigator.mediaSession.setActionHandler('nexttrack', playNext);
+  }
+}
+
+// [FUNC] Update Favicon
+function updateFavicon(url) {
+  let link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+    link = document.createElement("link");
+    link.rel = "icon";
+    document.head.appendChild(link);
+  }
+  link.href = url + "?v=" + Date.now();
+}
+
+// [FUNC] Generate Favicon From Image
+function generateFaviconFromImage(url) {
+  const img = new Image();
+  img.crossOrigin = "anonymous";
+  img.onload = function () {
+    const canvas = document.createElement("canvas");
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0, 64, 64);
+    const favicon = canvas.toDataURL("image/png");
+
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.href = favicon;
+  };
+  img.src = url;
+}
+
+// [FUNC] Start Scrolling Title
+function startScrollingTitle(text) {
+  clearInterval(scrollTitleInterval);
+  scrollTitleOffset = 0;
+  scrollTitleInterval = setInterval(() => {
+    const scrollText = text.substring(scrollTitleOffset) + " • " + text.substring(0, scrollTitleOffset);
+    document.title = scrollText;
+    scrollTitleOffset = (scrollTitleOffset + 1) % text.length;
+  }, 250);
+}
+
+// [FUNC] Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('✅ Service Worker registered'))
+      .catch(err => console.error('❌ SW failed:', err));
+  });
+}
+
+// Event Listeners
 btnPlay.addEventListener("click", () => {
   if (!songs.length) return;
   if (isPlaying) {
@@ -247,86 +348,3 @@ audio.addEventListener("timeupdate", () => {
 seek.addEventListener("input", () => {
   audio.currentTime = (seek.value / 100) * audio.duration;
 });
-
-function formatTime(seconds) {
-  const min = Math.floor(seconds / 60) || 0;
-  const sec = Math.floor(seconds % 60) || 0;
-  return `${min}:${sec.toString().padStart(2, "0")}`;
-}
-
-function updateNowPlayingUI(song) {
-  durationText.textContent = "0:00";
-  const cover = document.getElementById("cover-art");
-  if (song.cover) {
-    cover.src = song.cover;
-    cover.style.display = "block";
-    updateFavicon(song.cover);
-    generateFaviconFromImage(song.cover);
-  } else {
-    cover.style.display = "none";
-  }
-
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.metadata = new MediaMetadata({
-      title: song.title || 'Unknown',
-      artist: song.artist || 'Unknown',
-      album: song.album || '',
-      artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
-    });
-
-    navigator.mediaSession.setActionHandler('play', () => audio.play());
-    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-    navigator.mediaSession.setActionHandler('previoustrack', playPrev);
-    navigator.mediaSession.setActionHandler('nexttrack', playNext);
-  }
-}
-
-function updateFavicon(url) {
-  let link = document.querySelector("link[rel~='icon']");
-  if (!link) {
-    link = document.createElement("link");
-    link.rel = "icon";
-    document.head.appendChild(link);
-  }
-  link.href = url + "?v=" + Date.now();
-}
-
-function generateFaviconFromImage(url) {
-  const img = new Image();
-  img.crossOrigin = "anonymous";
-  img.onload = function () {
-    const canvas = document.createElement("canvas");
-    canvas.width = 64;
-    canvas.height = 64;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0, 64, 64);
-    const favicon = canvas.toDataURL("image/png");
-
-    let link = document.querySelector("link[rel~='icon']");
-    if (!link) {
-      link = document.createElement("link");
-      link.rel = "icon";
-      document.head.appendChild(link);
-    }
-    link.href = favicon;
-  };
-  img.src = url;
-}
-
-function startScrollingTitle(text) {
-  clearInterval(scrollTitleInterval);
-  scrollTitleOffset = 0;
-  scrollTitleInterval = setInterval(() => {
-    const scrollText = text.substring(scrollTitleOffset) + " • " + text.substring(0, scrollTitleOffset);
-    document.title = scrollText;
-    scrollTitleOffset = (scrollTitleOffset + 1) % text.length;
-  }, 250);
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(() => console.log('✅ Service Worker registered'))
-      .catch(err => console.error('❌ SW failed:', err));
-  });
-}
