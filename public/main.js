@@ -1,9 +1,3 @@
-// main.js - FINAL (lazy-load, auto-scroll highlight, search, save state)
-// ===================================================================
-
-// ====================
-// STATE & DOM ELEMENTS
-// ====================
 const audio = new Audio();
 const nowPlaying = document.getElementById("now-playing");
 const seek = document.getElementById("seek");
@@ -18,195 +12,122 @@ const iconPlay = document.getElementById("icon-play");
 const iconPause = document.getElementById("icon-pause");
 const btnClearSearch = document.getElementById("clear-search");
 const durationText = document.getElementById("duration");
-const coverArt = document.getElementById("cover-art");
 
-let songs = [];            // semua lagu dari songs.json
-let filteredSongs = [];    // hasil filter (search)
-let currentIndex = 0;      // index di songs (originalIndex)
+let currentIndex = 0;
+let isRepeating = false;
 let isPlaying = false;
 let isShuffled = false;
-let isRepeating = false;
-let scrollTitleInterval = null;
+let songs = [];
+let filterSongs = [];
+let scrollTitleInterval;
 let scrollTitleOffset = 0;
 
-// Lazy-load config
-const SONGS_PER_BATCH = 10;
-let loadedCount = 0;       // berapa item sudah dirender di UI
+// Lazy load config
+const SONGS_PER_LOAD = 20;
+let loadedCount = 0;
 
-// ====================
-// [FUNC] Util: safeGet
-// ====================
-function safeGet(id) {
-  return document.getElementById(id);
-}
+// Fetch & Init Songs
+fetch("songs.json")
+  .then(res => res.json())
+  .then(data => {
+    songs = data;
+    songs.sort((a, b) => a.artist?.toLowerCase().localeCompare(b.artist?.toLowerCase()));
+    const saved = localStorage.getItem("lastIndex");
+    currentIndex = saved ? parseInt(saved) : 0;
+    renderPlaylist();
+    loadSong(currentIndex, true);
+  });
 
-// ====================
-// [FUNC] Fetch & Init
-// - Ambil songs.json, set states dari localStorage, render awal
-// ====================
-function init() {
-  fetch("songs.json")
-    .then(res => res.json())
-    .then(data => {
-      songs = Array.isArray(data) ? data : [];
-      // pastikan terurut (opsional) agar konsisten
-      songs.sort((a, b) => (a.artist || "").toLowerCase().localeCompare((b.artist || "").toLowerCase()));
-
-      // restore saved states
-      const savedIndex = parseInt(localStorage.getItem("lastIndex"));
-      const savedTime = parseFloat(localStorage.getItem("lastTime"));
-      const savedShuffle = localStorage.getItem("shuffle") === "true";
-      const savedRepeat = localStorage.getItem("repeat") === "true";
-
-      if (!isNaN(savedIndex)) currentIndex = savedIndex;
-      if (!isNaN(savedTime)) audio.currentTime = savedTime;
-      isShuffled = savedShuffle;
-      isRepeating = savedRepeat;
-      btnShuffle.classList.toggle("active", isShuffled);
-      btnRepeat.classList.toggle("active", isRepeating);
-
-      // initial filter (empty = all)
-      filteredSongs = songs.map((s, i) => ({ ...s, originalIndex: i }));
-      loadedCount = 0;
-      renderPlaylist(); // render first batch
-      // if a saved index exists, load metadata for that song (but don't autoplay)
-      if (songs[currentIndex]) loadSong(currentIndex, true);
-    })
-    .catch(err => {
-      console.error("Failed to load songs.json", err);
-    });
-}
-
-// ====================
-// [FUNC] Toggle Clear Search Button Visibility
-// ====================
+// Toggle Clear Search Button
 function toggleClearButton() {
   btnClearSearch.style.display = searchInput.value ? "block" : "none";
 }
 
-// ====================
-// [FUNC] Render Playlist (reset + prepare filteredSongs)
-// - tidak mengubah scroll if caller wants to preserve
-// ====================
+searchInput.addEventListener("input", () => {
+  renderPlaylist(searchInput.value);
+  toggleClearButton();
+});
+
+btnClearSearch.addEventListener("click", () => {
+  searchInput.value = "";
+  renderPlaylist();
+  toggleClearButton();
+});
+
+toggleClearButton();
+
+// Render Playlist
 function renderPlaylist(filter = "") {
-  // preserve scrollTop only when filter is different? we'll reset because search changes list.
   songList.innerHTML = "";
   loadedCount = 0;
 
-  const q = (filter || "").toLowerCase();
-  filteredSongs = songs
+  filterSongs = songs
     .map((song, idx) => ({ ...song, originalIndex: idx }))
-    .filter(s => {
-      if (!q) return true;
+    .filter(song => {
+      const query = filter.toLowerCase();
       return (
-        (s.title || "").toLowerCase().includes(q) ||
-        (s.artist || "").toLowerCase().includes(q) ||
-        (s.album || "").toLowerCase().includes(q) ||
-        (s.genre || "").toLowerCase().includes(q) ||
-        (s.file || "").toLowerCase().includes(q)
+        song.title?.toLowerCase().includes(query) ||
+        song.artist?.toLowerCase().includes(query) ||
+        song.album?.toLowerCase().includes(query) ||
+        song.genre?.toLowerCase().includes(query) ||
+        song.file?.toLowerCase().includes(query)
       );
     });
 
-  loadMoreSongs(); // load first batch
+  loadMoreSongs();
 }
 
-// ====================
-// [FUNC] Load More Songs (lazy-load batch)
-// - After appended, check if currentIndex is within new batch and auto-highlight+scroll
-// ====================
+// Load More Songs (Lazy Load)
 function loadMoreSongs() {
-  if (!filteredSongs || !filteredSongs.length) return;
-
-  const start = loadedCount;
-  const end = Math.min(loadedCount + SONGS_PER_BATCH, filteredSongs.length);
-  const batch = filteredSongs.slice(start, end);
-
-  const fragment = document.createDocumentFragment();
-  batch.forEach((song, idx) => {
+  const nextSongs = filterSongs.slice(loadedCount, loadedCount + SONGS_PER_LOAD);
+  nextSongs.forEach(song => {
     const li = document.createElement("li");
-    // tag data for mapping back to filteredSongs index and originalIndex
-    li.dataset.filteredIndex = start + idx;
-    li.dataset.originalIndex = song.originalIndex;
     li.innerHTML = `
       <div class="flex flex-col">
         <span class="text-xs text-zinc-400">${getFileName(song.file)}</span>
       </div>
     `;
     li.addEventListener("click", () => {
-      // set currentIndex to originalIndex (global songs index)
       currentIndex = song.originalIndex;
       playSong();
-      // highlight and scroll to current song soon (will work even if item not yet in DOM)
-      highlightActive();
       scrollToCurrentSong(false);
     });
-    fragment.appendChild(li);
+    songList.appendChild(li);
   });
 
-  songList.appendChild(fragment);
-  loadedCount = end;
-
-  // update highlight for items rendered so far
+  loadedCount += nextSongs.length;
   highlightActive();
+}
 
-  // If the currently playing song is inside this newly added batch, ensure it's visible
-  const activeInBatch = batch.some(s => s.originalIndex === currentIndex);
-  if (activeInBatch) {
-    // small timeout to ensure DOM painted
-    requestAnimationFrame(() => {
-      highlightActive();
-      scrollToCurrentSong(true);
-    });
+// Get File Name
+function getFileName(path) {
+  const name = path.split('/').pop();
+  return name.replace(/\.[^/.]+$/, '');
+}
+
+songList.addEventListener("scroll", () => {
+  if (songList.scrollTop + songList.clientHeight >= songList.scrollHeight - 10) {
+    loadMoreSongs();
   }
-}
+});
 
-// ====================
-// [FUNC] Get file name (without extension)
-// ====================
-function getFileName(path = "") {
-  const name = (path + "").split("/").pop() || "";
-  return name.replace(/\.[^/.]+$/, "");
-}
-
-// ====================
-// [FUNC] Scroll To Current Song
-// - autoScroll param controls whether scroll happens
-// ====================
+// Scroll To Current Song
 function scrollToCurrentSong(autoScroll = true) {
-  if (!autoScroll) return;
-  // find corresponding li with data-original-index === currentIndex
-  const items = [...songList.querySelectorAll("li")];
-  const target = items.find(li => Number(li.dataset.originalIndex) === Number(currentIndex));
-  if (target) {
-    try {
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
-    } catch (e) {
-      // fallback
-      target.scrollIntoView();
-    }
+  const active = songList.querySelector("li.active");
+  if (active && autoScroll) {
+    active.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 }
 
-// ====================
-// [FUNC] Highlight Active Song
-// - toggles .active class on visible list items
-// ====================
+// Highlight Active Song
 function highlightActive() {
-  const lis = [...songList.children];
-  lis.forEach((li, visibleIdx) => {
-    const realIdx = Number(li.dataset.originalIndex);
-    if (realIdx === Number(currentIndex)) {
-      li.classList.add("active");
-    } else {
-      li.classList.remove("active");
-    }
+  [...songList.children].forEach((li, idx) => {
+    const realIndex = filterSongs[idx]?.originalIndex;
+    li.classList.toggle("active", realIndex === currentIndex);
   });
 }
 
-// ====================
-// [FUNC] Load Song (set src, restore resume time optionally)
-// - DOES NOT autoplay unless playSong calls audio.play()
-// ====================
+// Load Song
 function loadSong(index, resume = false) {
   const song = songs[index];
   if (!song) return;
@@ -214,19 +135,16 @@ function loadSong(index, resume = false) {
   nowPlaying.textContent = "⏳ Loading ...";
   document.title = "Loading...";
 
-  // stop previous
   audio.pause();
   audio.removeAttribute("src");
   audio.load();
 
-  // set new src
   if (!audio.src || audio.src !== song.url) {
     audio.src = song.url;
   }
 
-  // when ready, restore time if requested and update UI
-  audio.addEventListener("canplay", function onCanPlay() {
-    audio.removeEventListener("canplay", onCanPlay);
+  audio.addEventListener("canplay", function onReady() {
+    audio.removeEventListener("canplay", onReady);
     const savedIndex = parseInt(localStorage.getItem("lastIndex"));
     const savedTime = parseFloat(localStorage.getItem("lastTime"));
 
@@ -234,146 +152,98 @@ function loadSong(index, resume = false) {
       audio.currentTime = savedTime;
     }
 
-    nowPlaying.textContent = " 🎵 " + (song.title || song.file || "Unknown");
-    const fullTitle = `🎵 ${song.title || "Unknown"} - ${song.artist || "Unknown"}`;
+    nowPlaying.textContent = " 🎵 " + song.title;
+    const fullTitle = `🎵 ${song.title} - ${song.artist || "Unknown"}`;
     startScrollingTitle(fullTitle);
 
     updateNowPlayingUI(song);
-
-    // ensure visible and highlighted
+    document.getElementById("song-artist").textContent = song.artist || "Unknown";
+    document.getElementById("song-album").textContent = song.album || "Unknown";
+    document.getElementById("song-genre").textContent = song.genre || "Genre?";
     highlightActive();
-    // If the currently active item hasn't been rendered yet (lazy), attempt to bring it into view by loading more batches until found
-    ensureActiveVisible();
+    scrollToCurrentSong(); // ✅ Auto-scroll tiap ganti lagu
   });
 }
 
-// ====================
-// [FUNC] Play Song
-// - fade in volume
-// ====================
+// Play Song
 function playSong(resume = false) {
   loadSong(currentIndex, resume);
   audio.volume = 0;
-  const playPromise = audio.play();
-  // handle autoplay rejection gracefully
-  if (playPromise && typeof playPromise.then === "function") {
-    playPromise.then(() => {
-      isPlaying = true;
-      toggleIcons();
-      localStorage.setItem("lastIndex", currentIndex);
-      // fade in
-      let vol = 0;
-      const fade = setInterval(() => {
-        vol += 0.05;
-        if (vol >= 1) {
-          audio.volume = 1;
-          clearInterval(fade);
-        } else {
-          audio.volume = vol;
-        }
-      }, 50);
-    }).catch(e => {
-      // autoplay blocked — update state but don't crash
-      isPlaying = !audio.paused;
-      toggleIcons();
-    });
-  } else {
-    isPlaying = true;
-    toggleIcons();
-    localStorage.setItem("lastIndex", currentIndex);
-  }
+  audio.play();
+  isPlaying = true;
+  toggleIcons();
+  localStorage.setItem("lastIndex", currentIndex);
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    vol += 0.05;
+    if (vol >= 1) {
+      audio.volume = 1;
+      clearInterval(fade);
+    } else {
+      audio.volume = vol;
+    }
+  }, 50);
 }
 
-// ====================
-// [FUNC] Play Next
-// ====================
+// Play Next Song
 function playNext() {
   if (isShuffled) {
     currentIndex = Math.floor(Math.random() * songs.length);
   } else {
-    // move in filtered list context: find its position in filteredSongs then next
-    const posInFiltered = filteredSongs.findIndex(s => s.originalIndex === currentIndex);
-    if (posInFiltered >= 0) {
-      const nextPos = (posInFiltered + 1) % filteredSongs.length;
-      currentIndex = filteredSongs[nextPos].originalIndex;
-    } else {
-      currentIndex = (currentIndex + 1) % songs.length;
-    }
+    currentIndex = (currentIndex + 1) % songs.length;
   }
   playSong();
 }
 
-// ====================
-// [FUNC] Play Previous
-// ====================
+// Play Previous Song
 function playPrev() {
-  if (isShuffled) {
-    currentIndex = Math.floor(Math.random() * songs.length);
-  } else {
-    const posInFiltered = filteredSongs.findIndex(s => s.originalIndex === currentIndex);
-    if (posInFiltered >= 0) {
-      const prevPos = (posInFiltered - 1 + filteredSongs.length) % filteredSongs.length;
-      currentIndex = filteredSongs[prevPos].originalIndex;
-    } else {
-      currentIndex = (currentIndex - 1 + songs.length) % songs.length;
-    }
-  }
+  currentIndex = (currentIndex - 1 + songs.length) % songs.length;
   playSong();
 }
 
-// ====================
-// [FUNC] Toggle Icons (play/pause UI)
-// ====================
+// Toggle Play/Pause Icons
 function toggleIcons() {
   iconPlay.style.display = isPlaying ? "none" : "inline";
   iconPause.style.display = isPlaying ? "inline" : "none";
 }
 
-// ====================
-// [FUNC] Format Time mm:ss
-// ====================
+// Format Time
 function formatTime(seconds) {
-  if (!seconds || isNaN(seconds)) return "0:00";
-  const min = Math.floor(seconds / 60);
-  const sec = Math.floor(seconds % 60);
+  const min = Math.floor(seconds / 60) || 0;
+  const sec = Math.floor(seconds % 60) || 0;
   return `${min}:${sec.toString().padStart(2, "0")}`;
 }
 
-// ====================
-// [FUNC] Update Now Playing UI & MediaSession
-// ====================
+// Update Now Playing UI
 function updateNowPlayingUI(song) {
   durationText.textContent = "0:00";
+  const cover = document.getElementById("cover-art");
   if (song.cover) {
-    coverArt.src = song.cover;
-    coverArt.style.display = "block";
+    cover.src = song.cover;
+    cover.style.display = "block";
     updateFavicon(song.cover);
     generateFaviconFromImage(song.cover);
   } else {
-    coverArt.style.display = "none";
+    cover.style.display = "none";
   }
 
   if ('mediaSession' in navigator) {
-    try {
-      navigator.mediaSession.metadata = new MediaMetadata({
-        title: song.title || 'Unknown',
-        artist: song.artist || 'Unknown',
-        album: song.album || '',
-        artwork: [{ src: song.cover || '', sizes: '512x512', type: 'image/png' }]
-      });
-      navigator.mediaSession.setActionHandler('play', () => audio.play());
-      navigator.mediaSession.setActionHandler('pause', () => audio.pause());
-      navigator.mediaSession.setActionHandler('previoustrack', playPrev);
-      navigator.mediaSession.setActionHandler('nexttrack', playNext);
-    } catch (e) {
-      // ignore if browser doesn't support settings
-    }
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: song.title || 'Unknown',
+      artist: song.artist || 'Unknown',
+      album: song.album || '',
+      artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
+    });
+
+    navigator.mediaSession.setActionHandler('play', () => audio.play());
+    navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+    navigator.mediaSession.setActionHandler('previoustrack', playPrev);
+    navigator.mediaSession.setActionHandler('nexttrack', playNext);
   }
 }
 
-// ====================
-// [FUNC] Update Favicon (simple swap with cache buster)
-// ====================
+// Update Favicon
 function updateFavicon(url) {
   let link = document.querySelector("link[rel~='icon']");
   if (!link) {
@@ -384,9 +254,7 @@ function updateFavicon(url) {
   link.href = url + "?v=" + Date.now();
 }
 
-// ====================
-// [FUNC] Generate Favicon From Image (canvas)
-// ====================
+// Generate Favicon From Image
 function generateFaviconFromImage(url) {
   const img = new Image();
   img.crossOrigin = "anonymous";
@@ -397,6 +265,7 @@ function generateFaviconFromImage(url) {
     const ctx = canvas.getContext("2d");
     ctx.drawImage(img, 0, 0, 64, 64);
     const favicon = canvas.toDataURL("image/png");
+
     let link = document.querySelector("link[rel~='icon']");
     if (!link) {
       link = document.createElement("link");
@@ -408,9 +277,7 @@ function generateFaviconFromImage(url) {
   img.src = url;
 }
 
-// ====================
-// [FUNC] Start Scrolling Title (document.title marquee)
-// ====================
+// Start Scrolling Title
 function startScrollingTitle(text) {
   clearInterval(scrollTitleInterval);
   scrollTitleOffset = 0;
@@ -421,66 +288,16 @@ function startScrollingTitle(text) {
   }, 250);
 }
 
-// ====================
-// [FUNC] Ensure Active Visible
-// - If active song not rendered yet (lazy), load more batches until visible (with cap to avoid infinite loop)
-// ====================
-function ensureActiveVisible() {
-  // If already visible, nothing to do
-  const items = [...songList.querySelectorAll("li")];
-  const visibleIndexes = items.map(li => Number(li.dataset.originalIndex));
-  if (visibleIndexes.includes(currentIndex)) {
-    // highlight + scroll
-    highlightActive();
-    scrollToCurrentSong(true);
-    return;
-  }
-
-  // Otherwise, progressively load more until we either render the active item or exhaust
-  let attempts = 0;
-  const maxAttempts = Math.ceil(filteredSongs.length / SONGS_PER_BATCH) + 2;
-  (function tryLoad() {
-    if (attempts++ > maxAttempts) return;
-    // find position of active in filteredSongs
-    const pos = filteredSongs.findIndex(s => s.originalIndex === currentIndex);
-    if (pos === -1) return; // not in filtered set
-    const neededBatches = Math.floor((pos) / SONGS_PER_BATCH) + 1;
-    // load until loadedCount covers pos
-    if (loadedCount <= pos) {
-      loadMoreSongs();
-      // use rAF to let DOM update then check again
-      requestAnimationFrame(() => {
-        const itemsNow = [...songList.querySelectorAll("li")];
-        const visibleNow = itemsNow.map(li => Number(li.dataset.originalIndex));
-        if (visibleNow.includes(currentIndex)) {
-          highlightActive();
-          scrollToCurrentSong(true);
-        } else {
-          // try again
-          setTimeout(tryLoad, 40);
-        }
-      });
-    } else {
-      // already should be visible
-      highlightActive();
-      scrollToCurrentSong(true);
-    }
-  })();
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log('✅ Service Worker registered'))
+      .catch(err => console.error('❌ SW failed:', err));
+  });
 }
 
-// ====================
-// [FUNC] Save Player State (last index/time/shuffle/repeat)
-// ====================
-function savePlayerState() {
-  localStorage.setItem("lastIndex", currentIndex.toString());
-  localStorage.setItem("lastTime", audio.currentTime.toString());
-  localStorage.setItem("shuffle", isShuffled ? "true" : "false");
-  localStorage.setItem("repeat", isRepeating ? "true" : "false");
-}
-
-// ====================
-// EVENT BINDINGS
-// ====================
+// Event Listeners
 btnPlay.addEventListener("click", () => {
   if (!songs.length) return;
   if (isPlaying) {
@@ -489,42 +306,26 @@ btnPlay.addEventListener("click", () => {
     clearInterval(scrollTitleInterval);
     localStorage.setItem("lastTime", audio.currentTime.toString());
   } else {
-    // try to play current — ensure source loaded first
-    // If source is not set we should loadSong then play
-    if (!audio.src) {
-      playSong(true);
-    } else {
-      audio.play().catch(() => { /* autoplay block */ });
-      isPlaying = true;
-      const song = songs[currentIndex] || {};
-      startScrollingTitle(`🎵 ${song.title || "Unknown"} - ${song.artist || "Unknown"} 🎶`);
-    }
+    audio.play();
+    isPlaying = true;
+    const song = songs[currentIndex];
+    const fullTitle = `🎵 ${song.title} - ${song.artist || "Unknown"} 🎶`;
+    startScrollingTitle(fullTitle);
   }
   toggleIcons();
 });
 
-btnNext.addEventListener("click", () => {
-  playNext();
-  savePlayerState();
-});
-btnPrev.addEventListener("click", () => {
-  playPrev();
-  savePlayerState();
-});
-
+btnNext.addEventListener("click", playNext);
+btnPrev.addEventListener("click", playPrev);
 btnShuffle.addEventListener("click", () => {
   isShuffled = !isShuffled;
   btnShuffle.classList.toggle("active", isShuffled);
-  localStorage.setItem("shuffle", isShuffled ? "true" : "false");
 });
-
 btnRepeat.addEventListener("click", () => {
   isRepeating = !isRepeating;
   btnRepeat.classList.toggle("active", isRepeating);
-  localStorage.setItem("repeat", isRepeating ? "true" : "false");
 });
 
-// audio events
 audio.addEventListener("ended", () => {
   if (isRepeating) {
     audio.currentTime = 0;
@@ -536,52 +337,14 @@ audio.addEventListener("ended", () => {
 
 audio.addEventListener("timeupdate", () => {
   seek.value = (audio.currentTime / audio.duration) * 100 || 0;
-  durationText.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
+  const current = formatTime(audio.currentTime);
+  const total = formatTime(audio.duration);
+  durationText.textContent = `${current} / ${total}`;
   if (!audio.seeking && !audio.paused) {
     localStorage.setItem("lastTime", audio.currentTime.toString());
   }
 });
 
 seek.addEventListener("input", () => {
-  if (audio.duration) audio.currentTime = (seek.value / 100) * audio.duration;
+  audio.currentTime = (seek.value / 100) * audio.duration;
 });
-
-// search events
-searchInput.addEventListener("input", () => {
-  renderPlaylist(searchInput.value);
-  toggleClearButton();
-});
-btnClearSearch.addEventListener("click", () => {
-  searchInput.value = "";
-  renderPlaylist();
-  toggleClearButton();
-});
-toggleClearButton();
-
-// lazy load on scroll of list container
-songList.addEventListener("scroll", () => {
-  if (songList.scrollTop + songList.clientHeight >= songList.scrollHeight - 10) {
-    loadMoreSongs();
-  }
-});
-
-// save position periodically (throttle could be added)
-window.addEventListener("beforeunload", () => {
-  savePlayerState();
-});
-
-// ====================
-// [FUNC] Register Service Worker (PWA) - optional
-// ====================
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(() => console.log('✅ Service Worker registered'))
-      .catch(err => console.error('❌ SW failed:', err));
-  });
-}
-
-// ====================
-// START
-// ====================
-init();
