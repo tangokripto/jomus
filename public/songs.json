@@ -2410,6 +2410,16 @@
     "cover": "covers/green-day-are-we-the-waiting-st-jimmy.jpg"
   },
   {
+    "file": "Green Day - Basket Case.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Green%20Day%20-%20Basket%20Case.mp3",
+    "title": "Basket Case",
+    "artist": "Green Day",
+    "album": "Dookie",
+    "genre": "Unknown Genre",
+    "duration": 182,
+    "cover": "covers/green-day-basket-case.jpg"
+  },
+  {
     "file": "Green Day - Bobby Sox.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Green%20Day%20-%20Bobby%20Sox.mp3",
     "title": "Bobby Sox",
@@ -6148,6 +6158,76 @@
     "genre": "death metal",
     "duration": 259,
     "cover": "covers/viscral-enigma-of-obsessed-hatred.jpg"
+  },
+  {
+    "file": "Viscral - Entrance Into Terrifying Imagery (Instrument).mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Viscral%20-%20Entrance%20Into%20Terrifying%20Imagery%20(Instrument).mp3",
+    "title": "Entrance Into Terrifying Imagery (Instrument)",
+    "artist": "Viscral",
+    "album": "Entrance Into Terrifying Imagery",
+    "genre": "death metal",
+    "duration": 170,
+    "cover": "covers/viscral-entrance-into-terrifying-imagery-instrument.jpg"
+  },
+  {
+    "file": "Viscral - Eradicate The Parennial Threat.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Viscral%20-%20Eradicate%20The%20Parennial%20Threat.mp3",
+    "title": "Eradicate The Parennial Threat",
+    "artist": "Viscral",
+    "album": "Entrance Into Terrifying Imagery",
+    "genre": "death metal",
+    "duration": 233,
+    "cover": "covers/viscral-eradicate-the-parennial-threat.jpg"
+  },
+  {
+    "file": "Viscral - Impulses To Kill.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Viscral%20-%20Impulses%20To%20Kill.mp3",
+    "title": "Impulses To Kill",
+    "artist": "Viscral",
+    "album": "Entrance Into Terrifying Imagery",
+    "genre": "death metal",
+    "duration": 243,
+    "cover": "covers/viscral-impulses-to-kill.jpg"
+  },
+  {
+    "file": "Viscral - Infernal Abhorrence.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Viscral%20-%20Infernal%20Abhorrence.mp3",
+    "title": "Infernal Abhorrence",
+    "artist": "Viscral",
+    "album": "Infernal Abhorrence",
+    "genre": "death metal",
+    "duration": 184,
+    "cover": "covers/viscral-infernal-abhorrence.jpg"
+  },
+  {
+    "file": "Viscral - Suffer Resurrection.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Viscral%20-%20Suffer%20Resurrection.mp3",
+    "title": "Suffer Resurrection",
+    "artist": "Viscral",
+    "album": "Egocentric Underneath of Horror",
+    "genre": "death metal",
+    "duration": 193,
+    "cover": "covers/viscral-suffer-resurrection.jpg"
+  },
+  {
+    "file": "Viscral - The Catacombs.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Viscral%20-%20The%20Catacombs.mp3",
+    "title": "The Catacombs",
+    "artist": "Viscral",
+    "album": "Entrance Into Terrifying Imagery",
+    "genre": "death metal",
+    "duration": 255,
+    "cover": "covers/viscral-the-catacombs.jpg"
+  },
+  {
+    "file": "Viscral - Worldviews Mechanical.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Viscral%20-%20Worldviews%20Mechanical.mp3",
+    "title": "Worldviews Mechanical",
+    "artist": "Viscral",
+    "album": "Egocentric Underneath of Horror",
+    "genre": "death metal",
+    "duration": 205,
+    "cover": "covers/viscral-worldviews-mechanical.jpg"
   },
   {
     "file": "Willie Nelson - Cruel World.mp3",
