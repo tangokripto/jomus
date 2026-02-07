@@ -2700,6 +2700,16 @@
     "cover": "covers/heart-barracuda.jpg"
   },
   {
+    "file": "HEARTS GROW - ユラユラ .mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/HEARTS%20GROW%20-%20%E3%83%A6%E3%83%A9%E3%83%A6%E3%83%A9%20.mp3",
+    "title": "ユラユラ",
+    "artist": "HEARTS GROW",
+    "album": "ユラユラ",
+    "genre": "Unknown Genre",
+    "duration": 300,
+    "cover": "covers/hearts-grow.jpg"
+  },
+  {
     "file": "Hoobastank - The Reason.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Hoobastank%20-%20The%20Reason.mp3",
     "title": "The Reason",
@@ -4850,6 +4860,16 @@
     "cover": "covers/rhiannon-giddens-mountain-hymn.jpg"
   },
   {
+    "file": "Sambomaster - 青春狂騒曲.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Sambomaster%20-%20%E9%9D%92%E6%98%A5%E7%8B%82%E9%A8%92%E6%9B%B2.mp3",
+    "title": "青春狂騒曲",
+    "artist": "Sambomaster",
+    "album": "サンボマスターは君に語りかける",
+    "genre": "Unknown Genre",
+    "duration": 287,
+    "cover": "covers/sambomaster.jpg"
+  },
+  {
     "file": "Saosin - Bury Your Head.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Saosin%20-%20Bury%20Your%20Head.mp3",
     "title": "Bury Your Head",
@@ -5218,6 +5238,26 @@
     "genre": "G-Funk",
     "duration": 207,
     "cover": "covers/snoop-dogg-wiz-khalifa-bruno-mars-young-wild-free-feat-bruno-mars.jpg"
+  },
+  {
+    "file": "SNOWKEL - 波風サテライト .mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/SNOWKEL%20-%20%E6%B3%A2%E9%A2%A8%E3%82%B5%E3%83%86%E3%83%A9%E3%82%A4%E3%83%88%20.mp3",
+    "title": "波風サテライト",
+    "artist": "SNOWKEL",
+    "album": "波風サテライト",
+    "genre": "Unknown Genre",
+    "duration": 252,
+    "cover": "covers/snowkel.jpg"
+  },
+  {
+    "file": "STANCE PUNKS - ノーボーイ・ノークライ.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/STANCE%20PUNKS%20-%20%E3%83%8E%E3%83%BC%E3%83%9C%E3%83%BC%E3%82%A4%E3%83%BB%E3%83%8E%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A4.mp3",
+    "title": "ノーボーイ・ノークライ",
+    "artist": "STANCE PUNKS",
+    "album": "ノーボーイ・ノークライ",
+    "genre": "Unknown Genre",
+    "duration": 214,
+    "cover": "covers/stance-punks.jpg"
   },
   {
     "file": "Stillbirth - Apex Predator.mp3",
