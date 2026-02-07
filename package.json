@@ -1,7 +1,7 @@
 {
   "name": "imusik",
   "version": "1.0.0",
-  "description": "",
+  "description": "PERSONAL USE ONLY",
   "main": "generate-songs-json.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,9 +14,18 @@
     "axios": "^1.10.0",
     "backblaze-b2": "^1.7.1",
     "dotenv": "^17.2.0",
+    "exports": "^0.0.1",
     "fs": "^0.0.1-security",
-    "music-metadata": "^11.7.0",
+    "music-metadata": "^7.14.0",
     "path": "^0.12.7",
     "sharp": "^0.34.3"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tangokripto/jomus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tangokripto/jomus/issues"
+  },
+  "homepage": "https://github.com/tangokripto/jomus#readme"
 }
