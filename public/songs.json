@@ -1520,6 +1520,26 @@
     "cover": "covers/blink-182-what-s-my-age-again.jpg"
   },
   {
+    "file": "Bo Diddley - Bo Diddley.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Bo%20Diddley%20-%20Bo%20Diddley.mp3",
+    "title": "Bo Diddley",
+    "artist": "Bo Diddley",
+    "album": "His Best",
+    "genre": "Unknown Genre",
+    "duration": 167,
+    "cover": "covers/bo-diddley-bo-diddley.jpg"
+  },
+  {
+    "file": "Bo Diddley - Who Do You Love - Single Version.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Bo%20Diddley%20-%20Who%20Do%20You%20Love%20-%20Single%20Version.mp3",
+    "title": "Who Do You Love - Single Version",
+    "artist": "Bo Diddley",
+    "album": "Rock N' Roll Legends (International Version)",
+    "genre": "Unknown Genre",
+    "duration": 184,
+    "cover": "covers/bo-diddley-who-do-you-love-single-version.jpg"
+  },
+  {
     "file": "Bring Me The Horizon - Alligator Blood.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Bring%20Me%20The%20Horizon%20-%20Alligator%20Blood.mp3",
     "title": "Alligator Blood",
@@ -3968,6 +3988,16 @@
     "genre": "Metalcore",
     "duration": 224,
     "cover": "covers/motionless-in-white-voices.jpg"
+  },
+  {
+    "file": "Muddy Waters - Mannish Boy.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Muddy%20Waters%20-%20Mannish%20Boy.mp3",
+    "title": "Mannish Boy",
+    "artist": "Muddy Waters",
+    "album": "King Of The Electric Blues",
+    "genre": "Unknown Genre",
+    "duration": 325,
+    "cover": "covers/muddy-waters-mannish-boy.jpg"
   },
   {
     "file": "MUSASHI PROJECT - NARUTO Main Theme.mp3",
