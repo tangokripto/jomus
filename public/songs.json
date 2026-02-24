@@ -1525,7 +1525,7 @@
     "title": "Bo Diddley",
     "artist": "Bo Diddley",
     "album": "His Best",
-    "genre": "Unknown Genre",
+    "genre": "Blues",
     "duration": 167,
     "cover": "covers/bo-diddley-bo-diddley.jpg"
   },
@@ -1535,7 +1535,7 @@
     "title": "Who Do You Love - Single Version",
     "artist": "Bo Diddley",
     "album": "Rock N' Roll Legends (International Version)",
-    "genre": "Unknown Genre",
+    "genre": "Blues-rock",
     "duration": 184,
     "cover": "covers/bo-diddley-who-do-you-love-single-version.jpg"
   },
@@ -3995,7 +3995,7 @@
     "title": "Mannish Boy",
     "artist": "Muddy Waters",
     "album": "King Of The Electric Blues",
-    "genre": "Unknown Genre",
+    "genre": "Blues",
     "duration": 325,
     "cover": "covers/muddy-waters-mannish-boy.jpg"
   },
