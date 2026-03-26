@@ -1,24 +1,50 @@
 /* 1. RESET TOTAL & KOSONGKAN HTML/BODY */
 * { box-sizing: border-box; }
 
-html, body {
-  margin: 0; 
-  padding: 0;
-  width: 100%; 
-  height: 100%;
-  background-color: transparent !important; /* Haram ada warna di sini */
-  overflow: hidden; /* Biar layar ga bisa diseret-seret */
+:root {
+  /* Definisikan gradient sekali di sini agar konsisten */
+  --main-gradient: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
 }
 
-/* 2. LAYER BACKGROUND (Dibuat lebih besar dari layar biar notch ketutup) */
+html {
+  margin: 0;
+  padding: 0;
+  /* KUNCI: HTML tidak boleh transparan total, harus ada warna dasar agar tidak jadi putih */
+  background: #2a7b9b; 
+  background: var(--main-gradient);
+  background-size: 400% 400%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  /* Gunakan min-height dengan vh dan fill-available untuk iOS */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  background: transparent !important;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 2. LAYER ANIMASI (Tetap diperlukan untuk performa animasi yang mulus) */
 .bg-animated {
   position: fixed;
-  /* Ditarik sampai minus biar kalau layar iPhone mentul/bounce, ga ada putih-putih */
-  top: -20px; bottom: -20px; left: -20px; right: -20px;
+  /* Dibuat lebih besar (oversize) untuk antisipasi bounce/liquid glass */
+  top: -10%; 
+  left: -10%; 
+  width: 120%; 
+  height: 120%;
   z-index: -2;
-  background: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
+  background: var(--main-gradient);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
+  /* Memastikan hardware acceleration aktif */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
 @keyframes gradientShift {
@@ -27,14 +53,14 @@ html, body {
   100% { background-position: 0% 50%; }
 }
 
-/* 3. LAYER BLUR OVERLAY */
+/* 3. LAYER BLUR */
 .bg-blur {
   position: fixed;
-  inset: 0; /* Mengisi full viewport */
+  inset: 0;
   z-index: -1;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  background: rgba(0, 0, 0, 0.45); /* Sedikit lebih gelap agar teks putih lebih kontras */
+  backdrop-filter: blur(45px);
+  -webkit-backdrop-filter: blur(45px);
 }
 
 /* 4. WRAPPER KONTEN UTAMA */
