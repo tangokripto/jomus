@@ -176,7 +176,7 @@ function loadSong(index, resume = false) {
     document.getElementById("song-album").textContent = song.album || "Unknown";
     document.getElementById("song-genre").textContent = song.genre || "Genre?";
     highlightActive(true);
-    /* scrollToCurrentSong(); */ // ✅ Auto-scroll tiap ganti lagu
+    /* scrollToCurrentSong(); */ // Auto-scroll tiap ganti lagu
   });
 }
 
@@ -330,13 +330,12 @@ btnPlay.addEventListener("click", () => {
   toggleIcons();
 });
 
-// --- Fungsi Toast Notification ---
+// Toast Notification 
 function showToast(message) {
   const toast = document.getElementById("toast");
   toast.innerHTML = message;
   toast.classList.add("show");
   
-  // Sembunyikan setelah 2 detik
   setTimeout(() => {
     toast.classList.remove("show");
   }, 2000);
