@@ -7,32 +7,28 @@
   <meta name="theme-color" content="#2a7b9b" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="mobile-web-app-capable" content="yes">
   
   <title>Music Player</title>
-  
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
-  <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="manifest.json" /> */
 
   <style>
     /* Scrollbar Playlist */
     #song-list::-webkit-scrollbar { width: 4px; }
     #song-list::-webkit-scrollbar-track { background: transparent; }
     #song-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-    
-    /* State lagu aktif */
-    .active-song { 
-      background: rgba(59, 130, 246, 0.2) !important; 
-      border-left: 3px solid #3b82f6; 
-    }
+    .active-song { background: rgba(59, 130, 246, 0.2) !important; border-left: 3px solid #3b82f6; }
   </style>
 </head>
 <body class="text-zinc-100 font-sans">
 
+  <div class="bg-animated"></div>
+  <div class="bg-blur"></div>
+
   <main class="main-wrapper">
-    
     <div class="player-card">
-      
       <div class="flex justify-center mb-4 sm:mb-6">
         <img id="cover-art" src="plybtn2.png" alt="Cover Art" class="cover-image" />
       </div>
