@@ -55,7 +55,7 @@ body::before {
   -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
-  max-width: 360px;
+  max-width: 300px;
   border-radius: 2rem;
   padding: 1.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -145,8 +145,7 @@ body::before {
   .controls-container { margin-bottom: 0.5rem; }
   .play-btn { padding: 0.6rem; }
   .icon-md { width: 24px; height: 24px; }
-  
-  /* Playlist HP Kecil tetap diusahakan muat 4-5 lagu */
+
   .song-list-container { max-height: 103px; }
   #song-list li { padding: 6px 10px; font-size: 0.8rem; }
 }
