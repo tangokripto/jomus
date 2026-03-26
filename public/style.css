@@ -129,7 +129,7 @@ body::before {
 /* =========================================
    RESPONSIVE UNTUK HP KECIL (iPhone SE/4.7")
 ========================================= */
-@media (max-height: 720px) {
+@media (max-height: 670px) {
   .player-card { padding: 1rem; transform: scale(0.95);}
   .cover-image { width: 110px; height: 110px; }
   .song-title { font-size: 1rem; }
