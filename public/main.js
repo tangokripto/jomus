@@ -324,8 +324,7 @@ btnPlay.addEventListener("click", () => {
     audio.play();
     isPlaying = true;
     const song = songs[currentIndex];
-    const fullTitle = `🎵 ${song.title} - ${song.artist || "Unknown"} 🎶`;
-    startScrollingTitle(fullTitle);
+    const fullTitle = `${song.title} - ${song.artist || "Unknown"}`;
   }
   toggleIcons();
 });
