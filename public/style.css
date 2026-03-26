@@ -52,7 +52,6 @@ body::before {
 .player-card {
   background: rgba(24, 24, 27, 0.6);
   backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
   max-width: 360px;
@@ -119,7 +118,7 @@ body::before {
 }
 .search-input:focus { border-color: #3b82f6; }
 .playlist-title { font-size: 0.65rem; }
-.song-list-container { max-height: 180px; overflow-y: auto; padding-right: 5px; }
+.song-list-container { max-height: 220px; overflow-y: auto; padding-right: 5px; }
 #song-list li {
   padding: 8px 12px; border-radius: 8px; cursor: pointer;
   font-size: 0.85rem; transition: background 0.2s; margin-bottom: 2px;
@@ -131,23 +130,12 @@ body::before {
    RESPONSIVE UNTUK HP KECIL (iPhone SE/4.7")
 ========================================= */
 @media (max-height: 670px) {
-  .player-card { 
-    padding: 1rem; 
-    max-width: 320px; 
-  }
-  .cover-image { 
-    width: 100px; 
-    height: 100px; 
-    margin-bottom: 0.5rem;
-  }
-  .song-title { font-size: 0.95rem; }
-  .song-meta-text { font-size: 0.65rem; }
-  .controls-container { margin-bottom: 0.5rem; }
-  .play-btn { padding: 0.6rem; }
-  .icon-md { width: 24px; height: 24px; }
-
-  .song-list-container { max-height: 103px; }
-  #song-list li { padding: 6px 10px; font-size: 0.8rem; }
+  .player-card { padding: 1rem; transform: scale(0.95);}
+  .cover-image { width: 110px; height: 110px; }
+  .song-title { font-size: 1rem; }
+  .controls-container { margin-bottom: 0.75rem; }
+  .play-btn { padding: 0.75rem; }
+  .song-list-container { max-height: 150px; } 
 }
 
 
