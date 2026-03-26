@@ -147,7 +147,7 @@ body::before {
   .icon-md { width: 24px; height: 24px; }
   
   /* Playlist HP Kecil tetap diusahakan muat 4-5 lagu */
-  .song-list-container { max-height: 160px; }
+  .song-list-container { max-height: 110px; }
   #song-list li { padding: 6px 10px; font-size: 0.8rem; }
 }
 
