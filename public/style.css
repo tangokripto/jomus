@@ -1,7 +1,5 @@
 /* RESET & CORE (Mencegah Putih di Safari iOS) */
-html {
-  background-color: transparent; /* Warna gelap untuk dasar */
-}
+
 
 body {
   margin: 0;
