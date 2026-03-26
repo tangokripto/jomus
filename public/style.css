@@ -55,8 +55,8 @@ body::before {
    UKURAN STANDARD (Untuk HP Normal 6 inch)
 ========================================= */
 .player-card {
-  background: rgba(24, 24, 27, 0.7);
-  backdrop-filter: blur(20px);
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
   max-width: 360px; /* Ukuran standard HP */
