@@ -1,6 +1,6 @@
 body {
   font-family: sans-serif;
-  background: radial-gradient(circle, #4adede, #10eb2d);
+  background: linear-gradient(135deg, #4adede, #10eb2d);
   background-size: 200% 200%;
   animation: gradientShift 20s ease infinite;
   color: #ddd;
