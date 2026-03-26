@@ -82,6 +82,7 @@ function loadMoreSongs() {
   const nextSongs = filterSongs.slice(loadedCount, loadedCount + SONGS_PER_LOAD);
   nextSongs.forEach(song => {
     const li = document.createElement("li");
+    li.setAttribute("data-index", song.originalIndex);
     li.innerHTML = `
       <div class="flex flex-col">
         <span class="text-xs text-zinc-400">${getFileName(song.file)}</span>
@@ -327,11 +328,14 @@ btnNext.addEventListener("click", playNext);
 btnPrev.addEventListener("click", playPrev);
 btnShuffle.addEventListener("click", () => {
   isShuffled = !isShuffled;
-  btnShuffle.classList.toggle("active", isShuffled);
+  // Kita pakai class Tailwind untuk kasih tanda aktif (misal: warna biru)
+  btnShuffle.classList.toggle("text-blue-500", isShuffled);
+  btnShuffle.classList.toggle("text-zinc-400", !isShuffled);
 });
 btnRepeat.addEventListener("click", () => {
-  isRepeating = !isRepeating;
-  btnRepeat.classList.toggle("active", isRepeating);
+  isRepeating = !isRepeating; // Pastikan pakai isRepeating sesuai variabel di atas
+  btnRepeat.classList.toggle("text-blue-500", isRepeating);
+  btnRepeat.classList.toggle("text-zinc-400", !isRepeating);
 });
 
 audio.addEventListener("ended", () => {
