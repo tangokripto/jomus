@@ -163,6 +163,6 @@ body::before {
   .play-btn { padding: 1.25rem; }
   .search-input { padding: 0.75rem 1rem; }
   .playlist-title { font-size: 0.8rem; margin-bottom: 10px; }
-  .song-list-container { max-height: 350px; }
+  .song-list-container { max-height: 300px; }
   #song-list li { font-size: 1rem; padding: 10px 14px; }
 }
