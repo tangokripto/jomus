@@ -1,3 +1,6 @@
+/* =========================================
+   CORE & BACKGROUND
+   ========================================= */
 html {
   background-color: #09090b; 
 }
@@ -20,7 +23,6 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Blur Background */
 body::before {
   content: "";
   position: fixed;
@@ -31,24 +33,20 @@ body::before {
   z-index: -1;
 }
 
-/* WRAPPER (Dikunci posisi absolute supaya keyboard aman) */
+/* WRAPPER */
 .main-wrapper {
   position: fixed;
   inset: 0; 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom) 20px;
   box-sizing: border-box;
 }
 
 /* =========================================
-   UKURAN STANDARD (Untuk HP Normal 6 inch)
-========================================= */
+   BASE PLAYER CARD (Default / 6.1" Standard)
+   ========================================= */
 .player-card {
   background: rgba(24, 24, 27, 0.6);
   backdrop-filter: blur(25px);
@@ -68,11 +66,13 @@ body::before {
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   border: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease;
+  display: block;
+  margin: 0 auto;
 }
 
-.song-title { font-size: 1.125rem; }
-.song-meta-text { font-size: 0.7rem; }
-.duration-text { font-size: 0.65rem; }
+.song-title { font-size: 1.125rem; font-weight: bold; color: white; text-align: center; }
+.song-meta-text { font-size: 0.7rem; color: #a1a1aa; text-align: center; margin-top: 4px; }
+.duration-text { font-size: 0.65rem; color: #71717a; }
 
 /* Seek Bar */
 .seek-bar {
@@ -96,15 +96,13 @@ body::before {
 .controls-container button:hover { color: white; transform: scale(1.1); }
 .controls-container button:active { transform: scale(0.9); }
 
-/* Play Button */
 .play-btn {
   background: #2563eb !important; color: white !important;
   padding: 1rem; border-radius: 50%;
   box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
 }
-.play-btn:hover { background: #3b82f6 !important; }
 
-/* Icon sizes base */
+/* Icon sizes */
 .icon-sm { width: 18px; height: 18px; }
 .icon-md { width: 28px; height: 28px; }
 .icon-lg { width: 24px; height: 24px; }
@@ -113,45 +111,51 @@ body::before {
 .search-input {
   width: 100%; background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem;
-  padding: 0.6rem 1rem; font-size: 0.875rem; color: white; outline: none;
-  font-size: 16px; 
+  padding: 0.6rem 1rem; color: white; outline: none;
+  font-size: 16px; /* Prevent iOS zoom */
 }
 .search-input:focus { border-color: #3b82f6; }
-.playlist-title { font-size: 0.65rem; }
-.song-list-container { max-height: 220px; overflow-y: auto; padding-right: 5px; }
+.playlist-title { font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* Playlist Area (Default 6.1" inch) */
+.song-list-container { 
+  max-height: 220px; 
+  overflow-y: auto; 
+  padding-right: 5px; 
+  margin-top: 8px;
+}
 #song-list li {
   padding: 8px 12px; border-radius: 8px; cursor: pointer;
   font-size: 0.85rem; transition: background 0.2s; margin-bottom: 2px;
+  list-style: none; color: #d4d4d8;
 }
 #song-list li:hover { background: rgba(255,255,255,0.05); }
-
+.active-song { background: rgba(59, 130, 246, 0.2) !important; color: #60a5fa !important; }
 
 /* =========================================
-   RESPONSIVE UNTUK HP KECIL (iPhone SE/4.7")
-========================================= */
-@media (max-height: 720px) {
-  .player-card { padding: 1rem; transform: scale(0.95);}
-  .cover-image { width: 110px; height: 110px; }
+   RESPONSIVE: HP KECIL (iPhone SE / 4.7")
+   ========================================= */
+@media (max-height: 670px) and (max-width: 500px) {
+  .player-card { padding: 1rem; transform: scale(0.95); }
+  .cover-image { width: 100px; height: 100px; }
   .song-title { font-size: 1rem; }
   .controls-container { margin-bottom: 0.75rem; }
   .play-btn { padding: 0.75rem; }
+  
+  /* Sesuai request: 103px untuk iPhone SE */
   .song-list-container { max-height: 103px; } 
+  #song-list li { padding: 6px 10px; font-size: 0.8rem; }
 }
 
-
 /* =========================================
-   RESPONSIVE UNTUK PC / TABLET / 4K
-========================================= */
+   RESPONSIVE: PC / TABLET
+   ========================================= */
 @media (min-width: 768px) {
   .player-card {
     max-width: 500px; 
     padding: 2.5rem;
-    border-radius: 2rem;
   }
-  .cover-image {
-    width: 250px; 
-    height: 250px;
-  }
+  .cover-image { width: 250px; height: 250px; }
   .song-title { font-size: 1.5rem; margin-bottom: 0.5rem; }
   .song-meta-text { font-size: 0.85rem; }
   .duration-text { font-size: 0.8rem; }
