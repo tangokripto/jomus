@@ -11,7 +11,7 @@ body {
   overflow: hidden; /* Kunci layarnya biar ga bisa discroll liar */
   background: 
   linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-  linear-gradient(90deg, #1a4d61 0%, #57c785 70%, #eddd53 100%);
+  linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   background-attachment: fixed; /* background notch */
@@ -28,15 +28,15 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   z-index: -1;
 }
 
 /* WRAPPER (Dikunci posisi absolute supaya keyboard aman) */
 .main-wrapper {
-  position: relative;
+  position: fixed;
   inset: 0; /* top:0, right:0, bottom:0, left:0 */
   display: flex;
   align-items: center;
@@ -49,6 +49,8 @@ body::before {
   padding-right: 20px;
   
   box-sizing: border-box;
+  /* padding: 15px; */
+ /* overflow: hidden; */
 }
 
 /* =========================================
