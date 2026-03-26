@@ -1,50 +1,18 @@
-/* 1. RESET TOTAL & KOSONGKAN HTML/BODY */
-* { box-sizing: border-box; }
-
-:root {
-  /* Definisikan gradient sekali di sini agar konsisten */
-  --main-gradient: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
-}
-
+/* RESET & CORE (Mencegah Putih di Safari iOS) */
 html {
-  margin: 0;
-  padding: 0;
-  /* KUNCI: HTML tidak boleh transparan total, harus ada warna dasar agar tidak jadi putih */
-  background: #2a7b9b; 
-  background: var(--main-gradient);
-  background-size: 400% 400%;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
+  background-color: #09090b; /* Warna gelap untuk dasar */
 }
 
 body {
   margin: 0;
   padding: 0;
-  width: 100%;
-  /* Gunakan min-height dengan vh dan fill-available untuk iOS */
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
-  background: transparent !important;
-  overflow: hidden;
-  position: relative;
-}
-
-/* 2. LAYER ANIMASI (Tetap diperlukan untuk performa animasi yang mulus) */
-.bg-animated {
-  position: fixed;
-  /* Dibuat lebih besar (oversize) untuk antisipasi bounce/liquid glass */
-  top: -10%; 
-  left: -10%; 
-  width: 120%; 
-  height: 120%;
-  z-index: -2;
-  background: var(--main-gradient);
+  width: 100vw;
+  min-height: 100dvh; /* Dynamic height */
+  overflow: hidden; /* Kunci layarnya biar ga bisa discroll liar */
+  background: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
-  /* Memastikan hardware acceleration aktif */
-  transform: translateZ(0);
-  -webkit-transform: translateZ(0);
+  background-attachment: fixed; /* background notch */
 }
 
 @keyframes gradientShift {
@@ -53,29 +21,34 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* 3. LAYER BLUR */
-.bg-blur {
+/* Blur Background */
+body::before {
+  content: "";
   position: fixed;
   inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   z-index: -1;
-  background: rgba(0, 0, 0, 0.45); /* Sedikit lebih gelap agar teks putih lebih kontras */
-  backdrop-filter: blur(45px);
-  -webkit-backdrop-filter: blur(45px);
 }
 
-/* 4. WRAPPER KONTEN UTAMA */
+/* WRAPPER (Dikunci posisi absolute supaya keyboard aman) */
 .main-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
+  position: fixed;
+  inset: 0; /* top:0, right:0, bottom:0, left:0 */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Jaga jarak aman dari notch dan garis home iPhone */
+
+  /* Berikan padding safe-area agar konten tidak tertutup notch/tombol home */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   padding-left: 20px;
   padding-right: 20px;
+  
+  box-sizing: border-box;
+  /* padding: 15px; */
+ /* overflow: hidden; */
 }
 
 /* =========================================
