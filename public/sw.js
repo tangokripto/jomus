@@ -1,4 +1,4 @@
-const CACHE_NAME = "spotify-kw-cache-v1";
+const CACHE_NAME = "Jomusic-cache-v1";
 const urlsToCache = [
   "/",
   "/index.html",
@@ -10,7 +10,6 @@ const urlsToCache = [
   "/default.jpg"
 ];
 
-// Tambahkan semua file lagu MP3 ke cache
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {

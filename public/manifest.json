@@ -1,6 +1,6 @@
 {
-  "name": "Spotify KW",
-  "short_name": "SpotifyKW",
+  "name": "JoMusic",
+  "short_name": "JM",
   "start_url": ".",
   "display": "standalone",
   "icons": [
