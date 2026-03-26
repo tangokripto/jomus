@@ -340,6 +340,26 @@
     "cover": "covers/alvaro-diaz-pro.jpg"
   },
   {
+    "file": "Amadori - Soba Ni Irukara.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Amadori%20-%20Soba%20Ni%20Irukara.mp3",
+    "title": "そばにいるから",
+    "artist": "Amadori",
+    "album": "Naruto Best Hit Collection 2",
+    "genre": "Rock, Pop",
+    "duration": 228,
+    "cover": "covers/amadori-soba-ni-irukara.jpg"
+  },
+  {
+    "file": "Analogfish - Speed.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Analogfish%20-%20Speed.mp3",
+    "title": "スピード",
+    "artist": "アナログフィッシュ",
+    "album": "Naruto Best Hit Collection 2",
+    "genre": "Rock, Pop",
+    "duration": 195,
+    "cover": "covers/analogfish-speed.jpg"
+  },
+  {
     "file": "Aqua Timez - ALONES.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Aqua%20Timez%20-%20ALONES.mp3",
     "title": "ALONES",
@@ -1960,6 +1980,16 @@
     "cover": "covers/casey-edwards-bury-the-light.jpg"
   },
   {
+    "file": "Chaba - Parade.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Chaba%20-%20Parade.mp3",
+    "title": "パレード",
+    "artist": "Chaba",
+    "album": "Naruto Best Hit Collection 2",
+    "genre": "Rock, Pop",
+    "duration": 294,
+    "cover": "covers/chaba-parade.jpg"
+  },
+  {
     "file": "Creed - One Last Breath.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Creed%20-%20One%20Last%20Breath.mp3",
     "title": "One Last Breath",
@@ -2350,6 +2380,16 @@
     "cover": "covers/flow-go.jpg"
   },
   {
+    "file": "Flow - Remember.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Flow%20-%20Remember.mp3",
+    "title": "Re:member",
+    "artist": "Flow",
+    "album": "Flow The Best ~Single Collection~",
+    "genre": "Rock",
+    "duration": 197,
+    "cover": "covers/flow-remember.jpg"
+  },
+  {
     "file": "FLOW - Sign.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/FLOW%20-%20Sign.mp3",
     "title": "Sign",
@@ -2368,6 +2408,16 @@
     "genre": "Indonesian Indie",
     "duration": 263,
     "cover": "covers/fourtwnty-charita-utami-mangu.jpg"
+  },
+  {
+    "file": "GaGaGa SP - Hajimete Kimi To Shabetta.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/GaGaGa%20SP%20-%20Hajimete%20Kimi%20To%20Shabetta.mp3",
+    "title": "はじめて君としゃべった",
+    "artist": "ガガガSP",
+    "album": "Naruto Best Hit Collection 2",
+    "genre": "Rock, Pop",
+    "duration": 181,
+    "cover": "covers/gagaga-sp-hajimete-kimi-to-shabetta.jpg"
   },
   {
     "file": "Green Day - ¡Viva La Gloria!.mp3",
@@ -2748,6 +2798,16 @@
     "genre": "Nu Metal",
     "duration": 233,
     "cover": "covers/hoobastank-the-reason.jpg"
+  },
+  {
+    "file": "Hound Dog - Rocks.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Hound%20Dog%20-%20Rocks.mp3",
+    "title": "Rocks",
+    "artist": "Hound Dog",
+    "album": "Rocks",
+    "genre": "Rock, Pop",
+    "duration": 287,
+    "cover": "covers/hound-dog-rocks.jpg"
   },
   {
     "file": "Iksan Skuter - Bingung.mp3",
@@ -3800,6 +3860,16 @@
     "cover": "covers/louis-armstrong-what-a-wonderful-world.jpg"
   },
   {
+    "file": "Mafia 2 Soundtrack - Main Theme.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Mafia%202%20Soundtrack%20-%20Main%20Theme.mp3",
+    "title": "Mafia 2 - Main Menu",
+    "artist": "Prague Film Orchestra",
+    "album": "Mafia II",
+    "genre": "Orchestra",
+    "duration": 240,
+    "cover": "covers/mafia-2-soundtrack-main-theme.jpg"
+  },
+  {
     "file": "MAGIC! - Rude.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/MAGIC!%20-%20Rude.mp3",
     "title": "Rude",
@@ -4430,6 +4500,26 @@
     "cover": "covers/one-ok-rock-save-yourself.jpg"
   },
   {
+    "file": "Orange Range - Biva Rock (Japanese Side).mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Orange%20Range%20-%20Biva%20Rock%20(Japanese%20Side).mp3",
+    "title": "Biva Rock",
+    "artist": "Orange Range",
+    "album": "Naruto Best Collection",
+    "genre": "Rock, Pop, Stage & Screen",
+    "duration": 212,
+    "cover": "covers/orange-range-biva-rock-japanese-side.jpg"
+  },
+  {
+    "file": "OreskaBand - Pinnochio.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/OreskaBand%20-%20Pinnochio.mp3",
+    "title": "ピノキオ",
+    "artist": "Oreskaband",
+    "album": "Naruto Super Hits 2006-2008",
+    "genre": "Hip Hop, Rock, Pop",
+    "duration": 140,
+    "cover": "covers/oreskaband-pinnochio.jpg"
+  },
+  {
     "file": "Ozzy Osbourne - Bark at the Moon.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Ozzy%20Osbourne%20-%20Bark%20at%20the%20Moon.mp3",
     "title": "Bark at the Moon",
@@ -4880,6 +4970,16 @@
     "cover": "covers/rage-against-the-machine-killing-in-the-name.jpg"
   },
   {
+    "file": "Raico - Alive.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Raico%20-%20Alive.mp3",
+    "title": "Alive",
+    "artist": "Raico",
+    "album": "Naruto Best Collection",
+    "genre": "Rock, Pop, Stage & Screen",
+    "duration": 285,
+    "cover": "covers/raico-alive.jpg"
+  },
+  {
     "file": "Rhiannon Giddens - Mountain Banjo.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Rhiannon%20Giddens%20-%20Mountain%20Banjo.mp3",
     "title": "Mountain Banjo",
@@ -4898,6 +4998,26 @@
     "genre": "Folk",
     "duration": 239,
     "cover": "covers/rhiannon-giddens-mountain-hymn.jpg"
+  },
+  {
+    "file": "Rythem - Harmonia.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Rythem%20-%20Harmonia.mp3",
+    "title": "ハルモニア",
+    "artist": "Rythem",
+    "album": "Naruto Best Hit Collection",
+    "genre": "Rock, Pop, Stage & Screen",
+    "duration": 257,
+    "cover": "covers/rythem-harmonia.jpg"
+  },
+  {
+    "file": "Saboten - Scenario.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Saboten%20-%20Scenario.mp3",
+    "title": "シナリオ",
+    "artist": "Saboten",
+    "album": "Naruto Super Hits 2006-2008",
+    "genre": "Hip Hop, Rock, Pop",
+    "duration": 198,
+    "cover": "covers/saboten-scenario.jpg"
   },
   {
     "file": "Sambomaster - 青春狂騒曲.mp3",
@@ -6018,6 +6138,16 @@
     "genre": "Indonesian Pop",
     "duration": 197,
     "cover": "covers/the-changcuters-suka-suka.jpg"
+  },
+  {
+    "file": "The Mass Missile - Imamade Nandomo.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Mass%20Missile%20-%20Imamade%20Nandomo.mp3",
+    "title": "今まで何度も",
+    "artist": "The Mass Missile",
+    "album": "Naruto Best Hit Collection",
+    "genre": "Rock, Pop, Stage & Screen",
+    "duration": 282,
+    "cover": "covers/the-mass-missile-imamade-nandomo.jpg"
   },
   {
     "file": "The Notorious B.I.G. - Big Poppa - 2005 Remaster.mp3",
