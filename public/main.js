@@ -324,18 +324,32 @@ btnPlay.addEventListener("click", () => {
   toggleIcons();
 });
 
+// --- Fungsi Toast Notification ---
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.innerHTML = message;
+  toast.classList.add("show");
+  
+  // Sembunyikan setelah 2 detik
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
+}
+
 btnNext.addEventListener("click", playNext);
 btnPrev.addEventListener("click", playPrev);
+// --- Update Event Listeners Shuffle ---
 btnShuffle.addEventListener("click", () => {
   isShuffled = !isShuffled;
-  // Kita pakai class Tailwind untuk kasih tanda aktif (misal: warna biru)
-  btnShuffle.classList.toggle("text-blue-500", isShuffled);
-  btnShuffle.classList.toggle("text-zinc-400", !isShuffled);
+  // Gunakan style.color agar menang lawan CSS eksternal
+  btnShuffle.style.color = isShuffled ? "#3b82f6" : "#a1a1aa";
+  showToast(isShuffled ? "🔀 Shuffle Enabled" : "➡️ Sequential Play");
 });
+// --- Update Event Listeners Repeat ---
 btnRepeat.addEventListener("click", () => {
-  isRepeating = !isRepeating; // Pastikan pakai isRepeating sesuai variabel di atas
-  btnRepeat.classList.toggle("text-blue-500", isRepeating);
-  btnRepeat.classList.toggle("text-zinc-400", !isRepeating);
+  isRepeating = !isRepeating;
+  btnRepeat.style.color = isRepeating ? "#3b82f6" : "#a1a1aa";
+  showToast(isRepeating ? "🔂 Repeat Mode" : "➡️ Play All");
 });
 
 audio.addEventListener("ended", () => {

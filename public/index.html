@@ -20,14 +20,38 @@
     #song-list::-webkit-scrollbar-track { background: transparent; }
     #song-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
     
-    /* State lagu aktif */
+    /* State lagu aktif - GARIS KIRI DIHAPUS */
     .active-song { 
       background: rgba(59, 130, 246, 0.2) !important; 
-      border-left: 3px solid #3b82f6; 
     }
-  </style>
+
+    /* Toast Notification Style */
+    #toast {
+      position: fixed;
+      top: 20px; /* Muncul dari atas biar ga ganggu jempol */
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(37, 99, 235, 0.9);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 9999;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+</style>
 </head>
 <body class="text-zinc-100 font-sans">
+  <div id="toast"></div>
 
   <main class="main-wrapper">
     
