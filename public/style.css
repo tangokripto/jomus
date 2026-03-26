@@ -135,7 +135,7 @@ body::before {
   .song-title { font-size: 1rem; }
   .controls-container { margin-bottom: 0.75rem; }
   .play-btn { padding: 0.75rem; }
-  .song-list-container { max-height: 100px; } 
+  .song-list-container { max-height: 150px; } 
 }
 
 
