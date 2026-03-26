@@ -12,6 +12,7 @@ body {
   background: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
+  background-attachment: fixed; /* background notch */
 }
 
 @keyframes gradientShift {
@@ -127,7 +128,7 @@ body::before {
    RESPONSIVE UNTUK HP KECIL (iPhone SE/4.7")
 ========================================= */
 @media (max-height: 720px) {
-  .player-card { padding: 1rem; }
+  .player-card { padding: 1rem; transform: scale(0.95);}
   .cover-image { width: 110px; height: 110px; } /* Kecilin Cover */
   .song-title { font-size: 1rem; }
   .controls-container { margin-bottom: 0.75rem; }
