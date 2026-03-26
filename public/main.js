@@ -121,9 +121,17 @@ function scrollToCurrentSong(autoScroll = true) {
 
 // Highlight Active Song
 function highlightActive() {
-  [...songList.children].forEach((li, idx) => {
-    const realIndex = filterSongs[idx]?.originalIndex;
-    li.classList.toggle("active", realIndex === currentIndex);
+  const listItems = songList.querySelectorAll("li");
+  listItems.forEach((li) => {
+    // Kita ambil index dari data yang kita simpan saat render nanti
+    const songIndex = parseInt(li.getAttribute("data-index"));
+    if (songIndex === currentIndex) {
+      li.classList.add("active-song");
+      // Bonus: Auto-scroll supaya lagu yang aktif selalu kelihatan di tengah playlist
+      li.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } else {
+      li.classList.remove("active-song");
+    }
   });
 }
 
