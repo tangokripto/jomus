@@ -1,3 +1,7 @@
+:root {
+  --grad: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
+}
+
 /* RESET & CORE (Mencegah Putih di Safari iOS) */
 html {
   margin: 0;
@@ -32,9 +36,9 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(50px);
+  -webkit-backdrop-filter: blur(50px);
   z-index: -1;
 }
 
@@ -46,8 +50,11 @@ body::before {
   align-items: center;
   justify-content: center;
 
-/* Safe-area padding agar konten kartu tidak menabrak bar sistem */
-  padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom) 20px;
+/* Safe area khusus iOS 26 untuk Liquid Glass */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
   box-sizing: border-box;
 }
 
