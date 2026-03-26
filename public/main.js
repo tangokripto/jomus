@@ -124,12 +124,12 @@ function scrollToCurrentSong(autoScroll = true) {
 function highlightActive() {
   const listItems = songList.querySelectorAll("li");
   listItems.forEach((li) => {
-    // Kita ambil index dari data yang kita simpan saat render nanti
     const songIndex = parseInt(li.getAttribute("data-index"));
     if (songIndex === currentIndex) {
       li.classList.add("active-song");
-      // Bonus: Auto-scroll supaya lagu yang aktif selalu kelihatan di tengah playlist
+      if (shouldScroll) {
       li.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
     } else {
       li.classList.remove("active-song");
     }
@@ -169,8 +169,8 @@ function loadSong(index, resume = false) {
     document.getElementById("song-artist").textContent = song.artist || "Unknown";
     document.getElementById("song-album").textContent = song.album || "Unknown";
     document.getElementById("song-genre").textContent = song.genre || "Genre?";
-    highlightActive();
-    scrollToCurrentSong(); // ✅ Auto-scroll tiap ganti lagu
+    highlightActive(true);
+    /* scrollToCurrentSong(); */ // ✅ Auto-scroll tiap ganti lagu
   });
 }
 
