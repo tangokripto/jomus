@@ -135,7 +135,7 @@ body::before {
 /* =========================================
    RESPONSIVE: HP KECIL (iPhone SE / 4.7")
    ========================================= */
-@media (max-height: 670px) and (max-width: 500px) {
+@media (max-height: 570px) and (max-width: 500px) {
   .player-card { padding: 1rem; transform: scale(0.95); }
   .cover-image { width: 100px; height: 100px; }
   .song-title { font-size: 1rem; }
