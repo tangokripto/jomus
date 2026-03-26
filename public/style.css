@@ -7,7 +7,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100dvh; /* Dynamic height */
+  min-height: 100dvh; /* Dynamic height */
   overflow: hidden; /* Kunci layarnya biar ga bisa discroll liar */
   background: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
   background-size: 400% 400%;
@@ -34,13 +34,21 @@ body::before {
 
 /* WRAPPER (Dikunci posisi absolute supaya keyboard aman) */
 .main-wrapper {
-  position: absolute;
+  position: fixed;
   inset: 0; /* top:0, right:0, bottom:0, left:0 */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px;
-  overflow: hidden;
+
+  /* Berikan padding safe-area agar konten tidak tertutup notch/tombol home */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: 20px;
+  padding-right: 20px;
+  
+  box-sizing: border-box;
+  /* padding: 15px; */
+ /* overflow: hidden; */
 }
 
 /* =========================================
