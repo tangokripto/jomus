@@ -297,7 +297,7 @@ function startScrollingTitle(text) {
   clearInterval(scrollTitleInterval);
   scrollTitleOffset = 0;
   scrollTitleInterval = setInterval(() => {
-    const scrollText = text.substring(scrollTitleOffset) + " • " + text.substring(0, scrollTitleOffset);
+    const scrollText = text.substring(scrollTitleOffset) + "  " + text.substring(0, scrollTitleOffset);
     document.title = scrollText;
     scrollTitleOffset = (scrollTitleOffset + 1) % text.length;
   }, 250);
@@ -325,7 +325,7 @@ btnPlay.addEventListener("click", () => {
     isPlaying = true;
     const song = songs[currentIndex];
     const fullTitle = ` ${song.title} - ${song.artist || "Unknown"} `;
-    startScrollingTitle(fullTitle);
+    startScrollingTitle(false);
   }
   toggleIcons();
 });
