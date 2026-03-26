@@ -97,7 +97,7 @@ function loadMoreSongs() {
   });
 
   loadedCount += nextSongs.length;
-  highlightActive();
+  highlightActive(false);
 }
 
 // Get File Name
