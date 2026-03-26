@@ -1,10 +1,14 @@
-/* RESET & CORE */
+/* RESET & CORE (Mencegah Putih di Safari iOS) */
+html {
+  background-color: #09090b; /* Warna gelap untuk dasar */
+}
+
 body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 100dvh; /* Dynamic height untuk HP */
-  overflow: hidden; /* Mencegah body di-scroll */
+  height: 100dvh; /* Dynamic height */
+  overflow: hidden; /* Kunci layarnya biar ga bisa discroll liar */
   background: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
@@ -16,127 +20,147 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-/* Overlay Blur agar Background tidak terlalu kontras */
+/* Blur Background */
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(40px);
   -webkit-backdrop-filter: blur(40px);
   z-index: -1;
 }
 
-/* WRAPPER CENTER */
+/* WRAPPER (Dikunci posisi absolute supaya keyboard aman) */
 .main-wrapper {
+  position: absolute;
+  inset: 0; /* top:0, right:0, bottom:0, left:0 */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-  box-sizing: border-box;
+  padding: 15px;
+  overflow: hidden;
 }
 
-/* PLAYER CARD (Kotak Abu-abu) */
+/* =========================================
+   UKURAN STANDARD (Untuk HP Normal 6 inch)
+========================================= */
 .player-card {
-  background: rgba(24, 24, 27, 0.7); /* Zinc-900 dengan transparansi */
+  background: rgba(24, 24, 27, 0.7);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
-  max-width: 380px;
-  border-radius: 2rem;
-  padding: 1.5rem;
+  max-width: 360px; /* Ukuran standard HP */
+  border-radius: 1.5rem;
+  padding: 1.25rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
-/* COVER IMAGE */
 .cover-image {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   border: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease;
 }
-.cover-image:hover { transform: scale(1.03); }
 
-/* SEEK BAR */
+.song-title { font-size: 1.125rem; }
+.song-meta-text { font-size: 0.7rem; }
+.duration-text { font-size: 0.65rem; }
+
+/* Seek Bar */
 .seek-bar {
-  width: 100%;
-  height: 5px;
+  width: 100%; height: 5px;
   background: rgba(255,255,255,0.1);
-  border-radius: 10px;
-  appearance: none;
-  cursor: pointer;
-  outline: none;
+  border-radius: 10px; appearance: none; outline: none;
 }
 .seek-bar::-webkit-slider-thumb {
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  background: #3b82f6;
-  border-radius: 50%;
+  appearance: none; width: 12px; height: 12px;
+  background: #3b82f6; border-radius: 50%;
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
 }
 
-/* CONTROLS */
+/* Controls */
 .controls-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;
 }
 .controls-container button {
-  color: #a1a1aa;
-  transition: all 0.2s ease;
-  cursor: pointer;
+  color: #a1a1aa; transition: all 0.2s ease; background: none; border: none; cursor: pointer;
 }
 .controls-container button:hover { color: white; transform: scale(1.1); }
 .controls-container button:active { transform: scale(0.9); }
 
+/* Play Button */
 .play-btn {
-  background: #2563eb;
-  color: white !important;
-  padding: 1rem;
-  border-radius: 9999px;
+  background: #2563eb !important; color: white !important;
+  padding: 1rem; border-radius: 50%;
   box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
 }
-.play-btn:hover { background: #3b82f6; }
+.play-btn:hover { background: #3b82f6 !important; }
 
-/* SEARCH */
+/* Icon sizes base */
+.icon-sm { width: 18px; height: 18px; }
+.icon-md { width: 28px; height: 28px; }
+.icon-lg { width: 24px; height: 24px; }
+
+/* Search & Playlist */
 .search-input {
-  width: 100%;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 0.75rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  color: white;
-  outline: none;
-  transition: border-color 0.2s;
+  width: 100%; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem;
+  padding: 0.6rem 1rem; font-size: 0.875rem; color: white; outline: none;
+  /* Prevent iOS Safari zoom on focus */
+  font-size: 16px; 
 }
 .search-input:focus { border-color: #3b82f6; }
-
-/* PLAYLIST */
-.song-list-container {
-  max-height: 160px;
-  overflow-y: auto;
-  padding-right: 5px;
-}
+.playlist-title { font-size: 0.65rem; }
+.song-list-container { max-height: 150px; overflow-y: auto; padding-right: 5px; }
 #song-list li {
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: background 0.2s;
-  margin-bottom: 2px;
+  padding: 8px 12px; border-radius: 8px; cursor: pointer;
+  font-size: 0.85rem; transition: background 0.2s; margin-bottom: 2px;
 }
 #song-list li:hover { background: rgba(255,255,255,0.05); }
 
-/* RESPONSIVE FIX */
-@media (max-height: 700px) {
-  .cover-image { width: 140px; height: 140px; }
+
+/* =========================================
+   RESPONSIVE UNTUK HP KECIL (iPhone SE/4.7")
+========================================= */
+@media (max-height: 720px) {
   .player-card { padding: 1rem; }
+  .cover-image { width: 110px; height: 110px; } /* Kecilin Cover */
+  .song-title { font-size: 1rem; }
+  .controls-container { margin-bottom: 0.75rem; }
+  .play-btn { padding: 0.75rem; }
+  .song-list-container { max-height: 110px; } /* Biar ga nabrak bawah */
+}
+
+
+/* =========================================
+   RESPONSIVE UNTUK PC / TABLET / 4K
+========================================= */
+@media (min-width: 768px) {
+  .player-card {
+    max-width: 500px; /* Lebarkan kotaknya 1.5x */
+    padding: 2.5rem;
+    border-radius: 2rem;
+  }
+  .cover-image {
+    width: 250px; /* Besarkan gambar */
+    height: 250px;
+  }
+  .song-title { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .song-meta-text { font-size: 0.85rem; }
+  .duration-text { font-size: 0.8rem; }
+  
+  /* Besarkan Ikon di PC */
+  .icon-sm { width: 22px; height: 22px; }
+  .icon-md { width: 34px; height: 34px; }
+  .icon-lg { width: 32px; height: 32px; }
+  
+  .play-btn { padding: 1.25rem; }
+  .search-input { padding: 0.75rem 1rem; }
+  .playlist-title { font-size: 0.8rem; margin-bottom: 10px; }
+  .song-list-container { max-height: 200px; }
+  #song-list li { font-size: 1rem; padding: 10px 14px; }
 }
