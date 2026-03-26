@@ -9,7 +9,9 @@ body {
   width: 100vw;
   min-height: 100dvh; /* Dynamic height */
   overflow: hidden; /* Kunci layarnya biar ga bisa discroll liar */
-  background: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
+  background: 
+  linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+  linear-gradient(90deg, #1a4d61 0%, #57c785 70%, #eddd53 100%);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   background-attachment: fixed; /* background notch */
@@ -34,7 +36,7 @@ body::before {
 
 /* WRAPPER (Dikunci posisi absolute supaya keyboard aman) */
 .main-wrapper {
-  position: fixed;
+  position: relative;
   inset: 0; /* top:0, right:0, bottom:0, left:0 */
   display: flex;
   align-items: center;
@@ -47,8 +49,6 @@ body::before {
   padding-right: 20px;
   
   box-sizing: border-box;
-  /* padding: 15px; */
- /* overflow: hidden; */
 }
 
 /* =========================================
