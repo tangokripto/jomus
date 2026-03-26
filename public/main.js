@@ -35,7 +35,13 @@ fetch("songs.json")
     const saved = localStorage.getItem("lastIndex");
     currentIndex = saved ? parseInt(saved) : 0;
     renderPlaylist();
+    while (loadedCount <= currentIndex && loadedCount < songs.length) {
+      loadMoreSongs();
+    }
     loadSong(currentIndex, true);
+    setTimeout(() => {
+        highlightActive(true);
+    }, 500);
   });
 
 // Toggle Clear Search Button
