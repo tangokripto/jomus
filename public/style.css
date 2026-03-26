@@ -119,7 +119,7 @@ body::before {
 }
 .search-input:focus { border-color: #3b82f6; }
 .playlist-title { font-size: 0.65rem; }
-.song-list-container { max-height: 220px; overflow-y: auto; padding-right: 5px; }
+.song-list-container { max-height: 180px; overflow-y: auto; padding-right: 5px; }
 #song-list li {
   padding: 8px 12px; border-radius: 8px; cursor: pointer;
   font-size: 0.85rem; transition: background 0.2s; margin-bottom: 2px;
@@ -147,7 +147,7 @@ body::before {
   .icon-md { width: 24px; height: 24px; }
   
   /* Playlist HP Kecil tetap diusahakan muat 4-5 lagu */
-  .song-list-container { max-height: 110px; }
+  .song-list-container { max-height: 103px; }
   #song-list li { padding: 6px 10px; font-size: 0.8rem; }
 }
 
