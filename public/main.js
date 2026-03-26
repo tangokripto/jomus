@@ -167,9 +167,9 @@ function loadSong(index, resume = false) {
       audio.currentTime = savedTime;
     }
 
-    nowPlaying.textContent = " 🎵 " + song.title;
-    const fullTitle = `🎵 ${song.title} - ${song.artist || "Unknown"}`;
-    startScrollingTitle(fullTitle);
+    nowPlaying.textContent = song.title;
+    const fullTitle = `${song.title} - ${song.artist || "Unknown"}`;
+    
 
     updateNowPlayingUI(song);
     document.getElementById("song-artist").textContent = song.artist || "Unknown";
