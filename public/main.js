@@ -121,7 +121,7 @@ function scrollToCurrentSong(autoScroll = true) {
 }
 
 // Highlight Active Song
-function highlightActive() {
+function highlightActive(shouldScroll = false) {
   const listItems = songList.querySelectorAll("li");
   listItems.forEach((li) => {
     const songIndex = parseInt(li.getAttribute("data-index"));
@@ -338,16 +338,23 @@ function showToast(message) {
 
 btnNext.addEventListener("click", playNext);
 btnPrev.addEventListener("click", playPrev);
-// --- Update Event Listeners Shuffle ---
+
+isShuffled = localStorage.getItem("isShuffled") === "true";
+isRepeating = localStorage.getItem("isRepeating") === "true";
+
+btnShuffle.style.color = isShuffled ? "#3b82f6" : "#a1a1aa";
+btnRepeat.style.color = isRepeating ? "#3b82f6" : "#a1a1aa";
+
 btnShuffle.addEventListener("click", () => {
   isShuffled = !isShuffled;
-  // Gunakan style.color agar menang lawan CSS eksternal
+  localStorage.setItem("isShuffled", isShuffled);
   btnShuffle.style.color = isShuffled ? "#3b82f6" : "#a1a1aa";
   showToast(isShuffled ? "🔀 Shuffle Enabled" : "➡️ Sequential Play");
 });
-// --- Update Event Listeners Repeat ---
+
 btnRepeat.addEventListener("click", () => {
   isRepeating = !isRepeating;
+  localStorage.setItem("isRepeating", isRepeating);
   btnRepeat.style.color = isRepeating ? "#3b82f6" : "#a1a1aa";
   showToast(isRepeating ? "🔂 Repeat Mode" : "➡️ Play All");
 });
