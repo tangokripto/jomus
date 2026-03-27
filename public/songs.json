@@ -210,16 +210,6 @@
     "cover": "covers/510-fanny-soegi-amo.jpg"
   },
   {
-    "file": "7!! - さよならメモリー.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/7!!%20-%20%E3%81%95%E3%82%88%E3%81%AA%E3%82%89%E3%83%A1%E3%83%A2%E3%83%AA%E3%83%BC.mp3",
-    "title": "さよならメモリー",
-    "artist": "7!!",
-    "album": "ドキドキ",
-    "genre": "Anime",
-    "duration": 222,
-    "cover": "covers/7.jpg"
-  },
-  {
     "file": "88rising, Rich Brian, NIKI, Warren Hue - California (feat. Warren Hue).mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/88rising%2C%20Rich%20Brian%2C%20NIKI%2C%20Warren%20Hue%20-%20California%20(feat.%20Warren%20Hue).mp3",
     "title": "California (feat. Warren Hue)",
@@ -258,6 +248,26 @@
     "genre": "Anime",
     "duration": 260,
     "cover": "covers/aimer-chelly-ninelie.jpg"
+  },
+  {
+    "file": "Akeboshi - Wind.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Akeboshi%20-%20Wind.mp3",
+    "title": "Wind (ワインド)",
+    "artist": "六三四プロジェクト",
+    "album": "Naruto -ナルト- オリジナルサウンドトラック = Naruto Original Soundtrack",
+    "genre": "Rock, Pop, Stage & Screen",
+    "duration": 221,
+    "cover": "covers/akeboshi-wind.jpg"
+  },
+  {
+    "file": "Akeboshi - Yellow Moon.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Akeboshi%20-%20Yellow%20Moon.mp3",
+    "title": "Yellow Moon",
+    "artist": "Akeboshi",
+    "album": "Naruto Best Hit Collection 2",
+    "genre": "Rock, Pop",
+    "duration": 309,
+    "cover": "covers/akeboshi-yellow-moon.jpg"
   },
   {
     "file": "Akon, Eminem - Smack That.mp3",
@@ -360,12 +370,12 @@
     "cover": "covers/analogfish-speed.jpg"
   },
   {
-    "file": "Aqua Timez - ALONES.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/Aqua%20Timez%20-%20ALONES.mp3",
-    "title": "ALONES",
+    "file": "Aqua Timez - Alones.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Aqua%20Timez%20-%20Alones.mp3",
+    "title": "Alones",
     "artist": "Aqua Timez",
-    "album": "10th Anniversary Best BLUE",
-    "genre": "Anime",
+    "album": "Bleach Best Tunes",
+    "genre": "Stage & Screen",
     "duration": 259,
     "cover": "covers/aqua-timez-alones.jpg"
   },
@@ -400,14 +410,14 @@
     "cover": "covers/as-blood-runs-black-my-fears-have-become-phobias.jpg"
   },
   {
-    "file": "ASIAN KUNG-FU GENERATION - 遥か彼方.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/ASIAN%20KUNG-FU%20GENERATION%20-%20%E9%81%A5%E3%81%8B%E5%BD%BC%E6%96%B9.mp3",
-    "title": "遥か彼方",
-    "artist": "ASIAN KUNG-FU GENERATION",
-    "album": "BEST HIT AKG",
-    "genre": "J-Rock",
+    "file": "ASIAN KUNG-FU GENERATION - Haruka Kanata.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/ASIAN%20KUNG-FU%20GENERATION%20-%20Haruka%20Kanata.mp3",
+    "title": "Haruka Kanata",
+    "artist": "Asian Kung-Fu Generation",
+    "album": "Naruto Best Collection",
+    "genre": "Rock, Pop, Stage & Screen",
     "duration": 243,
-    "cover": "covers/asian-kung-fu-generation.jpg"
+    "cover": "covers/asian-kung-fu-generation-haruka-kanata.jpg"
   },
   {
     "file": "Asking Alexandria - A Candlelit Dinner With Inamorta.mp3",
@@ -2372,32 +2382,22 @@
   {
     "file": "FLOW - GO!!!.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/FLOW%20-%20GO!!!.mp3",
-    "title": "GO!!!",
-    "artist": "FLOW",
-    "album": "Go!!!",
-    "genre": "Anime",
-    "duration": 240,
+    "title": "Go !!!",
+    "artist": "Flow",
+    "album": "Naruto Best Collection",
+    "genre": "Rock, Pop, Stage & Screen",
+    "duration": 187,
     "cover": "covers/flow-go.jpg"
   },
   {
-    "file": "Flow - Remember.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/Flow%20-%20Remember.mp3",
+    "file": "FLOW - Remember.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/FLOW%20-%20Re%EF%80%BAmember.mp3",
     "title": "Re:member",
     "artist": "Flow",
-    "album": "Flow The Best ~Single Collection~",
-    "genre": "Rock",
+    "album": "Re:member",
+    "genre": "Electronic, Rock, Pop",
     "duration": 197,
-    "cover": "covers/flow-remember.jpg"
-  },
-  {
-    "file": "FLOW - Sign.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/FLOW%20-%20Sign.mp3",
-    "title": "Sign",
-    "artist": "FLOW",
-    "album": "MICROCOSM",
-    "genre": "Anime",
-    "duration": 236,
-    "cover": "covers/flow-sign.jpg"
+    "cover": "covers/flow-re-member.jpg"
   },
   {
     "file": "Fourtwnty, Charita Utami - Mangu.mp3",
@@ -2780,14 +2780,14 @@
     "cover": "covers/heart-barracuda.jpg"
   },
   {
-    "file": "HEARTS GROW - ユラユラ .mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/HEARTS%20GROW%20-%20%E3%83%A6%E3%83%A9%E3%83%A6%E3%83%A9%20.mp3",
+    "file": "Hearts Grow - Yura Yura.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Hearts%20Grow%20-%20Yura%20Yura.mp3",
     "title": "ユラユラ",
-    "artist": "HEARTS GROW",
-    "album": "ユラユラ",
-    "genre": "Anime, J-Pop",
+    "artist": "Hearts Grow",
+    "album": "Naruto Super Hits 2006-2008",
+    "genre": "Hip Hop, Rock, Pop",
     "duration": 300,
-    "cover": "covers/hearts-grow.jpg"
+    "cover": "covers/hearts-grow-yura-yura.jpg"
   },
   {
     "file": "Hoobastank - The Reason.mp3",
@@ -2802,10 +2802,10 @@
   {
     "file": "Hound Dog - Rocks.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Hound%20Dog%20-%20Rocks.mp3",
-    "title": "Rocks",
+    "title": "R★O★C★K★S",
     "artist": "Hound Dog",
-    "album": "Rocks",
-    "genre": "Rock, Pop",
+    "album": "Naruto -ナルト- オリジナルサウンドトラック = Naruto Original Soundtrack",
+    "genre": "Rock, Pop, Stage & Screen",
     "duration": 287,
     "cover": "covers/hound-dog-rocks.jpg"
   },
@@ -3200,12 +3200,12 @@
     "cover": "covers/jamrud-terima-kasih.jpg"
   },
   {
-    "file": "Joe Inoue - CLOSER.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/Joe%20Inoue%20-%20CLOSER.mp3",
-    "title": "CLOSER",
-    "artist": "Joe Inoue",
-    "album": "CLOSER",
-    "genre": "Anime",
+    "file": "Joe Inoue - Closer.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Joe%20Inoue%20-%20Closer.mp3",
+    "title": "Closer",
+    "artist": "井上ジョー",
+    "album": "Best Hit Naruto",
+    "genre": "Rock, Pop",
     "duration": 208,
     "cover": "covers/joe-inoue-closer.jpg"
   },
@@ -3250,14 +3250,14 @@
     "cover": "covers/default.jpg"
   },
   {
-    "file": "KANA-BOON - シルエット.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/KANA-BOON%20-%20%E3%82%B7%E3%83%AB%E3%82%A8%E3%83%83%E3%83%88.mp3",
-    "title": "シルエット",
+    "file": "KANA-BOON -Silhouette.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/KANA-BOON%20-Silhouette.mp3",
+    "title": "Silhouette",
     "artist": "KANA-BOON",
-    "album": "TIME",
-    "genre": "Anime",
+    "album": "Naruto The Best",
+    "genre": "Pop, Folk, World, & Country",
     "duration": 240,
-    "cover": "covers/kana-boon.jpg"
+    "cover": "covers/kana-boon-silhouette.jpg"
   },
   {
     "file": "KISS - Strutter.mp3",
@@ -3830,14 +3830,14 @@
     "cover": "covers/lita-ford-ozzy-osbourne-close-my-eyes-forever.jpg"
   },
   {
-    "file": "Little by Little - 悲しみをやさしさに.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/Little%20by%20Little%20-%20%E6%82%B2%E3%81%97%E3%81%BF%E3%82%92%E3%82%84%E3%81%95%E3%81%97%E3%81%95%E3%81%AB.mp3",
+    "file": "Little By Little - Kanashimi wo Yasashisani ni.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Little%20By%20Little%20-%20Kanashimi%20wo%20Yasashisani%20ni.mp3",
     "title": "悲しみをやさしさに",
-    "artist": "Little by Little",
-    "album": "Sweet Noodle Pop",
-    "genre": "Anime, J-Pop",
+    "artist": "Little By Little",
+    "album": "Naruto Best Hit Collection",
+    "genre": "Rock, Pop, Stage & Screen",
     "duration": 242,
-    "cover": "covers/little-by-little.jpg"
+    "cover": "covers/little-by-little-kanashimi-wo-yasashisani-ni.jpg"
   },
   {
     "file": "Lost Saga BGM - Wild West.mp3",
@@ -4270,22 +4270,12 @@
     "cover": "covers/neck-deep-wish-you-were-here.jpg"
   },
   {
-    "file": "NICO Touches the Walls - Broken Youth -Original Version-.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/NICO%20Touches%20the%20Walls%20-%20Broken%20Youth%20-Original%20Version-.mp3",
-    "title": "Broken Youth -Original Version-",
-    "artist": "NICO Touches the Walls",
-    "album": "Who are you?",
-    "genre": "Anime",
-    "duration": 311,
-    "cover": "covers/nico-touches-the-walls-broken-youth-original-version.jpg"
-  },
-  {
     "file": "NICO Touches the Walls - Broken Youth.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/NICO%20Touches%20the%20Walls%20-%20Broken%20Youth.mp3",
     "title": "Broken Youth",
     "artist": "NICO Touches the Walls",
-    "album": "Broken Youth",
-    "genre": "Anime",
+    "album": "Best Hit Naruto",
+    "genre": "Rock, Pop",
     "duration": 295,
     "cover": "covers/nico-touches-the-walls-broken-youth.jpg"
   },
@@ -4293,41 +4283,41 @@
     "file": "NICO Touches the Walls - Diver.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/NICO%20Touches%20the%20Walls%20-%20Diver.mp3",
     "title": "Diver",
-    "artist": "NICO Touches the Walls",
-    "album": "PASSENGER",
-    "genre": "Anime",
+    "artist": "Nico Touches The Walls",
+    "album": "Naruto Greatest Hits!!!!!",
+    "genre": "Rock, Stage & Screen",
     "duration": 251,
     "cover": "covers/nico-touches-the-walls-diver.jpg"
   },
   {
-    "file": "NICO Touches the Walls - かけら〜総べての想いたちへ〜.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/NICO%20Touches%20the%20Walls%20-%20%E3%81%8B%E3%81%91%E3%82%89%E3%80%9C%E7%B7%8F%E3%81%B9%E3%81%A6%E3%81%AE%E6%83%B3%E3%81%84%E3%81%9F%E3%81%A1%E3%81%B8%E3%80%9C.mp3",
-    "title": "かけら〜総べての想いたちへ〜",
-    "artist": "NICO Touches the Walls",
-    "album": "オーロラ",
-    "genre": "Anime",
-    "duration": 276,
-    "cover": "covers/nico-touches-the-walls.jpg"
-  },
-  {
-    "file": "NICO Touches the Walls - ニワカ雨ニモ負ケズ.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/NICO%20Touches%20the%20Walls%20-%20%E3%83%8B%E3%83%AF%E3%82%AB%E9%9B%A8%E3%83%8B%E3%83%A2%E8%B2%A0%E3%82%B1%E3%82%BA.mp3",
-    "title": "ニワカ雨ニモ負ケズ",
-    "artist": "NICO Touches the Walls",
-    "album": "ニコ タッチズ ザ ウォールズ ノ ベスト",
-    "genre": "Anime",
-    "duration": 263,
-    "cover": "covers/nico-touches-the-walls.jpg"
-  },
-  {
-    "file": "NICO Touches the Walls - ホログラム.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/NICO%20Touches%20the%20Walls%20-%20%E3%83%9B%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0.mp3",
+    "file": "NICO Touches the Walls - Hologram.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/NICO%20Touches%20the%20Walls%20-%20Hologram.mp3",
     "title": "ホログラム",
     "artist": "NICO Touches the Walls",
-    "album": "オーロラ",
-    "genre": "Anime",
+    "album": "ホログラム",
+    "genre": "Rock, Pop",
     "duration": 249,
-    "cover": "covers/nico-touches-the-walls.jpg"
+    "cover": "covers/nico-touches-the-walls-hologram.jpg"
+  },
+  {
+    "file": "NICO Touches the Walls - Kakera Subete no Omoitachi e.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/NICO%20Touches%20the%20Walls%20-%20Kakera%EF%80%BA%20Subete%20no%20Omoitachi%20e.mp3",
+    "title": "かけら―総べての想いたちへ―",
+    "artist": "NICO Touches the Walls",
+    "album": "オーロラ",
+    "genre": "Rock",
+    "duration": 276,
+    "cover": "covers/nico-touches-the-walls-kakera-subete-no-omoitachi-e.jpg"
+  },
+  {
+    "file": "NICO Touches the Walls - Niwaka Ame Nimo Makezu.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/NICO%20Touches%20the%20Walls%20-%20Niwaka%20Ame%20Nimo%20Makezu.mp3",
+    "title": "ニワカ雨ニモ負ケズ",
+    "artist": "NICO Touches the Walls",
+    "album": "Naruto Super Sounds",
+    "genre": "Rock, Pop",
+    "duration": 263,
+    "cover": "covers/nico-touches-the-walls-niwaka-ame-nimo-makezu.jpg"
   },
   {
     "file": "Nidji - Di Atas Awan.mp3",
@@ -4360,14 +4350,14 @@
     "cover": "covers/nidji-rahasia-hati.jpg"
   },
   {
-    "file": "No Regret Life - 失くした言葉.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/No%20Regret%20Life%20-%20%E5%A4%B1%E3%81%8F%E3%81%97%E3%81%9F%E8%A8%80%E8%91%89.mp3",
+    "file": "No Regret Life - Nakushita Kotoba.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/No%20Regret%20Life%20-%20Nakushita%20Kotoba.mp3",
     "title": "失くした言葉",
     "artist": "No Regret Life",
-    "album": "Sign",
-    "genre": "Anime",
+    "album": "Naruto Best Hit Collection 2",
+    "genre": "Rock, Pop",
     "duration": 288,
-    "cover": "covers/no-regret-life.jpg"
+    "cover": "covers/no-regret-life-nakushita-kotoba.jpg"
   },
   {
     "file": "NOFX - Thank God It's Monday.mp3",
@@ -5020,14 +5010,14 @@
     "cover": "covers/saboten-scenario.jpg"
   },
   {
-    "file": "Sambomaster - 青春狂騒曲.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/Sambomaster%20-%20%E9%9D%92%E6%98%A5%E7%8B%82%E9%A8%92%E6%9B%B2.mp3",
+    "file": "Sambomaster - Seishun Kyousoukyoku.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Sambomaster%20-%20Seishun%20Kyousoukyoku.mp3",
     "title": "青春狂騒曲",
-    "artist": "Sambomaster",
-    "album": "サンボマスターは君に語りかける",
-    "genre": "Japanese Rock",
+    "artist": "サンボマスター",
+    "album": "Naruto Best Hit Collection 2",
+    "genre": "Rock, Pop",
     "duration": 287,
-    "cover": "covers/sambomaster.jpg"
+    "cover": "covers/sambomaster-seishun-kyousoukyoku.jpg"
   },
   {
     "file": "Saosin - Bury Your Head.mp3",
@@ -5178,6 +5168,16 @@
     "genre": "Anime",
     "duration": 359,
     "cover": "covers/sawano-hiroyuki-you-see-big-girl-t-t.jpg"
+  },
+  {
+    "file": "seven oops - Sayonara Memory.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/seven%20oops%20-%20Sayonara%20Memory.mp3",
+    "title": "さよならメモリー",
+    "artist": "7!!",
+    "album": "Naruto Super Sounds",
+    "genre": "Rock, Pop",
+    "duration": 222,
+    "cover": "covers/seven-oops-sayonara-memory.jpg"
   },
   {
     "file": "SiM - The Rumbling.mp3",
@@ -5400,24 +5400,24 @@
     "cover": "covers/snoop-dogg-wiz-khalifa-bruno-mars-young-wild-free-feat-bruno-mars.jpg"
   },
   {
-    "file": "SNOWKEL - 波風サテライト .mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/SNOWKEL%20-%20%E6%B3%A2%E9%A2%A8%E3%82%B5%E3%83%86%E3%83%A9%E3%82%A4%E3%83%88%20.mp3",
+    "file": "Snowkel - Namikaze Satellite.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Snowkel%20-%20Namikaze%20Satellite.mp3",
     "title": "波風サテライト",
-    "artist": "SNOWKEL",
-    "album": "波風サテライト",
-    "genre": "Japanese rock, Anime",
+    "artist": "シュノーケル",
+    "album": "Naruto Best Hit Collection 2",
+    "genre": "Rock, Pop",
     "duration": 252,
-    "cover": "covers/snowkel.jpg"
+    "cover": "covers/snowkel-namikaze-satellite.jpg"
   },
   {
-    "file": "STANCE PUNKS - ノーボーイ・ノークライ.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/STANCE%20PUNKS%20-%20%E3%83%8E%E3%83%BC%E3%83%9C%E3%83%BC%E3%82%A4%E3%83%BB%E3%83%8E%E3%83%BC%E3%82%AF%E3%83%A9%E3%82%A4.mp3",
+    "file": "Stance Punks - No boy No cry.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Stance%20Punks%20-%20No%20boy%20No%20cry.mp3",
     "title": "ノーボーイ・ノークライ",
-    "artist": "STANCE PUNKS",
-    "album": "ノーボーイ・ノークライ",
-    "genre": "Japanese rock, Anime",
+    "artist": "Stance Punks",
+    "album": "Naruto Best Hit Collection 2",
+    "genre": "Rock, Pop",
     "duration": 214,
-    "cover": "covers/stance-punks.jpg"
+    "cover": "covers/stance-punks-no-boy-no-cry.jpg"
   },
   {
     "file": "Stillbirth - Apex Predator.mp3",
@@ -8038,25 +8038,5 @@
     "genre": "Afro House",
     "duration": 148,
     "cover": "covers/zerb-ty-dolla-ign-wiz-khalifa-location.jpg"
-  },
-  {
-    "file": "明星 Akeboshi - Wind.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/%E6%98%8E%E6%98%9F%20Akeboshi%20-%20Wind.mp3",
-    "title": "Wind",
-    "artist": "明星 <Akeboshi>",
-    "album": "Akeboshi",
-    "genre": "Anime",
-    "duration": 221,
-    "cover": "covers/akeboshi-wind.jpg"
-  },
-  {
-    "file": "明星 Akeboshi - Yellow Moon.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/%E6%98%8E%E6%98%9F%20Akeboshi%20-%20Yellow%20Moon.mp3",
-    "title": "Yellow Moon",
-    "artist": "明星 <Akeboshi>",
-    "album": "Roundabout",
-    "genre": "Anime",
-    "duration": 309,
-    "cover": "covers/akeboshi-yellow-moon.jpg"
   }
 ]
