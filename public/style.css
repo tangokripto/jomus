@@ -1,9 +1,8 @@
 /* =========================================
-   1. CORE & AURORA BACKGROUND (Glassmorphism)
-   Optimasi 4K: Blur Ekstrem + Grain Overlay
+   CORE & BACKGROUND
    ========================================= */
 html {
-  background-color: #0b0f14; 
+  background-color: #09090b; 
 }
 
 body {
@@ -12,42 +11,29 @@ body {
   width: 100vw;
   min-height: 100dvh; 
   overflow: hidden; 
-  position: relative;
-  background: #0b0f14; 
-  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  background-attachment: fixed; 
 }
 
-/* Bola Warna Teal (Kiri) - Blur ditingkatkan ke 150px untuk kehalusan maksimal */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 body::before {
   content: "";
   position: fixed;
-  width: 120vw;
-  height: 120vw;
-  top: -20vh;
-  left: -40vw;
-  background: radial-gradient(circle, #1e5b66 0%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(150px);
-  opacity: 0.6;
-  z-index: 0;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  z-index: -1;
 }
 
-/* Bola Warna Hijau (Kanan) - Noise halus untuk pecah color banding */
-body::after {
-  content: "";
-  position: fixed;
-  width: 120vw;
-  height: 120vw;
-  bottom: -30vh;
-  right: -40vw;
-  background: radial-gradient(circle, #1e4d3a 0%, transparent 70%);
-  border-radius: 50%;
-  filter: blur(150px);
-  opacity: 0.5;
-  z-index: 0;
-}
-
-/* WRAPPER + GLOBAL BLUR LAYER */
+/* WRAPPER */
 .main-wrapper {
   position: fixed;
   inset: 0; 
@@ -56,27 +42,20 @@ body::after {
   justify-content: center;
   padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom) 20px;
   box-sizing: border-box;
-  z-index: 1;
-  
-  /* Lapisan kabut tebal untuk menyatukan aurora */
-  backdrop-filter: blur(100px) saturate(140%);
-  -webkit-backdrop-filter: blur(100px) saturate(140%);
-  background: rgba(11, 15, 20, 0.3); 
 }
 
 /* =========================================
-   2. PLAYER CARD DESIGN
+   BASE PLAYER CARD (Default / 6.1" Standard)
    ========================================= */
 .player-card {
-  background: rgba(24, 24, 27, 0.4); 
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
   max-width: 360px;
   border-radius: 2rem;
   padding: 1.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .cover-image {
@@ -88,7 +67,7 @@ body::after {
   border: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease;
   display: block;
-  margin: 0 auto 1.5rem auto;
+  margin: 0 auto;
 }
 
 .song-title { font-size: 1.125rem; font-weight: bold; color: white; text-align: center; }
@@ -99,7 +78,7 @@ body::after {
 .seek-bar {
   width: 100%; height: 5px;
   background: rgba(255,255,255,0.1);
-  border-radius: 10px; appearance: none; outline: none; margin: 1rem 0;
+  border-radius: 10px; appearance: none; outline: none;
 }
 .seek-bar::-webkit-slider-thumb {
   appearance: none; width: 12px; height: 12px;
@@ -128,56 +107,48 @@ body::after {
 .icon-md { width: 28px; height: 28px; }
 .icon-lg { width: 24px; height: 24px; }
 
-/* =========================================
-   3. PLAYLIST & SEARCH
-   ========================================= */
+/* Search & Playlist */
 .search-input {
   width: 100%; background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem;
   padding: 0.6rem 1rem; color: white; outline: none;
-  font-size: 16px;
+  font-size: 16px; /* Prevent iOS zoom */
 }
 .search-input:focus { border-color: #3b82f6; }
-.playlist-title { font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 1rem; display: block; }
+.playlist-title { font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; }
 
+/* Playlist Area (Default 6.1" inch) */
 .song-list-container { 
   max-height: 130px; 
   overflow-y: auto; 
   padding-right: 5px; 
   margin-top: 8px;
 }
-#song-list { padding: 0; margin: 0; }
 #song-list li {
   padding: 8px 12px; border-radius: 8px; cursor: pointer;
   font-size: 0.85rem; transition: background 0.2s; margin-bottom: 2px;
   list-style: none; color: #d4d4d8;
 }
 #song-list li:hover { background: rgba(255,255,255,0.05); }
-
-/* FIX: Style Active Song sesuai screenshot (Garis Biru di Kiri) */
-.active-song { 
-  background: rgba(59, 130, 246, 0.15) !important; 
-  color: #60a5fa !important;
-  border-left: 3px solid #3b82f6; /* Garis vertikal biru */
-  padding-left: 9px !important; /* Kompensasi ketebalan border */
-}
+.active-song { background: rgba(59, 130, 246, 0.2) !important; color: #60a5fa !important; }
 
 /* =========================================
-   4. RESPONSIVE: HP KECIL (iPhone SE / 4.7")
+   RESPONSIVE: HP KECIL (iPhone SE / 4.7")
    ========================================= */
-@media (max-height: 670px) and (max-width: 500px) {
+@media (max-height: 570px) and (max-width: 500px) {
   .player-card { padding: 1rem; transform: scale(0.95); }
-  .cover-image { width: 100px; height: 100px; margin-bottom: 0.75rem; }
+  .cover-image { width: 100px; height: 100px; }
   .song-title { font-size: 1rem; }
   .controls-container { margin-bottom: 0.75rem; }
   .play-btn { padding: 0.75rem; }
   
+  /* Sesuai request: 103px untuk iPhone SE */
   .song-list-container { max-height: 103px; } 
   #song-list li { padding: 6px 10px; font-size: 0.8rem; }
 }
 
 /* =========================================
-   5. RESPONSIVE: PC / TABLET
+   RESPONSIVE: PC / TABLET
    ========================================= */
 @media (min-width: 768px) {
   .player-card {
