@@ -1,8 +1,8 @@
 /* =========================================
-   CORE & BACKGROUND
+   1. CORE & AURORA BACKGROUND (Glassmorphism)
    ========================================= */
 html {
-  background-color: #09090b; 
+  background-color: #0b0f14; 
 }
 
 body {
@@ -11,29 +11,42 @@ body {
   width: 100vw;
   min-height: 100dvh; 
   overflow: hidden; 
-  background: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
-  background-attachment: fixed; 
+  position: relative;
+  background: #0b0f14; /* Warna dasar gelap */
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
+/* Bola Warna Statis Kiri Atas (Teal) */
 body::before {
   content: "";
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  z-index: -1;
+  width: 100vw;
+  height: 100vw;
+  top: -20vh;
+  left: -30vw;
+  background: radial-gradient(circle, #2a7b9b 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  z-index: 0;
 }
 
-/* WRAPPER */
+/* Bola Warna Statis Kanan Bawah (Hijau) */
+body::after {
+  content: "";
+  position: fixed;
+  width: 100vw;
+  height: 100vw;
+  bottom: -20vh;
+  right: -30vw;
+  background: radial-gradient(circle, #4fa871 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  z-index: 0;
+}
+
+/* WRAPPER + GLOBAL BLUR LAYER */
 .main-wrapper {
   position: fixed;
   inset: 0; 
@@ -42,14 +55,21 @@ body::before {
   justify-content: center;
   padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom) 20px;
   box-sizing: border-box;
+  z-index: 1;
+  
+  /* Lapisan Kaca Utama */
+  backdrop-filter: blur(100px) saturate(150%);
+  -webkit-backdrop-filter: blur(100px) saturate(150%);
+  background: rgba(0, 0, 0, 0.2); 
 }
 
 /* =========================================
-   BASE PLAYER CARD (Default / 6.1" Standard)
+   2. PLAYER CARD DESIGN
    ========================================= */
 .player-card {
-  background: rgba(24, 24, 27, 0.6);
-  backdrop-filter: blur(25px);
+  background: rgba(24, 24, 27, 0.5); /* Semi transparan agar efek glass tembus */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   width: 100%;
   max-width: 360px;
@@ -67,7 +87,7 @@ body::before {
   border: 1px solid rgba(255,255,255,0.1);
   transition: transform 0.3s ease;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto 1.5rem auto;
 }
 
 .song-title { font-size: 1.125rem; font-weight: bold; color: white; text-align: center; }
@@ -78,7 +98,7 @@ body::before {
 .seek-bar {
   width: 100%; height: 5px;
   background: rgba(255,255,255,0.1);
-  border-radius: 10px; appearance: none; outline: none;
+  border-radius: 10px; appearance: none; outline: none; margin: 1rem 0;
 }
 .seek-bar::-webkit-slider-thumb {
   appearance: none; width: 12px; height: 12px;
@@ -107,23 +127,25 @@ body::before {
 .icon-md { width: 28px; height: 28px; }
 .icon-lg { width: 24px; height: 24px; }
 
-/* Search & Playlist */
+/* =========================================
+   3. PLAYLIST & SEARCH
+   ========================================= */
 .search-input {
   width: 100%; background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem;
   padding: 0.6rem 1rem; color: white; outline: none;
-  font-size: 16px; /* Prevent iOS zoom */
+  font-size: 16px;
 }
 .search-input:focus { border-color: #3b82f6; }
-.playlist-title { font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; }
+.playlist-title { font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 1rem; display: block; }
 
-/* Playlist Area (Default 6.1" inch) */
 .song-list-container { 
   max-height: 130px; 
   overflow-y: auto; 
   padding-right: 5px; 
   margin-top: 8px;
 }
+#song-list { padding: 0; margin: 0; }
 #song-list li {
   padding: 8px 12px; border-radius: 8px; cursor: pointer;
   font-size: 0.85rem; transition: background 0.2s; margin-bottom: 2px;
@@ -133,11 +155,11 @@ body::before {
 .active-song { background: rgba(59, 130, 246, 0.2) !important; color: #60a5fa !important; }
 
 /* =========================================
-   RESPONSIVE: HP KECIL (iPhone SE / 4.7")
+   4. RESPONSIVE: HP KECIL (iPhone SE / 4.7")
    ========================================= */
-@media (max-height: 570px) and (max-width: 500px) {
+@media (max-height: 670px) and (max-width: 500px) {
   .player-card { padding: 1rem; transform: scale(0.95); }
-  .cover-image { width: 100px; height: 100px; }
+  .cover-image { width: 100px; height: 100px; margin-bottom: 0.75rem; }
   .song-title { font-size: 1rem; }
   .controls-container { margin-bottom: 0.75rem; }
   .play-btn { padding: 0.75rem; }
@@ -148,7 +170,7 @@ body::before {
 }
 
 /* =========================================
-   RESPONSIVE: PC / TABLET
+   5. RESPONSIVE: PC / TABLET
    ========================================= */
 @media (min-width: 768px) {
   .player-card {
