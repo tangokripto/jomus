@@ -20,7 +20,7 @@ body {
        #2e2b11 80%,
        #2d1111 100%
        );
-  background-size: 400% 400%;
+  background-size: 700% 700%;
   animation: gradientShift 15s ease infinite;
   background-attachment: fixed; 
 }
