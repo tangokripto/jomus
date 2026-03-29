@@ -17,10 +17,10 @@ body {
     #1a1231 25%,   /* Midnight Purple */
     #0f2d38 50%,   /* Dark Teal */
     #1b3d29 75%,   /* Forest Green Deep */
-    #2d1111 100%   /* Black Cherry / Marun Tua */
+    #2d1111 100%   /* Black Cherry */
   );
   background-size: 700% 700%;
-  animation: gradientShift 20s ease infinite;
+  animation: gradientShift 30s ease infinite;
   background-attachment: fixed; 
 }
 
