@@ -11,7 +11,15 @@ body {
   width: 100vw;
   min-height: 100dvh; 
   overflow: hidden; 
-  background: linear-gradient(90deg, #0f2d38 0%, #1b3d29 70%, #2e2b11 100%);
+  background: linear-gradient(
+    90deg,
+     #0f2d38 0%,
+     #0a192f 20%,
+     #1a1231 40%,
+      #1b3d29 60%,
+       #2e2b11 80%,
+       #2d1111 100%
+       );
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   background-attachment: fixed; 
