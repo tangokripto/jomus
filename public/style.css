@@ -1,5 +1,6 @@
 /* =========================================
    1. CORE & AURORA BACKGROUND (Glassmorphism)
+   Optimasi 4K: Blur Ekstrem + Grain Overlay
    ========================================= */
 html {
   background-color: #0b0f14; 
@@ -12,41 +13,37 @@ body {
   min-height: 100dvh; 
   overflow: hidden; 
   position: relative;
-  background: #0b0f14; /* Warna dasar gelap */
+  background: #0b0f14; 
   font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
-/* Bola Warna Statis Kiri Atas (Teal) */
+/* Bola Warna Teal (Kiri) - Blur ditingkatkan ke 150px untuk kehalusan maksimal */
 body::before {
   content: "";
   position: fixed;
-  width: 100vw;
-  height: 100vw;
+  width: 120vw;
+  height: 120vw;
   top: -20vh;
-  left: -30vw;
-  background: radial-gradient(circle, #2a7b9b 0%, transparent 75%),
-  url(https://www.transparenttextures.com/patterns/carbon-fibre.png);
-  background-blend-mode: overlay;
+  left: -40vw;
+  background: radial-gradient(circle, #1e5b66 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.5;
+  filter: blur(150px);
+  opacity: 0.6;
   z-index: 0;
 }
 
-/* Bola Warna Statis Kanan Bawah (Hijau) */
+/* Bola Warna Hijau (Kanan) - Noise halus untuk pecah color banding */
 body::after {
   content: "";
   position: fixed;
-  width: 100vw;
-  height: 100vw;
-  bottom: -20vh;
-  right: -30vw;
-  background: radial-gradient(circle, #4fa871 0%, transparent 80%),
-  url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
-  background-blend-mode: overlay;
+  width: 120vw;
+  height: 120vw;
+  bottom: -30vh;
+  right: -40vw;
+  background: radial-gradient(circle, #1e4d3a 0%, transparent 70%);
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.4;
+  filter: blur(150px);
+  opacity: 0.5;
   z-index: 0;
 }
 
@@ -61,25 +58,25 @@ body::after {
   box-sizing: border-box;
   z-index: 1;
   
-  /* Lapisan Kaca Utama */
-  backdrop-filter: blur(120px) saturate(180%) contrast(110%);
-  -webkit-backdrop-filter: blur(120px) saturate(180%) contrast(110%);
-  background: rgba(11, 15, 20, 0.25); 
+  /* Lapisan kabut tebal untuk menyatukan aurora */
+  backdrop-filter: blur(100px) saturate(140%);
+  -webkit-backdrop-filter: blur(100px) saturate(140%);
+  background: rgba(11, 15, 20, 0.3); 
 }
 
 /* =========================================
    2. PLAYER CARD DESIGN
    ========================================= */
 .player-card {
-  background: rgba(24, 24, 27, 0.5); /* Semi transparan agar efek glass tembus */
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(24, 24, 27, 0.4); 
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   width: 100%;
   max-width: 360px;
   border-radius: 2rem;
   padding: 1.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
 }
 
 .cover-image {
@@ -156,7 +153,14 @@ body::after {
   list-style: none; color: #d4d4d8;
 }
 #song-list li:hover { background: rgba(255,255,255,0.05); }
-.active-song { background: rgba(59, 130, 246, 0.2) !important; color: #60a5fa !important; }
+
+/* FIX: Style Active Song sesuai screenshot (Garis Biru di Kiri) */
+.active-song { 
+  background: rgba(59, 130, 246, 0.15) !important; 
+  color: #60a5fa !important;
+  border-left: 3px solid #3b82f6; /* Garis vertikal biru */
+  padding-left: 9px !important; /* Kompensasi ketebalan border */
+}
 
 /* =========================================
    4. RESPONSIVE: HP KECIL (iPhone SE / 4.7")
@@ -168,7 +172,6 @@ body::after {
   .controls-container { margin-bottom: 0.75rem; }
   .play-btn { padding: 0.75rem; }
   
-  /* Sesuai request: 103px untuk iPhone SE */
   .song-list-container { max-height: 103px; } 
   #song-list li { padding: 6px 10px; font-size: 0.8rem; }
 }
