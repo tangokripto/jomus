@@ -11,7 +11,7 @@ body {
   width: 100vw;
   min-height: 100dvh; 
   overflow: hidden; 
-  background: linear-gradient(90deg, #2a7b9b 0%, #57c785 70%, #eddd53 100%);
+  background: linear-gradient(90deg, #0f2d38 0%, #1b3d29 70%, #2e2b11 100%);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   background-attachment: fixed; 
@@ -27,9 +27,9 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(70px);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.98) 100%);
+  backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(90px);
   z-index: -1;
 }
 
