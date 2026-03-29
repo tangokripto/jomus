@@ -24,10 +24,12 @@ body::before {
   height: 100vw;
   top: -20vh;
   left: -30vw;
-  background: radial-gradient(circle, #2a7b9b 0%, transparent 80%);
+  background: radial-gradient(circle, #2a7b9b 0%, transparent 75%),
+  url(https://www.transparenttextures.com/patterns/carbon-fibre.png);
+  background-blend-mode: overlay;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.6;
+  filter: blur(120px);
+  opacity: 0.5;
   z-index: 0;
 }
 
@@ -39,10 +41,12 @@ body::after {
   height: 100vw;
   bottom: -20vh;
   right: -30vw;
-  background: radial-gradient(circle, #4fa871 0%, transparent 80%);
+  background: radial-gradient(circle, #4fa871 0%, transparent 80%),
+  url("https://www.transparenttextures.com/patterns/carbon-fibre.png");
+  background-blend-mode: overlay;
   border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.5;
+  filter: blur(120px);
+  opacity: 0.4;
   z-index: 0;
 }
 
@@ -58,9 +62,9 @@ body::after {
   z-index: 1;
   
   /* Lapisan Kaca Utama */
-  backdrop-filter: blur(100px) saturate(150%);
-  -webkit-backdrop-filter: blur(100px) saturate(150%);
-  background: rgba(0, 0, 0, 0.2); 
+  backdrop-filter: blur(120px) saturate(180%) contrast(110%);
+  -webkit-backdrop-filter: blur(120px) saturate(180%) contrast(110%);
+  background: rgba(11, 15, 20, 0.25); 
 }
 
 /* =========================================
