@@ -12,16 +12,15 @@ body {
   min-height: 100dvh; 
   overflow: hidden; 
   background: linear-gradient(
-    90deg,
-     #0f2d38 0%,
-     #0a192f 20%,
-     #1a1231 40%,
-      #1b3d29 60%,
-       #2e2b11 80%,
-       #2d1111 100%
-       );
+    135deg, 
+    #0a192f 0%,    /* Deep Navy */
+    #1a1231 25%,   /* Midnight Purple */
+    #0f2d38 50%,   /* Dark Teal */
+    #1b3d29 75%,   /* Forest Green Deep */
+    #2d1111 100%   /* Black Cherry / Marun Tua */
+  );
   background-size: 700% 700%;
-  animation: gradientShift 15s ease infinite;
+  animation: gradientShift 20s ease infinite;
   background-attachment: fixed; 
 }
 
