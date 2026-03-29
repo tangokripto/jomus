@@ -24,7 +24,7 @@ body::before {
   height: 100vw;
   top: -20vh;
   left: -30vw;
-  background: radial-gradient(circle, #2a7b9b 0%, transparent 70%);
+  background: radial-gradient(circle, #2a7b9b 0%, transparent 80%);
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.6;
@@ -39,7 +39,7 @@ body::after {
   height: 100vw;
   bottom: -20vh;
   right: -30vw;
-  background: radial-gradient(circle, #4fa871 0%, transparent 70%);
+  background: radial-gradient(circle, #4fa871 0%, transparent 80%);
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.5;
