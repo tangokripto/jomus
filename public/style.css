@@ -1,8 +1,8 @@
 /* =========================================
-   CORE & BACKGROUND
+   1. CORE & DYNAMIC BACKGROUND (Cerah, Gradien)
    ========================================= */
 html {
-  background-color: #050507; 
+  background-color: #09090b; 
 }
 
 body {
@@ -11,17 +11,18 @@ body {
   width: 100vw;
   min-height: 100dvh; 
   overflow: hidden; 
+  position: relative;
+  /* KEMBALI KE GRADIENT DINAMIS SEBELUM PENIMPAAN */
   background: linear-gradient(
-    135deg, 
-    #0a192f 0%,    /* Deep Navy */
-    #1a1231 25%,   /* Midnight Purple */
-    #0f2d38 50%,   /* Dark Teal */
-    #1b3d29 75%,   /* Forest Green Deep */
-    #2d1111 100%   /* Black Cherry */
+    90deg, 
+    #2a7b9b 0%,    /* Teal */
+    #57c785 70%,   /* Hijau */
+    #eddd53 100%   /* Kuning */
   );
-  background-size: 700% 700%;
-  animation: gradientShift 30s ease infinite;
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
   background-attachment: fixed; 
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 @keyframes gradientShift {
@@ -30,17 +31,21 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+/* Vignette & Blur Layer (Cerah) */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.98) 100%);
-  backdrop-filter: blur(80px);
-  -webkit-backdrop-filter: blur(90px);
+  /* Radial gradient cerah */
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.7) 100%);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   z-index: -1;
 }
 
-/* WRAPPER */
+/* body::after (Bola warna statis gelap) sudah dihapus */
+
+/* WRAPPER (Fluid & Safe Area Aware) */
 .main-wrapper {
   position: fixed;
   inset: 0; 
@@ -49,43 +54,61 @@ body::before {
   justify-content: center;
   padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom) 20px;
   box-sizing: border-box;
+  z-index: 1;
 }
 
 /* =========================================
-   BASE PLAYER CARD (Default / 6.1" Standard)
+   2. FLUID PLAYER CARD (Fluid & Auto-Detect Screen)
    ========================================= */
 .player-card {
   background: rgba(24, 24, 27, 0.6);
   backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 100%;
-  max-width: 360px;
-  border-radius: 2rem;
-  padding: 1.5rem;
+  
+  /* Ukuran mengalir (Fluid Design) */
+  width: clamp(300px, 92vw, 500px); 
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  
+  border-radius: 2.5rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
 }
 
 .cover-image {
-  width: 160px;
-  height: 160px;
+  /* Gambar menyesuaikan layar otomatis (Fluid Design) */
+  width: clamp(110px, 35vw, 250px);
+  height: clamp(110px, 35vw, 250px);
   object-fit: cover;
-  border-radius: 1rem;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
   border: 1px solid rgba(255,255,255,0.1);
-  transition: transform 0.3s ease;
   display: block;
-  margin: 0 auto;
+  margin: 0 auto clamp(1rem, 3vw, 1.5rem) auto;
 }
 
-.song-title { font-size: 1.125rem; font-weight: bold; color: white; text-align: center; }
-.song-meta-text { font-size: 0.7rem; color: #a1a1aa; text-align: center; margin-top: 4px; }
-.duration-text { font-size: 0.65rem; color: #71717a; }
+.song-title { 
+  font-size: clamp(1.1rem, 4vw, 1.6rem); 
+  font-weight: bold; 
+  color: white; 
+  text-align: center; 
+}
 
-/* Seek Bar */
+.song-meta-text { 
+  font-size: clamp(0.7rem, 2vw, 0.85rem); 
+  color: #a1a1aa; 
+  text-align: center; 
+  margin-top: 4px; 
+}
+
+/* =========================================
+   Continuation of the script (Controls, Playlist, Responsive)
+   ========================================= */
+/* ... sisa kode Controls, Seek Bar, Playlist tetap sama ... */
 .seek-bar {
   width: 100%; height: 5px;
   background: rgba(255,255,255,0.1);
-  border-radius: 10px; appearance: none; outline: none;
+  border-radius: 10px; appearance: none; outline: none; margin: 1rem 0;
 }
 .seek-bar::-webkit-slider-thumb {
   appearance: none; width: 12px; height: 12px;
@@ -93,7 +116,6 @@ body::before {
   box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
 }
 
-/* Controls */
 .controls-container {
   display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;
 }
@@ -119,43 +141,68 @@ body::before {
   width: 100%; background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem;
   padding: 0.6rem 1rem; color: white; outline: none;
-  font-size: 16px; /* Prevent iOS zoom */
+  font-size: 16px;
 }
 .search-input:focus { border-color: #3b82f6; }
-.playlist-title { font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; }
+.playlist-title { font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 1rem; display: block; }
 
-/* Playlist Area (Default 6.1" inch) */
 .song-list-container { 
   max-height: 130px; 
   overflow-y: auto; 
   padding-right: 5px; 
   margin-top: 8px;
 }
+#song-list { padding: 0; margin: 0; }
 #song-list li {
   padding: 8px 12px; border-radius: 8px; cursor: pointer;
   font-size: 0.85rem; transition: background 0.2s; margin-bottom: 2px;
   list-style: none; color: #d4d4d8;
 }
 #song-list li:hover { background: rgba(255,255,255,0.05); }
-.active-song { background: rgba(59, 130, 246, 0.2) !important; color: #60a5fa !important; }
+
+/* Garis Biru Vertikal (Dihapus sesuai Screenshot 1) */
+.active-song { 
+  background: rgba(59, 130, 246, 0.2) !important; 
+  color: #60a5fa !important;
+}
 
 /* =========================================
-   RESPONSIVE: HP KECIL (iPhone SE / 4.7")
+   3. RESPONSIVE: HP KECIL (iPhone SE / 4.7")
+   Fix Pemotongan Mobile Safe Area (Screenshot 3)
    ========================================= */
 @media (max-height: 570px) and (max-width: 500px) {
-  .player-card { padding: 1rem; transform: scale(0.95); }
-  .cover-image { width: 100px; height: 100px; }
-  .song-title { font-size: 1rem; }
+  /* Kunci tinggi total kartu agar muat dalam Safe Area SE */
+  .player-card { 
+    padding: 1rem; 
+    transform: scale(0.95); 
+  }
+  
+  .cover-image { 
+    /* Lower image size range and clamping */
+    width: clamp(100px, 35vw, 200px); 
+    height: clamp(100px, 35vw, 200px); 
+    margin-bottom: 0.75rem; 
+  }
+  
+  .song-title { 
+    /* Lower typography clamp ranges */
+    font-size: clamp(0.95rem, 4vw, 1.4rem); 
+  }
+  
+  .song-meta-text { 
+    font-size: clamp(0.65rem, 2vw, 0.8rem); 
+  }
+  
   .controls-container { margin-bottom: 0.75rem; }
   .play-btn { padding: 0.75rem; }
   
-  /* Sesuai request: 103px untuk iPhone SE */
+  /* Sesuai request: 103px untuk iPhone SE (Tetap) */
   .song-list-container { max-height: 103px; } 
   #song-list li { padding: 6px 10px; font-size: 0.8rem; }
 }
 
 /* =========================================
-   RESPONSIVE: PC / TABLET
+   4. RESPONSIVE: PC / TABLET
    ========================================= */
 @media (min-width: 768px) {
   .player-card {
