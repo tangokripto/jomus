@@ -10,18 +10,12 @@ body {
   padding: 0;
   width: 100vw;
   min-height: 100dvh; 
-  overflow: hidden; 
-  background: linear-gradient(
-    135deg, 
-    #0a192f 0%,    /* Deep Navy */
-    #1a1231 25%,   /* Midnight Purple */
-    #0f2d38 50%,   /* Dark Teal */
-    #1b3d29 75%,   /* Forest Green Deep */
-    #2d1111 100%   /* Black Cherry */
-  );
-  background-size: 700% 700%;
-  animation: gradientShift 30s ease infinite;
-  background-attachment: fixed; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Background Gradient Biru-Teal ala Contoh1 */
+  background: radial-gradient(circle at top left, #004e92, #000428);
+  background-attachment: fixed;
 }
 
 @keyframes gradientShift {
