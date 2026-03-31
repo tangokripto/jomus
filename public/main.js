@@ -256,11 +256,48 @@ function changeVideo() {
 
 setInterval(changeVideo, 180000);
 
-// Force Background Video Play
-if (videoElement) {
-    videoElement.play().catch(() => {
-        document.addEventListener('click', () => videoElement.play(), { once: true });
-    });
+// Force Background Video Play (iOS Optimization)
+function forcePlayVideo() {
+    if (videoElement) {
+        videoElement.play().catch(() => {
+            // Jika gagal autoplay, tunggu interaksi pertama user
+            const playOnGesture = () => {
+                videoElement.play();
+                document.removeEventListener('click', playOnGesture);
+                document.removeEventListener('touchstart', playOnGesture);
+            };
+            document.addEventListener('click', playOnGesture);
+            document.addEventListener('touchstart', playOnGesture);
+        });
+    }
+}
+
+// Jalankan saat load
+forcePlayVideo();
+
+// Perbaikan fungsi changeVideo agar lebih stabil di iOS
+function changeVideo() {
+    const vContainer = document.getElementById('video-container');
+    const vSource = document.getElementById('video-source');
+    const vElement = document.getElementById('bg-video');
+
+    if (!vContainer || !vSource || !vElement) return;
+
+    vContainer.style.opacity = '0';
+
+    setTimeout(() => {
+        currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
+        vSource.src = videoList[currentVideoIndex];
+        
+        vElement.load();
+        
+        // Gunakan 'canplay' daripada 'onloadeddata' untuk mobile
+        vElement.addEventListener('canplay', function startPlay() {
+            vElement.play();
+            vContainer.style.opacity = '1';
+            vElement.removeEventListener('canplay', startPlay);
+        }, { once: true });
+    }, 1500); 
 }
 
 /* =========================================
