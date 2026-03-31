@@ -83,7 +83,7 @@ body::before {
    ========================================= */
 .player-card {
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(23px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-top: 1px solid rgba(255, 255, 255, 0.4);
   border-left: 1px solid rgba(255, 255, 255, 0.3);
