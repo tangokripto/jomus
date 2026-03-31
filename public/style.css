@@ -55,18 +55,22 @@ body::before {
    BASE PLAYER CARD (Default / 6.1" Standard)
    ========================================= */
 .player-card {
-  /* Kunci utama Liquid Glass: Transparan putih + border pantulan */
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(35px);
-  -webkit-backdrop-filter: blur(35px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-top: 1px solid rgba(255, 255, 255, 0.4); /* Pantulan cahaya dari atas */
-  border-left: 1px solid rgba(255, 255, 255, 0.3); /* Pantulan cahaya dari kiri */
-  width: 100%;
-  max-width: 360px;
-  border-radius: 2rem;
-  padding: 1.5rem;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2), inset 0 0 15px rgba(255, 255, 255, 0.05);
+  /* Kurangi alpha (0.08) biar makin bening/clear */
+  background: rgba(255, 255, 255, 0.08); 
+  /* Blur tinggi buat efek 'Liquid' */
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  
+  /* Border tajam biar bentuk card tegas (Mirip screenshot 2) */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid rgba(255, 255, 255, 0.4);
+  
+  width: 90%;
+  max-width: 380px;
+  border-radius: 2.5rem;
+  padding: 2rem;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
 }
 
 .cover-image {
@@ -81,8 +85,22 @@ body::before {
   margin: 0 auto;
 }
 
-.song-title { font-size: 1.125rem; font-weight: bold; color: white; text-align: center; }
-.song-meta-text { font-size: 0.7rem; color: #a1a1aa; text-align: center; margin-top: 4px; }
+.song-title { 
+  font-size: 1.4rem; 
+  font-weight: 800; 
+  color: #ffffff; 
+  text-align: center;
+  /* Kunci agar teks terbaca di background terang/blur */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
+  margin-bottom: 5px;
+}
+.song-meta-text { 
+  font-size: 0.85rem; 
+  color: rgba(255, 255, 255, 0.9); /* Naikin opacity teks meta */
+  text-align: center; 
+  font-weight: 500;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+}
 .duration-text { font-size: 0.65rem; color: #71717a; }
 
 /* Seek Bar */
@@ -125,15 +143,25 @@ body::before {
 
 /* Search & Playlist */
 .search-input {
-  width: 100%; background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0.75rem;
-  padding: 0.6rem 1rem; color: white; outline: none;
-  font-size: 16px; 
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2); /* Gelapin dikit input biar kontras */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  padding: 12px;
+  color: white;
+  margin-bottom: 20px;
 }
 .search-input::placeholder { color: rgba(255,255,255,0.6); }
 .search-input:focus { border-color: rgba(255, 255, 255, 0.6); background: rgba(255, 255, 255, 0.12); }
 
-.playlist-title { font-size: 0.65rem; color: rgba(255, 255, 255, 0.6); text-transform: uppercase; letter-spacing: 0.1em; }
+.playlist-title {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
 
 /* Playlist Area (Default 6.1" inch) */
 .song-list-container { 
@@ -143,12 +171,26 @@ body::before {
   margin-top: 8px;
 }
 #song-list li {
-  padding: 8px 12px; border-radius: 8px; cursor: pointer;
-  font-size: 0.85rem; transition: all 0.2s; margin-bottom: 2px;
-  list-style: none; color: rgba(255, 255, 255, 0.85);
+  padding: 12px 15px;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  list-style: none;
+  margin-bottom: 5px;
+  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.03); /* Dasar list tipis */
 }
-#song-list li:hover { background: rgba(255, 255, 255, 0.1); }
-.active-song { background: rgba(255, 255, 255, 0.2) !important; color: #ffffff !important; font-weight: 600; }
+#song-list li:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.active-song { 
+  background: rgba(255, 255, 255, 0.15) !important; 
+  border-left: 4px solid #ffffff; /* Tambah aksen garis biar tegas */
+  color: #ffffff !important; 
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+}
 
 /* =========================================
    RESPONSIVE: HP KECIL (iPhone SE / 4.7")
