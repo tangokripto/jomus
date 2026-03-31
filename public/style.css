@@ -74,12 +74,9 @@ body::before {
 }
 
 .song-title { 
-  font-size: 1.3rem; 
-  font-weight: 800; 
+  font-size: 1.2rem; 
+  font-weight: bold; 
   color: #ffffff; 
-  line-height: 1.2;
-  margin-bottom: 4px;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   text-align: center; 
 }
 
@@ -230,7 +227,6 @@ body::before {
   .song-title { font-size: 1rem; }
   .controls-container { margin-bottom: 0.75rem; }
   .play-btn { padding: 0.75rem; }
-  
   .song-list-container { max-height: 103px; } 
   #song-list li { padding: 6px 10px; font-size: 0.8rem; }
 }
