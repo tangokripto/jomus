@@ -37,7 +37,6 @@ let loadedCount = 0;
 
 const videoList = [
   'https://f003.backblazeb2.com/file/music-pribadi/evelyn.3840x2160.mp4',
-  'https://f003.backblazeb2.com/file/music-pribadi/asa-mitaka-chainsaw-man-moewalls-com.mp4',
   'https://f003.backblazeb2.com/file/music-pribadi/hunt-showdown-death-roots.3840x2160.mp4',
   'https://f003.backblazeb2.com/file/music-pribadi/hunt-showdown-skull-guns.3840x2160.mp4',
   'https://f003.backblazeb2.com/file/music-pribadi/the-shadow-fantasy-king-moewalls-com.mp4'
@@ -256,7 +255,7 @@ function changeVideo() {
         
         vElement.load();
         
-        // 2. Fade In (Gunakan 'canplay' agar stabil di mobile)
+        // 2. Fade In
         vElement.addEventListener('canplay', function startPlay() {
             vElement.play();
             vContainer.style.opacity = '1';
@@ -265,7 +264,7 @@ function changeVideo() {
     }, 1500); 
 }
 
-setInterval(changeVideo, 60000);
+setInterval(changeVideo, 120000);
 
 // Force Background Video Play (iOS Optimization)
 function forcePlayVideo() {
@@ -283,7 +282,6 @@ function forcePlayVideo() {
     }
 }
 
-// Jalankan saat load
 forcePlayVideo();
 
 /* =========================================

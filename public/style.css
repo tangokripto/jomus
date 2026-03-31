@@ -62,7 +62,7 @@ body::before {
   opacity: 0.1;
   backdrop-filter: blur(15px); 
   -webkit-backdrop-filter: blur(15px);
-  z-index: 2; /* Taruh di atas video container (-3) tapi di bawah konten (0) */
+  z-index: 2; 
   pointer-events: none;
 }
 
@@ -209,7 +209,6 @@ body::before {
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* .search-input:focus { border-color: ; } */
 .playlist-title { 
   font-size: 0.8rem; 
   color: #ffffff !important;
