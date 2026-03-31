@@ -13,10 +13,11 @@ body {
   overflow: hidden; 
   background: linear-gradient(
     135deg, 
-    #001f3f 0%,    /* Dark Blue */
-    #005b8f 30%,   /* Medium Blue */
-    #00a8cc 70%,   /* Cyan/Teal */
-    #003b59 100%   /* Deep Ocean Blue */
+    #0a192f 0%,    /* Deep Navy */
+    #1a1231 25%,   /* Midnight Purple */
+    #0f2d38 50%,   /* Dark Teal */
+    #1b3d29 75%,   /* Forest Green Deep */
+    #2d1111 100%   /* Black Cherry */
   );
   background-size: 700% 700%;
   animation: gradientShift 30s ease infinite;
