@@ -1,5 +1,5 @@
 /* =========================================
-   1. CORE & GPU-SAFE BACKGROUND
+   CORE & BACKGROUND
    ========================================= */
 html {
   background-color: #050507; 
@@ -9,23 +9,8 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  /* dvh: Deteksi tinggi layar asli termasuk bar browser */
   min-height: 100dvh; 
   overflow: hidden; 
-  position: relative;
-  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Animasi Background 5 Warna (GPU Optimized) */
-body::after {
-  content: "";
-  position: fixed;
-  inset: -50%; 
-  width: 200%;
-  height: 200%;
   background: linear-gradient(
     135deg, 
     #0a192f 0%,    /* Deep Navy */
@@ -34,124 +19,161 @@ body::after {
     #1b3d29 75%,   /* Forest Green Deep */
     #2d1111 100%   /* Black Cherry */
   );
-  background-size: 100% 100%;
-  animation: auroraRotate 35s linear infinite;
-  z-index: -2;
-  will-change: transform;
+  background-size: 700% 700%;
+  animation: gradientShift 30s ease infinite;
+  background-attachment: fixed; 
 }
 
-@keyframes auroraRotate {
-  from { transform: rotate(0deg) scale(1); }
-  to { transform: rotate(360deg) scale(1.1); }
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-/* Vignette Gelap (Screenshot 1 Style) */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.95) 100%);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.98) 100%);
   backdrop-filter: blur(80px);
-  -webkit-backdrop-filter: blur(80px);
+  -webkit-backdrop-filter: blur(90px);
   z-index: -1;
 }
 
+/* WRAPPER */
+.main-wrapper {
+  position: fixed;
+  inset: 0; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom) 20px;
+  box-sizing: border-box;
+}
+
 /* =========================================
-   2. AUTO-DETECT PLAYER CARD
+   BASE PLAYER CARD (Default / 6.1" Standard)
    ========================================= */
 .player-card {
-  background: rgba(24, 24, 27, 0.5);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 2.5rem;
-  
-  /* FLUID WIDTH */
-  width: clamp(300px, 92vw, 480px); 
-  
-  /* ANTI-CUTOFF: Batas tinggi kartu maksimal 85% dari layar yang tersedia */
-  max-height: 85dvh;
-  padding: clamp(1.2rem, 4vh, 2.2rem);
-  
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  background: rgba(24, 24, 27, 0.6);
+  backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  max-width: 360px;
+  border-radius: 2rem;
+  padding: 1.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .cover-image {
-  /* Ukuran gambar ikut mengalah jika layar pendek */
-  width: clamp(100px, 28vh, 240px);
-  height: clamp(100px, 28vh, 240px);
-  aspect-ratio: 1/1;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 1.5rem;
-  margin: 0 auto 1.2rem auto;
-  flex-shrink: 1; /* Biar gambar bisa mengecil di iPhone SE */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   border: 1px solid rgba(255,255,255,0.1);
+  transition: transform 0.3s ease;
+  display: block;
+  margin: 0 auto;
 }
 
-.song-title { 
-  font-size: clamp(1.1rem, 4vw, 1.5rem); 
-  font-weight: bold; color: white; text-align: center; 
-}
+.song-title { font-size: 1.125rem; font-weight: bold; color: white; text-align: center; }
+.song-meta-text { font-size: 0.7rem; color: #a1a1aa; text-align: center; margin-top: 4px; }
+.duration-text { font-size: 0.65rem; color: #71717a; }
 
-.song-meta-text { 
-  font-size: clamp(0.7rem, 2vw, 0.85rem); 
-  color: #a1a1aa; text-align: center; margin-top: 4px; 
-}
-
-/* =========================================
-   3. CONTROLS & PLAYLIST (No Blue Line)
-   ========================================= */
+/* Seek Bar */
 .seek-bar {
   width: 100%; height: 5px;
   background: rgba(255,255,255,0.1);
-  border-radius: 10px; appearance: none; outline: none; margin: 1.2rem 0;
+  border-radius: 10px; appearance: none; outline: none;
+}
+.seek-bar::-webkit-slider-thumb {
+  appearance: none; width: 12px; height: 12px;
+  background: #3b82f6; border-radius: 50%;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
 }
 
+/* Controls */
 .controls-container {
-  display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;
 }
+.controls-container button {
+  color: #a1a1aa; transition: all 0.2s ease; background: none; border: none; cursor: pointer;
+}
+.controls-container button:hover { color: white; transform: scale(1.1); }
+.controls-container button:active { transform: scale(0.9); }
 
 .play-btn {
   background: #2563eb !important; color: white !important;
-  padding: 0.9rem; border-radius: 50%;
+  padding: 1rem; border-radius: 50%;
   box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
 }
 
-.song-list-container { 
-  /* Sisa ruang digunakan untuk playlist */
-  flex-grow: 1;
-  max-height: clamp(100px, 22vh, 250px); 
-  overflow-y: auto; 
-  margin-top: 10px;
-}
+/* Icon sizes */
+.icon-sm { width: 18px; height: 18px; }
+.icon-md { width: 28px; height: 28px; }
+.icon-lg { width: 24px; height: 24px; }
 
+/* Search & Playlist */
+.search-input {
+  width: 100%; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem;
+  padding: 0.6rem 1rem; color: white; outline: none;
+  font-size: 16px; /* Prevent iOS zoom */
+}
+.search-input:focus { border-color: #3b82f6; }
+.playlist-title { font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* Playlist Area (Default 6.1" inch) */
+.song-list-container { 
+  max-height: 130px; 
+  overflow-y: auto; 
+  padding-right: 5px; 
+  margin-top: 8px;
+}
 #song-list li {
-  padding: 10px 14px; border-radius: 10px; cursor: pointer;
-  font-size: clamp(0.8rem, 2vw, 0.9rem); 
-  transition: all 0.2s; margin-bottom: 4px;
+  padding: 8px 12px; border-radius: 8px; cursor: pointer;
+  font-size: 0.85rem; transition: background 0.2s; margin-bottom: 2px;
   list-style: none; color: #d4d4d8;
 }
-
-/* REVISI: Lagu Aktif Tanpa Garis Biru Samping (Sesuai Request) */
-.active-song { 
-  background: rgba(59, 130, 246, 0.2) !important; 
-  color: #60a5fa !important;
-  border-left: none !important; /* Pastikan garis hilang */
-}
-
-/* Scrollbar halus */
-.song-list-container::-webkit-scrollbar { width: 4px; }
-.song-list-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 10px; }
+#song-list li:hover { background: rgba(255,255,255,0.05); }
+.active-song { background: rgba(59, 130, 246, 0.2) !important; color: #60a5fa !important; }
 
 /* =========================================
-   4. FIX UNTUK LAYAR SANGAT PENDEK
+   RESPONSIVE: HP KECIL (iPhone SE / 4.7")
    ========================================= */
-@media (max-height: 600px) {
-  .player-card { padding: 1rem; border-radius: 1.5rem; }
-  .cover-image { margin-bottom: 0.5rem; }
-  .playlist-title { display: none; } /* Biar makin lega di HP kecil */
+@media (max-height: 570px) and (max-width: 500px) {
+  .player-card { padding: 1rem; transform: scale(0.95); }
+  .cover-image { width: 100px; height: 100px; }
+  .song-title { font-size: 1rem; }
+  .controls-container { margin-bottom: 0.75rem; }
+  .play-btn { padding: 0.75rem; }
+  
+  /* Sesuai request: 103px untuk iPhone SE */
+  .song-list-container { max-height: 103px; } 
+  #song-list li { padding: 6px 10px; font-size: 0.8rem; }
+}
+
+/* =========================================
+   RESPONSIVE: PC / TABLET
+   ========================================= */
+@media (min-width: 768px) {
+  .player-card {
+    max-width: 500px; 
+    padding: 2.5rem;
+  }
+  .cover-image { width: 250px; height: 250px; }
+  .song-title { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .song-meta-text { font-size: 0.85rem; }
+  .duration-text { font-size: 0.8rem; }
+  
+  .icon-sm { width: 22px; height: 22px; }
+  .icon-md { width: 34px; height: 34px; }
+  .icon-lg { width: 32px; height: 32px; }
+  
+  .play-btn { padding: 1.25rem; }
+  .search-input { padding: 0.75rem 1rem; }
+  .playlist-title { font-size: 0.8rem; margin-bottom: 10px; }
+  .song-list-container { max-height: 300px; }
+  #song-list li { font-size: 1rem; padding: 10px 14px; }
 }
