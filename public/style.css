@@ -9,19 +9,20 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  min-height: 100dvh; 
-  overflow: hidden; 
-  background: linear-gradient(
-    135deg, 
-    #0a192f 0%,    /* Deep Navy */
-    #1a1231 25%,   /* Midnight Purple */
-    #0f2d38 50%,   /* Dark Teal */
-    #1b3d29 75%,   /* Forest Green Deep */
-    #2d1111 100%   /* Black Cherry */
-  );
-  background-size: 700% 700%;
-  animation: gradientShift 30s ease infinite;
-  background-attachment: fixed; 
+  min-height: 100dvh;
+  overflow: hidden;
+
+  /* 1. Warna cadangan saat loading */
+  background-color: #0a192f; 
+
+  /* 2. Link Gambar 4K kamu */
+  background-image: url('https://f003.backblazeb2.com/file/music-pribadi/liquid-art-paint.webp');
+
+  /* 3. Setting biar pas di layar */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 @keyframes gradientShift {
@@ -34,9 +35,9 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.98) 100%);
-  backdrop-filter: blur(80px);
-  -webkit-backdrop-filter: blur(90px);
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.98) 100%);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   z-index: -1;
 }
 
@@ -56,13 +57,14 @@ body::before {
    ========================================= */
 .player-card {
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(35px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
   width: 100%;
   max-width: 360px;
   border-radius: 2rem;
   padding: 1.5rem;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
 
 .cover-image {
@@ -86,12 +88,10 @@ body::before {
   width: 100%; height: 6px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 10px; appearance: none; outline: none;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
 }
 .seek-bar::-webkit-slider-thumb {
   appearance: none; width: 14px; height: 14px;
-  background: #ffffff; border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  background: #e4e4e7; border-radius: 50%;
 }
 
 /* Controls */
@@ -99,17 +99,15 @@ body::before {
   display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;
 }
 .controls-container button {
-  color: #a1a1aa; transition: all 0.2s ease; background: none; border: none; cursor: pointer;
+  color: #e4e4e7; transition: all 0.2s ease; background: none; border: none; cursor: pointer;
 }
-.controls-container button:hover { color: white; transform: scale(1.1); }
+.controls-container button:hover { color: #e4e4e7; transform: scale(1.1); }
 .controls-container button:active { transform: scale(0.9); }
 
 .play-btn {
-  background: rgba(255, 255, 255, 0.15) !important; 
-  color: white !important;
+  color: #e4e4e7 !important;
   padding: 1.1rem; border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(255,255,255,0.1);
   backdrop-filter: blur(10px);
 }
 
@@ -121,12 +119,12 @@ body::before {
 /* Search & Playlist */
 .search-input {
   width: 100%; background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1); border-radius: 0.75rem;
+  border: 1px solid rgba(255,255,255,0.05); border-radius: 0.75rem;
   padding: 0.6rem 1rem; color: white; outline: none;
   font-size: 16px; /* Prevent iOS zoom */
 }
 .search-input:focus { border-color: #3b82f6; }
-.playlist-title { font-size: 0.65rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; }
+.playlist-title { font-size: 0.65rem; color: #e4e4e7; text-transform: uppercase; letter-spacing: 0.1em; }
 
 /* Playlist Area (Default 6.1" inch) */
 .song-list-container { 
