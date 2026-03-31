@@ -148,7 +148,7 @@ function loadSong(index, resume = false) {
   if (!song) return;
 
   nowPlaying.textContent = "⏳ Loading ...";
-  document.title = "Loading...";
+  document.title = "Music Pleyah.";
 
   audio.pause();
   audio.removeAttribute("src");
@@ -170,13 +170,12 @@ function loadSong(index, resume = false) {
     nowPlaying.textContent = song.title;
     const fullTitle = `${song.title} - ${song.artist || "Unknown"}`;
     
-
     updateNowPlayingUI(song);
     document.getElementById("song-artist").textContent = song.artist || "Unknown";
     document.getElementById("song-album").textContent = song.album || "Unknown";
-    document.getElementById("song-genre").textContent = song.genre || "Genre?";
+    document.getElementById("song-genre").textContent = song.genre || "Unknown";
     highlightActive(true);
-    /* scrollToCurrentSong(); */ // Auto-scroll tiap ganti lagu
+    /* scrollToCurrentSong(); */
   });
 }
 
@@ -307,8 +306,8 @@ function startScrollingTitle(text) {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
-      .then(() => console.log('✅ Service Worker registered'))
-      .catch(err => console.error('❌ SW failed:', err));
+      .then(() => console.log('[OK] Service Worker registered'))
+      .catch(err => console.error('[Err] SW failed:', err));
   });
 }
 
@@ -347,21 +346,21 @@ btnPrev.addEventListener("click", playPrev);
 isShuffled = localStorage.getItem("isShuffled") === "true";
 isRepeating = localStorage.getItem("isRepeating") === "true";
 
-btnShuffle.style.color = isShuffled ? "#3b82f6" : "#a1a1aa";
-btnRepeat.style.color = isRepeating ? "#3b82f6" : "#a1a1aa";
+if (isShuffled) btnShuffle.classList.add("active-control");
+if (isRepeating) btnRepeat.classList.add("active-control");
 
 btnShuffle.addEventListener("click", () => {
   isShuffled = !isShuffled;
   localStorage.setItem("isShuffled", isShuffled);
-  btnShuffle.style.color = isShuffled ? "#3b82f6" : "#a1a1aa";
-  showToast(isShuffled ? "🔀 Shuffle Enabled" : "➡️ Sequential Play");
+  btnShuffle.classList.toggle("active-control", isShuffled);
+  showToast(isShuffled ? "Shuffle Enabled" : "Sequential Play");
 });
 
 btnRepeat.addEventListener("click", () => {
   isRepeating = !isRepeating;
   localStorage.setItem("isRepeating", isRepeating);
-  btnRepeat.style.color = isRepeating ? "#3b82f6" : "#a1a1aa";
-  showToast(isRepeating ? "🔂 Repeat Mode" : "➡️ Play All");
+  btnRepeat.classList.toggle("active-control", isRepeating);
+  showToast(isRepeating ? "Repeat Mode" : "Play All");
 });
 
 audio.addEventListener("ended", () => {
@@ -374,10 +373,16 @@ audio.addEventListener("ended", () => {
 });
 
 audio.addEventListener("timeupdate", () => {
-  seek.value = (audio.currentTime / audio.duration) * 100 || 0;
+  const progress = (audio.currentTime / audio.duration) * 100 || 0;
+  seek.value = progress;
+  
+  // TAMBAHKAN BARIS INI: Update warna bar yang sudah lewat
+  seek.style.backgroundSize = progress + '% 100%';
+
   const current = formatTime(audio.currentTime);
-  const total = formatTime(audio.duration);
+  const total = formatTime(audio.duration || 0);
   durationText.textContent = `${current} / ${total}`;
+  
   if (!audio.seeking && !audio.paused) {
     localStorage.setItem("lastTime", audio.currentTime.toString());
   }
@@ -385,4 +390,6 @@ audio.addEventListener("timeupdate", () => {
 
 seek.addEventListener("input", () => {
   audio.currentTime = (seek.value / 100) * audio.duration;
+
+  seek.style.backgroundSize = seek.value + '% 100%';
 });

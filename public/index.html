@@ -37,7 +37,6 @@
       font-weight: 600;
       z-index: 9999;
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      
       display: flex;
       align-items: center;
       gap: 8px;
@@ -60,12 +59,11 @@
 
       <div class="text-center mb-4">
         <h2 id="now-playing" class="font-bold truncate px-2 text-white song-title">Choose song</h2>
-        <div id="song-meta" class="text-zinc-400 mt-1 sm:mt-2 space-y-0.5 song-meta-text">
-          <p>Artist : <span id="song-artist" class="text-zinc-300">Unknown</span></p>
-          <p>Album : <span id="song-album" class="text-zinc-300">Unknown</span></p>
-          <p>Genre : <span id="song-genre" class="text-blue-400 font-medium">Unknown</span></p>
-        </div>
-      </div>
+          <div id="song-meta" class="mt-2 sm:mt-3 space-y-1 song-meta-text">
+              <p class="text-[0.85rem] sm:text-[0.9rem]">Artist : <span id="song-artist" class="font-semibold">Unknown</span></p>
+              <p class="text-[0.85rem] sm:text-[0.9rem]">Album : <span id="song-album" class="font-semibold">Unknown</span></p>
+              <p class="text-[0.85rem] sm:text-[0.9rem]">Genre : <span id="song-genre" class="font-semibold">Unknown</span></p>
+          </div>
 
       <div class="mb-4 sm:mb-5">
         <input id="seek" type="range" value="0" min="0" max="100" step="0.1" class="seek-bar" />

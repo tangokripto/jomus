@@ -16,7 +16,7 @@ body {
   background-color: #0a192f; 
 
   /* 2. Link Gambar 4K kamu */
-  background-image: url('https://f003.backblazeb2.com/file/music-pribadi/liquid-art-paint.webp');
+  background-image: url('https://f003.backblazeb2.com/file/music-pribadi/tyler-lastovich-hM08wZJBlK4-unsplash.webp');
 
   /* 3. Setting biar pas di layar */
   background-size: cover;
@@ -57,7 +57,7 @@ body::before {
    ========================================= */
 .player-card {
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(25px);
+  backdrop-filter: blur(40px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-top: 1px solid rgba(255, 255, 255, 0.4);
   border-left: 1px solid rgba(255, 255, 255, 0.3);
@@ -79,52 +79,117 @@ body::before {
   margin: 0 auto;
 }
 
-.song-title { font-size: 1.125rem; font-weight: bold; color: white; text-align: center; }
-.song-meta-text { font-size: 0.7rem; color: #a1a1aa; text-align: center; margin-top: 4px; }
-.duration-text { font-size: 0.65rem; color: #71717a; }
+.song-title { 
+  font-size: 1.125rem; 
+  font-weight: bold; 
+  color: #ffffff; 
+  text-align: center; 
+}
+
+.song-meta-text p,
+.song-meta-text span {
+    color: #ffffff !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5) !important;
+    letter-spacing: 0.02em;
+}
+
+.song-meta-text { 
+    font-size: 0.85rem; 
+    color: #ffffff !important; /* Paksa Putih */
+    opacity: 1 !important;     /* Hilangkan efek pudar */
+    text-align: center; 
+    margin-top: 10px; 
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8); /* Shadow lebih gelap agar teks putih menonjol */
+}
+.duration-text { 
+    font-size: 0.7rem; 
+    color: #ffffff !important; 
+    opacity: 1 !important;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
 
 /* Seek Bar */
 .seek-bar {
   width: 100%; height: 6px;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 10px; appearance: none; outline: none;
+  border-radius: 10px; 
+  appearance: none; 
+  outline: none;
+
+  background-image: linear-gradient(#3b82f6, #3b82f6);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
 }
 .seek-bar::-webkit-slider-thumb {
-  appearance: none; width: 14px; height: 14px;
-  background: #e4e4e7; border-radius: 50%;
+  appearance: none; 
+  width: 14px; 
+  height: 14px;
+  background: #e4e4e7; 
+  border-radius: 50%;
 }
 
 /* Controls */
 .controls-container {
-  display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;
+  display: flex; 
+  align-items: center; 
+  justify-content: space-between; 
+  margin-bottom: 1.25rem;
 }
 .controls-container button {
-  color: #e4e4e7; transition: all 0.2s ease; background: none; border: none; cursor: pointer;
+    color: rgba(255, 255, 255, 0.8) !important;
+    opacity: 1;
+    transition: all 0.2s ease; 
+    background: none; 
+    border: none; 
+    cursor: pointer;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.controls-container button:hover { color: #e4e4e7; transform: scale(1.1); }
+
+.controls-container button.active-control {
+  color: #3b82f6 !important;
+  filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.8));
+}
+
+.controls-container button:hover { 
+  color: #ffffff !important; 
+  transform: scale(1.15); 
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
 .controls-container button:active { transform: scale(0.9); }
 
 .play-btn {
-  color: #e4e4e7 !important;
-  padding: 1.1rem; border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(10px);
+    color: #3b82f6 !important;
+    padding: 1.1rem; 
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.4) !important;
 }
 
 /* Icon sizes */
-.icon-sm { width: 18px; height: 18px; }
-.icon-md { width: 28px; height: 28px; }
-.icon-lg { width: 24px; height: 24px; }
+.icon-sm { width: 18px; height: 18px;}
+.icon-md { width: 28px; height: 28px;}
+.icon-lg { width: 24px; height: 24px;}
 
 /* Search & Playlist */
 .search-input {
-  width: 100%; background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.05); border-radius: 0.75rem;
-  padding: 0.6rem 1rem; color: white; outline: none;
-  font-size: 16px; /* Prevent iOS zoom */
+  width: 100%; background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 0.75rem;
+  padding: 0.6rem 1rem; color: #e4e4e7; outline: none;
+  font-size: 16px;
 }
-.search-input:focus { border-color: #3b82f6; }
-.playlist-title { font-size: 0.65rem; color: #e4e4e7; text-transform: uppercase; letter-spacing: 0.1em; }
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* .search-input:focus { border-color: ; } */
+.playlist-title { 
+  font-size: 0.7rem; 
+  color: #ffffff !important;
+  opacity: 1; 
+  text-transform: uppercase; 
+  letter-spacing: 0.1em; 
+}
 
 /* Playlist Area (Default 6.1" inch) */
 .song-list-container { 
@@ -134,12 +199,30 @@ body::before {
   margin-top: 8px;
 }
 #song-list li {
-  padding: 8px 12px; border-radius: 8px; cursor: pointer;
-  font-size: 0.85rem; transition: background 0.2s; margin-bottom: 2px;
-  list-style: none; color: #d4d4d8;
+  padding: 8px 12px; 
+  border-radius: 8px; 
+  cursor: pointer;
+  font-size: 0.85rem; 
+  transition: background 0.2s; 
+  margin-bottom: 2px;
+  list-style: none; 
+  color: #ffffff !important;
 }
+
+#song-list li span {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
 #song-list li:hover { background: rgba(255,255,255,0.05); }
-.active-song { background: rgba(59, 130, 246, 0.2) !important; color: #60a5fa !important; }
+.active-song { 
+    background: #3b82f6;
+    color: #ffffff !important;
+
+}
+.active-song span {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
 
 /* =========================================
    RESPONSIVE: HP KECIL (iPhone SE / 4.7")
