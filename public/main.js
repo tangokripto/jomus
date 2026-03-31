@@ -231,27 +231,28 @@ btnRepeat.addEventListener("click", () => {
    5. VIDEO ROTATION (FIXED ID)
    ========================================= */
 function changeVideo() {
-  const vContainer = document.getElementById('video-container');
-  const vSource = document.getElementById('video-source');
-  const vElement = document.getElementById('bg-video');
+    const vContainer = document.getElementById('video-container');
+    const vSource = document.getElementById('video-source');
+    const vElement = document.getElementById('bg-video');
 
-  if (!vContainer || !vSource) return;
+    if (!vContainer || !vSource || !vElement) return;
 
-  // 1. Fade Out
-  vContainer.style.opacity = '0';
+    // 1. Fade Out
+    vContainer.style.opacity = '0';
 
-  setTimeout(() => {
-    currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
-    vSource.src = videoList[currentVideoIndex];
-    
-    vElement.load();
-    
-    vElement.onloadeddata = () => {
-        vElement.play();
-        // 2. Fade In
-        vContainer.style.opacity = '1';
-    };
-  }, 1500); 
+    setTimeout(() => {
+        currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
+        vSource.src = videoList[currentVideoIndex];
+        
+        vElement.load();
+        
+        // 2. Fade In (Gunakan 'canplay' agar stabil di mobile)
+        vElement.addEventListener('canplay', function startPlay() {
+            vElement.play();
+            vContainer.style.opacity = '1';
+            vElement.removeEventListener('canplay', startPlay);
+        }, { once: true });
+    }, 1500); 
 }
 
 setInterval(changeVideo, 180000);
@@ -260,7 +261,7 @@ setInterval(changeVideo, 180000);
 function forcePlayVideo() {
     if (videoElement) {
         videoElement.play().catch(() => {
-            // Jika gagal autoplay, tunggu interaksi pertama user
+            // Jika Safari nge-blokir autoplay, tunggu user tap layar 1x
             const playOnGesture = () => {
                 videoElement.play();
                 document.removeEventListener('click', playOnGesture);
@@ -274,31 +275,6 @@ function forcePlayVideo() {
 
 // Jalankan saat load
 forcePlayVideo();
-
-// Perbaikan fungsi changeVideo agar lebih stabil di iOS
-function changeVideo() {
-    const vContainer = document.getElementById('video-container');
-    const vSource = document.getElementById('video-source');
-    const vElement = document.getElementById('bg-video');
-
-    if (!vContainer || !vSource || !vElement) return;
-
-    vContainer.style.opacity = '0';
-
-    setTimeout(() => {
-        currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
-        vSource.src = videoList[currentVideoIndex];
-        
-        vElement.load();
-        
-        // Gunakan 'canplay' daripada 'onloadeddata' untuk mobile
-        vElement.addEventListener('canplay', function startPlay() {
-            vElement.play();
-            vContainer.style.opacity = '1';
-            vElement.removeEventListener('canplay', startPlay);
-        }, { once: true });
-    }, 1500); 
-}
 
 /* =========================================
    6. UTILITIES (UI, TOAST, SCROLL)
