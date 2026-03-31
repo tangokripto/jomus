@@ -1,14 +1,14 @@
 /* =========================================
    CORE & BACKGROUND
    ========================================= */
-body {
+html, body {
   margin: 0;
   padding: 0;
-  width: 100vw;
-  height: 100dvh;
+  width: 100%;
+  /* Pakai height 100% flat agar tidak ada sisa pixel di bawah */
+  height: 100%; 
   overflow: hidden;
-  /* HAPUS background-color agar video di bawahnya kelihatan */
-  background-color: transparent; 
+  background-color: #000000; /* Dasar tetap hitam */
 }
 
 #bg-video {
@@ -24,6 +24,7 @@ body {
 
 #video-container {
   position: fixed;
+  inset: 0;
   top: 0;
   left: 0;
   width: 100%;
