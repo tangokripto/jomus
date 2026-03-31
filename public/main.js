@@ -144,6 +144,15 @@ function loadMoreSongs() {
   });
   loadedCount += nextSongs.length;
   highlightActive(false);
+  // Fitur Infinite Scroll biar bisa lihat semua lagu!
+songList.addEventListener("scroll", () => {
+  // Kalau jarak scroll sudah mendekati paling bawah (sisa 50px)
+  if (songList.scrollTop + songList.clientHeight >= songList.scrollHeight - 50) {
+    if (loadedCount < filterSongs.length) {
+      loadMoreSongs();
+    }
+  }
+});
 }
 
 function highlightActive(shouldScroll = false) {

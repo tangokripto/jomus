@@ -27,7 +27,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -3;
+  z-index: 1;
   background-color: black;
   transition: opacity 1.5s ease-in-out;
 }
@@ -62,7 +62,7 @@ body::before {
   opacity: 0.1;
   backdrop-filter: blur(15px); 
   -webkit-backdrop-filter: blur(15px);
-  z-index: -2; /* Taruh di atas video container (-3) tapi di bawah konten (0) */
+  z-index: 2; /* Taruh di atas video container (-3) tapi di bawah konten (0) */
   pointer-events: none;
 }
 
@@ -75,6 +75,7 @@ body::before {
   justify-content: center;
   padding: env(safe-area-inset-top) 20px env(safe-area-inset-bottom) 20px;
   box-sizing: border-box;
+  z-index: 10;
 }
 
 /* =========================================
