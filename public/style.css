@@ -179,7 +179,7 @@ body::before {
 
 /* .search-input:focus { border-color: ; } */
 .playlist-title { 
-  font-size: 0.7rem; 
+  font-size: 5rem; 
   color: #ffffff !important;
   opacity: 1; 
   text-transform: uppercase; 
