@@ -11,12 +11,19 @@ body {
   width: 100vw;
   min-height: 100dvh;
   overflow: hidden;
-  background-color: #0a192f; 
-  background-image: url('https://f003.backblazeb2.com/file/music-pribadi/tyler-lastovich-hM08wZJBlK4-unsplash.webp');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  /* HAPUS background-color agar video di bawahnya kelihatan */
+  background-color: transparent; 
+}
+
+#bg-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover; 
+  z-index: -2; /* Pastikan ini angka paling kecil */
+  display: block; /* Pastikan dia bukan inline */
 }
 
 @keyframes gradientShift {
@@ -29,10 +36,12 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.8) 100%);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  z-index: -1;
+  /* Gunakan rgba agar video di belakangnya tembus pandang */
+  background: radial-gradient(circle, rgba(10, 25, 47, 0.4) 0%, rgba(10, 25, 47, 0.8) 100%);
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px);
+  z-index: -1; /* Di atas video, di bawah .main-wrapper */
+  pointer-events: none;
 }
 
 /* WRAPPER */
@@ -179,7 +188,7 @@ body::before {
 
 /* .search-input:focus { border-color: ; } */
 .playlist-title { 
-  font-size: 5rem; 
+  font-size: 0.8rem; 
   color: #ffffff !important;
   opacity: 1; 
   text-transform: uppercase; 
@@ -225,7 +234,7 @@ body::before {
 @media (max-height: 570px) and (max-width: 500px) {
   .player-card { padding: 1rem; transform: scale(0.95); }
   .cover-image { width: 100px; height: 100px; }
-  .song-title { font-size: 1rem; }
+  .song-title { font-size: 0.9rem; }
   .controls-container { margin-bottom: 0.75rem; }
   .play-btn { padding: 0.75rem; }
   .song-list-container { max-height: 103px; } 

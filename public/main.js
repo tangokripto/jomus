@@ -147,7 +147,7 @@ function loadSong(index, resume = false) {
   const song = songs[index];
   if (!song) return;
 
-  nowPlaying.textContent = "⏳ Loading ...";
+  nowPlaying.textContent = ":3 Loading ...";
   document.title = "Music Pleyah.";
 
   audio.pause();
@@ -393,3 +393,14 @@ seek.addEventListener("input", () => {
 
   seek.style.backgroundSize = seek.value + '% 100%';
 });
+// Force Video Playback
+const bgVideo = document.getElementById('bg-video');
+if (bgVideo) {
+    bgVideo.play().catch(error => {
+        console.log("Autoplay dicegah browser, mencoba play saat user klik pertama kali.");
+        // Jika autoplay diblokir, jalankan saat user klik apa saja di layar
+        document.addEventListener('click', () => {
+            bgVideo.play();
+        }, { once: true });
+    });
+}
