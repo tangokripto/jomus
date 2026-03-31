@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100vw;
-  min-height: 100dvh;
+  height: 100dvh;
   overflow: hidden;
   /* HAPUS background-color agar video di bawahnya kelihatan */
   background-color: transparent; 
