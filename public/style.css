@@ -1,10 +1,6 @@
 /* =========================================
    CORE & BACKGROUND
    ========================================= */
-html {
-  background-color: #000000; 
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -26,6 +22,31 @@ body {
   display: block; /* Pastikan dia bukan inline */
 }
 
+#video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-color: black; /* Dasar hitam untuk efek fade */
+  transition: opacity 1.5s ease-in-out; /* Durasi transisi */
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+.fade-in {
+  opacity: 1;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
@@ -36,11 +57,13 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  /* Gunakan rgba agar video di belakangnya tembus pandang */
-  background: radial-gradient(circle, rgba(10, 25, 47, 0.4) 0%, rgba(10, 25, 47, 0.8) 100%);
-  backdrop-filter: blur(10px); 
-  -webkit-backdrop-filter: blur(10px);
-  z-index: -1; /* Di atas video, di bawah .main-wrapper */
+  background: 
+    radial-gradient(circle, rgba(10, 25, 47, 0.3) 0%, rgba(10, 25, 47, 0.7) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.1; /* Atur kepekatan noise-nya */
+  backdrop-filter: blur(15px); 
+  -webkit-backdrop-filter: blur(15px);
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -203,10 +226,10 @@ body::before {
   margin-top: 8px;
 }
 #song-list li {
-  padding: 8px 12px; 
+  padding: 4px 12px; 
   border-radius: 8px; 
   cursor: pointer;
-  font-size: 0.85rem; 
+  font-size: 0.7rem; 
   transition: background 0.2s; 
   margin-bottom: 2px;
   list-style: none; 
@@ -238,7 +261,7 @@ body::before {
   .controls-container { margin-bottom: 0.75rem; }
   .play-btn { padding: 0.75rem; }
   .song-list-container { max-height: 103px; } 
-  #song-list li { padding: 6px 10px; font-size: 0.8rem; }
+  #song-list li { padding: 4px 10px; font-size: 0.6rem; }
 }
 
 /* =========================================
@@ -262,5 +285,5 @@ body::before {
   .search-input { padding: 0.75rem 1rem; }
   .playlist-title { font-size: 0.8rem; margin-bottom: 10px; }
   .song-list-container { max-height: 300px; }
-  #song-list li { font-size: 1rem; padding: 10px 14px; }
+  #song-list li { font-size: 0.85rem; padding: 8px 14px; }
 }
