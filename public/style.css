@@ -109,9 +109,12 @@ body::before {
 .controls-container button:active { transform: scale(0.9); }
 
 .play-btn {
-  background: #2563eb !important; color: white !important;
-  padding: 1rem; border-radius: 50%;
-  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+  background: rgba(255, 255, 255, 0.15) !important; 
+  color: white !important;
+  padding: 1.1rem; border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), inset 0 0 10px rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
 }
 
 /* Icon sizes */
