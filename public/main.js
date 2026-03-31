@@ -121,11 +121,21 @@ function renderPlaylist(filter = "") {
 
   filterSongs = songs
     .map((song, idx) => ({ ...song, originalIndex: idx }))
-    .filter(song => 
-      song.title?.toLowerCase().includes(query) ||
-      song.artist?.toLowerCase().includes(query) ||
-      song.file?.toLowerCase().includes(query)
-    );
+    .filter(song => {
+      const title = (song.title || "").toLowerCase();
+      const artist = (song.artist || "").toLowerCase();
+      const album = (song.album || "").toLowerCase();
+      const genre = (song.genre || "").toLowerCase();
+      const file = (song.file || "").toLowerCase();
+
+      return (
+        title.includes(query) ||
+        artist.includes(query) ||
+        album.includes(query) ||
+        genre.includes(query) ||
+        file.includes(query)
+      );
+    });
 
   loadMoreSongs();
 }
@@ -144,15 +154,6 @@ function loadMoreSongs() {
   });
   loadedCount += nextSongs.length;
   highlightActive(false);
-  // Fitur Infinite Scroll biar bisa lihat semua lagu!
-songList.addEventListener("scroll", () => {
-  // Kalau jarak scroll sudah mendekati paling bawah (sisa 50px)
-  if (songList.scrollTop + songList.clientHeight >= songList.scrollHeight - 50) {
-    if (loadedCount < filterSongs.length) {
-      loadMoreSongs();
-    }
-  }
-});
 }
 
 function highlightActive(shouldScroll = false) {
@@ -365,6 +366,14 @@ function updateFavicon(url) {
   if (!link) { link = document.createElement("link"); link.rel = "icon"; document.head.appendChild(link); }
   link.href = url;
 }
+
+songList.addEventListener("scroll", () => {
+  if (songList.scrollTop + songList.clientHeight >= songList.scrollHeight - 50) {
+    if (loadedCount < filterSongs.length) {
+      loadMoreSongs();
+    }
+  }
+});
 
 // Service Worker
 if ('serviceWorker' in navigator) {
