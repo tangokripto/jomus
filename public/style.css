@@ -407,6 +407,12 @@ body::before {
    ========================================= */
 @media (max-width: 500px) {
   
+  #bg-video {
+    /* 50% horizontal (tengah), 60% vertical (agak turun) 
+       Ubah 60% ke angka lebih besar (misal 70%) kalau mau lebih turun lagi */
+    object-position: 50% 60% !important;
+  }
+
   /* 1. Hilangkan area hitam & pastikan wrapper memenuhi layar penuh */
   .main-wrapper {
     padding: 0 !important;
