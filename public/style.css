@@ -461,7 +461,7 @@ body::before {
   /* 1. Perkecil padding utama agar kartu tidak terlalu tinggi */
   .player-card {
     padding: 1rem !important;
-    transform: translateY(10px) !important; /* Kurangi dorongan ke bawah agar muat */
+    transform: translateY(60px) !important; /* Kurangi dorongan ke bawah agar muat */
     max-height: 95vh !important;
   }
 
