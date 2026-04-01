@@ -137,6 +137,11 @@ function renderPlaylist(filter = "") {
     });
 
   loadMoreSongs();
+
+  // Memastikan lagu aktif ter-load ke dalam DOM setelah filter/render
+  if (currentSongIndex !== -1) {
+    ensureActiveSongVisible();
+  }
 }
 
 function loadMoreSongs() {
@@ -153,6 +158,18 @@ function loadMoreSongs() {
   });
   loadedCount += nextSongs.length;
   highlightActive(false);
+}
+
+// Fungsi baru: Memaksa load lagu yang sedang diputar agar tampil di list & bisa di-scroll
+function ensureActiveSongVisible() {
+  const isSongInFilter = filterSongs.some(s => s.originalIndex === currentSongIndex);
+  if (!isSongInFilter) return;
+
+  // Load bertahap sampai elemen lagu aktif masuk ke dalam HTML
+  while (!songList.querySelector(`li[data-index="${currentSongIndex}"]`) && loadedCount < filterSongs.length) {
+    loadMoreSongs();
+  }
+  highlightActive(true);
 }
 
 function highlightActive(shouldScroll = false) {
@@ -172,16 +189,29 @@ function highlightActive(shouldScroll = false) {
    4. CONTROLS & EVENTS
    ========================================= */
 function playNext() {
+  // Gunakan list yang sedang difilter (atau list utama jika tidak ada pencarian)
+  const activeList = filterSongs.length > 0 ? filterSongs : songs.map((s, i) => ({...s, originalIndex: i}));
+  let currentIndexInActiveList = activeList.findIndex(s => s.originalIndex === currentSongIndex);
+
   if (isShuffled) {
-    currentSongIndex = Math.floor(Math.random() * songs.length);
+    currentIndexInActiveList = Math.floor(Math.random() * activeList.length);
   } else {
-    currentSongIndex = (currentSongIndex + 1) % songs.length;
+    // Lanjut ke lagu berikutnya dalam daftar yang sama
+    currentIndexInActiveList = (currentIndexInActiveList + 1) % activeList.length;
   }
+
+  // Ambil index aslinya untuk diputar
+  currentSongIndex = activeList[currentIndexInActiveList].originalIndex;
   playSong();
 }
 
 function playPrev() {
-  currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
+  const activeList = filterSongs.length > 0 ? filterSongs : songs.map((s, i) => ({...s, originalIndex: i}));
+  let currentIndexInActiveList = activeList.findIndex(s => s.originalIndex === currentSongIndex);
+
+  currentIndexInActiveList = (currentIndexInActiveList - 1 + activeList.length) % activeList.length;
+  
+  currentSongIndex = activeList[currentIndexInActiveList].originalIndex;
   playSong();
 }
 
@@ -214,6 +244,8 @@ btnClearSearch.addEventListener("click", () => {
   searchInput.value = "";
   renderPlaylist();
   btnClearSearch.style.display = "none";
+  // Delay sedikit agar DOM selesai di-render sebelum scroll
+  setTimeout(() => ensureActiveSongVisible(), 100);
 });
 
 // Repeat & Shuffle Init
@@ -264,7 +296,7 @@ function changeVideo() {
     }, 1500); 
 }
 
-setInterval(changeVideo, 300000);
+setInterval(changeVideo, 240000);
 
 // Force Background Video Play (iOS Optimization)
 function forcePlayVideo() {
