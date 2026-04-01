@@ -412,22 +412,26 @@ body::before {
     padding: 0 !important;
     height: 100vh !important;
     height: -webkit-fill-available !important; /* Fix untuk iOS Safari */
-    align-items: center !important; /* Pusatkan secara vertikal */
+    display: flex !important;
+    align-items: flex-end !important; /* Kita ganti ke flex-end agar bisa kita dorong dari bawah */
     justify-content: center !important;
+    padding-bottom: 40px !important; /* Atur jarak kartu dari ujung bawah layar (Home Bar) */
   }
 
   /* 2. Turunkan posisi kartu agar tidak terlalu 'nyundul' ke atas */
   .player-card {
     margin-top: 20px !important; /* Memberi jarak dari area notch/jam */
+    /* Kalau mau diturunkan lagi secara manual, ubah angka 10px ini (makin besar makin turun) */
+    transform: translateY(12px) !important;
     max-height: 85vh !important; /* Sisakan ruang di bawah agar tidak luber */
     padding: 1.2rem !important;
-    width: 90% !important;
+    width: 88% !important;
   }
 
   /* 3. Kecilkan Cover Art dikit lagi buat ruang playlist */
   .cover-image {
-    width: 140px !important;
-    height: 140px !important;
+    width: 130px !important;
+    height: 130px !important;
   }
 
   /* 4. Batasi Playlist Mentok 5 Lagu (Mode Smartphone) */
@@ -435,9 +439,9 @@ body::before {
     flex-grow: 0 !important;
     height: auto !important;
     /* Tinggi sekitar 145px - 155px biasanya pas untuk 5 lagu di HP */
-    max-height: 155px !important; 
+    max-height: 145px !important; 
     overflow-y: auto !important;
-    margin-top: 8px !important;
+    margin-top: 5px !important;
     padding-bottom: 5px !important;
   }
 
