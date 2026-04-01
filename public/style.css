@@ -240,13 +240,10 @@ body::before {
 }
 
 #song-list li:hover { background: rgba(240, 22, 87, 1); }
-/* Kita panggil ID-nya juga supaya prioritasnya paling tinggi */
 #song-list li.active-song { 
     background: #f01657 !important; 
     color: #ffffff !important;
 }
-
-/* Pastikan teks di dalamnya juga ikutan putih terang */
 #song-list li.active-song span {
     color: #ffffff !important;
     opacity: 1 !important;
