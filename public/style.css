@@ -271,18 +271,6 @@ body::before {
 }
 
 /* =========================================
-   RESPONSIVE: HP KECIL (iPhone SE / 4.7")
-   ========================================= */
-@media (max-height: 570px) and (max-width: 500px) {
-  .player-card { padding: 1rem; transform: scale(0.95); max-height: 98vh; }
-  .cover-image { width: 100px; height: 100px; }
-  .song-title { font-size: 0.9rem; }
-  .controls-container { margin-bottom: 0.75rem; }
-  .play-btn { padding: 0.75rem; }
-  #song-list li { padding: 4px 10px; font-size: 0.6rem; }
-}
-
-/* =========================================
    RESPONSIVE: PC / TABLET / 4K
    ========================================= */
 @media (min-width: 768px) {
@@ -461,5 +449,67 @@ body::before {
     padding: 6px 10px !important;
     font-size: 0.7rem !important;
     margin-bottom: 2px !important;
+  }
+}
+
+/* =========================================
+   FIX KHUSUS IPHONE 4.7" (SE / 7 / 8)
+   Fokus: Mencegah luber di layar pendek
+   ========================================= */
+@media (max-height: 670px) and (max-width: 400px) {
+  
+  /* 1. Perkecil padding utama agar kartu tidak terlalu tinggi */
+  .player-card {
+    padding: 1rem !important;
+    transform: translateY(10px) !important; /* Kurangi dorongan ke bawah agar muat */
+    max-height: 95vh !important;
+  }
+
+  /* 2. Cover Art diperkecil lagi */
+  .cover-image {
+    width: 110px !important;
+    height: 110px !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  /* 3. Rapikan teks meta agar tidak makan tempat */
+  .song-title {
+    font-size: 0.95rem !important;
+  }
+  .song-meta-text {
+    font-size: 0.7rem !important;
+    margin-top: 2px !important;
+    margin-bottom: 5px !important;
+  }
+  .song-meta-text p {
+    margin: 0 !important;
+  }
+
+  /* 4. Controls sedikit dipadatkan */
+  .controls-container {
+    margin-bottom: 0.5rem !important;
+  }
+  .play-btn {
+    padding: 0.6rem !important;
+  }
+  .icon-md { width: 24px; height: 24px; }
+  .icon-lg { width: 22px; height: 22px; }
+
+  /* 5. PEMBATASAN PLAYLIST (3-4 Lagu) */
+  .song-list-container {
+    /* Tinggi sekitar 100px - 115px biasanya pas untuk 3-4 lagu */
+    max-height: 110px !important; 
+    margin-top: 4px !important;
+  }
+
+  #song-list li {
+    padding: 5px 10px !important;
+    font-size: 0.65rem !important;
+  }
+
+  .playlist-title {
+    margin-top: 2px !important;
+    margin-bottom: 4px !important;
+    font-size: 0.7rem !important;
   }
 }
