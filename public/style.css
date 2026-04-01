@@ -416,7 +416,17 @@ body::before {
   /* 1. Hilangkan area hitam & pastikan wrapper memenuhi layar penuh */
   .main-wrapper {
     padding: 0 !important;
-    height: 100vh !important;
+    height: 110vh !important;
+    width: 115vh !important;
+    -5% di sumbu Y (atas) artinya kita narik videonya turun melewati batas bawah layar */
+    top: -5% !important; 
+    left: -7.5% !important; /* Biar tetep center secara horizontal */
+
+    object-fit: cover !important;
+    object-position: center bottom !important;
+
+    position: fixed !important;
+    
     height: -webkit-fill-available !important; /* Fix untuk iOS Safari */
     display: flex !important;
     align-items: flex-end !important; /* Kita ganti ke flex-end agar bisa kita dorong dari bawah */
