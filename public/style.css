@@ -422,7 +422,7 @@ body::before {
   .player-card {
     margin-top: 20px !important; /* Memberi jarak dari area notch/jam */
     /* Kalau mau diturunkan lagi secara manual, ubah angka 10px ini (makin besar makin turun) */
-    transform: translateY(20px) !important;
+    transform: translateY(50px) !important;
     max-height: 85vh !important; /* Sisakan ruang di bawah agar tidak luber */
     padding: 1.2rem !important;
     width: 88% !important;
