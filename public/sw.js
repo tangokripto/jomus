@@ -1,4 +1,4 @@
-const CACHE_NAME = "Jomusic-cache-v2";
+const CACHE_NAME = "Jomusic-cache-v3";
 const STATIC_CACHE = [
   "/",
   "/index.html",
@@ -35,7 +35,7 @@ self.addEventListener("fetch", event => {
       if (response) return response;
 
       return fetch(event.request).then(networkResponse => {
-        if (event.request.destination === "audio" || url.pathname.includes("/covers/")) {
+        if (event.request.destination === "audio") {
           return caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, networkResponse.clone());
             return networkResponse;
