@@ -264,7 +264,7 @@ function changeVideo() {
     }, 1500); 
 }
 
-setInterval(changeVideo, 240000);
+setInterval(changeVideo, 300000);
 
 // Force Background Video Play (iOS Optimization)
 function forcePlayVideo() {
