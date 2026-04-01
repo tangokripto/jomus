@@ -400,3 +400,56 @@ body::before {
     margin-bottom: 2px !important;
   }
 }
+
+/* =========================================
+   FIX KHUSUS SMARTPHONE (iOS / 6.1" Focus)
+   Optimasi untuk Add to Home Screen
+   ========================================= */
+@media (max-width: 500px) {
+  
+  /* 1. Hilangkan area hitam & pastikan wrapper memenuhi layar penuh */
+  .main-wrapper {
+    padding: 0 !important;
+    height: 100vh !important;
+    height: -webkit-fill-available !important; /* Fix untuk iOS Safari */
+    align-items: center !important; /* Pusatkan secara vertikal */
+    justify-content: center !important;
+  }
+
+  /* 2. Turunkan posisi kartu agar tidak terlalu 'nyundul' ke atas */
+  .player-card {
+    margin-top: 20px !important; /* Memberi jarak dari area notch/jam */
+    max-height: 85vh !important; /* Sisakan ruang di bawah agar tidak luber */
+    padding: 1.2rem !important;
+    width: 90% !important;
+  }
+
+  /* 3. Kecilkan Cover Art dikit lagi buat ruang playlist */
+  .cover-image {
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  /* 4. Batasi Playlist Mentok 5 Lagu (Mode Smartphone) */
+  .song-list-container {
+    flex-grow: 0 !important;
+    height: auto !important;
+    /* Tinggi sekitar 145px - 155px biasanya pas untuk 5 lagu di HP */
+    max-height: 155px !important; 
+    overflow-y: auto !important;
+    margin-top: 8px !important;
+    padding-bottom: 5px !important;
+  }
+
+  /* 5. Sembunyikan scrollbar di HP agar estetik */
+  .song-list-container::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* 6. Rapikan jarak antar lagu di HP */
+  #song-list li {
+    padding: 6px 10px !important;
+    font-size: 0.7rem !important;
+    margin-bottom: 2px !important;
+  }
+}
