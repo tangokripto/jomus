@@ -7,6 +7,7 @@ const STATIC_CACHE = [
   "/songs.json",
   "/icon-192.png",
   "/icon-512.png",
+  "/covers/default.jpg",
   "https://f003.backblazeb2.com/file/music-pribadi/tyler-lastovich-hM08wZJBlK4-unsplash.webp"
 ];
 
