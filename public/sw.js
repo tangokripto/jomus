@@ -1,4 +1,4 @@
-const CACHE_NAME = "Jomusic-cache-v3";
+const CACHE_NAME = "Jomusic-cache-v4";
 const STATIC_CACHE = [
   "/",
   "/index.html",
@@ -21,7 +21,7 @@ const VIDEO_ASSETS = [
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      console.log("Caching Core & Videos...");
+      console.log("Caching Core & Videos Only...");
       return cache.addAll([...STATIC_CACHE, ...VIDEO_ASSETS]);
     })
   );
@@ -29,21 +29,10 @@ self.addEventListener("install", event => {
 });
 
 self.addEventListener("fetch", event => {
-  const url = new URL(event.request.url);
-
   event.respondWith(
     caches.match(event.request).then(response => {
       if (response) return response;
-
-      return fetch(event.request).then(networkResponse => {
-        if (event.request.destination === "audio") {
-          return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
-        }
-        return networkResponse;
-      }).catch(() => {
+      return fetch(event.request).catch(() => {
         if (event.request.destination === "document") {
           return caches.match("/index.html");
         }
