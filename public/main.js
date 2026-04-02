@@ -38,7 +38,7 @@ let loadedCount = 0;
 const videoList = [
   'https://f003.backblazeb2.com/file/music-pribadi/evelyn.3840x2160.mp4',
   'https://f003.backblazeb2.com/file/music-pribadi/hunt-showdown-death-roots.3840x2160.mp4',
-  'https://f003.backblazeb2.com/file/music-pribadi/hunt-showdown-skull-guns.3840x2160.mp4',
+  'https://f003.backblazeb2.com/file/music-pribadi/hunt-showdown-veil-of-thorns.3840x2160.mp4',
   'https://f003.backblazeb2.com/file/music-pribadi/the-shadow-fantasy-king-moewalls-com.mp4'
 ];
 
