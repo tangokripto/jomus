@@ -514,78 +514,43 @@ body::before {
   }
 }
 
-/* =========================================
-   FIX TABLET LANDSCAPE (Redmi Pad Pro, iPad Optimized)
-   Target: Layar lebar (>= 1024px) & Posisi Miring
-   ========================================= */
+/* Optimized for Tablet Landscape (>= 1024px) */
 @media (orientation: landscape) and (min-width: 1024px) {
-  
   .player-card {
-    display: grid !important;
-    /* Kolom 1 (Kiri): 40% untuk Cover & Info */
-    /* Kolom 2 (Kanan): 60% untuk Search & Playlist */
-    grid-template-columns: 40% 60% !important;
-    max-width: 950px !important; 
-    max-height: 85vh !important;
-    gap: 0 40px !important;
-    padding: 2rem !important;
-    align-items: center !important;
+    display: flex !important;
+    flex-direction: row !important; /* Paksa ke samping */
+    max-width: 950px !important;
+    width: 90vw !important;
+    gap: 40px !important;
+    padding: 2.5rem !important;
+    align-items: start !important;
   }
 
-  /* --- SISI KIRI (Cover & Meta) --- */
-  /* Target div ke-1 (Cover) dan ke-2 (Title/Controls) */
-  .player-card > div:nth-child(1),
-  .player-card > div:nth-child(2) {
-    grid-column: 1 !important;
+  .info-section { 
+    width: 45% !important; 
+    flex-shrink: 0;
+  }
+
+  .list-section { 
+    width: 55% !important; 
+    display: flex;
+    flex-direction: column;
   }
 
   .cover-image {
-    width: 200px !important;
-    height: 200px !important;
-    margin-bottom: 10px !important;
+    width: 220px !important;
+    height: 220px !important;
   }
 
-  .song-title { font-size: 1.3rem !important; }
-  .song-meta-text { margin-bottom: 10px !important; }
-
-  /* --- SISI KANAN (Search & Playlist) --- */
-  /* Target div ke-3 (Search) dan ke-4 (Playlist Section) */
-  .player-card > div:nth-child(3),
-  .player-card > div:nth-child(4) {
-    grid-column: 2 !important;
-  }
-
-  /* Naikin Search agar sejajar dengan atas cover */
-  .player-card > div:nth-child(3) {
-    align-self: end !important;
-    margin-bottom: 15px !important;
-  }
-
-  .playlist-section {
-    align-self: start !important;
-  }
-
-  /* Beri ruang scroll yang lega di tablet */
+  /* SOLUSI AGAR TIDAK LUBER */
   .song-list-container {
-    max-height: 320px !important; 
-    min-height: 0 !important;
+    max-height: 380px !important; /* Batasi tinggi playlist */
+    overflow-y: auto !important;   /* Aktifkan scroll internal */
+    padding-right: 5px;
   }
 
-  /* Sembunyikan scrollbar agar clean di layar gede */
+  /* Sembunyikan scrollbar agar estetis (opsional) */
   .song-list-container::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  #song-list li {
-    padding: 10px 15px !important;
-    font-size: 0.85rem !important;
-  }
-}
-
-/* Fix tambahan biar card gak 'tenggelam' di mode landscape */
-@media (orientation: landscape) {
-  .main-wrapper {
-    align-items: center !important;
-    padding-bottom: 20px !important;
+    width: 3px;
   }
 }
