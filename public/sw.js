@@ -1,12 +1,10 @@
-const CACHE_NAME = "Jomusic-cache-v4";
+const CACHE_NAME = "Jomusic-cache-v5";
 const STATIC_CACHE = [
   "/",
   "/index.html",
   "/style.css",
   "/main.js",
   "/songs.json",
-  "/icon-192.png",
-  "/icon-512.png",
   "/covers/default.jpg",
   "https://f003.backblazeb2.com/file/music-pribadi/tyler-lastovich-hM08wZJBlK4-unsplash.webp"
 ];
@@ -14,7 +12,7 @@ const STATIC_CACHE = [
 const VIDEO_ASSETS = [
   'https://f003.backblazeb2.com/file/music-pribadi/evelyn.3840x2160.mp4',
   'https://f003.backblazeb2.com/file/music-pribadi/hunt-showdown-death-roots.3840x2160.mp4',
-  'https://f003.backblazeb2.com/file/music-pribadi/hunt-showdown-skull-guns.3840x2160.mp4',
+  'https://f003.backblazeb2.com/file/music-pribadi/hunt-showdown-veil-of-thorns.3840x2160.mp4',
   'https://f003.backblazeb2.com/file/music-pribadi/the-shadow-fantasy-king-moewalls-com.mp4'
 ];
 
