@@ -214,6 +214,10 @@ body::before {
   flex-shrink: 0;
 }
 
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 .playlist-title { 
   font-size: 0.8rem; 
   color: #ffffff !important;
@@ -508,98 +512,4 @@ body::before {
     margin-bottom: 4px !important;
     font-size: 0.7rem !important;
   }
-}
-
-/* =========================================
-   FIX TABLET & MOBILE LANDSCAPE (Optimized)
-   Target: Semua layar saat posisi Miring
-   ========================================= */
-@media (orientation: landscape) {
-  
-  .player-card {
-    display: grid !important;
-    /* Memberi ruang lebih untuk sisi kanan agar playlist lega */
-    grid-template-columns: 1fr 1.2fr !important; 
-    grid-template-rows: auto !important;
-    max-width: 900px !important;
-    width: 95vw !important;
-    gap: 25px !important;
-    padding: 1.5rem !important;
-    align-items: center !important; /* Center secara vertikal */
-  }
-
-  /* Area Kiri: Cover & Teks Lagu */
-  .info-group {
-    display: flex !important;
-    flex-direction: row !important; 
-    align-items: center !important;
-    gap: 15px !important;
-    grid-column: 1 / 2;
-    margin-bottom: 15px;
-  }
-
-  .cover-image {
-    width: 120px !important;
-    height: 120px !important;
-    margin: 0 !important;
-    flex-shrink: 0;
-  }
-
-  /* Teks info lagu di kiri tetap rata kiri agar estetik di samping gambar */
-  .meta-wrapper, .song-title, .song-meta-text {
-    text-align: left !important;
-    width: 100%;
-  }
-
-  /* Seekbar & Controls tetap di kolom kiri */
-  .player-card > div:nth-child(2), 
-  .controls-container {
-    grid-column: 1 / 2;
-    width: 100%;
-  }
-
-  /* =========================================
-     SOLUSI ANTI NABRAK (KOLOM KANAN)
-     ========================================= */
-  .playlist-wrapper {
-    grid-column: 2 / 3;
-    grid-row: 1 / 5; /* Mengunci dari baris atas sampai bawah */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-  }
-
-  /* =========================================
-     SOLUSI RATA TENGAH (PLAYLIST & LIST)
-     ========================================= */
-  .playlist-title {
-    text-align: center !important;
-    width: 100%;
-    margin-top: 0 !important;
-  }
-
-  #song-list {
-    width: 100%;
-  }
-
-  #song-list li {
-    text-align: center !important; /* Daftar lagu ke tengah */
-    justify-content: center !important; 
-    display: flex !important;
-    align-items: center !important;
-    padding: 8px 10px !important;
-  }
-
-  /* Scrollbar Playlist di Landscape */
-  .song-list-container {
-    max-height: 200px !important; /* Supaya gak luber di layar HP miring */
-    overflow-y: auto !important;
-    margin-top: 10px !important;
-  }
-}
-
-/* Tambahan Global (di luar media query) agar Portrait juga Tengah */
-.playlist-title, #song-list li {
-  text-align: center !important;
 }
