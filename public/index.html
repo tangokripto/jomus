@@ -55,20 +55,20 @@
   <main class="main-wrapper">
     
     <div class="player-card">
-      <div class="info-group">
-      <div class="flex justify-center mb-4 sm:mb-6 cover-wrapper">
+      
+      <div class="flex justify-center mb-4 sm:mb-6">
         <img id="cover-art" src="covers/default.jpg" alt="Cover Art" class="cover-image" />
       </div>
 
-      <div class="text-center mb-4 meta-wrapper">
+      <div class="text-center mb-4">
         <h2 id="now-playing" class="font-bold truncate px-2 text-white song-title">Choose song</h2>
           <div id="song-meta" class="mt-2 sm:mt-3 space-y-1 song-meta-text">
               <p class="text-[0.85rem] sm:text-[0.9rem]">Artist : <span id="song-artist" class="font-semibold">Unknown</span></p>
               <p class="text-[0.85rem] sm:text-[0.9rem]">Album : <span id="song-album" class="font-semibold">Unknown</span></p>
               <p class="text-[0.85rem] sm:text-[0.9rem]">Genre : <span id="song-genre" class="font-semibold">Unknown</span></p>
-          </div>
-          </div>
-      </div><div class="mb-4 sm:mb-5">
+          </div></div>
+
+      <div class="mb-4 sm:mb-5">
         <input id="seek" type="range" value="0" min="0" max="100" step="0.1" class="seek-bar" />
         <div class="flex justify-end mt-1">
            <span id="duration" class="font-mono text-zinc-500 duration-text">00:00 / 00:00</span>
