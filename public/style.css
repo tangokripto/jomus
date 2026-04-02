@@ -214,10 +214,6 @@ body::before {
   flex-shrink: 0;
 }
 
-.search-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
 .playlist-title { 
   font-size: 0.8rem; 
   color: #ffffff !important;
