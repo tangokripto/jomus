@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#09090b" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <title>Music Pleyah</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+
+  <style>
+    #song-list::-webkit-scrollbar { width: 4px; }
+    #song-list::-webkit-scrollbar-track { background: transparent; }
+    #song-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+    
+    .active-song { 
+      background: rgba(240, 22, 87, 1) !important; 
+    }
+
+    #toast {
+      position: fixed;
+      top: 20px; 
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 9999;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+</style>
+</head>
+<body class="text-zinc-100 font-sans">
+<div id="video-container" class="fade-in">
+  <video autoplay muted loop playsinline id="bg-video" poster="https://f003.backblazeb2.com/file/music-pribadi/tyler-lastovich-hM08wZJBlK4-unsplash.webp">
+  <source id="video-source" src="https://f003.backblazeb2.com/file/music-pribadi/evelyn.3840x2160.mp4?v=1" type="video/mp4">
+</video>
+</div>
+  <div id="toast"></div>
+  <main class="main-wrapper">
+    
+    <div class="player-card">
+      
+      <div class="flex justify-center mb-4 sm:mb-6">
+        <img id="cover-art" src="covers/default.jpg" alt="Cover Art" class="cover-image" />
+      </div>
+
+      <div class="text-center mb-4">
+        <h2 id="now-playing" class="font-bold truncate px-2 text-white song-title">Choose song</h2>
+          <div id="song-meta" class="mt-2 sm:mt-3 space-y-1 song-meta-text">
+              <p class="text-[0.85rem] sm:text-[0.9rem]">Artist : <span id="song-artist" class="font-semibold">Unknown</span></p>
+              <p class="text-[0.85rem] sm:text-[0.9rem]">Album : <span id="song-album" class="font-semibold">Unknown</span></p>
+              <p class="text-[0.85rem] sm:text-[0.9rem]">Genre : <span id="song-genre" class="font-semibold">Unknown</span></p>
+          </div>
+
+      <div class="mb-4 sm:mb-5">
+        <input id="seek" type="range" value="0" min="0" max="100" step="0.1" class="seek-bar" />
+        <div class="flex justify-end mt-1">
+           <span id="duration" class="font-mono text-zinc-500 duration-text">00:00 / 00:00</span>
+        </div>
+      </div>
+
+      <div class="controls-container">
+        <button id="shuffle" title="Shuffle"><svg class="icon-sm" fill="currentColor" viewBox="0 0 24 24"><path d="M17 17h2v-2h-2v2zm-2-2H6v-2h9v-2l4 3-4 3v-2zm2-6h2V7h-2v2zm-2-2H6v2h9v2l4-3-4-3v2z"/></svg></button>
+        <button id="prev" title="Previous"><svg class="icon-md" fill="currentColor" viewBox="0 0 24 24"><path d="M11 18V6l-8.5 6L11 18zm1-12v12l8.5-6L12 6z"/></svg></button>
+        
+        <button id="play" class="play-btn">
+          <span id="icon-play"><svg class="icon-lg" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+          <span id="icon-pause" style="display:none;"><svg class="icon-lg" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></span>
+        </button>
+
+        <button id="next" title="Next"><svg class="icon-md" fill="currentColor" viewBox="0 0 24 24"><path d="M13 6v12l8.5-6L13 6zM3 6v12l8.5-6L3 6z"/></svg></button>
+        <button id="repeat" title="Repeat"><svg class="icon-sm" fill="currentColor" viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H6c-1.66 0-3 1.34-3 3v4h2v-4c0-.55.45-1 1-1zm10 10H6v-3l-4 4 4 4v-3h11c1.66 0 3-1.34 3-3v-4h-2v4c0 .55-.45 1-1 1z"/></svg></button>
+      </div>
+
+      <div class="relative mb-3 sm:mb-4">
+        <input type="text" id="search" placeholder="Search songs..." class="search-input" onblur="setTimeout(() => window.scrollTo(0,0), 100);" />
+        <button id="clear-search" class="absolute right-3 top-2.5 text-zinc-500 hover:text-white">✕</button>
+      </div>
+
+      <div class="playlist-section">
+        <h3 class="font-bold text-zinc-500 uppercase tracking-widest mb-2 px-1 playlist-title">Playlist</h3>
+        <ul id="song-list" class="song-list-container"></ul>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>
