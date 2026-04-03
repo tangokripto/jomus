@@ -2830,6 +2830,16 @@
     "cover": "covers/hound-dog-rocks.jpg"
   },
   {
+    "file": "Iksan Skuter - Bapak.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iksan%20Skuter%20-%20Bapak.mp3",
+    "title": "Bapak",
+    "artist": "Iksan Skuter",
+    "album": "Gulali",
+    "genre": "Indonesian Indie",
+    "duration": 209,
+    "cover": "covers/iksan-skuter-bapak.jpg"
+  },
+  {
     "file": "Iksan Skuter - Bingung.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Iksan%20Skuter%20-%20Bingung.mp3",
     "title": "Bingung",
@@ -2838,6 +2848,26 @@
     "genre": "indonesian indie",
     "duration": 301,
     "cover": "covers/iksan-skuter-bingung.jpg"
+  },
+  {
+    "file": "Iksan Skuter - Jangan Seperti Bapak.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iksan%20Skuter%20-%20Jangan%20Seperti%20Bapak.mp3",
+    "title": "Jangan Seperti Bapak",
+    "artist": "Iksan Skuter",
+    "album": "Gulali",
+    "genre": "Indonesian Indie",
+    "duration": 231,
+    "cover": "covers/iksan-skuter-jangan-seperti-bapak.jpg"
+  },
+  {
+    "file": "Iksan Skuter - Kepada Hidup.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Iksan%20Skuter%20-%20Kepada%20Hidup.mp3",
+    "title": "Kepada Hidup",
+    "artist": "Iksan Skuter",
+    "album": "Shankara",
+    "genre": "Folk",
+    "duration": 277,
+    "cover": "covers/iksan-skuter-kepada-hidup.jpg"
   },
   {
     "file": "Iksan Skuter - Nyalakan Tanda Bahaya.mp3",
