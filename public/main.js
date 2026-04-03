@@ -90,22 +90,28 @@ function loadSong(index, resume = false) {
 
 function playSong(resume = false) {
   loadSong(currentSongIndex, resume);
-  audio.volume = 0;
-  audio.play();
+if (document.hidden) {
+    audio.volume = 1;
+    audio.play().catch(err => console.error("Playback failed:", err));
+  } else {
+    audio.volume = 0;
+    audio.play();
+    let vol = 0;
+    const fade = setInterval(() => {
+      vol += 0.05;
+      if (vol >= 1) {
+        audio.volume = 1;
+        clearInterval(fade);
+      } else {
+        audio.volume = vol;
+      }
+    }, 50);
+    setTimeout(() => { if(audio.volume < 1) audio.volume = 1; }, 1000);
+  }
+
   isPlaying = true;
   toggleIcons();
   localStorage.setItem("lastIndex", currentSongIndex);
-
-  let vol = 0;
-  const fade = setInterval(() => {
-    vol += 0.05;
-    if (vol >= 1) {
-      audio.volume = 1;
-      clearInterval(fade);
-    } else {
-      audio.volume = vol;
-    }
-  }, 50);
 }
 
 /* =========================================
@@ -300,7 +306,7 @@ function forcePlayVideo() {
 forcePlayVideo();
 
 /* =========================================
-   6. UTILITIES (UI, TOAST, SCROLL)
+   6. UTILITIES (UI, TOAST, SCROLL, SW, ETC)
    ========================================= */
 function toggleIcons() {
   iconPlay.style.display = isPlaying ? "none" : "inline";
@@ -330,28 +336,33 @@ function updateNowPlayingUI(song) {
       title: song.title,
       artist: song.artist || "Unknown",
       album: song.album || "Unknown",
-      artwork: [
-        { src: song.cover || 'covers/default.jpg', sizes: '512x512', type: 'image/png' }
-      ]
+      artwork: [{ src: song.cover || 'covers/default.jpg', sizes: '512x512', type: 'image/png' }]
     });
 
     navigator.mediaSession.setActionHandler('play', () => {
-  if (!isPlaying) btnPlay.click(); 
-    });
+    audio.play();
+    isPlaying = true;
+    toggleIcons();
+    const currentSong = songs[currentSongIndex];
+    startScrollingTitle(`🎶 ${currentSong.title} - ${currentSong.artist || "Unknown"} `);
+  });
     navigator.mediaSession.setActionHandler('pause', () => {
-  if (isPlaying) btnPlay.click();
-    });
-    navigator.mediaSession.setActionHandler('previoustrack', () => playPrev());
-    navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
+    audio.pause();
+    isPlaying = false;
+    toggleIcons();
+    clearInterval(scrollTitleInterval);
+  });
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+    playPrev();
+  });
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+    playNext();
+  });
     navigator.mediaSession.setActionHandler('seekto', (details) => {
-      if (details.seekTime) {
-        audio.currentTime = details.seekTime;
-        const progress = (audio.currentTime / audio.duration) * 100 || 0;
-        seek.value = progress;
-        seek.style.backgroundSize = progress + '% 100%';
-      }
-    });
-  }
+    if (details.seekTime) {
+      audio.currentTime = details.seekTime;
+    }
+  });
 }
 
 function startScrollingTitle(text) {
@@ -411,6 +422,22 @@ songList.addEventListener("scroll", () => {
     if (loadedCount < filterSongs.length) {
       loadMoreSongs();
     }
+  }
+});
+
+audio.addEventListener("playing", () => {
+  isPlaying = true;
+  toggleIcons();
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.playbackState = "playing";
+  }
+});
+
+audio.addEventListener("pause", () => {
+  isPlaying = false;
+  toggleIcons();
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.playbackState = "paused";
   }
 });
 
