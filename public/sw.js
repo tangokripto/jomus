@@ -1,6 +1,6 @@
 const CACHE_NAME = "Jomusic-cache-v6";
 const MUSIC_CACHE_NAME = "Jomusic-songs-cache"; // Cache khusus file mp3
-const MAX_AGE = 24 * 60 * 60 * 1000; // Batas simpan: 6 Jam (dalam milidetik)
+const MAX_AGE = 24 * 60 * 60 * 1000; // Batas simpan: 24 Jam (dalam milidetik)
 
 const STATIC_CACHE = [
   "/",
