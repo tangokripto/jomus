@@ -55,7 +55,6 @@ fetch("songs.json")
     currentSongIndex = saved ? parseInt(saved) : 0;
     
     renderPlaylist();
-    // Load more until current index is visible
     while (loadedCount <= currentSongIndex && loadedCount < songs.length) {
       loadMoreSongs();
     }
@@ -97,7 +96,6 @@ function playSong(resume = false) {
   toggleIcons();
   localStorage.setItem("lastIndex", currentSongIndex);
 
-  // Smooth volume fade-in
   let vol = 0;
   const fade = setInterval(() => {
     vol += 0.05;
@@ -137,8 +135,6 @@ function renderPlaylist(filter = "") {
     });
 
   loadMoreSongs();
-
-  // Memastikan lagu aktif ter-load ke dalam DOM setelah filter/render
   if (currentSongIndex !== -1) {
     ensureActiveSongVisible();
   }
@@ -160,12 +156,10 @@ function loadMoreSongs() {
   highlightActive(false);
 }
 
-// Fungsi baru: Memaksa load lagu yang sedang diputar agar tampil di list & bisa di-scroll
 function ensureActiveSongVisible() {
   const isSongInFilter = filterSongs.some(s => s.originalIndex === currentSongIndex);
   if (!isSongInFilter) return;
 
-  // Load bertahap sampai elemen lagu aktif masuk ke dalam HTML
   while (!songList.querySelector(`li[data-index="${currentSongIndex}"]`) && loadedCount < filterSongs.length) {
     loadMoreSongs();
   }
@@ -189,18 +183,15 @@ function highlightActive(shouldScroll = false) {
    4. CONTROLS & EVENTS
    ========================================= */
 function playNext() {
-  // Gunakan list yang sedang difilter (atau list utama jika tidak ada pencarian)
   const activeList = filterSongs.length > 0 ? filterSongs : songs.map((s, i) => ({...s, originalIndex: i}));
   let currentIndexInActiveList = activeList.findIndex(s => s.originalIndex === currentSongIndex);
 
   if (isShuffled) {
     currentIndexInActiveList = Math.floor(Math.random() * activeList.length);
   } else {
-    // Lanjut ke lagu berikutnya dalam daftar yang sama
     currentIndexInActiveList = (currentIndexInActiveList + 1) % activeList.length;
   }
 
-  // Ambil index aslinya untuk diputar
   currentSongIndex = activeList[currentIndexInActiveList].originalIndex;
   playSong();
 }
@@ -234,7 +225,6 @@ btnPlay.addEventListener("click", () => {
 btnNext.addEventListener("click", playNext);
 btnPrev.addEventListener("click", playPrev);
 
-// Search Handling
 searchInput.addEventListener("input", () => {
   renderPlaylist(searchInput.value);
   btnClearSearch.style.display = searchInput.value ? "block" : "none";
@@ -244,11 +234,9 @@ btnClearSearch.addEventListener("click", () => {
   searchInput.value = "";
   renderPlaylist();
   btnClearSearch.style.display = "none";
-  // Delay sedikit agar DOM selesai di-render sebelum scroll
   setTimeout(() => ensureActiveSongVisible(), 100);
 });
 
-// Repeat & Shuffle Init
 isShuffled = localStorage.getItem("isShuffled") === "true";
 isRepeating = localStorage.getItem("isRepeating") === "true";
 btnShuffle.classList.toggle("active-control", isShuffled);
@@ -278,16 +266,13 @@ function changeVideo() {
 
     if (!vContainer || !vSource || !vElement) return;
 
-    // 1. Fade Out
     vContainer.style.opacity = '0';
 
     setTimeout(() => {
         currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
         vSource.src = videoList[currentVideoIndex];
-        
         vElement.load();
         
-        // 2. Fade In
         vElement.addEventListener('canplay', function startPlay() {
             vElement.play();
             vContainer.style.opacity = '1';
@@ -298,11 +283,9 @@ function changeVideo() {
 
 setInterval(changeVideo, 300000);
 
-// Force Background Video Play (iOS Optimization)
 function forcePlayVideo() {
     if (videoElement) {
         videoElement.play().catch(() => {
-            // Jika Safari nge-blokir autoplay, tunggu user tap layar 1x
             const playOnGesture = () => {
                 videoElement.play();
                 document.removeEventListener('click', playOnGesture);
@@ -322,6 +305,11 @@ forcePlayVideo();
 function toggleIcons() {
   iconPlay.style.display = isPlaying ? "none" : "inline";
   iconPause.style.display = isPlaying ? "inline" : "none";
+
+  // UPDATE MEDIA SESSION STATE
+  if ('mediaSession' in navigator) {
+    navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
+  }
 }
 
 function updateNowPlayingUI(song) {
@@ -336,11 +324,32 @@ function updateNowPlayingUI(song) {
     updateFavicon(song.cover);
   }
 
+  // ENHANCED MEDIA SESSION API
   if ('mediaSession' in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: song.title,
-      artist: song.artist,
-      artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
+      artist: song.artist || "Unknown",
+      album: song.album || "Unknown",
+      artwork: [
+        { src: song.cover || 'covers/default.jpg', sizes: '512x512', type: 'image/png' }
+      ]
+    });
+
+    // Handlers agar tombol di Lock Screen & TWS berfungsi
+    navigator.mediaSession.setActionHandler('play', () => {
+      audio.play();
+      isPlaying = true;
+      toggleIcons();
+    });
+    navigator.mediaSession.setActionHandler('pause', () => {
+      audio.pause();
+      isPlaying = false;
+      toggleIcons();
+    });
+    navigator.mediaSession.setActionHandler('previoustrack', () => playPrev());
+    navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
+    navigator.mediaSession.setActionHandler('seekto', (details) => {
+      if (details.seekTime) audio.currentTime = details.seekTime;
     });
   }
 }
@@ -405,7 +414,6 @@ songList.addEventListener("scroll", () => {
   }
 });
 
-// Service Worker
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').catch(err => console.log(err));
 }
