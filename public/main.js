@@ -17,8 +17,6 @@ const iconPause = document.getElementById("icon-pause");
 const btnClearSearch = document.getElementById("clear-search");
 const durationText = document.getElementById("duration");
 
-
-
 // Video Elements
 const videoElement = document.getElementById('bg-video');
 const videoSource = document.getElementById('video-source');
