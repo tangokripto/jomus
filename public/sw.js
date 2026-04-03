@@ -1,7 +1,4 @@
-const CACHE_NAME = "Jomusic-cache-v6";
-const MUSIC_CACHE_NAME = "Jomusic-songs-cache";
-const MAX_AGE = 24 * 60 * 60 * 1000;
-
+const CACHE_NAME = "Jomusic-cache-v3";
 const STATIC_CACHE = [
   "/",
   "/index.html",
@@ -21,38 +18,16 @@ const VIDEO_ASSETS = [
 
 self.addEventListener("install", event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll([...STATIC_CACHE, ...VIDEO_ASSETS]))
+    caches.open(CACHE_NAME).then(cache => {
+      console.log("Caching Core & Videos...");
+      return cache.addAll([...STATIC_CACHE, ...VIDEO_ASSETS]);
+    })
   );
   self.skipWaiting();
 });
 
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
-  if (url.pathname.endsWith('.mp3') || url.pathname.endsWith('.m4a')) {
-    event.respondWith(
-      caches.open(MUSIC_CACHE_NAME).then(cache => {
-        return cache.match(event.request).then(cachedResponse => {
-          if (cachedResponse) {
-            const dateHeader = cachedResponse.headers.get('date');
-            const age = Date.now() - new Date(dateHeader).getTime();
-
-            if (age < MAX_AGE) {
-              return cachedResponse;
-            }
-          }
-
-          return fetch(event.request).then(networkResponse => {
-            if (networkResponse.status === 200) {
-              cache.put(event.request, networkResponse.clone());
-            }
-            return networkResponse;
-          });
-        });
-      })
-    );
-    return;
-  }
-
   if (url.pathname.endsWith('songs.json')) {
     event.respondWith(
       fetch(event.request)
@@ -62,36 +37,29 @@ self.addEventListener("fetch", event => {
             return response;
           });
         })
-        .catch(() => caches.match(event.request))
+        .catch(() => {
+          return caches.match(event.request);
+        })
     );
     return;
   }
 
   event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request).catch(() => {
+        if (event.request.destination === "document") {
+          return caches.match("/index.html");
+        }
+      });
+    })
   );
 });
 
 self.addEventListener("activate", event => {
   event.waitUntil(
-    Promise.all([
-      caches.keys().then(keys => Promise.all(
-        keys.filter(key => key !== CACHE_NAME && key !== MUSIC_CACHE_NAME)
-            .map(key => caches.delete(key))
-      )),
-      caches.open(MUSIC_CACHE_NAME).then(cache => {
-        cache.keys().then(requests => {
-          requests.forEach(request => {
-            cache.match(request).then(response => {
-              const date = response.headers.get('date');
-              if (Date.now() - new Date(date).getTime() > MAX_AGE) {
-                cache.delete(request);
-              }
-            });
-          });
-        });
-      })
-    ])
+    caches.keys().then(keys => Promise.all(
+      keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+    ))
   );
   self.clients.claim();
 });
