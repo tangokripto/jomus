@@ -335,21 +335,21 @@ function updateNowPlayingUI(song) {
       ]
     });
 
-    // Handlers agar tombol di Lock Screen & TWS berfungsi
     navigator.mediaSession.setActionHandler('play', () => {
-      audio.play();
-      isPlaying = true;
-      toggleIcons();
+  if (!isPlaying) btnPlay.click(); 
     });
     navigator.mediaSession.setActionHandler('pause', () => {
-      audio.pause();
-      isPlaying = false;
-      toggleIcons();
+  if (isPlaying) btnPlay.click();
     });
     navigator.mediaSession.setActionHandler('previoustrack', () => playPrev());
     navigator.mediaSession.setActionHandler('nexttrack', () => playNext());
     navigator.mediaSession.setActionHandler('seekto', (details) => {
-      if (details.seekTime) audio.currentTime = details.seekTime;
+      if (details.seekTime) {
+        audio.currentTime = details.seekTime;
+        const progress = (audio.currentTime / audio.duration) * 100 || 0;
+        seek.value = progress;
+        seek.style.backgroundSize = progress + '% 100%';
+      }
     });
   }
 }
