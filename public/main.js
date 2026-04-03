@@ -428,19 +428,3 @@ songList.addEventListener("scroll", () => {
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').catch(err => console.log(err));
 }
-
-audio.addEventListener("playing", () => {
-  isPlaying = true;
-  toggleIcons();
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.playbackState = "playing";
-  }
-});
-
-audio.addEventListener("pause", () => {
-  isPlaying = false;
-  toggleIcons();
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.playbackState = "paused";
-  }
-});
