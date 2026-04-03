@@ -1,6 +1,7 @@
 /* =========================================
    1. INITIALIZATION & VARIABLES
    ========================================= */
+
 const audio = new Audio();
 const nowPlaying = document.getElementById("now-playing");
 const seek = document.getElementById("seek");
@@ -15,6 +16,8 @@ const iconPlay = document.getElementById("icon-play");
 const iconPause = document.getElementById("icon-pause");
 const btnClearSearch = document.getElementById("clear-search");
 const durationText = document.getElementById("duration");
+
+
 
 // Video Elements
 const videoElement = document.getElementById('bg-video');
@@ -31,10 +34,9 @@ let songs = [];
 let filterSongs = [];
 let scrollTitleInterval;
 let scrollTitleOffset = 0;
-
 const SONGS_PER_LOAD = 20;
-let loadedCount = 0;
 
+let loadedCount = 0;
 const videoList = [
   'https://f003.backblazeb2.com/file/music-pribadi/evelyn.3840x2160.mp4',
   'https://f003.backblazeb2.com/file/music-pribadi/hunt-showdown-death-roots.3840x2160.mp4',
@@ -45,15 +47,14 @@ const videoList = [
 /* =========================================
    2. SONG CORE LOGIC (FETCH & LOAD)
    ========================================= */
+
 fetch("songs.json")
   .then(res => res.json())
   .then(data => {
     songs = data;
     songs.sort((a, b) => a.artist?.toLowerCase().localeCompare(b.artist?.toLowerCase()));
-    
     const saved = localStorage.getItem("lastIndex");
     currentSongIndex = saved ? parseInt(saved) : 0;
-    
     renderPlaylist();
     while (loadedCount <= currentSongIndex && loadedCount < songs.length) {
       loadMoreSongs();
@@ -66,18 +67,14 @@ fetch("songs.json")
 function loadSong(index, resume = false) {
   const song = songs[index];
   if (!song) return;
-
   nowPlaying.textContent = "Loading...";
   audio.pause();
   audio.src = song.url;
   audio.load();
-
   audio.addEventListener("canplay", function onReady() {
     audio.removeEventListener("canplay", onReady);
-    
     const savedIndex = parseInt(localStorage.getItem("lastIndex"));
     const savedTime = parseFloat(localStorage.getItem("lastTime"));
-
     if (resume && index === savedIndex && !isNaN(savedTime)) {
       audio.currentTime = savedTime;
     }
@@ -90,33 +87,28 @@ function loadSong(index, resume = false) {
 
 function playSong(resume = false) {
   loadSong(currentSongIndex, resume);
-if (document.hidden) {
-    audio.volume = 1;
-    audio.play().catch(err => console.error("Playback failed:", err));
-  } else {
-    audio.volume = 0;
-    audio.play();
-    let vol = 0;
-    const fade = setInterval(() => {
-      vol += 0.05;
-      if (vol >= 1) {
-        audio.volume = 1;
-        clearInterval(fade);
-      } else {
-        audio.volume = vol;
-      }
-    }, 50);
-    setTimeout(() => { if(audio.volume < 1) audio.volume = 1; }, 1000);
-  }
-
+  audio.volume = 0;
+  audio.play();
   isPlaying = true;
   toggleIcons();
   localStorage.setItem("lastIndex", currentSongIndex);
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    vol += 0.05;
+    if (vol >= 1) {
+      audio.volume = 1;
+      clearInterval(fade);
+    } else {
+      audio.volume = vol;
+    }
+  }, 50);
 }
 
 /* =========================================
    3. PLAYLIST & SEARCH
    ========================================= */
+
 function renderPlaylist(filter = "") {
   songList.innerHTML = "";
   loadedCount = 0;
@@ -130,7 +122,6 @@ function renderPlaylist(filter = "") {
       const album = (song.album || "").toLowerCase();
       const genre = (song.genre || "").toLowerCase();
       const file = (song.file || "").toLowerCase();
-
       return (
         title.includes(query) ||
         artist.includes(query) ||
@@ -139,7 +130,6 @@ function renderPlaylist(filter = "") {
         file.includes(query)
       );
     });
-
   loadMoreSongs();
   if (currentSongIndex !== -1) {
     ensureActiveSongVisible();
@@ -165,7 +155,6 @@ function loadMoreSongs() {
 function ensureActiveSongVisible() {
   const isSongInFilter = filterSongs.some(s => s.originalIndex === currentSongIndex);
   if (!isSongInFilter) return;
-
   while (!songList.querySelector(`li[data-index="${currentSongIndex}"]`) && loadedCount < filterSongs.length) {
     loadMoreSongs();
   }
@@ -188,16 +177,15 @@ function highlightActive(shouldScroll = false) {
 /* =========================================
    4. CONTROLS & EVENTS
    ========================================= */
+
 function playNext() {
   const activeList = filterSongs.length > 0 ? filterSongs : songs.map((s, i) => ({...s, originalIndex: i}));
   let currentIndexInActiveList = activeList.findIndex(s => s.originalIndex === currentSongIndex);
-
   if (isShuffled) {
     currentIndexInActiveList = Math.floor(Math.random() * activeList.length);
   } else {
     currentIndexInActiveList = (currentIndexInActiveList + 1) % activeList.length;
   }
-
   currentSongIndex = activeList[currentIndexInActiveList].originalIndex;
   playSong();
 }
@@ -205,9 +193,7 @@ function playNext() {
 function playPrev() {
   const activeList = filterSongs.length > 0 ? filterSongs : songs.map((s, i) => ({...s, originalIndex: i}));
   let currentIndexInActiveList = activeList.findIndex(s => s.originalIndex === currentSongIndex);
-
   currentIndexInActiveList = (currentIndexInActiveList - 1 + activeList.length) % activeList.length;
-  
   currentSongIndex = activeList[currentIndexInActiveList].originalIndex;
   playSong();
 }
@@ -219,6 +205,7 @@ btnPlay.addEventListener("click", () => {
     isPlaying = false;
     clearInterval(scrollTitleInterval);
     localStorage.setItem("lastTime", audio.currentTime.toString());
+
   } else {
     audio.play();
     isPlaying = true;
@@ -245,6 +232,7 @@ btnClearSearch.addEventListener("click", () => {
 
 isShuffled = localStorage.getItem("isShuffled") === "true";
 isRepeating = localStorage.getItem("isRepeating") === "true";
+
 btnShuffle.classList.toggle("active-control", isShuffled);
 btnRepeat.classList.toggle("active-control", isRepeating);
 
@@ -265,30 +253,27 @@ btnRepeat.addEventListener("click", () => {
 /* =========================================
    5. VIDEO ROTATION (FIXED ID)
    ========================================= */
+
 function changeVideo() {
     const vContainer = document.getElementById('video-container');
     const vSource = document.getElementById('video-source');
     const vElement = document.getElementById('bg-video');
-
     if (!vContainer || !vSource || !vElement) return;
-
     vContainer.style.opacity = '0';
-
     setTimeout(() => {
         currentVideoIndex = (currentVideoIndex + 1) % videoList.length;
         vSource.src = videoList[currentVideoIndex];
         vElement.load();
-        
+
         vElement.addEventListener('canplay', function startPlay() {
             vElement.play();
             vContainer.style.opacity = '1';
             vElement.removeEventListener('canplay', startPlay);
         }, { once: true });
-    }, 1500); 
+    }, 1500);
 }
 
 setInterval(changeVideo, 300000);
-
 function forcePlayVideo() {
     if (videoElement) {
         videoElement.play().catch(() => {
@@ -302,27 +287,22 @@ function forcePlayVideo() {
         });
     }
 }
-
 forcePlayVideo();
 
 /* =========================================
-   6. UTILITIES (UI, TOAST, SCROLL, SW, ETC)
+   6. UTILITIES (UI, TOAST, SCROLL)
    ========================================= */
+
 function toggleIcons() {
   iconPlay.style.display = isPlaying ? "none" : "inline";
   iconPause.style.display = isPlaying ? "inline" : "none";
-
-  // UPDATE MEDIA SESSION STATE
-  if ('mediaSession' in navigator) {
-    navigator.mediaSession.playbackState = isPlaying ? "playing" : "paused";
-  }
 }
 
 function updateNowPlayingUI(song) {
   document.getElementById("song-artist").textContent = song.artist || "Unknown";
   document.getElementById("song-album").textContent = song.album || "Unknown";
   document.getElementById("song-genre").textContent = song.genre || "Unknown";
-  
+
   const cover = document.getElementById("cover-art");
   if (song.cover) {
     cover.src = song.cover;
@@ -330,39 +310,13 @@ function updateNowPlayingUI(song) {
     updateFavicon(song.cover);
   }
 
-  // ENHANCED MEDIA SESSION API
   if ('mediaSession' in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
       title: song.title,
-      artist: song.artist || "Unknown",
-      album: song.album || "Unknown",
-      artwork: [{ src: song.cover || 'covers/default.jpg', sizes: '512x512', type: 'image/png' }]
+      artist: song.artist,
+      artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
     });
-
-    navigator.mediaSession.setActionHandler('play', () => {
-    audio.play();
-    isPlaying = true;
-    toggleIcons();
-    const currentSong = songs[currentSongIndex];
-    startScrollingTitle(`🎶 ${currentSong.title} - ${currentSong.artist || "Unknown"} `);
-  });
-    navigator.mediaSession.setActionHandler('pause', () => {
-    audio.pause();
-    isPlaying = false;
-    toggleIcons();
-    clearInterval(scrollTitleInterval);
-  });
-    navigator.mediaSession.setActionHandler('previoustrack', () => {
-    playPrev();
-  });
-    navigator.mediaSession.setActionHandler('nexttrack', () => {
-    playNext();
-  });
-    navigator.mediaSession.setActionHandler('seekto', (details) => {
-    if (details.seekTime) {
-      audio.currentTime = details.seekTime;
-    }
-  });
+  }
 }
 
 function startScrollingTitle(text) {
@@ -388,7 +342,6 @@ audio.addEventListener("timeupdate", () => {
   seek.value = progress;
   seek.style.backgroundSize = progress + '% 100%';
   durationText.textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration || 0)}`;
-  
   if (!audio.seeking && !audio.paused) {
     localStorage.setItem("lastTime", audio.currentTime.toString());
   }
@@ -400,7 +353,6 @@ seek.addEventListener("input", () => {
 });
 
 audio.addEventListener("ended", () => isRepeating ? audio.play() : playNext());
-
 function formatTime(seconds) {
   const min = Math.floor(seconds / 60) || 0;
   const sec = Math.floor(seconds % 60) || 0;
