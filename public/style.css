@@ -78,9 +78,9 @@ body::before {
   z-index: 10;
 }
 
-/* =========================================
+/* ===============================================
    BASE PLAYER CARD (Optimized for FHD/4K/Mobile)
-   ========================================= */
+   =============================================== */
 .player-card {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(10px);
@@ -91,8 +91,6 @@ body::before {
   max-width: 360px;
   border-radius: 2rem;
   padding: 1.5rem;
-  
-  /* FITUR ANTI LUBER */
   max-height: 95vh; 
   display: flex;
   flex-direction: column;
@@ -109,7 +107,7 @@ body::before {
   transition: transform 0.3s ease;
   display: block;
   margin: 0 auto;
-  flex-shrink: 0; /* Mencegah gambar gepeng saat layar sempit */
+  flex-shrink: 0;
 }
 
 .song-title { 
@@ -230,11 +228,11 @@ body::before {
 
 /* Playlist Area (Scrollable & Optimized) */
 .song-list-container { 
-  flex-grow: 1; /* Mengambil sisa ruang kartu */
+  flex-grow: 1;
   overflow-y: auto; 
   padding-right: 5px; 
   margin-top: 8px;
-  min-height: 0; /* Penting untuk Flexbox */
+  min-height: 0;
 }
 
 /* Custom Scrollbar Playlist */
@@ -294,47 +292,37 @@ body::before {
   .search-input { padding: 0.75rem 1rem; }
   .playlist-title { font-size: 0.8rem; margin-bottom: 10px; }
 
-  /* FIX 4K LUBER: Playlist elastis tapi mentok di 7-8 lagu */
   .song-list-container {
     flex-grow: 0 !important;
     height: auto !important; 
-    /* Di 4K layar lebih lega, kita bisa set max-height sedikit lebih tinggi 
-       sekitar 280px-300px agar muat 7-8 lagu dengan padding PC */
     max-height: 300px !important; 
     overflow-y: auto !important;
     margin-top: 15px !important;
   }
   
-  /* Di PC, playlist bisa lebih panjang tapi tetap aman karena max-height kartu */
   #song-list li { font-size: 0.85rem; padding: 8px 14px; }
 }
 
 /* =========================================
-   FIX KHUSUS DESKTOP RESOLUSI RENDAH (FHD)
-   Aktif jika lebar layar PC >= 1024px DAN tinggi layar <= 1000px
-   (Ini tidak akan mengganggu tampilan HP karena HP lebarnya kecil)
+   FIX FHD Optimized
    ========================================= */
 @media (min-width: 1024px) and (max-height: 1000px) {
   
-  /* 1. Paksa Card Player Center & Fit di layar */
   .player-card {
-    max-height: 90vh !important; /* Batasi tinggi total kartu */
+    max-height: 90vh !important; 
     display: flex !important;
     flex-direction: column !important;
     justify-content: flex-start !important;
-    /* Sedikit kurangi padding luar agar space konten lebih luas */
     padding: 1rem !important; 
-    max-width: 350px !important; /* Sedikit rampingkan di FHD */
+    max-width: 350px !important;
   }
 
-  /* 2. Kecilkan Cover Art agar hemat tempat */
   .cover-image {
-    width: 130px !important; /* Dari aslinya 160px/250px */
+    width: 130px !important;
     height: 130px !important;
     margin-bottom: 0.5rem !important;
   }
 
-  /* 3. Padatkan area teks informasi lagu */
   .song-title {
     font-size: 1rem !important;
   }
@@ -344,45 +332,41 @@ body::before {
     font-size: 0.75rem !important;
   }
   .song-meta-text p {
-    margin: 1px 0 !important; /* Rapatkan jarak antar baris */
+    margin: 1px 0 !important;
   }
 
-  /* 4. Padatkan area Controls (tombol-tombol) */
   .controls-container {
     margin-bottom: 0.75rem !important;
   }
-  /* Kecilkan padding tombol play biar gak makan tempat */
+
   .play-btn {
     padding: 0.8rem !important;
   }
   
-  /* 5. Padatkan Input Search */
   .search-input {
     padding: 0.5rem 0.75rem !important;
     font-size: 14px !important;
   }
 
-  /* 6. Atur ulang Playlist Container agar Fit & Scroll */
   .playlist-title {
     margin-top: 5px !important;
     margin-bottom: 5px !important;
   }
 
   .song-list-container {
-    flex-grow: 0 !important; /* Paksa ambil sisa ruang */
-    overflow-y: auto !important; /* Aktifkan scrollbar */
+    flex-grow: 0 !important;
+    overflow-y: auto !important;
     height: auto !important;
     max-height: 195px !important;
     min-height: 0 !important;
     margin-top: 5px !important;
-    padding-bottom: 5px; /* Sedikit nafas di bawah */
+    padding-bottom: 5px;
   }
 
   .song-list-container::-webkit-scrollbar {
     display: none; 
   }
 
-  /* 7. Padatkan jarak list lagu */
   #song-list li {
     padding: 6px 10px !important;
     font-size: 0.65rem !important;
@@ -392,61 +376,50 @@ body::before {
 }
 
 /* =========================================
-   FIX KHUSUS SMARTPHONE (iOS / 6.1" Focus)
-   Optimasi untuk Add to Home Screen
+   FIX 6.1 Optimized
    ========================================= */
 @media (max-width: 500px) {
   
   #bg-video {
-    /* 50% horizontal (tengah), 60% vertical (agak turun) 
-       Ubah 60% ke angka lebih besar (misal 70%) kalau mau lebih turun lagi */
     object-position: 50% 100% !important;
   }
 
-  /* 1. Hilangkan area hitam & pastikan wrapper memenuhi layar penuh */
   .main-wrapper {
     padding: 0 !important;
     height: 100vh !important;
-    height: -webkit-fill-available !important; /* Fix untuk iOS Safari */
+    height: -webkit-fill-available !important;
     display: flex !important;
-    align-items: flex-end !important; /* Kita ganti ke flex-end agar bisa kita dorong dari bawah */
+    align-items: flex-end !important;
     justify-content: center !important;
-    padding-bottom: 40px !important; /* Atur jarak kartu dari ujung bawah layar (Home Bar) */
+    padding-bottom: 40px !important;
   }
 
-  /* 2. Turunkan posisi kartu agar tidak terlalu 'nyundul' ke atas */
   .player-card {
-    margin-top: 20px !important; /* Memberi jarak dari area notch/jam */
-    /* Kalau mau diturunkan lagi secara manual, ubah angka 10px ini (makin besar makin turun) */
+    margin-top: 20px !important;
     transform: translateY(60px) !important;
-    max-height: 85vh !important; /* Sisakan ruang di bawah agar tidak luber */
+    max-height: 85vh !important;
     padding: 1.2rem !important;
     width: 88% !important;
   }
 
-  /* 3. Kecilkan Cover Art dikit lagi buat ruang playlist */
   .cover-image {
     width: 130px !important;
     height: 130px !important;
   }
 
-  /* 4. Batasi Playlist Mentok 5 Lagu (Mode Smartphone) */
   .song-list-container {
     flex-grow: 0 !important;
     height: auto !important;
-    /* Tinggi sekitar 145px - 155px biasanya pas untuk 5 lagu di HP */
     max-height: 145px !important; 
     overflow-y: auto !important;
     margin-top: 5px !important;
     padding-bottom: 5px !important;
   }
 
-  /* 5. Sembunyikan scrollbar di HP agar estetik */
   .song-list-container::-webkit-scrollbar {
     display: none !important;
   }
 
-  /* 6. Rapikan jarak antar lagu di HP */
   #song-list li {
     padding: 6px 10px !important;
     font-size: 0.7rem !important;
@@ -455,26 +428,22 @@ body::before {
 }
 
 /* =========================================
-   FIX KHUSUS IPHONE 4.7" (SE / 7 / 8)
-   Fokus: Mencegah luber di layar pendek
+   FIX 4.7 Optimized
    ========================================= */
 @media (max-height: 670px) and (max-width: 400px) {
   
-  /* 1. Perkecil padding utama agar kartu tidak terlalu tinggi */
   .player-card {
     padding: 1rem !important;
-    transform: translateY(60px) !important; /* Kurangi dorongan ke bawah agar muat */
+    transform: translateY(60px) !important;
     max-height: 95vh !important;
   }
 
-  /* 2. Cover Art diperkecil lagi */
   .cover-image {
     width: 110px !important;
     height: 110px !important;
     margin-bottom: 0.25rem !important;
   }
 
-  /* 3. Rapikan teks meta agar tidak makan tempat */
   .song-title {
     font-size: 0.95rem !important;
   }
@@ -487,7 +456,6 @@ body::before {
     margin: 0 !important;
   }
 
-  /* 4. Controls sedikit dipadatkan */
   .controls-container {
     margin-bottom: 0.5rem !important;
   }
@@ -497,9 +465,7 @@ body::before {
   .icon-md { width: 24px; height: 24px; }
   .icon-lg { width: 22px; height: 22px; }
 
-  /* 5. PEMBATASAN PLAYLIST (3-4 Lagu) */
   .song-list-container {
-    /* Tinggi sekitar 100px - 115px biasanya pas untuk 3-4 lagu */
     max-height: 110px !important; 
     margin-top: 4px !important;
   }
