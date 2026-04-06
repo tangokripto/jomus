@@ -1,0 +1,16 @@
+alur bot testnet
+
+1) task logic
+2) random interval (anti bot)
+3) rotator (random wallet)
+4) proxy (optional) + auto detect ip/domain + format proxy ip/host:port:user:pass
+5) fingerprint rotator + Auto-Retry & Identity Switcher (bypass cloudflare)
+6) Tls Impersonation (bypass cloudflare)
+7) windows headers (bypass cloudflare)
+8) curl_cffi python (nyamar browser sungguhan)
+9) profile browser locking agar tidak dicurigai bot
+10) report result/ report summary hasil nya failed berapa sukses berapa
+11) browser Impersonation
+12) Impersonate browser eg chrome edge safari
+13) browser fingerprint
+14) menu opsi, 1 fitur 2 fitur 3 exit
