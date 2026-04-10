@@ -223,7 +223,6 @@ body::before {
   text-transform: uppercase; 
   letter-spacing: 0.1em; 
   margin-top: 10px;
-  text-align: center;
 }
 
 /* Playlist Area (Scrollable & Optimized) */
