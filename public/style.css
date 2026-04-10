@@ -354,9 +354,9 @@ body::before {
   }
 
   .song-list-container {
-    flex-grow: 0 !important;
+    flex-grow: 1 !important;
     overflow-y: auto !important;
-    height: auto;
+    height: auto !important;
     max-height: 190px !important;
     min-height: 0 !important;
     margin-top: 5px !important;
