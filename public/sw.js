@@ -1,4 +1,4 @@
-const CACHE_NAME = "Jomusic-cache-v1";
+const CACHE_NAME = "Jomusic-cache-v0.3";
 const STATIC_CACHE = [
   "/",
   "/index.html",
@@ -28,7 +28,11 @@ self.addEventListener("install", event => {
 
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
-  if (url.pathname.endsWith('songs.json', 'style.css', 'main.js', 'index.html')) {
+
+  const updateFiles = ['songs.json', 'style.css', 'main.js', 'index.html'];
+  const isNetworkFirst = updateFiles.some(file => url.pathname.endsWith(file)) || url.pathname === '/';
+
+  if (isNetworkFirst) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
