@@ -28,7 +28,7 @@ self.addEventListener("install", event => {
 
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
-  if (url.pathname.endsWith('songs.json', 'style.css', 'main.js')) {
+  if (url.pathname.endsWith('songs.json', 'style.css', 'main.js', 'index.html')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
