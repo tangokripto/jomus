@@ -1,4 +1,4 @@
-const CACHE_NAME = "Jomusic-cache-v3"; // Versi naik ke v6 untuk mereset cache lama
+const CACHE_NAME = "Jomusic-cache-v1";
 const STATIC_CACHE = [
   "/",
   "/index.html",
@@ -16,7 +16,6 @@ const VIDEO_ASSETS = [
   'https://f003.backblazeb2.com/file/music-pribadi/the-shadow-fantasy-king-moewalls-com.mp4'
 ];
 
-// 1. Install Event: Simpan aset awal ke cache
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
@@ -27,35 +26,33 @@ self.addEventListener("install", event => {
   self.skipWaiting();
 });
 
-// 2. Fetch Event: Logika cerdas pemisahan songs.json dengan aset statis
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
+  
+  // Perbaikan logika: Cek apakah file termasuk dalam daftar Network First
+  const updateFiles = ['songs.json', 'style.css', 'main.js', 'index.html'];
+  const isNetworkFirst = updateFiles.some(file => url.pathname.endsWith(file)) || url.pathname === '/';
 
-  // STRATEGI KHUSUS UNTUK songs.json (Network First)
-  if (url.pathname.endsWith('songs.json')) {
+  if (isNetworkFirst) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
-          // Jika berhasil konek ke internet, update cache dengan data terbaru
           return caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, response.clone());
             return response;
           });
         })
         .catch(() => {
-          // Jika gagal (offline), ambil cadangan dari cache
           return caches.match(event.request);
         })
     );
     return;
   }
 
-  // STRATEGI UNTUK ASET LAIN (Cache First)
+  // Strategi Cache First untuk aset lainnya
   event.respondWith(
     caches.match(event.request).then(response => {
-      // Jika ada di cache pakai cache, jika tidak baru fetch internet
       return response || fetch(event.request).catch(() => {
-        // Fallback jika user sedang offline dan mencoba akses halaman utama
         if (event.request.destination === "document") {
           return caches.match("/index.html");
         }
@@ -64,7 +61,6 @@ self.addEventListener("fetch", event => {
   );
 });
 
-// 3. Activate Event: Bersihkan cache versi lama
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
