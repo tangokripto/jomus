@@ -1,4 +1,4 @@
-const CACHE_NAME = "Jomusic-cache-v3";
+const CACHE_NAME = "Jomusic-cache-v1";
 const STATIC_CACHE = [
   "/",
   "/index.html",
