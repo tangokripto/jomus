@@ -6,12 +6,16 @@
   <meta name="theme-color" content="#09090b" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="JoMusic">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="Personal Music Player with Background Playback">
   
   <title>Music Pleyah</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="covers/default.jpg">
 
   <style>
     #song-list::-webkit-scrollbar { width: 4px; }
@@ -43,6 +47,43 @@
     #toast.show {
       transform: translateX(-50%) translateY(0);
     }
+    
+    #install-prompt {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(200px);
+      background: rgba(240, 22, 87, 0.95);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 16px 24px;
+      border-radius: 16px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      z-index: 9999;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      max-width: 90%;
+    }
+    #install-prompt.show {
+      transform: translateX(-50%) translateY(0);
+    }
+    #install-prompt button {
+      background: white;
+      color: #f01657;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-left: 12px;
+      cursor: pointer;
+    }
+    #install-prompt .close-btn {
+      background: transparent;
+      color: white;
+      padding: 4px 12px;
+      margin-left: 8px;
+    }
 </style>
 </head>
 <body class="text-zinc-100 font-sans">
@@ -52,6 +93,12 @@
 </video>
 </div>
   <div id="toast"></div>
+  <div id="install-prompt">
+    📱 Install JoMusic as an app for better background playback!
+    <button id="install-btn">Install</button>
+    <button class="close-btn" id="install-close">✕</button>
+  </div>
+  
   <main class="main-wrapper">
     
     <div class="player-card">
@@ -102,5 +149,47 @@
   </main>
 
   <script src="main.js"></script>
+  <script>
+    // PWA Install Prompt Handler
+    let deferredPrompt;
+    const installPrompt = document.getElementById('install-prompt');
+    const installBtn = document.getElementById('install-btn');
+    const installClose = document.getElementById('install-close');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      
+      // Show install prompt after 5 seconds
+      setTimeout(() => {
+        if (!window.matchMedia('(display-mode: standalone)').matches) {
+          installPrompt.classList.add('show');
+        }
+      }, 5000);
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      
+      if (outcome === 'accepted') {
+        console.log('PWA installed');
+      }
+      
+      deferredPrompt = null;
+      installPrompt.classList.remove('show');
+    });
+
+    installClose.addEventListener('click', () => {
+      installPrompt.classList.remove('show');
+    });
+
+    // Hide install prompt if already installed
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      installPrompt.style.display = 'none';
+    }
+  </script>
 </body>
 </html>

@@ -1,6 +1,47 @@
 {
-  "name": "JoMusic",
-  "short_name": "JM",
-  "start_url": ".",
-  "display": "standalone"
+  "name": "JoMusic Player",
+  "short_name": "JoMusic",
+  "description": "Personal Music Player with Background Playback",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a1a1a",
+  "theme_color": "#1a1a1a",
+  "scope": "/",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/covers/default.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/covers/default.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["music", "entertainment"],
+  "screenshots": [],
+  "share_target": {
+    "action": "/",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "shortcuts": [
+    {
+      "name": "Play Music",
+      "short_name": "Play",
+      "description": "Start playing music",
+      "url": "/",
+      "icons": [{ "src": "/covers/default.jpg", "sizes": "192x192" }]
+    }
+  ]
 }

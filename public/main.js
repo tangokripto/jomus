@@ -33,6 +33,7 @@ let filterSongs = [];
 let scrollTitleInterval;
 let scrollTitleOffset = 0;
 const SONGS_PER_LOAD = 20;
+let wakeLock = null; // Wake Lock for preventing screen sleep affecting playback
 
 let loadedCount = 0;
 const videoList = [
@@ -90,10 +91,13 @@ function playSong(resume = false) {
   const playPromise = audio.play();
   if (playPromise !== undefined) {
     playPromise
-      .then(() => {
+      .then(async () => {
         isPlaying = true;
         toggleIcons();
         localStorage.setItem("lastIndex", currentSongIndex);
+        
+        // Request wake lock to keep playback alive
+        await requestWakeLock();
         
         let vol = 0;
         const fade = setInterval(() => {
@@ -207,22 +211,26 @@ function playPrev() {
   playSong();
 }
 
-btnPlay.addEventListener("click", () => {
+btnPlay.addEventListener("click", async () => {
   if (!songs.length) return;
   if (isPlaying) {
     audio.pause();
     isPlaying = false;
     clearInterval(scrollTitleInterval);
     localStorage.setItem("lastTime", audio.currentTime.toString());
+    // Release wake lock when paused
+    await releaseWakeLock();
   } else {
     const playPromise = audio.play();
     if (playPromise !== undefined) {
       playPromise
-        .then(() => {
+        .then(async () => {
           isPlaying = true;
           const song = songs[currentSongIndex];
           startScrollingTitle(`🎶 ${song.title} - ${song.artist || "Unknown"} `);
           toggleIcons();
+          // Request wake lock when playing
+          await requestWakeLock();
         })
         .catch(error => {
           console.log("Play prevented:", error);
@@ -306,6 +314,46 @@ function forcePlayVideo() {
     }
 }
 forcePlayVideo();
+
+/* =========================================
+   5.5. WAKE LOCK FOR BACKGROUND PLAYBACK
+   ========================================= */
+
+async function requestWakeLock() {
+  if (!('wakeLock' in navigator)) {
+    console.log('Wake Lock API not supported');
+    return;
+  }
+  
+  try {
+    wakeLock = await navigator.wakeLock.request('screen');
+    console.log('Wake Lock acquired');
+    
+    wakeLock.addEventListener('release', () => {
+      console.log('Wake Lock released');
+    });
+  } catch (err) {
+    console.log('Wake Lock error:', err);
+  }
+}
+
+async function releaseWakeLock() {
+  if (wakeLock !== null) {
+    try {
+      await wakeLock.release();
+      wakeLock = null;
+    } catch (err) {
+      console.log('Wake Lock release error:', err);
+    }
+  }
+}
+
+// Re-acquire wake lock when page becomes visible
+document.addEventListener('visibilitychange', async () => {
+  if (wakeLock !== null && document.visibilityState === 'visible') {
+    await requestWakeLock();
+  }
+});
 
 /* =========================================
    6. UTILITIES (UI, TOAST, SCROLL)
