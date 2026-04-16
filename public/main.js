@@ -86,21 +86,32 @@ function loadSong(index, resume = false) {
 function playSong(resume = false) {
   loadSong(currentSongIndex, resume);
   audio.volume = 0;
-  audio.play();
-  isPlaying = true;
-  toggleIcons();
-  localStorage.setItem("lastIndex", currentSongIndex);
-
-  let vol = 0;
-  const fade = setInterval(() => {
-    vol += 0.05;
-    if (vol >= 1) {
-      audio.volume = 1;
-      clearInterval(fade);
-    } else {
-      audio.volume = vol;
-    }
-  }, 50);
+  
+  const playPromise = audio.play();
+  if (playPromise !== undefined) {
+    playPromise
+      .then(() => {
+        isPlaying = true;
+        toggleIcons();
+        localStorage.setItem("lastIndex", currentSongIndex);
+        
+        let vol = 0;
+        const fade = setInterval(() => {
+          vol += 0.05;
+          if (vol >= 1) {
+            audio.volume = 1;
+            clearInterval(fade);
+          } else {
+            audio.volume = vol;
+          }
+        }, 50);
+      })
+      .catch(error => {
+        console.log("Playback prevented:", error);
+        isPlaying = false;
+        toggleIcons();
+      });
+  }
 }
 
 /* =========================================
@@ -203,14 +214,23 @@ btnPlay.addEventListener("click", () => {
     isPlaying = false;
     clearInterval(scrollTitleInterval);
     localStorage.setItem("lastTime", audio.currentTime.toString());
-
   } else {
-    audio.play();
-    isPlaying = true;
-    const song = songs[currentSongIndex];
-    startScrollingTitle(`🎶 ${song.title} - ${song.artist || "Unknown"} `);
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          isPlaying = true;
+          const song = songs[currentSongIndex];
+          startScrollingTitle(`🎶 ${song.title} - ${song.artist || "Unknown"} `);
+          toggleIcons();
+        })
+        .catch(error => {
+          console.log("Play prevented:", error);
+          isPlaying = false;
+          toggleIcons();
+        });
+    }
   }
-  toggleIcons();
 });
 
 btnNext.addEventListener("click", playNext);
@@ -314,6 +334,35 @@ function updateNowPlayingUI(song) {
       artist: song.artist,
       artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
     });
+    
+    // Setup Media Session Action Handlers for background playback
+    navigator.mediaSession.setActionHandler('play', () => {
+      audio.play();
+      isPlaying = true;
+      toggleIcons();
+    });
+    
+    navigator.mediaSession.setActionHandler('pause', () => {
+      audio.pause();
+      isPlaying = false;
+      toggleIcons();
+      localStorage.setItem("lastTime", audio.currentTime.toString());
+    });
+    
+    navigator.mediaSession.setActionHandler('previoustrack', () => {
+      playPrev();
+    });
+    
+    navigator.mediaSession.setActionHandler('nexttrack', () => {
+      playNext();
+    });
+    
+    navigator.mediaSession.setActionHandler('seekto', (details) => {
+      if (details.seekTime) {
+        audio.currentTime = details.seekTime;
+        localStorage.setItem("lastTime", audio.currentTime.toString());
+      }
+    });
   }
 }
 
@@ -350,7 +399,13 @@ seek.addEventListener("input", () => {
   seek.style.backgroundSize = seek.value + '% 100%';
 });
 
-audio.addEventListener("ended", () => isRepeating ? audio.play() : playNext());
+audio.addEventListener("ended", () => {
+  if (isRepeating) {
+    audio.play().catch(err => console.log("Repeat play error:", err));
+  } else {
+    playNext();
+  }
+});
 function formatTime(seconds) {
   const min = Math.floor(seconds / 60) || 0;
   const sec = Math.floor(seconds % 60) || 0;
@@ -377,4 +432,33 @@ songList.addEventListener("scroll", () => {
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').catch(err => console.log(err));
+}
+
+// Handle page visibility changes to maintain playback
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    // Page is hidden (screen locked or tab switched)
+    // Save current state but keep audio playing
+    if (isPlaying && !audio.paused) {
+      localStorage.setItem("lastTime", audio.currentTime.toString());
+      localStorage.setItem("wasPlayingBeforeHidden", "true");
+    }
+  } else {
+    // Page is visible again
+    // Resume if was playing before
+    const wasPlaying = localStorage.getItem("wasPlayingBeforeHidden");
+    if (wasPlaying === "true" && audio.paused && isPlaying) {
+      audio.play().catch(err => console.log("Resume error:", err));
+    }
+    localStorage.removeItem("wasPlayingBeforeHidden");
+  }
+});
+
+// Prevent audio context suspension on mobile
+if (audio.context) {
+  document.addEventListener('touchstart', () => {
+    if (audio.context.state === 'suspended') {
+      audio.context.resume();
+    }
+  }, { once: true });
 }
