@@ -33,7 +33,6 @@ let filterSongs = [];
 let scrollTitleInterval;
 let scrollTitleOffset = 0;
 const SONGS_PER_LOAD = 20;
-let wakeLock = null; // Wake Lock for preventing screen sleep affecting playback
 
 let loadedCount = 0;
 const videoList = [
@@ -87,35 +86,21 @@ function loadSong(index, resume = false) {
 function playSong(resume = false) {
   loadSong(currentSongIndex, resume);
   audio.volume = 0;
-  
-  const playPromise = audio.play();
-  if (playPromise !== undefined) {
-    playPromise
-      .then(async () => {
-        isPlaying = true;
-        toggleIcons();
-        localStorage.setItem("lastIndex", currentSongIndex);
-        
-        // Request wake lock to keep playback alive
-        await requestWakeLock();
-        
-        let vol = 0;
-        const fade = setInterval(() => {
-          vol += 0.05;
-          if (vol >= 1) {
-            audio.volume = 1;
-            clearInterval(fade);
-          } else {
-            audio.volume = vol;
-          }
-        }, 50);
-      })
-      .catch(error => {
-        console.log("Playback prevented:", error);
-        isPlaying = false;
-        toggleIcons();
-      });
-  }
+  audio.play();
+  isPlaying = true;
+  toggleIcons();
+  localStorage.setItem("lastIndex", currentSongIndex);
+
+  let vol = 0;
+  const fade = setInterval(() => {
+    vol += 0.05;
+    if (vol >= 1) {
+      audio.volume = 1;
+      clearInterval(fade);
+    } else {
+      audio.volume = vol;
+    }
+  }, 50);
 }
 
 /* =========================================
@@ -211,34 +196,21 @@ function playPrev() {
   playSong();
 }
 
-btnPlay.addEventListener("click", async () => {
+btnPlay.addEventListener("click", () => {
   if (!songs.length) return;
   if (isPlaying) {
     audio.pause();
     isPlaying = false;
     clearInterval(scrollTitleInterval);
     localStorage.setItem("lastTime", audio.currentTime.toString());
-    // Release wake lock when paused
-    await releaseWakeLock();
+
   } else {
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise
-        .then(async () => {
-          isPlaying = true;
-          const song = songs[currentSongIndex];
-          startScrollingTitle(`🎶 ${song.title} - ${song.artist || "Unknown"} `);
-          toggleIcons();
-          // Request wake lock when playing
-          await requestWakeLock();
-        })
-        .catch(error => {
-          console.log("Play prevented:", error);
-          isPlaying = false;
-          toggleIcons();
-        });
-    }
+    audio.play();
+    isPlaying = true;
+    const song = songs[currentSongIndex];
+    startScrollingTitle(`🎶 ${song.title} - ${song.artist || "Unknown"} `);
   }
+  toggleIcons();
 });
 
 btnNext.addEventListener("click", playNext);
@@ -316,46 +288,6 @@ function forcePlayVideo() {
 forcePlayVideo();
 
 /* =========================================
-   5.5. WAKE LOCK FOR BACKGROUND PLAYBACK
-   ========================================= */
-
-async function requestWakeLock() {
-  if (!('wakeLock' in navigator)) {
-    console.log('Wake Lock API not supported');
-    return;
-  }
-  
-  try {
-    wakeLock = await navigator.wakeLock.request('screen');
-    console.log('Wake Lock acquired');
-    
-    wakeLock.addEventListener('release', () => {
-      console.log('Wake Lock released');
-    });
-  } catch (err) {
-    console.log('Wake Lock error:', err);
-  }
-}
-
-async function releaseWakeLock() {
-  if (wakeLock !== null) {
-    try {
-      await wakeLock.release();
-      wakeLock = null;
-    } catch (err) {
-      console.log('Wake Lock release error:', err);
-    }
-  }
-}
-
-// Re-acquire wake lock when page becomes visible
-document.addEventListener('visibilitychange', async () => {
-  if (wakeLock !== null && document.visibilityState === 'visible') {
-    await requestWakeLock();
-  }
-});
-
-/* =========================================
    6. UTILITIES (UI, TOAST, SCROLL)
    ========================================= */
 
@@ -381,35 +313,6 @@ function updateNowPlayingUI(song) {
       title: song.title,
       artist: song.artist,
       artwork: [{ src: song.cover, sizes: '512x512', type: 'image/png' }]
-    });
-    
-    // Setup Media Session Action Handlers for background playback
-    navigator.mediaSession.setActionHandler('play', () => {
-      audio.play();
-      isPlaying = true;
-      toggleIcons();
-    });
-    
-    navigator.mediaSession.setActionHandler('pause', () => {
-      audio.pause();
-      isPlaying = false;
-      toggleIcons();
-      localStorage.setItem("lastTime", audio.currentTime.toString());
-    });
-    
-    navigator.mediaSession.setActionHandler('previoustrack', () => {
-      playPrev();
-    });
-    
-    navigator.mediaSession.setActionHandler('nexttrack', () => {
-      playNext();
-    });
-    
-    navigator.mediaSession.setActionHandler('seekto', (details) => {
-      if (details.seekTime) {
-        audio.currentTime = details.seekTime;
-        localStorage.setItem("lastTime", audio.currentTime.toString());
-      }
     });
   }
 }
@@ -447,13 +350,7 @@ seek.addEventListener("input", () => {
   seek.style.backgroundSize = seek.value + '% 100%';
 });
 
-audio.addEventListener("ended", () => {
-  if (isRepeating) {
-    audio.play().catch(err => console.log("Repeat play error:", err));
-  } else {
-    playNext();
-  }
-});
+audio.addEventListener("ended", () => isRepeating ? audio.play() : playNext());
 function formatTime(seconds) {
   const min = Math.floor(seconds / 60) || 0;
   const sec = Math.floor(seconds % 60) || 0;
@@ -480,33 +377,4 @@ songList.addEventListener("scroll", () => {
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/sw.js').catch(err => console.log(err));
-}
-
-// Handle page visibility changes to maintain playback
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) {
-    // Page is hidden (screen locked or tab switched)
-    // Save current state but keep audio playing
-    if (isPlaying && !audio.paused) {
-      localStorage.setItem("lastTime", audio.currentTime.toString());
-      localStorage.setItem("wasPlayingBeforeHidden", "true");
-    }
-  } else {
-    // Page is visible again
-    // Resume if was playing before
-    const wasPlaying = localStorage.getItem("wasPlayingBeforeHidden");
-    if (wasPlaying === "true" && audio.paused && isPlaying) {
-      audio.play().catch(err => console.log("Resume error:", err));
-    }
-    localStorage.removeItem("wasPlayingBeforeHidden");
-  }
-});
-
-// Prevent audio context suspension on mobile
-if (audio.context) {
-  document.addEventListener('touchstart', () => {
-    if (audio.context.state === 'suspended') {
-      audio.context.resume();
-    }
-  }, { once: true });
 }
