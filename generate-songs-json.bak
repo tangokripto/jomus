@@ -26,17 +26,17 @@ function slugify(text) {
 }
 
 async function extractAndSaveCover(pictureBuffer, filenameBase) {
-  const coverPath = path.join(coverDir, `${filenameBase}.jpg`);
-  if (fs.existsSync(coverPath)) return `covers/${filenameBase}.jpg`;
+  const coverPath = path.join(coverDir, `${filenameBase}.png`);
+  if (fs.existsSync(coverPath)) return `covers/${filenameBase}.png`;
 
   try {
     const outputBuffer = await sharp(pictureBuffer)
       .resize({ width: 1000, height: 1000, fit: 'inside' })
-      .jpeg({ quality: 90, chromaSubsampling: '4:4:4' })
+      .png({ compressionLevel: 0 })
       .toBuffer();
 
     fs.writeFileSync(coverPath, outputBuffer);
-    return `covers/${filenameBase}.jpg`;
+    return `covers/${filenameBase}.png`;
   } catch (err) {
     console.warn(`⚠️ Gagal kompres cover untuk ${filenameBase}:`, err.message);
     return null;
