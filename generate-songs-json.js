@@ -1,4 +1,4 @@
-// update-songs.js — FINAL GABUNGAN
+// generate-songs-json.js — FINAL FIXED
 
 const B2 = require('backblaze-b2');
 const fs = require('fs');
@@ -8,6 +8,7 @@ const axios = require('axios');
 const sharp = require('sharp');
 require('dotenv').config();
 
+console.log('🚀 SCRIPT STARTED - v2');
 const b2 = new B2({
   applicationKeyId: process.env.B2_KEY_ID,
   applicationKey: process.env.B2_APP_KEY,
@@ -25,17 +26,17 @@ function slugify(text) {
 }
 
 async function extractAndSaveCover(pictureBuffer, filenameBase) {
-  const coverPath = path.join(coverDir, `${filenameBase}.jpg`);
-  if (fs.existsSync(coverPath)) return `covers/${filenameBase}.jpg`;
+  const coverPath = path.join(coverDir, `${filenameBase}.png`);
+  if (fs.existsSync(coverPath)) return `covers/${filenameBase}.png`;
 
   try {
     const outputBuffer = await sharp(pictureBuffer)
-      .resize({ width: 300, height: 300, fit: 'inside' })
-      .jpeg({ quality: 70 })
+      .resize({ width: 1000, height: 1000, fit: 'inside' })
+      .png({ compressionLevel: 0 })
       .toBuffer();
 
     fs.writeFileSync(coverPath, outputBuffer);
-    return `covers/${filenameBase}.jpg`;
+    return `covers/${filenameBase}.png`;
   } catch (err) {
     console.warn(`⚠️ Gagal kompres cover untuk ${filenameBase}:`, err.message);
     return null;
@@ -71,37 +72,50 @@ async function getMetadataWithCover(url, filenameBase) {
   try {
     console.log('🔐 Authorizing...');
     await b2.authorize();
+    console.log('✅ Authorized');
 
     let existingSongs = [];
     if (fs.existsSync(outputPath)) {
-      existingSongs = JSON.parse(fs.readFileSync(outputPath, 'utf-8'));
+      const raw = fs.readFileSync(outputPath, 'utf-8');
+      existingSongs = JSON.parse(raw);
+      console.log(`📄 Existing songs: ${existingSongs.length}`);
     }
 
     const existingMap = new Map();
     existingSongs.forEach(song => existingMap.set(song.file, song));
 
     const bucketsResponse = await b2.listBuckets();
-    const bucket = bucketsResponse.data.buckets[0];
-    if (!bucket) return console.error('❌ Tidak ada bucket ditemukan.');
+    console.log('📦 Buckets:', bucketsResponse.data.buckets.map(b => b.bucketName));
+
+    const bucket = bucketsResponse.data.buckets.find(b => b.bucketName === 'music-pribadi');
+    if (!bucket) {
+      console.error('❌ Bucket tidak ditemukan. Available:', bucketsResponse.data.buckets.map(b => b.bucketName));
+      return;
+    }
+    console.log(`✅ Using bucket: ${bucket.bucketName} (${bucket.bucketId})`);
 
     let allSongs = [...existingSongs];
     let startFileName = null;
     let done = false;
 
     while (!done) {
+      console.log('📂 Listing files...');
       const list = await b2.listFileNames({
         bucketId: bucket.bucketId,
         startFileName,
         maxFileCount: 1000,
       });
 
-      const files = list.data.files.filter(f => f.fileName.endsWith('.mp3'));
+      const allFiles = list.data.files;
+      console.log(`📁 Total files in bucket: ${allFiles.length}`);
+
+      const files = allFiles.filter(f => f.fileName.endsWith('.mp3'));
+      console.log(`🎵 MP3 files found: ${files.length}`);
 
       for (const file of files) {
         const fileName = file.fileName;
         const fileUrl = `${b2.downloadUrl}/file/${bucket.bucketName}/${encodeURIComponent(fileName)}`;
 
-        // Jika sudah ada, skip
         if (existingMap.has(fileName)) {
           console.log(`⏩ Skip (sudah ada): ${fileName}`);
           continue;
@@ -121,7 +135,7 @@ async function getMetadataWithCover(url, filenameBase) {
           album: meta.album,
           genre: meta.genre,
           duration: meta.duration,
-          cover: meta.cover || 'covers/default.jpg',
+          cover: meta.cover || 'covers/default.png',
         };
 
         allSongs.push(newSong);
@@ -135,12 +149,11 @@ async function getMetadataWithCover(url, filenameBase) {
       }
     }
 
-    // Optional: sort alfabetis
     allSongs.sort((a, b) => a.file.localeCompare(b.file));
 
     fs.writeFileSync(outputPath, JSON.stringify(allSongs, null, 2));
     console.log(`✅ ${allSongs.length} lagu ditulis ke ${outputPath}`);
   } catch (err) {
-    console.error('❌ ERROR:', err.message || err);
+    console.error('❌ FULL ERROR:', err);
   }
 })();
