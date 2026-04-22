@@ -40,6 +40,16 @@
     "cover": "covers/2pac-hail-mary.jpg"
   },
   {
+    "file": "2Pac - I Don't Give A Fuck.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/2Pac%20-%20I%20Don't%20Give%20A%20Fuck.mp3",
+    "title": "I Don't Give A Fuck",
+    "artist": "2Pac",
+    "album": "2Pacalypse Now",
+    "genre": "Old school Hip Hop",
+    "duration": 260,
+    "cover": "covers/2pac-i-don-t-give-a-fuck.jpg"
+  },
+  {
     "file": "2Pac - Keep Ya Head Up.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/2Pac%20-%20Keep%20Ya%20Head%20Up.mp3",
     "title": "Keep Ya Head Up",
@@ -740,6 +750,16 @@
     "cover": "covers/avenged-sevenfold-bat-country.jpg"
   },
   {
+    "file": "Avenged Sevenfold - Blinded in Chains.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avenged%20Sevenfold%20-%20Blinded%20in%20Chains.mp3",
+    "title": "Blinded In Chains",
+    "artist": "Avenged Sevenfold",
+    "album": "City Of Evil",
+    "genre": "Heavy Metal",
+    "duration": 395,
+    "cover": "covers/avenged-sevenfold-blinded-in-chains.jpg"
+  },
+  {
     "file": "Avenged Sevenfold - Dear God.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Avenged%20Sevenfold%20-%20Dear%20God.mp3",
     "title": "Dear God",
@@ -808,6 +828,16 @@
     "genre": "Metal",
     "duration": 327,
     "cover": "covers/avenged-sevenfold-so-far-away.jpg"
+  },
+  {
+    "file": "Avenged Sevenfold - Unholy Confessions.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Avenged%20Sevenfold%20-%20Unholy%20Confessions.mp3",
+    "title": "Just Stop",
+    "artist": "Disturbed",
+    "album": "Ten Thousand Fists",
+    "genre": "Heavy Metal",
+    "duration": 284,
+    "cover": "covers/avenged-sevenfold-unholy-confessions.jpg"
   },
   {
     "file": "Belphegor - Baphomet.mp3",
@@ -1960,6 +1990,16 @@
     "cover": "covers/david-ferguson-the-housebuilding-song.jpg"
   },
   {
+    "file": "Dead by April - Stronger.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Dead%20by%20April%20-%20Stronger.mp3",
+    "title": "Stronger",
+    "artist": "Dead By April",
+    "album": "Dead By April",
+    "genre": "Rock",
+    "duration": 241,
+    "cover": "covers/dead-by-april-stronger.jpg"
+  },
+  {
     "file": "Deez Nuts - 5 Gold Chains.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Deez%20Nuts%20-%205%20Gold%20Chains.mp3",
     "title": "5 Gold Chains",
@@ -2068,6 +2108,16 @@
     "genre": "Big Room",
     "duration": 196,
     "cover": "covers/dimitri-vegas-like-mike-dimitri-vegas-wiz-khalifa-when-i-grow-up.jpg"
+  },
+  {
+    "file": "Disturbed - Decadence.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Disturbed%20-%20Decadence.mp3",
+    "title": "Decadence",
+    "artist": "Disturbed",
+    "album": "Ten Thousand Fists",
+    "genre": "Nu Metal",
+    "duration": 205,
+    "cover": "covers/disturbed-decadence.jpg"
   },
   {
     "file": "Don Omar, Tego Calderón - Los Bandoleros.mp3",
@@ -3858,6 +3908,16 @@
     "genre": "Metalcore",
     "duration": 205,
     "cover": "covers/motionless-in-white-another-life.jpg"
+  },
+  {
+    "file": "Motionless In White - c0de.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Motionless%20In%20White%20-%20c0de.mp3",
+    "title": "</c0de>",
+    "artist": "Motionless In White",
+    "album": "Disguise",
+    "genre": "Rock, Metalcore",
+    "duration": 228,
+    "cover": "covers/motionless-in-white-c0de.jpg"
   },
   {
     "file": "Motionless In White - Masterpiece.mp3",
@@ -6230,6 +6290,16 @@
     "cover": "covers/viscral-worldviews-mechanical.jpg"
   },
   {
+    "file": "Willie Nelson - Crazy.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Willie%20Nelson%20-%20Crazy.mp3",
+    "title": "Disguise",
+    "artist": "Motionless In White",
+    "album": "Disguise",
+    "genre": "Rock",
+    "duration": 173,
+    "cover": "covers/willie-nelson-crazy.jpg"
+  },
+  {
     "file": "Willie Nelson - Cruel World.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Willie%20Nelson%20-%20Cruel%20World.mp3",
     "title": "Cruel World",
@@ -7800,6 +7870,26 @@
     "cover": "covers/yungblud-nuno-bettencourt-frank-bello-adam-wakeman-ii-changes-live-from-villa-park-back-to-the-beginning-feat-nuno-bettencourt-frank-bello-adam-wakeman-ii.jpg"
   },
   {
+    "file": "yurisa - lemon.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/yurisa%20-%20lemon.mp3",
+    "title": "Headache",
+    "artist": "Motionless In White",
+    "album": "Disguise",
+    "genre": "Rock",
+    "duration": 255,
+    "cover": "covers/yurisa-lemon.jpg"
+  },
+  {
+    "file": "yurisa - nandemonaiya.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/yurisa%20-%20nandemonaiya.mp3",
+    "title": "Thoughts & Prayers",
+    "artist": "Motionless In White",
+    "album": "Disguise",
+    "genre": "Rock",
+    "duration": 261,
+    "cover": "covers/yurisa-nandemonaiya.jpg"
+  },
+  {
     "file": "Zedd, Foxes - Clarity.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Zedd%2C%20Foxes%20-%20Clarity.mp3",
     "title": "Clarity",
@@ -7828,5 +7918,15 @@
     "genre": "Afro House",
     "duration": 148,
     "cover": "covers/zerb-ty-dolla-ign-wiz-khalifa-location.jpg"
+  },
+  {
+    "file": "麦吉_Maggie - 耳わほう.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/%E9%BA%A6%E5%90%89_Maggie%20-%20%E8%80%B3%E3%82%8F%E3%81%BB%E3%81%86.mp3",
+    "title": "Legacy",
+    "artist": "Motionless In White",
+    "album": "Disguise",
+    "genre": "Rock",
+    "duration": 244,
+    "cover": "covers/maggie.jpg"
   }
 ]
