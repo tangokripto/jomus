@@ -1957,7 +1957,7 @@
     "album": "Unknown Album",
     "genre": "Rock",
     "duration": 158,
-    "cover": "covers/default.png"
+    "cover": "covers/default.jpg"
   },
   {
     "file": "Daniel Lanois - Mountain Finale.mp3",
@@ -2360,7 +2360,7 @@
     "cover": "covers/flow-go.jpg"
   },
   {
-    "file": "FLOW - Re:member.mp3",
+    "file": "FLOW - Remember.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/FLOW%20-%20Re%EF%80%BAmember.mp3",
     "title": "Re:member",
     "artist": "Flow",
@@ -3147,7 +3147,7 @@
     "album": "GTA San Andreas Radio",
     "genre": "Radio",
     "duration": 4370,
-    "cover": "covers/default.png"
+    "cover": "covers/default.jpg"
   },
   {
     "file": "K-Rose - Radio - GTA San Andreas.mp3",
@@ -3157,7 +3157,7 @@
     "album": "GTA San Andreas Radio",
     "genre": "Radio",
     "duration": 2631,
-    "cover": "covers/default.png"
+    "cover": "covers/default.jpg"
   },
   {
     "file": "KANA-BOON - Silhouette.mp3",
@@ -3757,7 +3757,7 @@
     "album": "Unknown Album",
     "genre": "Game",
     "duration": 183,
-    "cover": "covers/default.png"
+    "cover": "covers/default.jpg"
   },
   {
     "file": "Louis Armstrong - What A Wonderful World.mp3",
@@ -3795,7 +3795,7 @@
     "title": "Rude",
     "artist": "MAGIC!",
     "album": "Don't Kill the Magic",
-    "genre": "Pop",
+    "genre": "Unknown Genre",
     "duration": 225,
     "cover": "covers/magic-rude.jpg"
   },
@@ -3918,16 +3918,6 @@
     "genre": "Instrumental",
     "duration": 171,
     "cover": "covers/michael-hunter-soviet-connection.jpg"
-  },
-  {
-    "file": "Motionless In White - </c0de>.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/Motionless%20In%20White%20-%20c0de.mp3",
-    "title": "</c0de>",
-    "artist": "Motionless In White",
-    "album": "Disguise",
-    "genre": "Rock, Metalcore",
-    "duration": 228,
-    "cover": "covers/motionless-in-white-c0de.jpg"
   },
   {
     "file": "Motionless In White - Another Life.mp3",
@@ -7925,7 +7915,7 @@
     "title": "Changes (Live From Villa Park) Back To The Beginning (feat. Nuno Bettencourt, Frank Bello, Adam Wakeman, II)",
     "artist": "YUNGBLUD",
     "album": "Changes (Live From Villa Park) Back To The Beginning (feat. Nuno Bettencourt, Frank Bello, Adam Wakeman, II)",
-    "genre": "Rock",
+    "genre": "Unknown Genre",
     "duration": 340,
     "cover": "covers/yungblud-nuno-bettencourt-frank-bello-adam-wakeman-ii-changes-live-from-villa-park-back-to-the-beginning-feat-nuno-bettencourt-frank-bello-adam-wakeman-ii.jpg"
   },
