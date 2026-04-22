@@ -189,7 +189,9 @@ async function getMetadataWithCover(url, filenameBase) {
           album: meta.album,
           genre: meta.genre,
           duration: meta.duration,
-          cover: meta.cover || 'covers/default.jpg',
+          cover: meta.cover
+            ? `${downloadUrl}/file/${bucket.bucketName}/${meta.cover}`
+            : `${downloadUrl}/file/${bucket.bucketName}/covers/default.jpg`,
         };
 
         allSongs.push(newSong);
