@@ -11,13 +11,13 @@
   "prefer_related_applications": false,
   "icons": [
     {
-      "src": "/covers/default.jpg",
+      "src": "https://f003.backblazeb2.com/file/music-pribadi/covers/default.jpg",
       "sizes": "192x192",
       "type": "image/jpeg",
       "purpose": "any maskable"
     },
     {
-      "src": "/covers/default.jpg",
+      "src": "https://f003.backblazeb2.com/file/music-pribadi/covers/default.jpg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"
@@ -41,7 +41,7 @@
       "short_name": "Play",
       "description": "Start playing music",
       "url": "/",
-      "icons": [{ "src": "/covers/default.jpg", "sizes": "192x192" }]
+      "icons": [{ "src": "https://f003.backblazeb2.com/file/music-pribadi/covers/default.jpg", "sizes": "192x192" }]
     }
   ]
 }

@@ -1,4 +1,4 @@
-const CACHE_NAME = "Jomusic-cache-v0.4";
+const CACHE_NAME = "Jomusic-cache-v0.5";
 const STATIC_CACHE = [
   "/",
   "/index.html",
@@ -6,7 +6,7 @@ const STATIC_CACHE = [
   "/main.js",
   "/songs.json",
   "/manifest.json",
-  "/covers/default.jpg",
+  "https://f003.backblazeb2.com/file/music-pribadi/covers/default.jpg",
   "https://f003.backblazeb2.com/file/music-pribadi/tyler-lastovich-hM08wZJBlK4-unsplash.webp"
 ];
 
@@ -30,16 +30,14 @@ self.addEventListener("install", event => {
 self.addEventListener("fetch", event => {
   const url = new URL(event.request.url);
 
-  // Audio files - always network first with cache fallback
+  // Audio files - always network first, don't cache (too large)
   if (url.pathname.endsWith('.mp3') || url.pathname.endsWith('.m4a') || url.pathname.endsWith('.flac')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
-          // Don't cache audio files (too large), just stream
           return response;
         })
         .catch(() => {
-          // Fallback to cache if offline
           return caches.match(event.request);
         })
     );
@@ -85,14 +83,12 @@ self.addEventListener("activate", event => {
   self.clients.claim();
 });
 
-// Handle messages from main thread
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
 
-// Background Sync for offline playback (experimental)
 self.addEventListener('sync', event => {
   if (event.tag === 'sync-playback-state') {
     event.waitUntil(syncPlaybackState());
@@ -100,6 +96,5 @@ self.addEventListener('sync', event => {
 });
 
 async function syncPlaybackState() {
-  // Placeholder for syncing playback state when back online
   console.log('Syncing playback state...');
 }
