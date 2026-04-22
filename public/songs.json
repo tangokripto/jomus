@@ -832,10 +832,10 @@
   {
     "file": "Avenged Sevenfold - Unholy Confessions.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Avenged%20Sevenfold%20-%20Unholy%20Confessions.mp3",
-    "title": "Just Stop",
-    "artist": "Disturbed",
-    "album": "Ten Thousand Fists",
-    "genre": "Heavy Metal",
+    "title": "Waking The Fallen",
+    "artist": "Avenged Sevenfold",
+    "album": "Waking The Fallen",
+    "genre": "Hard Rock",
     "duration": 284,
     "cover": "covers/avenged-sevenfold-unholy-confessions.jpg"
   },
@@ -3775,7 +3775,7 @@
     "title": "Rude",
     "artist": "MAGIC!",
     "album": "Don't Kill the Magic",
-    "genre": "Unknown Genre",
+    "genre": "Pop",
     "duration": 225,
     "cover": "covers/magic-rude.jpg"
   },
@@ -3898,6 +3898,16 @@
     "genre": "Instrumental",
     "duration": 171,
     "cover": "covers/michael-hunter-soviet-connection.jpg"
+  },
+  {
+    "file": "Motionless In White - </c0de>.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Motionless%20In%20White%20-%20c0de.mp3",
+    "title": "</c0de>",
+    "artist": "Motionless In White",
+    "album": "Disguise",
+    "genre": "Rock, Metalcore",
+    "duration": 228,
+    "cover": "covers/motionless-in-white-c0de.jpg"
   },
   {
     "file": "Motionless In White - Another Life.mp3",
@@ -6292,10 +6302,10 @@
   {
     "file": "Willie Nelson - Crazy.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Willie%20Nelson%20-%20Crazy.mp3",
-    "title": "Disguise",
-    "artist": "Motionless In White",
-    "album": "Disguise",
-    "genre": "Rock",
+    "title": "Crazy",
+    "artist": "Willie Nelson",
+    "album": "... And Then I Wrote",
+    "genre": "Country, Folk, World, & Country",
     "duration": 173,
     "cover": "covers/willie-nelson-crazy.jpg"
   },
@@ -7865,27 +7875,27 @@
     "title": "Changes (Live From Villa Park) Back To The Beginning (feat. Nuno Bettencourt, Frank Bello, Adam Wakeman, II)",
     "artist": "YUNGBLUD",
     "album": "Changes (Live From Villa Park) Back To The Beginning (feat. Nuno Bettencourt, Frank Bello, Adam Wakeman, II)",
-    "genre": "Unknown Genre",
+    "genre": "Rock",
     "duration": 340,
     "cover": "covers/yungblud-nuno-bettencourt-frank-bello-adam-wakeman-ii-changes-live-from-villa-park-back-to-the-beginning-feat-nuno-bettencourt-frank-bello-adam-wakeman-ii.jpg"
   },
   {
     "file": "yurisa - lemon.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/yurisa%20-%20lemon.mp3",
-    "title": "Headache",
-    "artist": "Motionless In White",
-    "album": "Disguise",
-    "genre": "Rock",
+    "title": "lemon",
+    "artist": "yurisa",
+    "album": "2019cover",
+    "genre": "J-Pop",
     "duration": 255,
     "cover": "covers/yurisa-lemon.jpg"
   },
   {
     "file": "yurisa - nandemonaiya.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/yurisa%20-%20nandemonaiya.mp3",
-    "title": "Thoughts & Prayers",
-    "artist": "Motionless In White",
-    "album": "Disguise",
-    "genre": "Rock",
+    "title": "nandemonaiya",
+    "artist": "yurisa",
+    "album": "2019cover",
+    "genre": "J-Pop",
     "duration": 261,
     "cover": "covers/yurisa-nandemonaiya.jpg"
   },
@@ -7922,10 +7932,10 @@
   {
     "file": "麦吉_Maggie - 耳わほう.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/%E9%BA%A6%E5%90%89_Maggie%20-%20%E8%80%B3%E3%82%8F%E3%81%BB%E3%81%86.mp3",
-    "title": "Legacy",
-    "artist": "Motionless In White",
-    "album": "Disguise",
-    "genre": "Rock",
+    "title": "耳わほう",
+    "artist": "麦吉_Maggie",
+    "album": "耳わほう",
+    "genre": "J-Pop",
     "duration": 244,
     "cover": "covers/maggie.jpg"
   }
