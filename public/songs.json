@@ -832,7 +832,7 @@
   {
     "file": "Avenged Sevenfold - Unholy Confessions.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Avenged%20Sevenfold%20-%20Unholy%20Confessions.mp3",
-    "title": "Waking The Fallen",
+    "title": "Unholy Confessions",
     "artist": "Avenged Sevenfold",
     "album": "Waking The Fallen",
     "genre": "Hard Rock",
@@ -2358,6 +2358,16 @@
     "genre": "Rock",
     "duration": 236,
     "cover": "covers/flow-go.jpg"
+  },
+  {
+    "file": "FLOW - Re:member.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/FLOW%20-%20Re%EF%80%BAmember.mp3",
+    "title": "Re:member",
+    "artist": "Flow",
+    "album": "Re:member",
+    "genre": "J-pop, Anison",
+    "duration": 197,
+    "cover": "covers/flow-re-member.jpg"
   },
   {
     "file": "FLOW - Remember.mp3",
