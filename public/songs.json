@@ -3760,6 +3760,16 @@
     "cover": "covers/louis-armstrong-what-a-wonderful-world.jpg"
   },
   {
+    "file": "Lukas Graham - 7 Years.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Lukas%20Graham%20-%207%20Years.mp3",
+    "title": "7 years",
+    "artist": "Lukas Graham",
+    "album": "Lukas Graham",
+    "genre": "Pop",
+    "duration": 237,
+    "cover": "covers/lukas-graham-7-years.jpg"
+  },
+  {
     "file": "Mafia 2 Soundtrack - Main Theme.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Mafia%202%20Soundtrack%20-%20Main%20Theme.mp3",
     "title": "Mafia 2 - Main Menu",
@@ -5450,6 +5460,16 @@
     "cover": "covers/stillbirth-trapped-in-darkness.jpg"
   },
   {
+    "file": "Sublime - Santeria.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/Sublime%20-%20Santeria.mp3",
+    "title": "Santeria",
+    "artist": "Sublime",
+    "album": "Sublime",
+    "genre": "Punk, Ska",
+    "duration": 183,
+    "cover": "covers/sublime-santeria.jpg"
+  },
+  {
     "file": "Sukatani - Gelap Gempita.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Sukatani%20-%20Gelap%20Gempita.mp3",
     "title": "Gelap Gempita",
@@ -6068,6 +6088,16 @@
     "genre": "Indonesian Pop",
     "duration": 197,
     "cover": "covers/the-changcuters-suka-suka.jpg"
+  },
+  {
+    "file": "The Everly Brothers - All I Have to Do Is Dream.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/The%20Everly%20Brothers%20-%20All%20I%20Have%20to%20Do%20Is%20Dream.mp3",
+    "title": "All I Have To Do Is Dream",
+    "artist": "Everly Brothers",
+    "album": "The Very Best Of The Everly Brothers",
+    "genre": "Rock & Roll",
+    "duration": 143,
+    "cover": "covers/the-everly-brothers-all-i-have-to-do-is-dream.jpg"
   },
   {
     "file": "The Mass Missile - Imamade Nandomo.mp3",
