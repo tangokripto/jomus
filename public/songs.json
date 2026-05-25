@@ -355,7 +355,7 @@
     "title": "Pro",
     "artist": "Alvaro Diaz",
     "album": "Diaz Antes",
-    "genre": "Unknown Genre",
+    "genre": "Electronic",
     "duration": 211,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/alvaro-diaz-pro.jpg"
   },
@@ -1475,7 +1475,7 @@
     "title": "Bo Diddley",
     "artist": "Bo Diddley",
     "album": "His Best",
-    "genre": "Unknown Genre",
+    "genre": "Rock",
     "duration": 167,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/bo-diddley-bo-diddley.jpg"
   },
@@ -1485,7 +1485,7 @@
     "title": "Who Do You Love - Single Version",
     "artist": "Bo Diddley",
     "album": "Rock N' Roll Legends",
-    "genre": "Unknown Genre",
+    "genre": "Rock",
     "duration": 184,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/bo-diddley-who-do-you-love.jpg"
   },
@@ -1905,7 +1905,7 @@
     "title": "Bury the Light - Game Edit",
     "artist": "Casey Edwards",
     "album": "Devil May Cry 5 Special Edition Vergil's Rebirth Sound Selection",
-    "genre": "Unknown Genre",
+    "genre": "Metalcore",
     "duration": 379,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/casey-edwards-bury-the-light-game-edit.jpg"
   },
@@ -1915,7 +1915,7 @@
     "title": "Bury the Light",
     "artist": "Casey Edwards",
     "album": "Devil May Cry 5 Special Edition Vergil's Rebirth Sound Selection",
-    "genre": "Unknown Genre",
+    "genre": "Metalcore",
     "duration": 580,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/casey-edwards-bury-the-light.jpg"
   },
@@ -1954,7 +1954,7 @@
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Danes%20Rabani%20-%20Sore%20Tugu%20Pancoran%20ft.%20Jeje%20GuitarAddict.mp3",
     "title": "Sore Tugu Pancoran (Iwan Fals Rock Cover)",
     "artist": "Danes Rabani",
-    "album": "Unknown Album",
+    "album": "Sore Tugu Pancuran Cover",
     "genre": "Rock",
     "duration": 158,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/default.jpg"
@@ -1965,7 +1965,7 @@
     "title": "Mountain Finale",
     "artist": "Daniel Lanois",
     "album": "The Music of Red Dead Redemption 2 (Original Soundtrack)",
-    "genre": "Unknown Genre",
+    "genre": "Country",
     "duration": 175,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/daniel-lanois-mountain-finale.jpg"
   },
@@ -1975,7 +1975,7 @@
     "title": "That's The Way It Is",
     "artist": "Daniel Lanois",
     "album": "The Music of Red Dead Redemption 2 (Original Soundtrack)",
-    "genre": "Unknown Genre",
+    "genre": "Country",
     "duration": 248,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/daniel-lanois-that-s-the-way-it-is.jpg"
   },
@@ -1985,7 +1985,7 @@
     "title": "The Housebuilding Song",
     "artist": "David Ferguson",
     "album": "The Music of Red Dead Redemption 2: The Housebuilding EP",
-    "genre": "Unknown Genre",
+    "genre": "Country",
     "duration": 192,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/david-ferguson-the-housebuilding-song.jpg"
   },
@@ -3165,7 +3165,7 @@
     "title": "Cruel World",
     "artist": "Josh Homme",
     "album": "The Music of Red Dead Redemption 2 (Original Soundtrack)",
-    "genre": "Unknown Genre",
+    "genre": "Country",
     "duration": 218,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/josh-homme-cruel-world.jpg"
   },
@@ -3810,11 +3810,11 @@
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/los-cuates-de-sinaloa-negro-y-azul-the-ballad-of-heisenberg-from-breaking-bad-tv-series.jpg"
   },
   {
-    "file": "Lost Saga BGM - Wild West.mp3",
+    "file": "Lost Saga - Wild West.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Lost%20Saga%20BGM%20-%20Wild%20West.mp3",
     "title": "Lost Saga BGM - Wild West",
     "artist": "Lost Saga BGM",
-    "album": "Unknown Album",
+    "album": "Lost Saga",
     "genre": "Game",
     "duration": 183,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/default.jpg"
@@ -3855,7 +3855,7 @@
     "title": "Rude",
     "artist": "MAGIC!",
     "album": "Don't Kill the Magic",
-    "genre": "Unknown Genre",
+    "genre": "Reggae Fusion",
     "duration": 225,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/magic-rude.jpg"
   },
@@ -4045,7 +4045,7 @@
     "title": "Mannish Boy",
     "artist": "Muddy Waters",
     "album": "King Of The Electric Blues",
-    "genre": "Unknown Genre",
+    "genre": "Blues",
     "duration": 325,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/muddy-waters-mannish-boy.jpg"
   },
@@ -4895,7 +4895,7 @@
     "title": "death bed (coffee for your head)",
     "artist": "Powfu",
     "album": "death bed (coffee for your head)",
-    "genre": "Unknown Genre",
+    "genre": "Lo-Fi Hip-Hop",
     "duration": 173,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/powfu-beabadoobee-death-bed-coffee-for-your-head.jpg"
   },
@@ -5545,7 +5545,7 @@
     "title": "Gelap Gempita",
     "artist": "Sukatani",
     "album": "Gelap Gempita",
-    "genre": "Unknown Genre",
+    "genre": "Punk",
     "duration": 242,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/sukatani-gelap-gempita.jpg"
   },
@@ -5555,7 +5555,7 @@
     "title": "Semakin Tua Semakin Punk",
     "artist": "Sukatani",
     "album": "Gelap Gempita",
-    "genre": "Unknown Genre",
+    "genre": "Punk",
     "duration": 214,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/sukatani-semakin-tua-semakin-punk.jpg"
   },
@@ -6045,7 +6045,7 @@
     "title": "Something Just Like This",
     "artist": "The Chainsmokers, Coldplay",
     "album": "Memories...Do Not Open",
-    "genre": "Unknown Genre",
+    "genre": "Alternative",
     "duration": 248,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/the-chainsmokers-coldplay-something-just-like-this.jpg"
   },
@@ -6055,7 +6055,7 @@
     "title": "Don't Let Me Down",
     "artist": "The Chainsmokers, Daya",
     "album": "Don't Let Me Down",
-    "genre": "Unknown Genre",
+    "genre": "Indie Pop",
     "duration": 209,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/the-chainsmokers-daya-don-t-let-me-down.jpg"
   },
@@ -6065,7 +6065,7 @@
     "title": "Closer",
     "artist": "The Chainsmokers, Halsey",
     "album": "Closer",
-    "genre": "Unknown Genre",
+    "genre": "Electropop",
     "duration": 245,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/the-chainsmokers-halsey-closer.jpg"
   },
@@ -6515,7 +6515,7 @@
     "title": "Red Dead Redemption",
     "artist": "Woody Jackson",
     "album": "The Music of Red Dead Redemption 2 (Original Score)",
-    "genre": "Unknown Genre",
+    "genre": "Country",
     "duration": 217,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/woody-jackson-red-dead-redemption.jpg"
   },
@@ -7985,7 +7985,7 @@
     "title": "Changes (Live From Villa Park) Back To The Beginning (feat. Nuno Bettencourt, Frank Bello, Adam Wakeman, II)",
     "artist": "YUNGBLUD",
     "album": "Changes (Live From Villa Park) Back To The Beginning (feat. Nuno Bettencourt, Frank Bello, Adam Wakeman, II)",
-    "genre": "Unknown Genre",
+    "genre": "Heavy Metal",
     "duration": 340,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/yungblud-nuno-bettencourt-frank-bello-adam-wakeman-ii-changes-live-from-villa-park-back-to-the-beginning-feat-nuno-bettencourt-frank-bello-adam-wakeman-ii.jpg"
   },
