@@ -2110,10 +2110,20 @@
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/dia-eeee-a.jpg"
   },
   {
+    "file": "dia, Jemsii, Tenxi, RYO - Paling Sabi.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/dia%2C%20Jemsii%2C%20Tenxi%2C%20RYO%20-%20Paling%20Sabi.mp3",
+    "title": "Paling Sabi",
+    "artist": "Tenxi, RYO, dia, Jemsii",
+    "album": "Puting Beliung",
+    "genre": "Unknown Genre",
+    "duration": 206,
+    "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/dia-jemsii-tenxi-ryo-paling-sabi.jpg"
+  },
+  {
     "file": "dia, Tenxi - Makasih Tuhan.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/dia%2C%20Tenxi%20-%20Makasih%20Tuhan.mp3",
     "title": "Makasih Tuhan",
-    "artist": "dia, Tenxi",
+    "artist": "Tenxi, dia",
     "album": "LIGA BESAR",
     "genre": "Hipdut",
     "duration": 176,
@@ -2128,16 +2138,6 @@
     "genre": "Hipdut",
     "duration": 154,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/dia-tenxi-sency.jpg"
-  },
-  {
-    "file": "dia, Tenxi, RYO, Jemsii - Paling Sabi.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/dia%2C%20Tenxi%2C%20RYO%2C%20Jemsii%20-%20Paling%20Sabi.mp3",
-    "title": "Paling Sabi",
-    "artist": "Tenxi, RYO, dia, Jemsii",
-    "album": "Puting Beliung",
-    "genre": "Hipdut",
-    "duration": 206,
-    "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/dia-tenxi-ryo-jemsii-paling-sabi.jpg"
   },
   {
     "file": "Diggy-MO' - STAY BEAUTIFUL.mp3",
@@ -2980,23 +2980,13 @@
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/iksan-skuter-shankara.jpg"
   },
   {
-    "file": "INDAHKUS - bentar lagi sayang.mp3",
-    "url": "https://f003.backblazeb2.com/file/music-pribadi/INDAHKUS%20-%20bentar%20lagi%20sayang.mp3",
-    "title": "bentar lagi sayang",
-    "artist": "INDAHKUS",
-    "album": "bentar lagi sayang",
-    "genre": "Hipdut",
-    "duration": 197,
-    "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/indahkus-bentar-lagi-sayang.jpg"
-  },
-  {
     "file": "INDAHKUS - Endless Loop.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/INDAHKUS%20-%20Endless%20Loop.mp3",
     "title": "Endless Loop",
     "artist": "INDAHKUS",
     "album": "Once in a Blue Moon",
-    "genre": "Hipdut",
-    "duration": 209,
+    "genre": "Pop",
+    "duration": 210,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/indahkus-endless-loop.jpg"
   },
   {
@@ -3005,17 +2995,27 @@
     "title": "Mirror, Mirror on the Wall",
     "artist": "INDAHKUS",
     "album": "Once in a Blue Moon",
-    "genre": "Hipdut",
-    "duration": 227,
+    "genre": "Pop",
+    "duration": 229,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/indahkus-mirror-mirror-on-the-wall.jpg"
+  },
+  {
+    "file": "INDAHKUS, dia - bentar lagi sayang.mp3",
+    "url": "https://f003.backblazeb2.com/file/music-pribadi/INDAHKUS%2C%20dia%20-%20bentar%20lagi%20sayang.mp3",
+    "title": "bentar lagi sayang",
+    "artist": "INDAHKUS, dia",
+    "album": "bentar lagi sayang",
+    "genre": "Pop",
+    "duration": 198,
+    "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/indahkus-dia-bentar-lagi-sayang.jpg"
   },
   {
     "file": "INDAHKUS, dia - MALU MALU.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/INDAHKUS%2C%20dia%20-%20MALU%20MALU.mp3",
     "title": "MALU MALU",
-    "artist": "INDAHKUS",
+    "artist": "dia, INDAHKUS",
     "album": "MALU MALU",
-    "genre": "Hipdut",
+    "genre": "Pop",
     "duration": 206,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/indahkus-dia-malu-malu.jpg"
   },
@@ -3023,10 +3023,10 @@
     "file": "INDAHKUS, DNA - Second Choice.mp3",
     "url": "https://f003.backblazeb2.com/file/music-pribadi/INDAHKUS%2C%20DNA%20-%20Second%20Choice.mp3",
     "title": "Second Choice",
-    "artist": "INDAHKUS, DNA",
+    "artist": "DNA, INDAHKUS",
     "album": "Ourora;",
-    "genre": "Hipdut",
-    "duration": 189,
+    "genre": "Pop",
+    "duration": 192,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/indahkus-dna-second-choice.jpg"
   },
   {
@@ -4334,7 +4334,7 @@
     "url": "https://f003.backblazeb2.com/file/music-pribadi/Naykilla%20-%20SO%20ASU.mp3",
     "title": "SO ASU",
     "artist": "Naykilla",
-    "album": "SO ASU",
+    "album": "centyl",
     "genre": "Hipdut",
     "duration": 156,
     "cover": "https://f003.backblazeb2.com/file/music-pribadi/covers/naykilla-so-asu.jpg"
